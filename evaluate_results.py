@@ -6,6 +6,7 @@ For each CSV it:
   - Maps YES-SIMILAR → CLONE, NO-NOT-SIMILAR → NON-CLONE
   - Handles DONT-KNOW / parse errors via --unknown-as (default: exclude)
   - Prints a confusion matrix plus precision, recall, F1, and MCC
+  - Writes a summary CSV with all metrics (default: evaluation_summary.csv)
 
 Usage:
     python evaluate_results.py                          # all results_*.csv in cwd
@@ -13,6 +14,7 @@ Usage:
     python evaluate_results.py --unknown-as non-clone  # treat unknowns as NON-CLONE
     python evaluate_results.py --unknown-as clone       # treat unknowns as CLONE
     python evaluate_results.py --unknown-as exclude    # skip unknowns (default)
+    python evaluate_results.py --output summary.csv    # custom output CSV name
 """
 
 import argparse
@@ -79,7 +81,8 @@ def compute_metrics(tp: int, fp: int, fn: int, tn: int) -> dict:
 # ---------------------------------------------------------------------------
 
 def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
-                 n_excluded: int) -> None:
+                 n_excluded: int) -> dict:
+    """Print a formatted report to stdout and return a metrics dict."""
     tp, fp, fn, tn = confusion_matrix_values(y_true, y_pred)
     m = compute_metrics(tp, fp, fn, tn)
 
@@ -113,12 +116,29 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
     print(f"  {'MCC':<14}  {m['mcc']:>8.4f}")
     print()
 
+    return {
+        "file": Path(csv_path).name,
+        "rows_total": total + n_excluded,
+        "rows_evaluated": total,
+        "rows_excluded": n_excluded,
+        "TP": tp,
+        "FP": fp,
+        "FN": fn,
+        "TN": tn,
+        "accuracy": round(accuracy, 4),
+        "precision": round(m["precision"], 4),
+        "recall": round(m["recall"], 4),
+        "f1": round(m["f1"], 4),
+        "mcc": round(m["mcc"], 4),
+    }
+
 
 # ---------------------------------------------------------------------------
 # Per-file evaluation
 # ---------------------------------------------------------------------------
 
-def evaluate_file(csv_path: str, unknown_as: str) -> None:
+def evaluate_file(csv_path: str, unknown_as: str) -> dict | None:
+    """Evaluate one CSV and return its metrics dict, or None if no evaluable rows."""
     y_true: list[str] = []
     y_pred: list[str] = []
     n_excluded = 0
@@ -149,14 +169,69 @@ def evaluate_file(csv_path: str, unknown_as: str) -> None:
 
     if not y_true:
         print(f"\n[{Path(csv_path).name}] No evaluable rows found.")
-        return
+        return None
 
-    print_report(csv_path, y_true, y_pred, n_excluded)
+    return print_report(csv_path, y_true, y_pred, n_excluded)
 
 
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+
+def print_summary_table(rows: list[dict]) -> None:
+    if not rows:
+        return
+
+    col_headers = ["File", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
+                   "Accuracy", "Precision", "Recall", "F1", "MCC"]
+    col_keys    = ["file", "rows_total", "rows_evaluated", "rows_excluded",
+                   "TP", "FP", "FN", "TN",
+                   "accuracy", "precision", "recall", "f1", "mcc"]
+    float_cols  = {"accuracy", "precision", "recall", "f1", "mcc"}
+
+    # Build display strings
+    str_rows = []
+    for r in rows:
+        row = []
+        for k in col_keys:
+            v = r[k]
+            row.append(f"{v:.4f}" if k in float_cols else str(v))
+        str_rows.append(row)
+
+    # Column widths: max of header and all values
+    widths = [
+        max(len(col_headers[i]), *(len(sr[i]) for sr in str_rows))
+        for i in range(len(col_headers))
+    ]
+
+    def fmt_row(cells):
+        return "  " + "  ".join(c.ljust(widths[i]) if i == 0 else c.rjust(widths[i])
+                                 for i, c in enumerate(cells))
+
+    sep = "  " + "─" * (sum(widths) + 2 * (len(widths) - 1))
+    total_width = len(sep)
+
+    print(f"\n{'═' * total_width}")
+    print(f"  {'Summary':^{total_width - 2}}")
+    print(f"{'═' * total_width}")
+    print(fmt_row(col_headers))
+    print(sep)
+    for sr in str_rows:
+        print(fmt_row(sr))
+    print(f"{'═' * total_width}")
+    print()
+
+
+def write_summary_csv(rows: list[dict], output_path: str) -> None:
+    if not rows:
+        return
+    fieldnames = list(rows[0].keys())
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    print(f"Summary written to: {output_path}")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -177,6 +252,12 @@ def main() -> None:
             "'exclude' (default), 'clone', or 'non-clone'."
         ),
     )
+    parser.add_argument(
+        "--output",
+        default="evaluation_summary.csv",
+        metavar="FILE",
+        help="Output CSV file for the summary table (default: evaluation_summary.csv).",
+    )
     args = parser.parse_args()
 
     paths = args.files or sorted(glob.glob("results_*.csv"))
@@ -186,11 +267,17 @@ def main() -> None:
 
     print(f"Unknown/ambiguous responses: treated as '{args.unknown_as}'")
 
+    summary_rows: list[dict] = []
     for path in paths:
         if not Path(path).exists():
             print(f"File not found: {path}", file=sys.stderr)
             continue
-        evaluate_file(path, args.unknown_as)
+        result = evaluate_file(path, args.unknown_as)
+        if result is not None:
+            summary_rows.append(result)
+
+    print_summary_table(summary_rows)
+    write_summary_csv(summary_rows, args.output)
 
 
 if __name__ == "__main__":

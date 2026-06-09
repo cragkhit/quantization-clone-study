@@ -22,6 +22,7 @@ import csv
 import glob
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
 
@@ -80,8 +81,15 @@ def compute_metrics(tp: int, fp: int, fn: int, tn: int) -> dict:
 # Report
 # ---------------------------------------------------------------------------
 
+def fmt_duration(seconds: float) -> str:
+    seconds = int(seconds)
+    h, rem = divmod(seconds, 3600)
+    m, s = divmod(rem, 60)
+    return f"{h:02d}:{m:02d}:{s:02d}"
+
+
 def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
-                 n_excluded: int) -> dict:
+                 n_excluded: int, run_seconds: float | None) -> dict:
     """Print a formatted report to stdout and return a metrics dict."""
     tp, fp, fn, tn = confusion_matrix_values(y_true, y_pred)
     m = compute_metrics(tp, fp, fn, tn)
@@ -92,10 +100,13 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
     label_w = 15
     sep = "─" * 52
 
+    duration_str = fmt_duration(run_seconds) if run_seconds is not None else "N/A"
+
     print(f"\n{'═' * 52}")
     print(f"  File : {Path(csv_path).name}")
     print(f"  Rows : {total + n_excluded}  "
           f"(evaluated: {total}, excluded: {n_excluded})")
+    print(f"  Time : {duration_str}")
     print(f"{'═' * 52}")
 
     # Confusion matrix
@@ -130,6 +141,7 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
         "recall": round(m["recall"], 4),
         "f1": round(m["f1"], 4),
         "mcc": round(m["mcc"], 4),
+        "run_time": duration_str,
     }
 
 
@@ -137,15 +149,29 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
 # Per-file evaluation
 # ---------------------------------------------------------------------------
 
+_TS_FMT = "%Y-%m-%d %H:%M:%S"
+
+
 def evaluate_file(csv_path: str, unknown_as: str) -> dict | None:
     """Evaluate one CSV and return its metrics dict, or None if no evaluable rows."""
     y_true: list[str] = []
     y_pred: list[str] = []
     n_excluded = 0
+    first_ts: datetime | None = None
+    last_ts:  datetime | None = None
 
     with open(csv_path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
+            ts_raw = row.get("timestamp", "").strip()
+            try:
+                ts = datetime.strptime(ts_raw, _TS_FMT)
+                if first_ts is None:
+                    first_ts = ts
+                last_ts = ts
+            except ValueError:
+                pass
+
             ground_truth = row["ground_truth"].strip().upper()
             predicted = parse_answer(row["response"])
 
@@ -171,7 +197,8 @@ def evaluate_file(csv_path: str, unknown_as: str) -> dict | None:
         print(f"\n[{Path(csv_path).name}] No evaluable rows found.")
         return None
 
-    return print_report(csv_path, y_true, y_pred, n_excluded)
+    run_seconds = (last_ts - first_ts).total_seconds() if first_ts and last_ts else None
+    return print_report(csv_path, y_true, y_pred, n_excluded, run_seconds)
 
 
 # ---------------------------------------------------------------------------
@@ -183,10 +210,10 @@ def print_summary_table(rows: list[dict]) -> None:
         return
 
     col_headers = ["File", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
-                   "Accuracy", "Precision", "Recall", "F1", "MCC"]
+                   "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"]
     col_keys    = ["file", "rows_total", "rows_evaluated", "rows_excluded",
                    "TP", "FP", "FN", "TN",
-                   "accuracy", "precision", "recall", "f1", "mcc"]
+                   "accuracy", "precision", "recall", "f1", "mcc", "run_time"]
     float_cols  = {"accuracy", "precision", "recall", "f1", "mcc"}
 
     # Build display strings
@@ -233,6 +260,58 @@ def write_summary_csv(rows: list[dict], output_path: str) -> None:
     print(f"Summary written to: {output_path}")
 
 
+def write_latex_table(rows: list[dict], output_path: str) -> None:
+    if not rows:
+        return
+
+    col_headers = ["File", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
+                   "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"]
+    col_keys    = ["file", "rows_total", "rows_evaluated", "rows_excluded",
+                   "TP", "FP", "FN", "TN",
+                   "accuracy", "precision", "recall", "f1", "mcc", "run_time"]
+    float_cols  = {"accuracy", "precision", "recall", "f1", "mcc"}
+
+    def escape(s: str) -> str:
+        return s.replace("_", r"\_").replace("%", r"\%").replace("&", r"\&")
+
+    col_spec = "l" + "r" * (len(col_headers) - 1)
+    header_cells = " & ".join(r"\textbf{" + escape(h) + "}" for h in col_headers)
+
+    lines = [
+        r"\begin{table}[htbp]",
+        r"  \centering",
+        r"  \caption{Clone Detection Evaluation Summary}",
+        r"  \label{tab:evaluation_summary}",
+        r"  \small",
+        f"  \\begin{{tabular}}{{{col_spec}}}",
+        r"    \toprule",
+        f"    {header_cells} \\\\",
+        r"    \midrule",
+    ]
+
+    for r in rows:
+        cells = []
+        for k in col_keys:
+            v = r[k]
+            if k in float_cols:
+                cells.append(f"{v:.4f}")
+            elif k == "file":
+                cells.append(escape(str(v)))
+            else:
+                cells.append(str(v))
+        lines.append("    " + " & ".join(cells) + r" \\")
+
+    lines += [
+        r"    \bottomrule",
+        r"  \end{tabular}",
+        r"\end{table}",
+    ]
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    print(f"LaTeX table written to: {output_path}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Evaluate clone-detection CSVs: confusion matrix + metrics."
@@ -258,6 +337,12 @@ def main() -> None:
         metavar="FILE",
         help="Output CSV file for the summary table (default: evaluation_summary.csv).",
     )
+    parser.add_argument(
+        "--latex",
+        default=None,
+        metavar="FILE",
+        help="Write a LaTeX booktabs table to FILE (e.g. evaluation_summary.tex).",
+    )
     args = parser.parse_args()
 
     paths = args.files or sorted(glob.glob("results_*.csv"))
@@ -278,6 +363,8 @@ def main() -> None:
 
     print_summary_table(summary_rows)
     write_summary_csv(summary_rows, args.output)
+    if args.latex:
+        write_latex_table(summary_rows, args.latex)
 
 
 if __name__ == "__main__":

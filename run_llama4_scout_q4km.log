@@ -1,0 +1,17 @@
+Loaded 100 files → 10000 pairs (0 already done, 10000 remaining)
+/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 291, in <module>
+    run_experiment(model_name, hf_model, tests_dir, output_csv)
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 223, in run_experiment
+    infer = LOADERS[model_name](hf_model)
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 122, in load_gguf
+    llm = Llama.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/llama_cpp/llama.py", line 2427, in from_pretrained
+    return cls(
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/llama_cpp/llama.py", line 381, in __init__
+    internals.LlamaModel(
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/llama_cpp/_internals.py", line 62, in __init__
+    raise ValueError(f"Failed to load model from file: {path_model}")
+ValueError: Failed to load model from file: /home/chaiyong.rag/.cache/huggingface/hub/models--bartowski--meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF/snapshots/91d32823a1855f7ca12919dffa86701254271eb9/meta-llama_Llama-4-Scout-17B-16E-Instruct-Q4_K_M/meta-llama_Llama-4-Scout-17B-16E-Instruct-Q4_K_M-00001-of-00002.gguf

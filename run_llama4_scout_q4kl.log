@@ -1,0 +1,49 @@
+Loaded 100 files → 10000 pairs (0 already done, 10000 remaining)
+Traceback (most recent call last):
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 761, in hf_raise_for_status
+    response.raise_for_status()
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'https://huggingface.co/api/models/bartowski/Llama-4-Scout-17B-16E-Instruct-GGUF'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/hf_file_system.py", line 252, in _repo_and_revision_exist
+    self._api.repo_info(
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3603, in repo_info
+    return method(
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3295, in model_info
+    hf_raise_for_status(r)
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 835, in hf_raise_for_status
+    raise _format(RepositoryNotFoundError, message, response, repo_type=repo_type, repo_id=repo_id) from e
+huggingface_hub.errors.RepositoryNotFoundError: 404 Client Error. (Request ID: Root=1-6a254197-3da345f02413cd846ca56543;53813d79-2d65-4561-ae0a-b97399514206)
+
+Repository Not Found for url: https://huggingface.co/api/models/bartowski/Llama-4-Scout-17B-16E-Instruct-GGUF.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 291, in <module>
+    run_experiment(model_name, hf_model, tests_dir, output_csv)
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 223, in run_experiment
+    infer = LOADERS[model_name](hf_model)
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 122, in load_gguf
+    llm = Llama.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/llama_cpp/llama.py", line 2338, in from_pretrained
+    for file in hffs.ls(repo_id, recursive=True)
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/hf_file_system.py", line 498, in ls
+    resolved_path = self.resolve_path(path, revision=revision)
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/hf_file_system.py", line 341, in resolve_path
+    _raise_file_not_found(path, err)
+  File "/home/chaiyong.rag/quantization-clone-study/gguf/lib/python3.10/site-packages/huggingface_hub/hf_file_system.py", line 1409, in _raise_file_not_found
+    raise FileNotFoundError(msg) from err
+FileNotFoundError: bartowski/Llama-4-Scout-17B-16E-Instruct-GGUF (repository not found)

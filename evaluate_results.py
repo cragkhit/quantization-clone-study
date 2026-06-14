@@ -9,19 +9,23 @@ For each CSV it:
   - Writes a summary CSV with all metrics (default: evaluation_summary.csv)
 
 Usage:
-    python evaluate_results.py                          # all results_*.csv in cwd
-    python evaluate_results.py results_original*.csv   # specific files
-    python evaluate_results.py --unknown-as non-clone  # treat unknowns as NON-CLONE
-    python evaluate_results.py --unknown-as clone       # treat unknowns as CLONE
-    python evaluate_results.py --unknown-as exclude    # skip unknowns (default)
-    python evaluate_results.py --output summary.csv    # custom output CSV name
+    python evaluate_results.py                                      # all results/**/*.csv, individual mode
+    python evaluate_results.py --mode majority-vote                # majority vote across _roundN files
+    python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/*.csv  # specific folder
+    python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/results_aqlm_round1.csv  # single file
+    python evaluate_results.py --unknown-as non-clone              # treat unknowns as NON-CLONE
+    python evaluate_results.py --unknown-as clone                  # treat unknowns as CLONE
+    python evaluate_results.py --unknown-as exclude                # skip unknowns (default)
+    python evaluate_results.py --output summary.csv                # custom output CSV name
 """
 
 import argparse
 import csv
 import glob
 import json
+import re
 import sys
+from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
@@ -88,7 +92,7 @@ def fmt_duration(seconds: float) -> str:
     return f"{h:02d}:{m:02d}:{s:02d}"
 
 
-def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
+def print_report(label: str, y_true: list[str], y_pred: list[str],
                  n_excluded: int, run_seconds: float | None) -> dict:
     """Print a formatted report to stdout and return a metrics dict."""
     tp, fp, fn, tn = confusion_matrix_values(y_true, y_pred)
@@ -103,7 +107,7 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
     duration_str = fmt_duration(run_seconds) if run_seconds is not None else "N/A"
 
     print(f"\n{'═' * 52}")
-    print(f"  File : {Path(csv_path).name}")
+    print(f"  File : {label}")
     print(f"  Rows : {total + n_excluded}  "
           f"(evaluated: {total}, excluded: {n_excluded})")
     print(f"  Time : {duration_str}")
@@ -128,7 +132,7 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
     print()
 
     return {
-        "file": Path(csv_path).name,
+        "file": label,
         "rows_total": total + n_excluded,
         "rows_evaluated": total,
         "rows_excluded": n_excluded,
@@ -152,17 +156,13 @@ def print_report(csv_path: str, y_true: list[str], y_pred: list[str],
 _TS_FMT = "%Y-%m-%d %H:%M:%S"
 
 
-def evaluate_file(csv_path: str, unknown_as: str) -> dict | None:
-    """Evaluate one CSV and return its metrics dict, or None if no evaluable rows."""
-    y_true: list[str] = []
-    y_pred: list[str] = []
-    n_excluded = 0
+def _load_csv_rows(csv_path: str) -> tuple[list[dict], datetime | None, datetime | None]:
+    """Read all rows from a CSV, return (rows, first_ts, last_ts)."""
+    rows = []
     first_ts: datetime | None = None
     last_ts:  datetime | None = None
-
     with open(csv_path, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
+        for row in csv.DictReader(f):
             ts_raw = row.get("timestamp", "").strip()
             try:
                 ts = datetime.strptime(ts_raw, _TS_FMT)
@@ -171,34 +171,120 @@ def evaluate_file(csv_path: str, unknown_as: str) -> dict | None:
                 last_ts = ts
             except ValueError:
                 pass
+            rows.append(row)
+    return rows, first_ts, last_ts
 
-            ground_truth = row["ground_truth"].strip().upper()
-            predicted = parse_answer(row["response"])
 
-            # Normalise ground truth
-            if ground_truth not in ("CLONE", "NON-CLONE"):
+def evaluate_file(csv_path: str, unknown_as: str) -> dict | None:
+    """Evaluate one CSV and return its metrics dict, or None if no evaluable rows."""
+    y_true: list[str] = []
+    y_pred: list[str] = []
+    n_excluded = 0
+
+    rows, first_ts, last_ts = _load_csv_rows(csv_path)
+    for row in rows:
+        ground_truth = row["ground_truth"].strip().upper()
+        predicted = parse_answer(row["response"])
+
+        if ground_truth not in ("CLONE", "NON-CLONE"):
+            n_excluded += 1
+            continue
+
+        if predicted is None or predicted == "DONT-KNOW":
+            if unknown_as == "exclude":
                 n_excluded += 1
                 continue
+            predicted = "CLONE" if unknown_as == "clone" else "NON-CLONE"
 
-            # Handle ambiguous predictions
-            if predicted is None or predicted == "DONT-KNOW":
-                if unknown_as == "exclude":
-                    n_excluded += 1
-                    continue
-                elif unknown_as == "clone":
-                    predicted = "CLONE"
-                else:  # non-clone
-                    predicted = "NON-CLONE"
-
-            y_true.append(ground_truth)
-            y_pred.append(predicted)
+        y_true.append(ground_truth)
+        y_pred.append(predicted)
 
     if not y_true:
         print(f"\n[{Path(csv_path).name}] No evaluable rows found.")
         return None
 
     run_seconds = (last_ts - first_ts).total_seconds() if first_ts and last_ts else None
-    return print_report(csv_path, y_true, y_pred, n_excluded, run_seconds)
+    return print_report(Path(csv_path).name, y_true, y_pred, n_excluded, run_seconds)
+
+
+def _strip_round_suffix(stem: str) -> str:
+    """Remove trailing _roundN from a filename stem."""
+    return re.sub(r"_round\d+$", "", stem)
+
+
+def evaluate_majority_vote(paths: list[str], unknown_as: str) -> list[dict | None]:
+    """
+    Group files by base name (stripping _roundN), apply majority vote across
+    rounds for each code pair, then compute metrics per group.
+    """
+    # Group paths: stem-without-round → list of paths (preserve directory)
+    groups: dict[str, list[str]] = defaultdict(list)
+    for p in paths:
+        stem = Path(p).stem
+        key = str(Path(p).parent / _strip_round_suffix(stem))
+        groups[key].append(p)
+
+    results = []
+    for key in sorted(groups):
+        group_paths = sorted(groups[key])
+        n_rounds = len(group_paths)
+        label = f"{Path(key).name} (majority vote, {n_rounds} round{'s' if n_rounds != 1 else ''})"
+
+        # Accumulate votes and ground truth per pair
+        pair_truth:  dict[tuple, str]       = {}
+        pair_votes:  dict[tuple, list[str]] = defaultdict(list)
+        first_ts:    datetime | None = None
+        last_ts:     datetime | None = None
+
+        for csv_path in group_paths:
+            rows, fts, lts = _load_csv_rows(csv_path)
+            if fts and (first_ts is None or fts < first_ts):
+                first_ts = fts
+            if lts and (last_ts is None or lts > last_ts):
+                last_ts = lts
+            for row in rows:
+                pair_key = (row["program_a"], row["variant_a"],
+                            row["program_b"], row["variant_b"])
+                gt = row["ground_truth"].strip().upper()
+                if gt in ("CLONE", "NON-CLONE"):
+                    pair_truth[pair_key] = gt
+                pred = parse_answer(row["response"])
+                if pred in ("CLONE", "NON-CLONE"):
+                    pair_votes[pair_key].append(pred)
+
+        # Resolve majority vote for each pair
+        y_true: list[str] = []
+        y_pred: list[str] = []
+        n_excluded = 0
+
+        for pair_key, votes in pair_votes.items():
+            if pair_key not in pair_truth:
+                continue
+            clone_count     = votes.count("CLONE")
+            non_clone_count = votes.count("NON-CLONE")
+
+            if clone_count > non_clone_count:
+                predicted = "CLONE"
+            elif non_clone_count > clone_count:
+                predicted = "NON-CLONE"
+            else:  # tie or no valid votes
+                if unknown_as == "exclude":
+                    n_excluded += 1
+                    continue
+                predicted = "CLONE" if unknown_as == "clone" else "NON-CLONE"
+
+            y_true.append(pair_truth[pair_key])
+            y_pred.append(predicted)
+
+        if not y_true:
+            print(f"\n[{label}] No evaluable pairs found.")
+            results.append(None)
+            continue
+
+        run_seconds = (last_ts - first_ts).total_seconds() if first_ts and last_ts else None
+        results.append(print_report(label, y_true, y_pred, n_excluded, run_seconds))
+
+    return results
 
 
 # ---------------------------------------------------------------------------
@@ -373,7 +459,18 @@ def main() -> None:
     parser.add_argument(
         "files",
         nargs="*",
-        help="CSV file(s) to evaluate. Defaults to all results_*.csv in cwd.",
+        help="CSV file(s) to evaluate. Defaults to all results/**/*.csv.",
+    )
+    parser.add_argument(
+        "--mode",
+        choices=["individual", "majority-vote"],
+        default="individual",
+        metavar="MODE",
+        help=(
+            "Evaluation mode: 'individual' scores each file separately (default); "
+            "'majority-vote' groups files by base name (stripping _roundN), "
+            "takes the per-pair majority vote across rounds, then scores each group."
+        ),
     )
     parser.add_argument(
         "--unknown-as",
@@ -399,21 +496,31 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    paths = args.files or sorted(glob.glob("results_*.csv"))
+    paths = args.files or sorted(glob.glob("results/**/*.csv", recursive=True))
     if not paths:
         print("No result CSV files found.", file=sys.stderr)
         sys.exit(1)
 
     print(f"Unknown/ambiguous responses: treated as '{args.unknown_as}'")
+    print(f"Mode: {args.mode}")
 
-    summary_rows: list[dict] = []
+    existing_paths = []
     for path in paths:
         if not Path(path).exists():
             print(f"File not found: {path}", file=sys.stderr)
-            continue
-        result = evaluate_file(path, args.unknown_as)
-        if result is not None:
-            summary_rows.append(result)
+        else:
+            existing_paths.append(path)
+
+    summary_rows: list[dict] = []
+    if args.mode == "majority-vote":
+        for result in evaluate_majority_vote(existing_paths, args.unknown_as):
+            if result is not None:
+                summary_rows.append(result)
+    else:
+        for path in existing_paths:
+            result = evaluate_file(path, args.unknown_as)
+            if result is not None:
+                summary_rows.append(result)
 
     print_summary_table(summary_rows)
     write_summary_csv(summary_rows, args.output)

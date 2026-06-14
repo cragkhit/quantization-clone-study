@@ -260,22 +260,70 @@ def write_summary_csv(rows: list[dict], output_path: str) -> None:
     print(f"Summary written to: {output_path}")
 
 
+def _extract_model_info(filename: str) -> tuple[str, str]:
+    """
+    Return (group_label, model_name) derived from a results CSV filename.
+
+    Naming conventions handled:
+      results_original_{provider}__{model}     → ("Original (FP16)",    model)
+      results_gguf_{provider}__{repo}_{f}.gguf → ("GGUF Quantization",  f.gguf)
+      results_gguf_{provider}__{repo}           → ("GGUF Quantization",  repo)
+      results_gguf_{anything}                   → ("GGUF Quantization",  anything.gguf)
+    """
+    stem = Path(filename).stem  # strip .csv
+
+    if stem.startswith("results_original_"):
+        rest = stem[len("results_original_"):]
+        model_name = rest.split("__", 1)[1] if "__" in rest else rest
+        return "Original (FP16)", model_name
+
+    if stem.startswith("results_gguf_"):
+        rest = stem[len("results_gguf_"):]
+        if "__" in rest:
+            after_dunder = rest.split("__", 1)[1]
+            if after_dunder.endswith(".gguf"):
+                # repo_name_gguf_file.gguf — repo uses hyphens only, split at first _
+                parts = after_dunder.split("_", 1)
+                model_name = parts[1] if len(parts) == 2 else after_dunder
+            else:
+                model_name = after_dunder
+        else:
+            model_name = rest + ".gguf"
+        return "GGUF Quantization", model_name
+
+    return "Other", stem
+
+
 def write_latex_table(rows: list[dict], output_path: str) -> None:
     if not rows:
         return
 
-    col_headers = ["File", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
+    col_headers = ["Model", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
                    "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"]
     col_keys    = ["file", "rows_total", "rows_evaluated", "rows_excluded",
                    "TP", "FP", "FN", "TN",
                    "accuracy", "precision", "recall", "f1", "mcc", "run_time"]
     float_cols  = {"accuracy", "precision", "recall", "f1", "mcc"}
+    n_cols = len(col_headers)
 
     def escape(s: str) -> str:
         return s.replace("_", r"\_").replace("%", r"\%").replace("&", r"\&")
 
-    col_spec = "l" + "r" * (len(col_headers) - 1)
+    col_spec = "l" + "r" * (n_cols - 1)
     header_cells = " & ".join(r"\textbf{" + escape(h) + "}" for h in col_headers)
+
+    # Group rows preserving input order within each group
+    grouped: dict[str, list[tuple[str, dict]]] = {}
+    group_order: list[str] = []
+    for r in rows:
+        group, model_name = _extract_model_info(r["file"])
+        if group not in grouped:
+            grouped[group] = []
+            group_order.append(group)
+        grouped[group].append((model_name, r))
+
+    preferred = ["Original (FP16)", "GGUF Quantization"]
+    group_order.sort(key=lambda g: preferred.index(g) if g in preferred else 99)
 
     lines = [
         r"\begin{table}[htbp]",
@@ -289,17 +337,23 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
         r"    \midrule",
     ]
 
-    for r in rows:
-        cells = []
-        for k in col_keys:
-            v = r[k]
-            if k in float_cols:
-                cells.append(f"{v:.4f}")
-            elif k == "file":
-                cells.append(escape(str(v)))
-            else:
-                cells.append(str(v))
-        lines.append("    " + " & ".join(cells) + r" \\")
+    for i, group in enumerate(group_order):
+        if i > 0:
+            lines.append(r"    \midrule")
+        lines.append(
+            f"    \\multicolumn{{{n_cols}}}{{l}}{{\\textit{{{escape(group)}}}}} \\\\"
+        )
+        lines.append(r"    \midrule")
+        for model_name, r in grouped[group]:
+            cells = []
+            for k in col_keys:
+                if k == "file":
+                    cells.append(escape(model_name))
+                elif k in float_cols:
+                    cells.append(f"{r[k]:.4f}")
+                else:
+                    cells.append(str(r[k]))
+            lines.append("    " + " & ".join(cells) + r" \\")
 
     lines += [
         r"    \bottomrule",

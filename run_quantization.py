@@ -139,24 +139,65 @@ def load_gguf(hf_model: str | None = None):
 
 
 def load_aqlm(hf_model: str | None = None):
-    """AQLM 2-bit + PV-Tuning. pip install transformers accelerate aqlm[gpu]"""
+    """AQLM 2-bit + PV-Tuning. pip install transformers accelerate aqlm[gpu]
+    Run with: CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm
+    """
+    import os
+    import math
+    os.environ.setdefault("CC", "gcc-11")
+    os.environ.setdefault("CXX", "g++-11")
+
     from transformers import AutoTokenizer, AutoModelForCausalLM
     import torch
-    from aqlm.inference import QuantizedLinear
+    import aqlm.inference_kernels.kernel_selector as _ks
+    import aqlm.inference as _aqlm_inf
+    import aqlm.inference_kernels as _aqlm_ik
+    from aqlm.inference_kernels.dequantization import dequantize_gemm as _dequant_gemm
 
-    # PyTorch 2.8 + CUDA 12.2: cuBLAS GemmEx fails for the AQLM GEMM path on A100.
-    # Force GEMV (custom CUDA kernel, iterates per row) which works correctly.
-    _orig_prepare = QuantizedLinear.prepare_matmul_op
-    def _patched_prepare(self, input):
-        _orig_prepare(self, input)
-        self.use_gemv_rule = lambda inp: True
-    QuantizedLinear.prepare_matmul_op = _patched_prepare
+    # The GEMM path (optimize_for_training=True, used for prefill of long sequences)
+    # calls code1x16_matmat_dequant which hits a cuBLAS FP16 GemmEx error on this
+    # PyTorch 2.8 + A100 setup. Route it through dequantize_gemm (dequantize weights
+    # then F.linear) which avoids the broken cuBLAS path.
+    # The GEMV path (optimize_for_training=False, used for single-token generation)
+    # uses the native code1x16_matmat CUDA kernel, which is fast and correct.
+    _orig_get_fwd = _ks.get_forward_pass_kernel
+    def _patched_get_fwd(codebooks, optimize_for_training):
+        if optimize_for_training:
+            return _dequant_gemm
+        return _orig_get_fwd(codebooks, optimize_for_training)
+    _ks.get_forward_pass_kernel = _patched_get_fwd
+    _aqlm_ik.get_forward_pass_kernel = _patched_get_fwd
+    _aqlm_inf.get_forward_pass_kernel = _patched_get_fwd
 
     model_id = hf_model or "ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(
         model_id, dtype=torch.float16, device_map="auto"
     )
+
+    # The AQLM checkpoint stores lm_head as a regular Linear (not quantized),
+    # but the architecture registers it as QuantizedLinear — causing random
+    # codebooks/codes to be initialized and garbage output.
+    # Fix: reload lm_head.weight from the checkpoint and install a proper Linear.
+    import torch.nn as nn
+    from safetensors import safe_open
+    from huggingface_hub import hf_hub_download
+    lm_head_weight = None
+    try:
+        shard_path = hf_hub_download(repo_id=model_id, filename="model.safetensors")
+        with safe_open(shard_path, framework="pt") as _sf:
+            if "lm_head.weight" in _sf.keys():
+                lm_head_weight = _sf.get_tensor("lm_head.weight")
+    except Exception:
+        pass
+    if lm_head_weight is not None:
+        out_features, in_features = lm_head_weight.shape
+        _new_lm_head = nn.Linear(in_features, out_features, bias=False,
+                                 dtype=torch.float16, device=model.device)
+        _new_lm_head.weight = nn.Parameter(lm_head_weight.to(model.device))
+        model.lm_head = _new_lm_head
+        print(f"Replaced QuantizedLinear lm_head with nn.Linear ({lm_head_weight.shape})")
+
     return _make_transformers_infer(model, tokenizer)
 
 
@@ -171,13 +212,18 @@ LOADERS = {
 # Experiment runner
 # ==============================================================================
 
-def _load_completed(output_csv: str) -> set[tuple]:
-    """Return set of (program_a, variant_a, program_b, variant_b) already in the CSV."""
+def _round_csv_path(base: str, round_num: int) -> str:
+    """Return the CSV path for a specific round: {base}_round{N}.csv"""
+    return f"{base}_round{round_num}.csv"
+
+
+def _load_completed_round(round_csv: str) -> set[tuple]:
+    """Return set of (program_a, variant_a, program_b, variant_b) done in a round CSV."""
     completed = set()
-    p = Path(output_csv)
+    p = Path(round_csv)
     if not p.exists():
         return completed
-    with open(output_csv, newline="") as f:
+    with open(round_csv, newline="") as f:
         for row in csv.DictReader(f):
             completed.add((row["program_a"], row["variant_a"],
                            row["program_b"], row["variant_b"]))
@@ -188,36 +234,41 @@ def run_experiment(
     model_name: str,
     hf_model: str | None = None,
     tests_dir: str = "ocd/tests",
-    output_csv: str | None = None,
+    output_base: str | None = None,
     lang: str = "Java",
+    rounds: int = 1,
 ):
     """
-    Load all test cases from tests_dir, generate every n×n pair,
-    run model_name on each, and write results to output_csv.
+    Load all test cases from tests_dir, generate every n×n pair, and run model_name
+    for the specified number of rounds. Each round is saved to its own CSV:
+        {output_base}_round1.csv, {output_base}_round2.csv, ...
 
-    Resumes automatically if output_csv already exists (skips completed pairs).
+    Resumes automatically: completed rounds are skipped; partial rounds continue
+    from where they left off.
     Columns: program_a, variant_a, program_b, variant_b, ground_truth, timestamp, response
     """
     if model_name not in LOADERS:
         raise ValueError(f"Unknown model '{model_name}'. Choose from: {list(LOADERS)}")
 
-    if output_csv is None:
+    if output_base is None:
         if hf_model:
-            output_csv = f"results_{model_name}_{_sanitize_hf_name(hf_model)}.csv"
+            output_base = f"results_{model_name}_{_sanitize_hf_name(hf_model)}"
         else:
-            output_csv = f"results_{model_name}.csv"
+            output_base = f"results_{model_name}"
 
     test_cases = load_test_cases(tests_dir)
     pairs = list(generate_pairs(test_cases))
-    total = len(pairs)
+    pairs_per_round = len(pairs)
 
-    completed = _load_completed(output_csv)
-    remaining = total - len(completed)
-    print(f"Loaded {len(test_cases)} files → {total} pairs "
-          f"({len(completed)} already done, {remaining} remaining)", flush=True)
+    # Check overall resume state across all rounds
+    total_done = sum(len(_load_completed_round(_round_csv_path(output_base, r)))
+                     for r in range(1, rounds + 1))
+    total = pairs_per_round * rounds
+    print(f"Loaded {len(test_cases)} files → {pairs_per_round} pairs × {rounds} round(s) = {total} total "
+          f"({total_done} already done, {total - total_done} remaining)", flush=True)
 
-    if remaining == 0:
-        print("All pairs already completed. Nothing to do.")
+    if total_done == total:
+        print("All rounds already completed. Nothing to do.")
         return
 
     infer = LOADERS[model_name](hf_model)
@@ -225,35 +276,51 @@ def run_experiment(
 
     fieldnames = ["program_a", "variant_a", "program_b", "variant_b",
                   "ground_truth", "timestamp", "response"]
-    file_exists = Path(output_csv).exists()
-    with open(output_csv, "a", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        if not file_exists:
-            writer.writeheader()
 
-        done = len(completed)
-        for idx, (tc_a, tc_b, ground_truth) in enumerate(pairs, 1):
-            key = (tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
-            if key in completed:
-                continue
+    overall_done = total_done
+    for round_num in range(1, rounds + 1):
+        round_csv = _round_csv_path(output_base, round_num)
+        completed = _load_completed_round(round_csv)
 
-            response = infer(tc_a.code, tc_b.code, lang)
-            ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            done += 1
-            writer.writerow({
-                "program_a":    tc_a.program,
-                "variant_a":    tc_a.variant,
-                "program_b":    tc_b.program,
-                "variant_b":    tc_b.variant,
-                "ground_truth": ground_truth,
-                "timestamp":    ts,
-                "response":     response,
-            })
-            f.flush()
-            print(f"[{done}/{total}] {ts} | {tc_a.program}/{tc_a.variant} vs "
-                  f"{tc_b.program}/{tc_b.variant} → {ground_truth}", flush=True)
+        if len(completed) == pairs_per_round:
+            print(f"--- Round {round_num}/{rounds}: already complete, skipping ---", flush=True)
+            continue
 
-    print(f"Done. Results saved to {output_csv}")
+        print(f"--- Round {round_num}/{rounds} "
+              f"({len(completed)} done, {pairs_per_round - len(completed)} remaining) ---", flush=True)
+
+        file_exists = Path(round_csv).exists()
+        with open(round_csv, "a", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            if not file_exists:
+                writer.writeheader()
+
+            for tc_a, tc_b, ground_truth in pairs:
+                key = (tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
+                if key in completed:
+                    continue
+
+                response = infer(tc_a.code, tc_b.code, lang)
+                ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                overall_done += 1
+                writer.writerow({
+                    "program_a":    tc_a.program,
+                    "variant_a":    tc_a.variant,
+                    "program_b":    tc_b.program,
+                    "variant_b":    tc_b.variant,
+                    "ground_truth": ground_truth,
+                    "timestamp":    ts,
+                    "response":     response,
+                })
+                f.flush()
+                print(f"[{overall_done}/{total}] {ts} | R{round_num} | "
+                      f"{tc_a.program}/{tc_a.variant} vs "
+                      f"{tc_b.program}/{tc_b.variant} → {ground_truth}", flush=True)
+
+        print(f"Round {round_num} done → {round_csv}", flush=True)
+
+    print(f"All {rounds} round(s) complete. Files: "
+          f"{', '.join(_round_csv_path(output_base, r) for r in range(1, rounds + 1))}")
 
 
 # ==============================================================================
@@ -274,18 +341,21 @@ def run_aqlm(content_a: str, content_b: str, lang: str):
 
 # ==============================================================================
 # Entry point
-# Usage: python run_quantization.py <model_name> [hf_model] [tests_dir] [output_csv]
-#   model_name : original | gguf | aqlm
-#   hf_model   : HuggingFace model ID (default: hardcoded per model type)
-#                GGUF supports 'repo_id::filename.gguf' to pick a specific quant
-#                e.g. bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
-#   tests_dir  : path to OCD tests folder  (default: ocd/tests)
-#   output_csv : where to save results     (default: results_<model_name>_<hf_model>.csv)
+# Usage: python run_quantization.py <model_name> [hf_model] [tests_dir] [output_base] [rounds]
+#   model_name  : original | gguf | aqlm
+#   hf_model    : HuggingFace model ID (default: hardcoded per model type)
+#                 GGUF supports 'repo_id::filename.gguf' to pick a specific quant
+#                 e.g. bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+#   tests_dir   : path to OCD tests folder   (default: ocd/tests)
+#   output_base : base name for result files  (default: results_<model_name>[_<hf_model>])
+#                 each round is saved as {output_base}_round{N}.csv
+#   rounds      : number of times to repeat the full experiment (default: 1)
 # ==============================================================================
 if __name__ == "__main__":
-    model_name = sys.argv[1] if len(sys.argv) > 1 else "original"
-    hf_model   = sys.argv[2] if len(sys.argv) > 2 else None
-    tests_dir  = sys.argv[3] if len(sys.argv) > 3 else "ocd/tests"
-    output_csv = sys.argv[4] if len(sys.argv) > 4 else None
+    model_name  = sys.argv[1] if len(sys.argv) > 1 else "original"
+    hf_model    = sys.argv[2] if len(sys.argv) > 2 else None
+    tests_dir   = sys.argv[3] if len(sys.argv) > 3 else "ocd/tests"
+    output_base = sys.argv[4] if len(sys.argv) > 4 else None
+    rounds      = int(sys.argv[5]) if len(sys.argv) > 5 else 1
 
-    run_experiment(model_name, hf_model, tests_dir, output_csv)
+    run_experiment(model_name, hf_model, tests_dir, output_base, rounds=rounds)

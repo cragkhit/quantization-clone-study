@@ -73,7 +73,7 @@ def _make_transformers_infer(model, tokenizer, max_new_tokens: int = 128,
             model.generate(_bos, max_new_tokens=2,
                            pad_token_id=tokenizer.eos_token_id)
             model.generate(
-                torch.cat([_bos] * 1, dim=0).expand(1, 16),
+                _bos.expand(1, 16),
                 max_new_tokens=2, pad_token_id=tokenizer.eos_token_id)
         print("Warmup complete.", flush=True)
 
@@ -103,7 +103,7 @@ def _make_transformers_infer(model, tokenizer, max_new_tokens: int = 128,
 
 def _sanitize_hf_name(hf_model: str) -> str:
     """Convert a HuggingFace model ID to a filesystem-safe string."""
-    return hf_model.replace("/", "_").replace("::", "_")
+    return hf_model.replace("/", "__").replace("::", "_")
 
 
 def load_original(hf_model: str | None = None):
@@ -158,7 +158,6 @@ def load_aqlm(hf_model: str | None = None):
     Run with: CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm
     """
     import os
-    import math
     os.environ.setdefault("CC", "gcc-11")
     os.environ.setdefault("CXX", "g++-11")
 

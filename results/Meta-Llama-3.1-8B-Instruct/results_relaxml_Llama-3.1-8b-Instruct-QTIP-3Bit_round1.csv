@@ -1,0 +1,853 @@
+program_a,variant_a,program_b,variant_b,ground_truth,timestamp,response
+InfixConverter,0_orig,InfixConverter,0_orig,CLONE,2026-06-15 17:05:33,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they perform the same task of converting an infix expression to a postfix expression. They have the same structure and logic, with the only difference being that they have identical code in both snippets. The ReadString and ReadInteger methods are used to read input from the user, and the InfixToPostfixConvert method is used to convert the infix expression to postfix. The main method is used to test the InfixToPostfixConvert method with different infix expressions.""
+}"
+InfixConverter,0_orig,InfixConverter,1_artifice,CLONE,2026-06-15 17:05:40,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar. They both take input from the user, parse it, and convert it to postfix notation. They use a stack to keep track of the operators and operands. The main difference is in the naming conventions, variable names, and some minor differences in the code structure. However, the overall functionality of both code snippets is the same.""
+}"
+InfixConverter,0_orig,InfixConverter,test_0_orig_no_krakatau,CLONE,2026-06-15 17:05:49,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementations of an Infix to Postfix Converter. They both read input from the user, convert an infix expression to postfix, and print the result. The main difference lies in the implementation details, such as the use of different libraries and classes, but the functionality remains the same. The logic used to convert infix to postfix is identical in both code snippets, with the same conditions and operations performed on the input characters and the stack.""
+}"
+InfixConverter,0_orig,InfixConverter,test_0_orig_no_procyon,CLONE,2026-06-15 17:05:56,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they perform the same task of converting an infix expression to postfix expression. They use a stack to keep track of operators and follow the same rules to handle operator precedence and associativity. The main differences are in syntax, structure, and minor variations in error handling and input reading. However, the core logic of the InfixToPostfixConvert method is identical in both code snippets.""
+}"
+InfixConverter,0_orig,InfixConverter,test_0_orig_pg_krakatau,CLONE,2026-06-15 17:06:02,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they both implement the Infix to Postfix conversion algorithm. They both use a stack to handle the conversion. The main differences are in the syntax and structure, but the overall logic and functionality are the same.""
+}"
+InfixConverter,0_orig,InfixConverter,test_0_orig_pg_procyon,CLONE,2026-06-15 17:06:09,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement an Infix to Postfix converter. They read input from the user, parse the infix expression, and convert it to postfix notation. They use a stack to handle the operators and operands. The main difference is in the variable names, method names, and minor syntax differences. However, the functionality and the logic are identical.""
+}"
+InfixConverter,0_orig,InfixConverter,test_1_artifice_no_krakatau,CLONE,2026-06-15 17:06:16,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar. They both achieve the same task of converting infix notation to postfix notation. They have different implementations, but they both use a stack to store operators and operands, and they both follow the same basic steps to convert the infix expression to postfix. The main differences are in the syntax and structure of the code, but the functionality is the same.""
+}
+```"
+InfixConverter,0_orig,InfixConverter,test_1_artifice_no_procyon,CLONE,2026-06-15 17:06:23,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are Java programs that convert infix expressions to postfix expressions. They use a stack to store operators and read input from the standard input. They have similar logic for handling operators with different precedence and for popping operators from the stack when an operator with lower precedence is encountered. The main differences are in the variable names, function names, and some minor differences in the exception handling and loop variables, but the overall functionality is the same.""
+}"
+InfixConverter,0_orig,InfixConverter,test_1_artifice_pg_krakatau,CLONE,2026-06-15 17:06:30,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementations of an infix to postfix converter. They both use a stack to parse the input string and output the postfix equivalent. The main differences are in the implementation details, such as the use of try-catch blocks for error handling in the first code snippet and the use of label statements in the second code snippet for control flow. However, the overall functionality of both code snippets is the same.""
+}"
+InfixConverter,0_orig,InfixConverter,test_1_artifice_pg_procyon,CLONE,2026-06-15 17:06:36,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they both perform the same task of converting an infix expression to postfix expression. They use a stack to store operators and process the input string from left to right, following the same rules for operator precedence and associativity. The main differences are in syntax, structure, and naming conventions, but the logic and functionality are identical.""
+}"
+InfixConverter,0_orig,SqrtAlgorithm,0_orig,NON-CLONE,2026-06-15 17:06:42,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that calculates the square root of a number using a specific algorithm. They have different purposes and do not perform the same task.""
+}
+```"
+InfixConverter,0_orig,SqrtAlgorithm,1_artifice,NON-CLONE,2026-06-15 17:06:49,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be unrelated and serve different purposes. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second code snippet appears to be an implementation of the Babylonian method for calculating the square root of a number. The code structure, syntax, and functionality are significantly different between the two snippets, indicating that they are not functionally similar.""
+}"
+InfixConverter,0_orig,SqrtAlgorithm,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:06:56,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that calculates the square root of a number using the Babylonian method. They are two completely different tasks, and there is no common functionality between them.""
+}"
+InfixConverter,0_orig,SqrtAlgorithm,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:07:03,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second snippet is a Java program that calculates the square root of a number using a custom algorithm. The two programs have different goals and do not perform the same task, so they are not functionally similar.""
+}
+```"
+InfixConverter,0_orig,SqrtAlgorithm,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:07:10,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that calculates the square root of a number using the Babylonian method. The two programs have different purposes and do not perform the same task, even though they both use Java as the programming language.""
+}"
+InfixConverter,0_orig,SqrtAlgorithm,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:07:15,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be unrelated and serve different purposes. The first code snippet is an implementation of an infix-to-postfix converter, while the second code snippet appears to be an implementation of the Babylonian method for calculating square roots. They do not share any common functionality or structure.""
+}
+```"
+InfixConverter,0_orig,SqrtAlgorithm,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:07:24,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It reads input from the console and uses a stack to parse the expression. The second code snippet is a Java program that calculates the square root of a number using a custom algorithm. It uses a loop to calculate the square root and prints the result to the console. The two programs have different functionality and do not perform the same task.""
+}"
+InfixConverter,0_orig,SqrtAlgorithm,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:07:32,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that calculates the square root of a number using a custom algorithm. The two programs have different inputs, outputs, and purposes, making it difficult to determine if they are functionally similar or not.""
+}
+```"
+InfixConverter,0_orig,SqrtAlgorithm,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:07:44,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that calculates the square root of a number using a while loop and does not appear to perform any conversion of expressions. The code is also much more complex and does not share any similarities with the first code snippet in terms of functionality.""
+}
+```"
+InfixConverter,0_orig,SqrtAlgorithm,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:07:56,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that calculates the square root of a number using a binary search algorithm. The two programs have different purposes and do not perform the same task, even though they may share some superficial similarities in their use of loops and conditional statements.""
+}"
+InfixConverter,0_orig,bubblesort,0_orig,NON-CLONE,2026-06-15 17:08:06,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that implements the Bubble Sort algorithm to sort an array of numbers. The two programs have different goals and do not share any similar functionality.""
+}
+```"
+InfixConverter,0_orig,bubblesort,1_artifice,NON-CLONE,2026-06-15 17:08:15,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different contexts and have different purposes. The first snippet is a class that converts an infix expression to a postfix expression, while the second snippet is a class that implements the Bubble Sort algorithm. They do not seem to share a common goal or functionality, making it difficult to determine if they are functionally similar or not.""
+}"
+InfixConverter,0_orig,bubblesort,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:08:25,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that implements the Bubble Sort algorithm. They are two distinct algorithms with different purposes and do not perform the same task.""
+}
+```"
+InfixConverter,0_orig,bubblesort,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:08:41,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is designed to convert an infix expression to a postfix expression, while the second code snippet is a simple implementation of the Bubble Sort algorithm. They are two distinct algorithms with different purposes and functionality. The first code snippet uses a stack to parse the infix expression and generate a postfix expression, whereas the second code snippet uses nested loops to implement the Bubble Sort algorithm. The input and output of the two code snippets are also different, with the first code snippet taking a string as input and generating a postfix expression, and the second code snippet taking an array of integers as input and sorting it using the Bubble Sort algorithm.""
+}"
+InfixConverter,0_orig,bubblesort,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:08:52,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are Java programs that perform different tasks, but the main function of the first code snippet is to convert infix notation to postfix notation, while the second code snippet is a Bubble Sort algorithm. However, both programs use similar structures and concepts such as using a stack data structure, handling input from the user, and handling exceptions. The main difference is in the specific tasks they perform, but their overall architecture and approach are similar. ""
+}"
+InfixConverter,0_orig,bubblesort,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:09:00,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is designed to convert an infix expression to postfix expression, while the second code snippet is a Bubble Sort algorithm. They have different purposes, structures, and steps to accomplish their tasks.""
+}"
+InfixConverter,0_orig,bubblesort,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:09:09,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix notation mathematical expression to a postfix notation. The second code snippet is a Java program that implements the Bubble Sort algorithm. They have different purposes and do not perform the same task.""
+}
+```"
+InfixConverter,0_orig,bubblesort,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:09:17,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that implements the Bubble Sort algorithm. The two programs have different purposes and do not achieve the same result.""
+}"
+InfixConverter,0_orig,bubblesort,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:09:26,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that implements the Bubble Sort algorithm. They are two distinct algorithms with different purposes and do not share any common functionality.""
+}"
+InfixConverter,0_orig,bubblesort,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:09:35,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts infix notation to postfix notation for a given mathematical expression, while Code Snippet 2 is a Java program that implements the Bubble Sort algorithm. They have different purposes and do not perform the same task.""
+}"
+InfixConverter,0_orig,guessword,0_orig,NON-CLONE,2026-06-15 17:09:44,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression. The second snippet is a Java program that reads words from a file and plays a guessing game. They have different goals and do not perform the same task.""
+}
+```"
+InfixConverter,0_orig,guessword,1_artifice,NON-CLONE,2026-06-15 17:09:55,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in Java and are quite different in terms of functionality and structure. The first snippet is a simple infix-to-postfix converter, while the second snippet is a word guessing game. They do not share any obvious similarities in terms of their functionality or implementation. However, without a deeper analysis of their internal workings, it is difficult to determine if they are functionally similar.""
+}"
+InfixConverter,0_orig,guessword,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:10:09,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a simple infix to postfix converter, while the second code snippet is a word guessing game. They have different purposes and do not perform the same task. The first code snippet reads input from the user and converts infix expressions to postfix, while the second code snippet reads words from a file, generates a random word, and asks the user to guess it. They have different input/output and logic, making them not functionally similar.""
+}"
+InfixConverter,0_orig,guessword,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:10:20,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are not directly functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression using a stack, while Code Snippet 2 is a word-guessing game that reads words from a file and allows the user to guess the word. They have different goals and do not perform the same task, making it difficult to determine their functional similarity.""
+}"
+InfixConverter,0_orig,guessword,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:10:32,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts infix notation to postfix notation, while the second snippet is a word-guessing game. They have different purposes and do not perform the same task. The first snippet uses a stack to convert infix to postfix, while the second snippet uses a BufferedReader to read input and compare it with a secret word. The two code snippets do not have any obvious similarities in their functionality.""
+}"
+InfixConverter,0_orig,guessword,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:10:49,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It reads an infix expression from the user, parses it, and prints the corresponding postfix expression. Code Snippet 2 is a Java program that reads a list of words from a file and plays a word guessing game with the user. It reads a word from the file, generates a secret word of a given length, and asks the user to guess the word. The user can guess the word by inputting characters, and the program prints the correct and incorrect guesses. The two programs have different purposes and do not achieve the same result.""
+}
+```"
+InfixConverter,0_orig,guessword,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:11:03,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a program that converts an infix expression to a postfix expression. It reads input from the user, parses the input, and prints the postfix equivalent. Code Snippet 2 is a word-guessing game that reads words from a file, randomly selects a word, and asks the user to guess the word by inputting characters. The two programs have different purposes and do not perform the same task, so they are not functionally similar.""
+}
+```"
+InfixConverter,0_orig,guessword,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:11:14,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are unrelated and do not achieve the same result. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a word-guessing game that reads a word from a file and asks the user to guess the word. They have different purposes and structures, making it difficult to determine their functional similarity.""
+}
+```"
+InfixConverter,0_orig,guessword,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:11:31,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix notation mathematical expression to postfix notation. It reads a string from the console, parses it, and prints the postfix notation. Code Snippet 2 is a Java program that guesses a word from a file. It reads words from the file, selects a random word, and then asks the user to guess the word by providing a series of characters, one at a time. The user can guess the word by entering characters, and the program checks if the entered characters match the random word. The two programs have different functionalities and do not achieve the same result.""
+}"
+InfixConverter,0_orig,guessword,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:11:39,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts infix notation to postfix notation, while the second code snippet is a word guessing game. They have different purposes and do not achieve the same result.""
+}
+```"
+InfixConverter,0_orig,hanoi,0_orig,NON-CLONE,2026-06-15 17:11:48,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a program that converts an infix expression to a postfix expression, while Code Snippet 2 is a solution to the Tower of Hanoi problem. They have different purposes and do not achieve the same result.""
+}"
+InfixConverter,0_orig,hanoi,1_artifice,NON-CLONE,2026-06-15 17:12:03,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be implementing the Tower of Hanoi problem, a classic problem in computer science. They both take a number of discs as input, create stacks to hold the discs, and then use a recursive function to solve the problem. The main difference is in the implementation details, but the overall functionality is the same. The first code snippet is converting an infix expression to a postfix expression, while the second code snippet is solving the Tower of Hanoi problem. However, the logic and structure of both code snippets are similar, as they both use a recursive function to solve a problem.""
+}
+```"
+InfixConverter,0_orig,hanoi,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:12:17,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing two different algorithms: one for converting infix to postfix notation and the other for solving the Tower of Hanoi problem. The code structure, syntax, and variable names may differ, but the logic and approach to solving the problems are similar. The InfixConverter class converts infix expressions to postfix, while the Main class in the second snippet uses a recursive approach to solve the Tower of Hanoi problem. The use of stacks and recursive function calls is a common pattern in both code snippets, indicating functional similarity.""
+}
+```"
+InfixConverter,0_orig,hanoi,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:12:36,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are Java programs that perform different tasks, but they share some common characteristics. The first code snippet is a simple Infix to Postfix converter, while the second code snippet is a solution to the Tower of Hanoi problem. Despite their different tasks, they share some similarities in their design and implementation. Both code snippets use stacks to store data and perform operations on them. They also use a recursive approach to solve their respective problems. Additionally, both code snippets have a similar structure, with a main method that handles user input and calls other methods to perform the actual work. However, the tasks they perform are quite different, and the implementation details are not identical. Nevertheless, the overall design and structure of the two code snippets are similar.""
+}"
+InfixConverter,0_orig,hanoi,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:12:51,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar. They both contain two main functions: one for reading user input and the other for performing a specific task. The task in the first code snippet is converting infix to postfix notation, while the task in the second code snippet is simulating the Tower of Hanoi problem. However, the second code snippet can be seen as a generalization of the first one. Both code snippets also share a common trait of using a stack data structure to store and manipulate data. The main difference lies in the problem domain and the specific implementation details, but the functional similarity is evident.""
+}
+```"
+InfixConverter,0_orig,hanoi,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:13:02,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar. They both convert infix notation to postfix notation and solve the Tower of Hanoi problem. They also handle user input and provide output in a similar way. The main difference is in the implementation details, such as the use of different data structures and algorithms. However, the overall functionality and purpose of the two code snippets are the same.""
+}"
+InfixConverter,0_orig,hanoi,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:13:21,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they implement the Hanoi problem solution. The first code snippet converts an infix expression to a postfix expression and prints it, while the second code snippet solves the Tower of Hanoi problem. However, upon closer inspection, it can be seen that the second code snippet uses a recursive approach to solve the Hanoi problem, and it uses stacks to keep track of the discs and the moves. The stacks in the second code snippet are used to store the discs and the moves, and the code uses a recursive function to move the discs from one pole to another. This is similar to the way the first code snippet uses a stack to convert the infix expression to postfix. Both code snippets use a recursive approach and a stack to solve their respective problems, making them functionally similar.""
+}"
+InfixConverter,0_orig,hanoi,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:13:32,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementations of the Tower of Hanoi problem. The first snippet is a string-based solution that converts an infix expression to a postfix expression and prints the moves required to solve the problem. The second snippet is a stack-based solution that directly prints the moves required to solve the problem. Although they differ in implementation, they both aim to solve the same problem and achieve the same result.""
+}"
+InfixConverter,0_orig,hanoi,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:13:49,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing two different problems: Infix to Postfix conversion and the Tower of Hanoi problem. The Infix to Postfix conversion is implemented in the first code snippet, while the Tower of Hanoi problem is implemented in the second code snippet. However, upon closer inspection, we can see that both problems involve using a stack data structure to solve the problem. The first code snippet uses a stack to convert an infix expression to postfix, while the second code snippet uses a stack to solve the Tower of Hanoi problem. Both code snippets also use a recursive approach to solve the problem. Therefore, despite the differences in syntax and structure, the two code snippets are functionally similar.""
+}"
+InfixConverter,0_orig,hanoi,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:13:58,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a simple infix to postfix converter, while the second code snippet is a solution to the Tower of Hanoi problem. They have different purposes and do not achieve the same result.""
+}
+```"
+InfixConverter,0_orig,kaprekar,0_orig,NON-CLONE,2026-06-15 17:14:08,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is used to convert an infix expression to a postfix expression using a stack, while the second code snippet is used to perform the Kaprekar Transformation on a given 3-digit number. They are two distinct mathematical operations with different purposes and logic.""
+}
+```"
+InfixConverter,0_orig,kaprekar,1_artifice,NON-CLONE,2026-06-15 17:14:22,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. The second code snippet is a Java program that performs the Kaprekar Transformation on a given 3-digit number. They have different functionality, structure, and purpose. The first code snippet uses a stack to parse the infix expression, while the second code snippet uses a different approach to perform the Kaprekar Transformation. They do not achieve the same result or perform the same task, so they are not functionally similar.""
+}"
+InfixConverter,0_orig,kaprekar,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:14:33,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that performs the Kaprekar transformation on a given 3-digit number. The two programs have different goals and do not perform the same task, even though they both use Java and have some similar code structures.""
+}
+```"
+InfixConverter,0_orig,kaprekar,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:14:48,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second code snippet is a Java program that performs the Kaprekar transformation on a 3-digit number. They have different purposes, different logic, and different implementation. The first code snippet does not even have a main method, whereas the second code snippet has a main method that reads a 3-digit number from the user and performs the Kaprekar transformation. The only similarity is that they both use Java as the programming language.""
+}
+```"
+InfixConverter,0_orig,kaprekar,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:15:02,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It reads an infix expression from the user, parses it, and prints the equivalent postfix expression. Code Snippet 2 is a Java program that performs the Kaprekar transformation on a given 3-digit number. It reads a number from the user, performs the transformation, and prints the result. The two programs have different purposes and do not achieve the same result.""
+}
+```"
+InfixConverter,0_orig,kaprekar,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:15:14,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is designed to convert an infix expression to a postfix expression and reads user input to perform this conversion. Code Snippet 2 is designed to perform the Kaprekar transformation on a 3-digit number, which involves repeatedly subtracting a derived number from the original number until the result is equal to the original number. The two code snippets have different functionality and do not achieve the same result.""
+}"
+InfixConverter,0_orig,kaprekar,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:15:25,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second snippet is a Java program that performs the Kaprekar Transformation on a 3-digit number. The two programs have different inputs, outputs, and purposes, and do not share any common functionality.""
+}
+```"
+InfixConverter,0_orig,kaprekar,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:15:34,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated. The first snippet is a Java program that converts infix notation to postfix notation, while the second snippet is a Java program that performs the Kaprekar transformation on a 3-digit number. The two programs have different goals and do not seem to be similar in terms of functionality.""
+}
+```"
+InfixConverter,0_orig,kaprekar,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:15:45,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated in terms of functionality. The first code snippet is designed to convert an infix expression to a postfix expression, while the second code snippet is a simple console application that performs the Kaprekar transformation on a given 3-digit number. The code structures and syntax are also quite different, making it difficult to determine if they are functionally similar or not.""
+}"
+InfixConverter,0_orig,kaprekar,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:15:54,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are written in different programming languages (Java) and have different functionality. The first snippet is a class that converts infix notation to postfix notation, while the second snippet is a class that performs the Kaprekar transformation on a given number. The code structure and syntax are also different, making it difficult to determine functional similarity.""
+}"
+InfixConverter,0_orig,queens,0_orig,NON-CLONE,2026-06-15 17:16:04,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second code snippet is a Java program that solves the N-Queens problem using backtracking. They have different purposes, structures, and algorithms, making them not functionally similar.""
+}"
+InfixConverter,0_orig,queens,1_artifice,NON-CLONE,2026-06-15 17:16:20,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression, while Code Snippet 2 is a Java program that solves the N-Queens problem. They have different purposes and do not achieve the same result. Code Snippet 1 uses a stack to convert infix to postfix, while Code Snippet 2 uses a backtracking algorithm to find solutions to the N-Queens problem. The syntax and structure of the two code snippets are also different, with Code Snippet 1 using a more traditional object-oriented approach and Code Snippet 2 using a more functional approach with methods and instance variables.""
+}"
+InfixConverter,0_orig,queens,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:16:29,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts infix notation to postfix notation, while Code Snippet 2 is a Java program that solves the eight queens problem. They have different purposes, data structures, and algorithms, indicating that they are not functionally similar.""
+}"
+InfixConverter,0_orig,queens,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:16:39,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second code snippet is a Java program that solves the N-Queens problem using backtracking. They have different purposes, structures, and logic, and do not achieve the same result.""
+}"
+InfixConverter,0_orig,queens,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:16:49,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second code snippet is a Java program that solves the N-Queens problem using backtracking. They have different purposes, structures, and algorithms, and there is no clear similarity between them.""
+}
+```"
+InfixConverter,0_orig,queens,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:16:57,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are unrelated and perform different tasks. The first snippet is a Java program that converts an infix notation mathematical expression to postfix notation, while the second snippet is a Java program that solves the eight queens problem. They do not share any similarities in their functionality or structure.""
+}"
+InfixConverter,0_orig,queens,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:17:11,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix notation mathematical expression into a postfix notation. It uses a stack to keep track of operators and outputs the postfix expression. The second code snippet is a Java program that solves the classic 8 Queens problem, a classic problem in computer science. It uses a backtracking algorithm to find all possible solutions to the problem. The two code snippets have different purposes and do not perform the same task, therefore they are not functionally similar.""
+}
+```"
+InfixConverter,0_orig,queens,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:17:20,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated. The first snippet is a Java program that converts an infix expression to a postfix expression, while the second snippet is a Java program that solves the N-Queens problem. They have different goals and structures, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,0_orig,queens,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:17:33,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated in terms of their functionality. The first code snippet is a Java program that converts infix notation to postfix notation, while the second code snippet appears to be a solution to the eight queens problem. The first code snippet uses a stack to parse the infix expression and convert it to postfix, whereas the second code snippet uses recursion and backtracking to find all possible solutions to the eight queens problem. The code structures and algorithms used are different, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,0_orig,queens,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:17:48,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that solves the N-Queens problem using backtracking. They have different purposes, different structures, and different functions. The first code snippet has methods for reading input, converting infix to postfix, and printing the results, while the second code snippet has a main method that creates an instance of the EightQueens class and calls its method a to find solutions to the N-Queens problem. They do not perform the same task, and their functions are not similar.""
+}"
+InfixConverter,0_orig,railroadcar,0_orig,NON-CLONE,2026-06-15 17:17:58,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are written in Java and appear to be attempting to solve different problems. The first snippet is an Infix to Postfix converter, while the second snippet appears to be a rearrangement algorithm for a LinkedList. The code structure, syntax, and problem-solving approach are vastly different, making it difficult to determine functional similarity without a clear understanding of the input and expected output for each code snippet.""
+}"
+InfixConverter,0_orig,railroadcar,1_artifice,NON-CLONE,2026-06-15 17:18:11,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. It reads user input, parses the input, and prints the infix and postfix expressions. The second code snippet appears to be a sorting algorithm, rearranging a linked list of cars based on their values. It reads user input, adds the characters to a linked list, and then sorts the list. The two code snippets have different purposes and do not perform the same task, so they are not functionally similar.""
+}"
+InfixConverter,0_orig,railroadcar,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:18:21,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression. It uses a stack to handle the expression. The second snippet is a Java program that rearranges a linked list of numbers. It uses a linked list to store the numbers and rearranges them in a specific order. The two programs have different functionality and do not achieve the same result.""
+}"
+InfixConverter,0_orig,railroadcar,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:18:29,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets seem to be unrelated in terms of their functionality. The first snippet appears to be an infix-to-postfix converter for mathematical expressions, while the second snippet seems to be a program that rearranges elements in a linked list. They have different purposes and do not seem to share any common functionality.""
+}
+```"
+InfixConverter,0_orig,railroadcar,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:18:39,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated and serve different purposes. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that rearranges a list of integers based on certain conditions. The two code snippets have different inputs, outputs, and functionality, making it difficult to determine if they are functionally similar or not.""
+}"
+InfixConverter,0_orig,railroadcar,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:18:48,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. The first code snippet is a Java program that converts an infix notation mathematical expression to a postfix notation. The second code snippet is a Java program that rearranges elements in a linked list based on their integer values. The logic and structure of the two programs are distinct, and there is no apparent functional similarity between them.""
+}"
+InfixConverter,0_orig,railroadcar,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:19:02,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they both perform the same task, which is to convert infix notation to postfix notation. However, they use different approaches and structures. The first code snippet uses a stack-based approach to convert infix to postfix, while the second code snippet appears to be sorting a linked list of integers in a custom order, but the sorting order is not clearly defined. However, upon closer inspection, it seems that the second code snippet is actually implementing a stack-based approach similar to the first code snippet. It uses a linked list to mimic a stack and rearranges the elements based on their values, effectively achieving the same result as the first code snippet.""
+}"
+InfixConverter,0_orig,railroadcar,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:19:10,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is designed to convert an infix expression to a postfix expression, while Code Snippet 2 is a program that rearranges a list of objects in a specific order. They have different purposes and do not perform the same task.""
+}"
+InfixConverter,0_orig,railroadcar,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:19:21,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming languages and have different goals. The first code snippet is written in Java and appears to be a program that converts infix notation to postfix notation, while the second code snippet is also written in Java but seems to be a simulation of a railroad car rearrangement process. The code snippets do not appear to be functionally similar as they are solving different problems.""
+}"
+InfixConverter,0_orig,railroadcar,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:19:31,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming paradigms and have different purposes. The first snippet is a Java program that converts infix notation to postfix notation, while the second snippet appears to be rearranging elements in a linked list based on certain conditions. The code structure, syntax, and functionality are significantly different, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,0_orig,slinkedlist,0_orig,NON-CLONE,2026-06-15 17:19:41,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second snippet is a Java program that implements a singly linked list with methods for insertion, deletion, traversal, and reversal. The two programs have different purposes and do not perform the same task, so they are not functionally similar.""
+}"
+InfixConverter,0_orig,slinkedlist,1_artifice,NON-CLONE,2026-06-15 17:19:54,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It uses a stack to keep track of the operators and outputs the postfix expression. The second code snippet is a Java program that implements a singly linked list with methods to add nodes, traverse the list, reverse the list, and duplicate the list. The two programs have different purposes and do not perform the same task.""
+}
+```"
+InfixConverter,0_orig,slinkedlist,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:20:06,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It reads input from the console, parses the expression, and outputs the postfix equivalent. The second code snippet is a Java class that represents a singly linked list. It provides methods for inserting, deleting, traversing, and reversing the list. The two programs have different purposes and do not perform the same task, therefore they are not functionally similar.""
+}"
+InfixConverter,0_orig,slinkedlist,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:20:17,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated in terms of functionality. The first snippet is a Java class that converts an infix expression to a postfix expression, while the second snippet is a Java class that implements a singly linked list with various methods for inserting, deleting, and reversing nodes. There is no apparent connection between these two classes in terms of their functionality, making it difficult to determine if they are functionally similar or not.""
+}"
+InfixConverter,0_orig,slinkedlist,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:20:29,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java class that implements a singly linked list with methods to add nodes and traverse the list in forward direction. The two code snippets do not perform the same task, and the code structure and syntax are significantly different. Therefore, they are not functionally similar.""
+}
+```"
+InfixConverter,0_orig,slinkedlist,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:20:39,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix notation to postfix notation using a stack. The second code snippet is a Java program that creates a singly linked list and demonstrates its traversal. They have different purposes and do not perform the same task, therefore they are not functionally similar.""
+}"
+InfixConverter,0_orig,slinkedlist,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:20:52,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are in different programming languages (Java and Java), and they appear to be implementing different tasks. The first snippet is a converter from infix notation to postfix notation, while the second snippet seems to be implementing a singly linked list. The structure and syntax of the code are different, making it difficult to determine if they are functionally similar or not. A more in-depth analysis of the code is required to determine the similarity, but based on the provided information, it is unclear if they are functionally similar.""
+}"
+InfixConverter,0_orig,slinkedlist,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:21:04,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It uses a stack to keep track of the operators and outputs the postfix expression. The second code snippet is a Java class that implements a singly linked list with methods to add elements, traverse the list, reverse the list, and clone the list. The two code snippets have different purposes and do not perform the same task.""
+}
+```"
+InfixConverter,0_orig,slinkedlist,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:21:19,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that creates and manipulates a singly linked list. The two programs have different purposes, data structures, and functionality, and there is no clear connection between the two. The first program reads user input and converts it to postfix, while the second program creates a linked list and performs operations on it. The code structure, syntax, and logic are also different, indicating that the two code snippets are not functionally similar.""
+}"
+InfixConverter,0_orig,slinkedlist,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:21:33,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression, while the second snippet is a Java program that creates and traverses a singly linked list. The two programs have different purposes and do not perform the same task, even though they may share some similar syntax or structure. The first snippet uses a stack to convert infix expressions, while the second snippet uses a linked list to store and traverse integers. The code snippets do not achieve the same result or perform the same task, so they are not functionally similar.""
+}"
+InfixConverter,0_orig,square,0_orig,NON-CLONE,2026-06-15 17:21:43,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack. The second code snippet is a Java program that generates all possible solutions to the magic square problem. They have different purposes, structures, and algorithms, and do not achieve the same result.""
+}"
+InfixConverter,0_orig,square,1_artifice,NON-CLONE,2026-06-15 17:21:55,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in Java and have different purposes. The first code snippet is designed to convert an infix expression to a postfix expression, while the second code snippet is a solution to the magic square problem, where it generates all possible solutions for a given size of a magic square. The code structure, syntax, and logic are different between the two snippets, making it difficult to determine if they are functionally similar without a clear understanding of their specific requirements and inputs.""
+}"
+InfixConverter,0_orig,square,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:22:09,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It reads input from the console and uses a stack to achieve this conversion. Code Snippet 2 is a Java program that generates all possible magic squares of a given size. It uses a boolean array to keep track of possible values and a recursive method to fill in the magic square. The two programs have different goals and use different algorithms, so they are not functionally similar.""
+}"
+InfixConverter,0_orig,square,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:22:19,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression. The second snippet is a Java class that generates all possible magic squares of a given size. The two programs have different purposes and do not perform the same task, therefore they are not functionally similar.""
+}"
+InfixConverter,0_orig,square,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:22:34,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It reads input from the console and uses a stack to process the expression. The second code snippet is a Java class called MagicSquare that appears to be a solution to the magic square problem in combinatorial game theory. It uses a 3x3 matrix to represent the magic square and checks for various conditions to find a solution. The two programs have different purposes and use different algorithms, so they are not functionally similar.""
+}"
+InfixConverter,0_orig,square,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:22:46,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression using a stack, while the second code snippet is a Java class that appears to be a solution to the magic square problem in combinatorial mathematics. They have different purposes, structures, and algorithms, and do not achieve the same result.""
+}
+```"
+InfixConverter,0_orig,square,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:22:59,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix notation mathematical expression to postfix notation. It reads input from the console, parses the expression, and outputs the equivalent postfix expression. The second code snippet is a Java class that appears to be a solution to the magic square problem. It initializes a 3x3 matrix and attempts to fill it with numbers in a way that satisfies certain conditions. The two programs have different purposes and do not perform the same task.""
+}"
+InfixConverter,0_orig,square,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:23:10,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming languages (Java and Java) and seem to be solving different problems. The first code snippet is an infix to postfix converter, while the second code snippet appears to be a solution for generating magic squares. The structure and syntax of the code are different, and it is not immediately clear if the two code snippets are functionally similar.""
+}"
+InfixConverter,0_orig,square,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:23:21,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java class called MagicSquare that appears to be a solution to the magic square problem. The two programs have different goals and structures, and do not share any common functionality.""
+}
+```"
+InfixConverter,0_orig,square,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:23:33,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are written in different programming languages and seem to have different purposes. The first code snippet is written in Java and appears to be a simple implementation of an infix-to-postfix converter. The second code snippet is also written in Java, but it seems to be a solution to a magic square problem. The two code snippets do not share any obvious similarities in terms of their functionality or structure, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,InfixConverter,0_orig,CLONE,2026-06-15 17:23:42,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same functionality of converting an infix expression to a postfix expression. They use a stack to keep track of operators and operands. The main difference is in the implementation details, such as variable naming and error handling, but the overall logic is the same.""
+}
+```"
+InfixConverter,1_artifice,InfixConverter,1_artifice,CLONE,2026-06-15 17:24:01,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they perform the same task of converting an infix expression to a postfix expression. They use the same algorithm and logic to parse the input string and push operators and operands onto a stack. The only difference is that the second code snippet has the same code duplicated in the main method, which is not necessary and can be removed. The m00() and m10() methods are also identical in both code snippets and can be removed as they are not used in the main method. The m20() method is the core of the code and performs the infix to postfix conversion. It uses a stack to push operators and operands and converts the infix expression to a postfix expression. Both code snippets have the same logic and use the same data structures to achieve the same result, making them functionally similar.""
+}"
+InfixConverter,1_artifice,InfixConverter,test_0_orig_no_krakatau,CLONE,2026-06-15 17:24:14,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing an Infix to Postfix converter. They both read user input, parse the infix expression, and convert it to postfix. The main differences are in the syntax and structure, but the overall functionality is the same. The first code snippet uses a while loop and a stack to parse the infix expression, while the second code snippet uses a StringBuilder and a stack to parse the infix expression. The logic of the code is the same, just the implementation is different.""
+}"
+InfixConverter,1_artifice,InfixConverter,test_0_orig_no_procyon,CLONE,2026-06-15 17:24:23,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are Java programs designed to convert infix notation to postfix notation. They use a stack data structure to process the input string and achieve the same result. The main differences are in the implementation details, such as variable names, exception handling, and some minor syntax differences. However, the overall logic and functionality of both code snippets are identical.""
+}"
+InfixConverter,1_artifice,InfixConverter,test_0_orig_pg_krakatau,CLONE,2026-06-15 17:24:33,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement an Infix to Postfix converter. They take an infix expression as input, parse it, and return the equivalent postfix expression. The parsing logic is similar, using a stack to handle operator precedence and associativity. The main difference is in the implementation details, such as the use of different data structures (Stack vs. StringBuilder) and exception handling. However, the functional behavior is identical.""
+}"
+InfixConverter,1_artifice,InfixConverter,test_0_orig_pg_procyon,CLONE,2026-06-15 17:24:42,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to convert an infix notation mathematical expression to a postfix notation. They achieve this by using a stack to push and pop operators and operands. The main differences are in the implementation details, such as variable naming, exception handling, and input handling. However, the overall logic and functionality of both code snippets are the same.""
+}"
+InfixConverter,1_artifice,InfixConverter,test_1_artifice_no_krakatau,CLONE,2026-06-15 17:24:55,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they both perform the same task of converting an infix expression into a postfix expression. They have similar structure and logic, with the main difference being in the syntax and variable naming conventions. The first code snippet uses the BufferedReader and InputStreamReader classes to read input from the console, while the second code snippet uses the InputStreamReader and BufferedReader classes directly. The logic for converting infix to postfix is the same in both code snippets, with the only difference being in the variable naming and the use of try-catch blocks.""
+}
+```"
+InfixConverter,1_artifice,InfixConverter,test_1_artifice_no_procyon,CLONE,2026-06-15 17:25:04,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they both convert an infix expression to a postfix expression. They have the same functionality and use the same approach to solve the problem. They read input from the user, parse the infix expression, and then convert it to postfix using a stack. The only differences are in the syntax and structure, but the logic and outcome are the same.""
+}"
+InfixConverter,1_artifice,InfixConverter,test_1_artifice_pg_krakatau,CLONE,2026-06-15 17:25:15,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the same functionality of converting an infix expression to a postfix expression. They use a stack to store operators and operands, and they handle the same set of operators (+, -, *, /). The main difference is in the implementation details, such as the use of try-catch blocks and the handling of the end of the input string. However, the overall logic and approach are the same.""
+}
+```"
+InfixConverter,1_artifice,InfixConverter,test_1_artifice_pg_procyon,CLONE,2026-06-15 17:25:27,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar. They are implementing the same functionality, which is to convert an infix expression to a postfix expression. The main difference is in the implementation approach and syntax, but the output for the same input is the same. The first code snippet uses BufferedReader and InputStreamReader to read input from the console, while the second code snippet uses a Stack to process the input string directly. The logic for processing the input string and converting it to postfix is the same in both code snippets.""
+}
+```"
+InfixConverter,1_artifice,SqrtAlgorithm,0_orig,NON-CLONE,2026-06-15 17:25:39,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It uses a stack to process the expression and generate the postfix equivalent. The second code snippet is a Java program that calculates the square root of a number using the Babylonian method. It uses a loop to iteratively improve the estimate of the square root until it reaches a certain precision. The two programs have different purposes and do not perform the same task.""
+}
+```"
+InfixConverter,1_artifice,SqrtAlgorithm,1_artifice,NON-CLONE,2026-06-15 17:25:49,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be a Java program that converts an infix expression to a postfix expression, while Code Snippet 2 is a Java program that calculates the square root of a number using the Babylonian method. The code structure, syntax, and functionality of the two programs are completely different, and there is no overlap in their purpose or implementation.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:26:01,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming languages and have different purposes. The first snippet is a Java class that converts infix notation to postfix notation, while the second snippet is a Java class that calculates the square root of a number using a custom algorithm. The code structure, syntax, and functionality of the two snippets are quite different, making it difficult to determine if they are functionally similar or not.""
+}
+```"
+InfixConverter,1_artifice,SqrtAlgorithm,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:26:13,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. The second code snippet is a Java program that calculates the square root of a number using the Babylonian method. They have different purposes and do not perform the same task, even though they are both written in Java. The code structures, syntax, and steps taken to accomplish their respective tasks are also different.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:26:29,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts infix notation to postfix notation, while the second code snippet is a program that calculates the square root of a number. They have different purposes and do not perform the same task, even though they are written in Java. The first code snippet uses a stack to parse the infix notation and convert it to postfix notation, while the second code snippet uses a different algorithm to calculate the square root of a number. The structure and syntax of the two code snippets are also different, which further supports the conclusion that they are not functionally similar.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:26:41,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming languages and seem to be solving different problems. The first code snippet is written in Java and appears to be converting an infix notation mathematical expression to a postfix notation. The second code snippet is also written in Java but appears to be calculating the square root of a number. The logic and structure of the two code snippets are quite different, making it difficult to determine if they are functionally similar or not.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:26:51,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are written in different programming languages and have different purposes. The first code snippet appears to be a Java program that converts an infix expression to a postfix expression, while the second code snippet appears to be a Java program that calculates the square root of a number. They do not seem to be functionally similar.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:27:03,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in Java, but they have vastly different functionality. The first snippet seems to be a parser that converts infix notation to postfix notation, while the second snippet is an implementation of the Babylonian method for calculating square roots. The code structure, syntax, and purpose of the two snippets are quite different, making it difficult to determine if they are functionally similar. Further analysis would be required to determine the similarity between the two code snippets.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:27:14,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated and serve different purposes. The first snippet is a Java program that converts infix notation to postfix notation, while the second snippet is a Java program that calculates the square root of a number using the Babylonian method. The code structure, syntax, and functionality of the two snippets are significantly different, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,SqrtAlgorithm,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:27:23,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet appears to be a Java program that converts infix notation to postfix notation, while the second code snippet is a program that calculates the square root of a number using the Babylonian method. They have different purposes and do not achieve the same result.""
+}"
+InfixConverter,1_artifice,bubblesort,0_orig,NON-CLONE,2026-06-15 17:27:35,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated in terms of functionality. The first snippet seems to be a Java program that converts infix notation to postfix notation, while the second snippet is a Java program that implements a bubble sort algorithm. There is no clear connection between these two programs, and they do not appear to perform the same task. However, without a deeper understanding of the requirements and constraints of the task, it is difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,bubblesort,1_artifice,NON-CLONE,2026-06-15 17:27:44,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated. The first snippet is a Java program that converts infix notation to postfix notation, while the second snippet is a Java program that implements the bubble sort algorithm. They do not share any common functionality or goals, and it is not clear if they are similar or not based on their current implementation.""
+}"
+InfixConverter,1_artifice,bubblesort,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:27:57,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are quite different in terms of their functionality. The first snippet appears to be a Java program that converts an infix expression to a postfix expression, while the second snippet is a Java program that implements the Bubble Sort algorithm. The first snippet uses a stack to parse the infix expression and convert it to postfix, while the second snippet uses a simple iteration to sort an array of numbers. The code structures, syntax, and problem domains are quite different, making it difficult to determine whether they are functionally similar or not.""
+}"
+InfixConverter,1_artifice,bubblesort,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:28:10,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix notation mathematical expression to a postfix notation. It reads an expression from the standard input, parses it, and prints the equivalent postfix notation. The second code snippet is a Java program that implements the Bubble Sort algorithm. It reads a number of elements from the standard input, sorts them using the Bubble Sort algorithm, and prints the sorted array. The two programs have different goals and functionality, and there is no overlap in their functionality.""
+}"
+InfixConverter,1_artifice,bubblesort,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:28:21,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression and prints the infix and postfix expressions. Code Snippet 2 is a Java program that implements the Bubble Sort algorithm. They have different purposes and do not achieve the same result, even though they are written in the same language.""
+}"
+InfixConverter,1_artifice,bubblesort,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:28:30,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression into a postfix expression and prints it. Code Snippet 2 is a Java program that implements the Bubble Sort algorithm. The two programs have different goals and functionality, and there is no common task or result between them.""
+}"
+InfixConverter,1_artifice,bubblesort,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:28:39,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated. The first snippet is a Java program that converts an infix expression to a postfix expression, while the second snippet is a Java program that implements the bubble sort algorithm. They have different purposes and do not seem to perform the same task, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,bubblesort,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:28:53,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression and prints the results. Code Snippet 2 is a Java program that implements the Bubble Sort algorithm. They have different purposes, structures, and functions. The first snippet uses a Stack data structure to parse the infix expression and build the postfix expression, while the second snippet uses nested loops to sort an array of numbers. The code snippets do not share any common functionality or logic.""
+}"
+InfixConverter,1_artifice,bubblesort,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:29:04,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are in different languages and appear to be performing different tasks. The first code snippet is written in Java and appears to be a simple infix to postfix converter, while the second code snippet is also written in Java but appears to be implementing the Bubble Sort algorithm. The structure, syntax, and purpose of the two code snippets are quite different, making it difficult to determine if they are functionally similar without a deeper understanding of their respective functions.""
+}"
+InfixConverter,1_artifice,bubblesort,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:29:13,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that implements the bubble sort algorithm. The two programs have different functionality and do not perform the same task.""
+}"
+InfixConverter,1_artifice,guessword,0_orig,NON-CLONE,2026-06-15 17:29:25,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. The second code snippet is a word-guessing game that reads words from a file and asks the user to guess a secret word. They have different purposes and do not perform the same task, even though they use some similar Java code structures such as try-catch blocks and BufferedReader.""
+}
+```"
+InfixConverter,1_artifice,guessword,1_artifice,NON-CLONE,2026-06-15 17:29:35,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. They have different purposes and structures. The first snippet is a Java program that converts an infix expression to a postfix expression, while the second snippet is a word guessing game. They do not perform the same task or achieve the same result.""
+}
+```"
+InfixConverter,1_artifice,guessword,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:29:53,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different contexts and have different purposes. The first code snippet seems to be a Java program that converts infix notation to postfix notation, while the second code snippet is a word-guessing game. They do not seem to have any functional similarities. However, upon closer inspection, it appears that both code snippets use a similar approach to handle exceptions, with both using try-catch blocks to catch and handle potential errors. They also both use similar methods to read input from a source (System.in for the first code snippet and a file for the second code snippet). However, these similarities are not sufficient to conclude that the code snippets are functionally similar, as the overall purpose and functionality of the two code snippets are different.""
+}"
+InfixConverter,1_artifice,guessword,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:30:03,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are unrelated and appear to be solving different problems. The first code snippet is a Java program that converts an infix notation mathematical expression to a postfix notation, while the second code snippet is a word guessing game. They do not have similar functionality and do not perform the same task, making it difficult to determine if they are functionally similar or not.""
+}"
+InfixConverter,1_artifice,guessword,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:30:17,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix notation to a postfix notation, while Code Snippet 2 is a word guessing game. They have different purposes and do not perform the same task. Code Snippet 1 uses a stack to parse the infix notation and build the postfix notation, whereas Code Snippet 2 uses a file and user input to guess a word. The two code snippets do not have any common functionality or structure, and they do not achieve the same result.""
+}"
+InfixConverter,1_artifice,guessword,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:30:32,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is designed to convert an infix expression to a postfix expression, while the second code snippet is a simple text-based word guessing game. They have different purposes and do not perform the same task. The first code snippet uses a stack to process the infix expression, while the second code snippet uses a random word from a file and allows the user to guess it. The structure and syntax of the two code snippets are also different, with the first code snippet having multiple methods and the second code snippet having a single main method.""
+}
+```"
+InfixConverter,1_artifice,guessword,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:30:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are Java programs that perform different tasks. The first snippet is an infix-to-postfix converter, while the second snippet is a word-guessing game. However, upon closer inspection, we can see that both snippets have a similar structure and use similar techniques. They both use try-catch blocks to handle exceptions, and they both use loops to iterate over data. The main difference is that the first snippet is a simple program with a specific task, while the second snippet is a more complex program with a game-like structure. However, the underlying techniques used to solve the problems are similar, and the structure of the code is also similar. Therefore, the two code snippets are functionally similar.""
+}"
+InfixConverter,1_artifice,guessword,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:31:00,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be a Java program that converts an infix expression to a postfix expression, while Code Snippet 2 appears to be a word guessing game. The two programs have different goals and functionalities, and they do not achieve the same result or perform the same task.""
+}
+```"
+InfixConverter,1_artifice,guessword,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:31:17,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression into a postfix expression, while Code Snippet 2 is a program that guesses a word from a file. The main functionality of these two programs is completely different. Code Snippet 1 is a mathematical program that uses a stack to parse the infix expression, whereas Code Snippet 2 is a word-guessing game that reads words from a file and allows the user to guess the word by inputting characters. The structure, syntax, and purpose of the two programs are also different. Therefore, they are not functionally similar.""
+}"
+InfixConverter,1_artifice,guessword,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:31:28,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression, while the second snippet is a word-guessing game that reads a list of words from a file and asks the user to guess a randomly selected word. They have different goals, structures, and functions, and there is no clear similarity between them.""
+}
+```"
+InfixConverter,1_artifice,hanoi,0_orig,NON-CLONE,2026-06-15 17:31:37,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that solves the Tower of Hanoi problem. They have different goals and functionality, and do not share any common logic or structure.""
+}"
+InfixConverter,1_artifice,hanoi,1_artifice,NON-CLONE,2026-06-15 17:31:53,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the same functionality of converting infix expressions to postfix expressions and solving the Tower of Hanoi problem. They use a similar approach with stacks to solve the problem. The first code snippet converts infix expressions to postfix expressions, while the second code snippet solves the Tower of Hanoi problem. However, the approach used to solve the Tower of Hanoi problem in the second code snippet can be seen as a conversion of an infix expression, where the expression is a sequence of moves to be performed. The code snippets share a common pattern of using stacks and recursion to solve the problem, making them functionally similar.""
+}"
+InfixConverter,1_artifice,hanoi,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:32:03,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""Both code snippets are written in Java, but they appear to be solving different problems. The first snippet seems to be converting an infix expression to a postfix expression, while the second snippet appears to be solving the Tower of Hanoi problem. The code structures and algorithms used in both snippets are different, making it difficult to determine their functional similarity.""
+}"
+InfixConverter,1_artifice,hanoi,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:32:15,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar because they both read input from the console and perform a specific task. Code snippet 1 converts infix notation to postfix notation, while code snippet 2 solves the Tower of Hanoi problem. Both tasks involve reading input from the console and performing a series of operations to achieve the desired output. The similarity lies in the way they read input, handle exceptions, and perform operations on the input data.""
+}
+```"
+InfixConverter,1_artifice,hanoi,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:32:32,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be solving the Tower of Hanoi problem. The first snippet is converting an infix expression to postfix, and the second snippet is solving the Tower of Hanoi problem using a recursive approach. Although the two problems seem unrelated at first glance, they both involve recursive operations and stack-based processing. The first snippet uses a stack to process the infix expression, and the second snippet uses stacks to move discs in the Tower of Hanoi problem. The recursive approach in both code snippets involves breaking down the problem into smaller sub-problems and solving them recursively. Therefore, based on their problem-solving approach and use of stacks, the two code snippets can be considered functionally similar.""
+}"
+InfixConverter,1_artifice,hanoi,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:32:43,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the Tower of Hanoi problem and converting infix notation to postfix notation. They are functionally similar, but the approach and implementation differ. The first code snippet uses a stack to convert infix to postfix, while the second code snippet uses recursion to solve the Tower of Hanoi problem. The code for reading user input and printing the output is also similar.""
+}"
+InfixConverter,1_artifice,hanoi,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:32:53,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be implementations of the Tower of Hanoi problem, a classic problem in computer science. They both take user input, process it, and print the solution to the problem. The main difference is in the implementation of the algorithm and the handling of user input. However, the core functionality of both code snippets is the same.""
+}"
+InfixConverter,1_artifice,hanoi,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:33:04,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the Tower of Hanoi problem. They take a number of discs as input, create stacks to store the discs, and then recursively move the discs from one stack to another, following the rules of the game. They also keep track of the number of moves made and print the moves to the console. Although the code is structured and written differently, the functionality of the two code snippets is the same.""
+}"
+InfixConverter,1_artifice,hanoi,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:33:19,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar. They both seem to be implementing a simple calculator that can parse and evaluate mathematical expressions in infix and postfix notation. They both use a stack data structure to store intermediate results. The main difference is in the approach used to parse and evaluate the expressions. The first code snippet uses a recursive approach with a lot of repeated code, while the second code snippet uses a more iterative approach with a loop. However, the end result is the same: to parse and evaluate mathematical expressions in infix and postfix notation.""
+}
+```"
+InfixConverter,1_artifice,hanoi,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:33:39,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the Tower of Hanoi problem. The first code snippet is converting an infix expression to a postfix expression, and the second code snippet is solving the Tower of Hanoi problem. However, upon closer inspection, it can be seen that the second code snippet can be viewed as a specific case of the Tower of Hanoi problem where the goal is to move all disks from one stack to another with the same number of disks. The main difference between the two code snippets is that the first one is not directly related to the Tower of Hanoi problem, but the second one can be seen as a special case of the Tower of Hanoi problem. However, both code snippets use stacks as a data structure to solve their respective problems. Therefore, they share some similarities in their use of stacks.""
+}"
+InfixConverter,1_artifice,kaprekar,0_orig,NON-CLONE,2026-06-15 17:33:49,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are functionally dissimilar. The first code snippet converts an infix expression to a postfix expression, while the second code snippet performs the Kaprekar Transformation on a 3-digit number. They have different purposes and do not perform the same task, even though they share some similarities in their use of try-catch blocks and input/output operations.""
+}"
+InfixConverter,1_artifice,kaprekar,1_artifice,NON-CLONE,2026-06-15 17:34:00,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is designed to convert an infix expression to a postfix expression, while Code Snippet 2 performs the Kaprekar Transformation on a 3-digit number. The two code snippets have different inputs, processing, and outputs. They do not achieve the same result or perform the same task, even if they differ in syntax or structure.""
+}"
+InfixConverter,1_artifice,kaprekar,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:34:17,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. The second code snippet is a Java program that performs the Kaprekar Transformation on a given 3-digit number. They have different purposes, structures, and steps to achieve their tasks. The first code snippet uses a stack to process the infix expression, while the second code snippet uses a series of if-else statements to process the 3-digit number. The output of the two programs is also different, with the first program outputting the infix and postfix expressions, and the second program outputting the result of the Kaprekar Transformation.""
+}"
+InfixConverter,1_artifice,kaprekar,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:34:27,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be unrelated and perform different tasks. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that performs the Kaprekar Transformation on a three-digit number. They have different goals, structures, and algorithms, indicating they are not functionally similar.""
+}"
+InfixConverter,1_artifice,kaprekar,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:34:42,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix notation expression to a postfix notation expression. It reads an expression from the standard input, parses it, and prints the equivalent postfix notation. Code Snippet 2 is a Java program that performs the Kaprekar transformation on a 3-digit number. It reads a number from the standard input, performs a series of calculations, and prints the results. The two programs have different input, output, and functionality, indicating that they are not functionally similar.""
+}"
+InfixConverter,1_artifice,kaprekar,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:34:55,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression into a postfix expression. It reads input from the user, parses the input, and prints the equivalent postfix expression. Code Snippet 2 is a Java program that performs the Kaprekar transformation on a 3-digit number. It reads input from the user, performs the transformation, and prints the result. The two programs have different purposes and do not perform the same task.""
+}"
+InfixConverter,1_artifice,kaprekar,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:35:09,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be a Java program that converts an infix expression to a postfix expression. It reads an expression from the console, parses it, and prints the postfix equivalent. Code Snippet 2 is a Java program that performs the Kaprekar transformation on a 3-digit number. It reads a number from the console, performs a series of calculations, and prints the result. The two programs have different functionality and do not perform the same task, therefore they are not functionally similar.""
+}"
+InfixConverter,1_artifice,kaprekar,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:35:18,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to have different functionality. The first snippet seems to be implementing an infix to postfix converter, while the second snippet appears to be implementing the Kaprekar transformation. They do not perform the same task, so they are not functionally similar.""
+}
+```"
+InfixConverter,1_artifice,kaprekar,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:35:30,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming languages (Java and Java) and have different purposes (one is a Postfix expression parser and the other is a Kaprekar transformation algorithm). Although they share some similarities in their use of try-catch blocks and loops, their overall structure and functionality are distinct. Without a clear understanding of the specific requirements and expected outputs of each code snippet, it is difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,kaprekar,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:35:44,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet converts an infix expression to a postfix expression and prints it. The second code snippet performs the Kaprekar Transformation on a given 3-digit number. They have different purposes and do not achieve the same result. The first code snippet uses a stack to process the infix expression, while the second code snippet uses a while loop to perform the Kaprekar Transformation. The logic and structure of the two code snippets are different, indicating they are not functionally similar.""
+}"
+InfixConverter,1_artifice,queens,0_orig,NON-CLONE,2026-06-15 17:35:55,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""Both code snippets are Java programs, but they are solving very different problems. The first code snippet is designed to convert an infix notation mathematical expression to a postfix notation, while the second code snippet is a solution to the N-Queens problem. The structure and functionality of the two code snippets are quite different, making it difficult to determine if they are functionally similar. Therefore, the similarity between the two code snippets is unclear.""
+}"
+InfixConverter,1_artifice,queens,1_artifice,NON-CLONE,2026-06-15 17:36:09,"```json
+{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""Both code snippets are Java programs, but they appear to be solving different problems. The first code snippet seems to be a Postfix to Infix expression converter, while the second code snippet appears to be a solution to the N-Queens problem. The code structures, syntax, and logic are significantly different, making it difficult to determine functional similarity without a clear understanding of the problem being solved. Without further context or a clear definition of functional similarity, it is challenging to definitively conclude whether these two code snippets are functionally similar or not.""
+}
+```"
+InfixConverter,1_artifice,queens,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:36:20,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression. The second snippet is a Java program that solves the eight queens problem. They have different purposes and do not perform the same task. The first snippet uses a stack to process the infix expression, while the second snippet uses a recursive approach to find solutions to the eight queens problem.""
+}"
+InfixConverter,1_artifice,queens,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:36:29,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are written in different programming languages (Java and Java) and have different purposes. The first code snippet is used to convert infix notation to postfix notation, while the second code snippet is used to solve the N-Queens problem. The code structures, syntax, and logic are also different, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,queens,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:36:41,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. The second code snippet is a Java program that solves the N-Queens problem. They have different goals, structure, and logic. The first code snippet uses a stack to process the infix expression, while the second code snippet uses a recursive approach to solve the N-Queens problem. The two code snippets do not perform the same task, and their functionality is not similar.""
+}"
+InfixConverter,1_artifice,queens,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:36:51,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java program that converts an infix expression to a postfix expression and the second snippet is a Java program that solves the 8 queens problem. They have different goals and do not perform the same task. The first snippet uses a stack to process the infix expression, while the second snippet uses a recursive function to solve the 8 queens problem.""
+}"
+InfixConverter,1_artifice,queens,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:36:59,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated in terms of their functionality. The first code snippet is a Java program that converts infix notation to postfix notation, while the second code snippet is a Java program that solves the N-Queens problem. The two programs have different objectives and do not seem to share any common functionality.""
+}"
+InfixConverter,1_artifice,queens,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:37:11,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different contexts and have different purposes. The first snippet is an infix to postfix converter, while the second snippet is a solution to the N-Queens problem. They have different classes, methods, and variables, and do not seem to share any common functionality. However, without a clear understanding of what 'functionally similar' means, it is difficult to determine if they are functionally similar or not. A deeper analysis of the code is required to determine their similarity.""
+}"
+InfixConverter,1_artifice,queens,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:37:23,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It uses a stack to parse the expression and build the postfix equivalent. Code Snippet 2 is a Java program that solves the 8 Queens problem, which is a classic problem in computer science. It uses a backtracking algorithm to find all possible solutions to the problem. The two programs have different purposes, use different algorithms, and do not perform the same task.""
+}"
+InfixConverter,1_artifice,queens,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:37:36,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It reads input from the console, parses the expression, and prints the infix and postfix expressions. Code Snippet 2 is a Java program that solves the N-Queens problem, which is a classic problem in computer science. It tries to place N queens on an NxN chessboard such that no two queens attack each other. The two programs have different purposes and do not achieve the same result. They do not have any similar functionality.""
+}"
+InfixConverter,1_artifice,railroadcar,0_orig,NON-CLONE,2026-06-15 17:37:50,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It reads user input, checks for operators and operands, and rearranges them according to the operator precedence. Code Snippet 2 is a Java program that rearranges a linked list of integers based on the value of each element. It uses a while loop to iterate through the list and rearranges the elements based on their values. The two programs have different inputs, processes, and outputs, and do not perform the same task. Therefore, they are not functionally similar.""
+}"
+InfixConverter,1_artifice,railroadcar,1_artifice,NON-CLONE,2026-06-15 17:38:01,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It reads input from the console, parses the input string, and uses a stack to build the postfix expression. The second code snippet is a Java program that rearranges elements in a linked list. It uses a series of linked lists to sort the elements in the input list. The two programs have different purposes and use different algorithms, so they are not functionally similar.""
+}"
+InfixConverter,1_artifice,railroadcar,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:38:15,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression. It uses a stack to keep track of the operators. Code Snippet 2 is a Java program that rearranges a linked list of integers in a specific order. It uses three linked lists to store the elements in sorted order. The two programs have different input and output, and they use different algorithms to achieve their goals. The main similarity is that they both use a linked list and a stack, but the purpose and implementation are different.""
+}
+```"
+InfixConverter,1_artifice,railroadcar,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:38:28,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. The first snippet is a Java program that converts an infix notation mathematical expression to a postfix notation. It reads an expression from the user, uses a stack to parse the expression, and prints the infix and postfix notations. The second snippet is a Java program that rearranges a list of cars (represented as integers) in ascending order. It reads a list of integers from the user, rearranges the list, and prints the rearranged list. The two programs have different inputs, outputs, and problem-solving approaches, indicating they are not functionally similar.""
+}"
+InfixConverter,1_artifice,railroadcar,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:38:39,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in Java, but they seem to be solving different problems. The first snippet appears to be converting an infix notation mathematical expression to a postfix notation, while the second snippet appears to be rearranging elements in a linked list. The code structures and syntax are different, making it difficult to determine if they are functionally similar. Without a clear understanding of the desired output for each snippet, it is challenging to determine their functional similarity.""
+}"
+InfixConverter,1_artifice,railroadcar,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:38:53,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is designed to convert an infix expression to a postfix expression, while the second code snippet is designed to rearrange a linked list of characters based on certain conditions. The two code snippets have different purposes and do not achieve the same result, even though they share some superficial similarities in their use of linked lists and character manipulation. The first code snippet uses a stack to parse the infix expression and convert it to postfix, while the second code snippet uses two linked lists to rearrange the input characters. The logic and algorithms used in the two code snippets are distinct and serve different purposes, making them not functionally similar.""
+}"
+InfixConverter,1_artifice,railroadcar,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:39:06,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a class that rearranges elements in a linked list based on their values. They have different purposes and do not achieve the same result. The first code snippet uses a stack to parse the infix expression, while the second code snippet uses a linked list and sorting. The algorithms and data structures used in the two code snippets are different, indicating that they are not functionally similar.""
+}"
+InfixConverter,1_artifice,railroadcar,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:39:15,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be unrelated and serve different purposes. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that rearranges a linked list based on the values of its elements. The two programs have different input, output, and functionality, making it difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,railroadcar,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:39:30,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet appears to be a Java program that converts an infix expression to a postfix expression, while the second code snippet appears to be a program that rearranges a linked list of integers. The two programs have different inputs, outputs, and functionality. The first program reads input from the user, processes it, and prints the result, while the second program reads input from the user, processes it, and prints the result as a rearranged linked list. The code structure and syntax are also different, with the first program using a stack to process the input and the second program using a linked list to rearrange the input.""
+}"
+InfixConverter,1_artifice,railroadcar,test_1_artifice_pg_procyon,NON-CLONE,2026-06-15 17:39:38,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is designed to convert an infix notation mathematical expression into a postfix notation, while the second code snippet appears to be rearranging a list of objects based on certain conditions. The logic and purpose of the two code snippets are completely different.""
+}"
+InfixConverter,1_artifice,slinkedlist,0_orig,NON-CLONE,2026-06-15 17:39:51,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a Java class named InfixConverter that converts an infix expression to a postfix expression. The second snippet is a Java class named SLinkedList that implements a singly linked list with methods for insertion, deletion, traversal, and reversal. The two classes have different purposes and do not perform the same task. The InfixConverter class is used for parsing and converting mathematical expressions, while the SLinkedList class is used for data storage and manipulation. The code structure, syntax, and functionality are also significantly different between the two snippets.""
+}"
+InfixConverter,1_artifice,slinkedlist,1_artifice,NON-CLONE,2026-06-15 17:40:01,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression, while the second code snippet is a Java program that implements a singly linked list with various methods for adding, removing, and traversing the list. The two programs have different purposes and do not perform the same task, therefore they are not functionally similar.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_0_orig_no_krakatau,NON-CLONE,2026-06-15 17:40:12,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It uses a stack to parse the infix expression and generate the postfix expression. The second code snippet is a Java program that implements a singly linked list with methods for inserting and deleting nodes, traversing the list, and reversing the list. The two programs have different purposes and do not perform the same task.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_0_orig_no_procyon,NON-CLONE,2026-06-15 17:40:22,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are written in different programming languages and have different purposes. The first snippet is written in Java and appears to be a simple calculator that converts infix notation to postfix notation, while the second snippet is also written in Java and appears to be a linked list implementation with methods for inserting, deleting, and reversing the list. The code snippets do not seem to perform the same task, so it's difficult to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_0_orig_pg_krakatau,NON-CLONE,2026-06-15 17:40:32,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a Java program that converts an infix expression to a postfix expression, while Code Snippet 2 is a Java program that creates a singly linked list and performs some operations on it. The two programs have different goals and do not perform the same task, even though they share some superficial similarities in their syntax and structure.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_0_orig_pg_procyon,NON-CLONE,2026-06-15 17:40:42,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are in Java and seem to be written in different styles and for different purposes. The first code snippet is for converting an infix expression to a postfix expression, while the second code snippet is for creating a singly linked list and traversing it. They do not seem to be performing the same task or achieving the same result, so it's not clear if they are functionally similar or not.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_1_artifice_no_krakatau,NON-CLONE,2026-06-15 17:40:54,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets are in different programming languages (Java and Java) and appear to be implementing different functionalities. The first snippet seems to be a simple calculator that converts infix notation to postfix notation, while the second snippet appears to be a linked list implementation with various methods for inserting, traversing, and reversing the list. Without a clear understanding of the requirements or specifications for these code snippets, it is difficult to determine if they are functionally similar or not. A more detailed comparison of the code and the requirements would be necessary to make a definitive determination.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_1_artifice_no_procyon,NON-CLONE,2026-06-15 17:41:06,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be written in different programming languages (Java) and have different purposes. The first code snippet appears to be a simple console application that converts infix notation to postfix notation, while the second code snippet is a singly linked list implementation. The structure, syntax, and functionality of the two code snippets are vastly different, making it difficult to determine if they are functionally similar. Without a clear understanding of the specific requirements and functionality of each code snippet, it is not possible to determine if they are functionally similar.""
+}"
+InfixConverter,1_artifice,slinkedlist,test_1_artifice_pg_krakatau,NON-CLONE,2026-06-15 17:41:18,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a Java program that converts an infix expression to a postfix expression. It reads input from the console, parses the input, and prints the postfix expression. The second code snippet is a Java program that implements a singly linked list. It has methods to add elements to the list and traverse the list in forward direction. The two programs have different purposes and do not perform the same task, therefore they are not functionally similar.""
+}"

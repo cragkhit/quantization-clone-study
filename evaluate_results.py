@@ -48,6 +48,12 @@ def parse_answer(response_str: str) -> str | None:
         m = re.search(r'"answer"\s*:\s*"([^"]+)"', response_str, re.IGNORECASE)
         raw = m.group(1).strip().upper() if m else ""
 
+    if not raw:
+        # Plain-text fallback: "ANSWER: YES-SIMILAR\nEXPLANATION: ..."
+        import re as _re
+        m = _re.search(r'\bANSWER\s*:\s*([A-Z_-]+)', response_str, _re.IGNORECASE)
+        raw = m.group(1).strip().upper() if m else ""
+
     if raw in ("YES-SIMILAR", "YES_SIMILAR", "YES"):
         return "CLONE"
     if raw in ("NO-NOT-SIMILAR", "NO_NOT_SIMILAR", "NO"):
@@ -381,19 +387,41 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
     if not rows:
         return
 
-    col_headers = ["Model", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
-                   "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"]
-    col_keys    = ["file", "rows_total", "rows_evaluated", "rows_excluded",
-                   "TP", "FP", "FN", "TN",
-                   "accuracy", "precision", "recall", "f1", "mcc", "run_time"]
-    float_cols  = {"accuracy", "precision", "recall", "f1", "mcc"}
-    n_cols = len(col_headers)
+    float_cols = {"accuracy", "precision", "recall", "f1", "mcc"}
+
+    TABLES = [
+        {
+            "caption": "Clone Detection Evaluation Summary --- Count Statistics",
+            "label":   "tab:evaluation_counts",
+            "size":    r"\small",
+            "resize":  False,
+            "headers": ["Model", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN"],
+            "keys":    ["file", "rows_total", "rows_evaluated", "rows_excluded",
+                        "TP", "FP", "FN", "TN"],
+        },
+        {
+            "caption": "Clone Detection Evaluation Summary --- Performance Metrics",
+            "label":   "tab:evaluation_metrics",
+            "size":    r"\small",
+            "resize":  False,
+            "headers": ["Model", "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"],
+            "keys":    ["file", "accuracy", "precision", "recall", "f1", "mcc", "run_time"],
+        },
+        {
+            "caption": "Clone Detection Evaluation Summary --- Full Results",
+            "label":   "tab:evaluation_summary",
+            "size":    r"\footnotesize",
+            "resize":  True,
+            "headers": ["Model", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
+                        "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"],
+            "keys":    ["file", "rows_total", "rows_evaluated", "rows_excluded",
+                        "TP", "FP", "FN", "TN",
+                        "accuracy", "precision", "recall", "f1", "mcc", "run_time"],
+        },
+    ]
 
     def escape(s: str) -> str:
         return s.replace("_", r"\_").replace("%", r"\%").replace("&", r"\&")
-
-    col_spec = "l" + "r" * (n_cols - 1)
-    header_cells = " & ".join(r"\textbf{" + escape(h) + "}" for h in col_headers)
 
     # Group rows preserving input order within each group
     grouped: dict[str, list[tuple[str, dict]]] = {}
@@ -408,45 +436,61 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
     preferred = ["Original (FP16)", "GGUF Quantization"]
     group_order.sort(key=lambda g: preferred.index(g) if g in preferred else 99)
 
-    lines = [
-        r"\begin{table}[htbp]",
-        r"  \centering",
-        r"  \caption{Clone Detection Evaluation Summary}",
-        r"  \label{tab:evaluation_summary}",
-        r"  \small",
-        f"  \\begin{{tabular}}{{{col_spec}}}",
-        r"    \toprule",
-        f"    {header_cells} \\\\",
-        r"    \midrule",
-    ]
+    all_lines: list[str] = []
 
-    for i, group in enumerate(group_order):
-        if i > 0:
+    for tbl in TABLES:
+        headers = tbl["headers"]
+        keys    = tbl["keys"]
+        n_cols  = len(headers)
+        col_spec = "l" + "r" * (n_cols - 1)
+        header_cells = " & ".join(r"\textbf{" + escape(h) + "}" for h in headers)
+
+        lines = [
+            r"\begin{table}[htbp]",
+            r"  \centering",
+            f"  \\caption{{{tbl['caption']}}}",
+            f"  \\label{{{tbl['label']}}}",
+            f"  {tbl['size']}",
+        ]
+        if tbl["resize"]:
+            lines.append(r"  \resizebox{\textwidth}{!}{%")
+        lines += [
+            f"  \\begin{{tabular}}{{{col_spec}}}",
+            r"    \toprule",
+            f"    {header_cells} \\\\",
+            r"    \midrule",
+        ]
+
+        for i, group in enumerate(group_order):
+            if i > 0:
+                lines.append(r"    \midrule")
+            lines.append(
+                f"    \\multicolumn{{{n_cols}}}{{l}}{{\\textit{{{escape(group)}}}}} \\\\"
+            )
             lines.append(r"    \midrule")
-        lines.append(
-            f"    \\multicolumn{{{n_cols}}}{{l}}{{\\textit{{{escape(group)}}}}} \\\\"
-        )
-        lines.append(r"    \midrule")
-        for model_name, r in grouped[group]:
-            cells = []
-            for k in col_keys:
-                if k == "file":
-                    cells.append(escape(model_name))
-                elif k in float_cols:
-                    cells.append(f"{r[k]:.4f}")
-                else:
-                    cells.append(str(r[k]))
-            lines.append("    " + " & ".join(cells) + r" \\")
+            for model_name, r in grouped[group]:
+                cells = []
+                for k in keys:
+                    if k == "file":
+                        cells.append(escape(model_name))
+                    elif k in float_cols:
+                        cells.append(f"{r[k]:.4f}")
+                    else:
+                        cells.append(str(r[k]))
+                lines.append("    " + " & ".join(cells) + r" \\")
 
-    lines += [
-        r"    \bottomrule",
-        r"  \end{tabular}",
-        r"\end{table}",
-    ]
+        lines.append(r"    \bottomrule")
+        lines.append(r"  \end{tabular}")
+        if tbl["resize"]:
+            lines.append(r"  }")
+        lines.append(r"\end{table}")
+
+        all_lines.extend(lines)
+        all_lines.append("")  # blank line between tables
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines) + "\n")
-    print(f"LaTeX table written to: {output_path}")
+        f.write("\n".join(all_lines) + "\n")
+    print(f"LaTeX tables written to: {output_path}")
 
 
 def main() -> None:

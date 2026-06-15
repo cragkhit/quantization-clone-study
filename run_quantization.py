@@ -59,8 +59,23 @@ def build_prompt(content_a: str, content_b: str, lang: str) -> str:
 # Model loaders (each returns a callable: (content_a, content_b, lang) -> str)
 # ==============================================================================
 
-def _make_transformers_infer(model, tokenizer, max_new_tokens: int = 128):
+def _make_transformers_infer(model, tokenizer, max_new_tokens: int = 128,
+                             warmup: bool = False):
     import torch
+
+    if warmup:
+        # Pay CUDA kernel compilation/autotuning cost before the real experiment.
+        # Run two short generations: one single-token (warms bs=1 kernel path)
+        # and one ~16-token sequence (warms the prefill path).
+        print("Warming up CUDA kernels...", flush=True)
+        _bos = torch.tensor([[model.config.bos_token_id]], device=model.device)
+        with torch.no_grad():
+            model.generate(_bos, max_new_tokens=2,
+                           pad_token_id=tokenizer.eos_token_id)
+            model.generate(
+                torch.cat([_bos] * 1, dim=0).expand(1, 16),
+                max_new_tokens=2, pad_token_id=tokenizer.eos_token_id)
+        print("Warmup complete.", flush=True)
 
     def infer(content_a: str, content_b: str, lang: str) -> str:
         prompt = build_prompt(content_a, content_b, lang)
@@ -88,7 +103,7 @@ def _make_transformers_infer(model, tokenizer, max_new_tokens: int = 128):
 
 def _sanitize_hf_name(hf_model: str) -> str:
     """Convert a HuggingFace model ID to a filesystem-safe string."""
-    return hf_model.replace("/", "__").replace("::", "_")
+    return hf_model.replace("/", "_").replace("::", "_")
 
 
 def load_original(hf_model: str | None = None):
@@ -201,10 +216,104 @@ def load_aqlm(hf_model: str | None = None):
     return _make_transformers_infer(model, tokenizer)
 
 
+def load_higgs(hf_model: str | None = None):
+    """HIGGS-GPTQ quantized model. pip install gptqmodel transformers accelerate"""
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    import torch
+
+    model_id = hf_model or "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit"
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id, device_map="auto", torch_dtype=torch.float16
+    )
+    return _make_transformers_infer(model, tokenizer)
+
+
+def load_qtip(hf_model: str | None = None):
+    """QTIP 4-bit. Requires qtip/ repo (Cornell-RelaxML/qtip) and qtip_venv.
+    Run with: source qtip_venv/bin/activate && CC=gcc-11 CXX=g++-11 python run_quantization.py qtip
+    """
+    import os
+    import sys
+    import subprocess
+
+    os.environ.setdefault("CC", "gcc-11")
+    os.environ.setdefault("CXX", "g++-11")
+
+    qtip_dir = Path(__file__).parent / "qtip"
+    kernels_dir = qtip_dir / "qtip-kernels"
+
+    # Build CUDA kernel if not already built
+    kernel_so = list(kernels_dir.glob("qtip_kernels*.so"))
+    if not kernel_so:
+        print("Building QTIP CUDA kernel...", flush=True)
+        subprocess.run(
+            [sys.executable, "setup.py", "build_ext", "--inplace"],
+            cwd=kernels_dir, env={**os.environ, "CC": "gcc-11", "CXX": "g++-11"},
+            check=True,
+        )
+        kernel_so = list(kernels_dir.glob("qtip_kernels*.so"))
+
+    # Add repo and kernel dir to sys.path so QTIP modules are importable
+    for p in [str(qtip_dir), str(kernels_dir)]:
+        if p not in sys.path:
+            sys.path.insert(0, p)
+
+    # Load the kernel op (registers torch.ops.quip_lib.*)
+    if kernel_so:
+        try:
+            # Pre-load PyTorch shared libs so the extension's dlopen can find them.
+            # Setting LD_LIBRARY_PATH after process start has no effect on the
+            # dynamic linker, but ctypes.CDLL calls dlopen which populates the
+            # process symbol table for subsequent dlopens.
+            import ctypes
+            import torch as _torch_for_path
+            _torch_lib = Path(_torch_for_path.__file__).parent / "lib"
+            for _lib in ["libc10.so", "libtorch.so", "libtorch_cpu.so",
+                         "libc10_cuda.so", "libtorch_cuda.so"]:
+                _p = _torch_lib / _lib
+                if _p.exists():
+                    ctypes.CDLL(str(_p))
+            import qtip_kernels  # noqa: F401
+        except ImportError as e:
+            print(f"Warning: QTIP kernel import failed ({e}), falling back to pure-PyTorch path.", flush=True)
+            # Force has_kernel=False so BitshiftLinear uses the pure-PyTorch fallback
+            import lib.utils.kernel_check as _kc
+            _kc.has_kernel = lambda *a, **kw: False
+
+    from lib.utils.unsafe_import import model_from_hf_path
+    from lib.linear.quantized_linear import QuantizedLinear as _QtipQL
+    from transformers import AutoTokenizer
+    import torch
+
+    model_id = hf_model or "relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit"
+    print(f"Loading QTIP model: {model_id}", flush=True)
+    model, model_str = model_from_hf_path(model_id)
+
+    # Switch every QuantizedLinear to train-fixW mode, which pre-computes
+    # the dequantized+Hadamard-rotated weight matrix once and stores it as
+    # a plain FP16 tensor (hatW). Subsequent forward passes then do a single
+    # cuBLAS matmul instead of on-the-fly trellis decompression, making
+    # prefill of long sequences ~5-10x faster at the cost of ~7 GB extra VRAM.
+    for _m in model.modules():
+        if isinstance(_m, _QtipQL):
+            _m.mode = 'train-fixW'
+    print("Caching dequantized weights (train-fixW warmup)...", flush=True)
+    with torch.no_grad():
+        _dummy = torch.tensor([[model.config.bos_token_id]], device=model.device)
+        model(_dummy)
+    print("Weight cache ready.", flush=True)
+
+    tokenizer = AutoTokenizer.from_pretrained(model_str)
+    return _make_transformers_infer(model, tokenizer, max_new_tokens=256, warmup=True)
+
+
 LOADERS = {
     "original": load_original,
     "gguf":     load_gguf,
     "aqlm":     load_aqlm,
+    "higgs":    load_higgs,
+    "qtip":     load_qtip,
 }
 
 
@@ -252,7 +361,8 @@ def run_experiment(
 
     if output_base is None:
         if hf_model:
-            output_base = f"results_{model_name}_{_sanitize_hf_name(hf_model)}"
+            model_part = hf_model.split("/")[-1].split("::")[0]
+            output_base = f"results/{model_part}/results_{_sanitize_hf_name(hf_model)}"
         else:
             output_base = f"results_{model_name}"
 
@@ -289,6 +399,7 @@ def run_experiment(
         print(f"--- Round {round_num}/{rounds} "
               f"({len(completed)} done, {pairs_per_round - len(completed)} remaining) ---", flush=True)
 
+        Path(round_csv).parent.mkdir(parents=True, exist_ok=True)
         file_exists = Path(round_csv).exists()
         with open(round_csv, "a", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -342,7 +453,7 @@ def run_aqlm(content_a: str, content_b: str, lang: str):
 # ==============================================================================
 # Entry point
 # Usage: python run_quantization.py <model_name> [hf_model] [tests_dir] [output_base] [rounds]
-#   model_name  : original | gguf | aqlm
+#   model_name  : original | gguf | aqlm | higgs | qtip
 #   hf_model    : HuggingFace model ID (default: hardcoded per model type)
 #                 GGUF supports 'repo_id::filename.gguf' to pick a specific quant
 #                 e.g. bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf

@@ -13,8 +13,14 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-with open("prompt.md") as _f:
-    PROMPT_TEMPLATE = _f.read()
+_PROMPT_TEMPLATE: str | None = None
+
+
+def _get_prompt_template() -> str:
+    global _PROMPT_TEMPLATE
+    if _PROMPT_TEMPLATE is None:
+        _PROMPT_TEMPLATE = (Path(__file__).parent / "prompt.md").read_text()
+    return _PROMPT_TEMPLATE
 
 
 # ==============================================================================
@@ -52,7 +58,7 @@ def generate_pairs(test_cases: list[TestCase]):
 
 
 def build_prompt(content_a: str, content_b: str, lang: str) -> str:
-    return PROMPT_TEMPLATE.format(contentA=content_a, contentB=content_b, lang=lang)
+    return _get_prompt_template().format(contentA=content_a, contentB=content_b, lang=lang)
 
 
 # ==============================================================================
@@ -354,6 +360,68 @@ def _load_completed_round(round_csv: str) -> set[tuple]:
     return completed
 
 
+_FIELDNAMES = ["program_a", "variant_a", "program_b", "variant_b",
+               "ground_truth", "timestamp", "response"]
+
+
+def _run_round(
+    round_num: int,
+    rounds: int,
+    round_csv: str,
+    pairs: list,
+    infer,
+    lang: str,
+    overall_done: int,
+    total: int,
+) -> int:
+    """Write one round of inference results to round_csv, resuming if partial.
+
+    Returns the updated overall_done count.
+    """
+    completed = _load_completed_round(round_csv)
+    pairs_per_round = len(pairs)
+
+    if len(completed) == pairs_per_round:
+        print(f"--- Round {round_num}/{rounds}: already complete, skipping ---", flush=True)
+        return overall_done
+
+    print(f"--- Round {round_num}/{rounds} "
+          f"({len(completed)} done, {pairs_per_round - len(completed)} remaining) ---",
+          flush=True)
+
+    Path(round_csv).parent.mkdir(parents=True, exist_ok=True)
+    file_exists = Path(round_csv).exists()
+    with open(round_csv, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=_FIELDNAMES)
+        if not file_exists:
+            writer.writeheader()
+
+        for tc_a, tc_b, ground_truth in pairs:
+            key = (tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
+            if key in completed:
+                continue
+
+            response = infer(tc_a.code, tc_b.code, lang)
+            ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            overall_done += 1
+            writer.writerow({
+                "program_a":    tc_a.program,
+                "variant_a":    tc_a.variant,
+                "program_b":    tc_b.program,
+                "variant_b":    tc_b.variant,
+                "ground_truth": ground_truth,
+                "timestamp":    ts,
+                "response":     response,
+            })
+            f.flush()
+            print(f"[{overall_done}/{total}] {ts} | R{round_num} | "
+                  f"{tc_a.program}/{tc_a.variant} vs "
+                  f"{tc_b.program}/{tc_b.variant} → {ground_truth}", flush=True)
+
+    print(f"Round {round_num} done → {round_csv}", flush=True)
+    return overall_done
+
+
 def run_experiment(
     model_name: str,
     hf_model: str | None = None,
@@ -362,14 +430,10 @@ def run_experiment(
     lang: str = "Java",
     rounds: int = 1,
 ):
-    """
-    Load all test cases from tests_dir, generate every n×n pair, and run model_name
-    for the specified number of rounds. Each round is saved to its own CSV:
-        {output_base}_round1.csv, {output_base}_round2.csv, ...
+    """Run model_name on all test pairs for the given number of rounds.
 
-    Resumes automatically: completed rounds are skipped; partial rounds continue
-    from where they left off.
-    Columns: program_a, variant_a, program_b, variant_b, ground_truth, timestamp, response
+    Each round is saved to {output_base}_round{N}.csv. Resumes automatically:
+    completed rounds are skipped; partial rounds continue from where they left off.
     """
     if model_name not in LOADERS:
         raise ValueError(f"Unknown model '{model_name}'. Choose from: {list(LOADERS)}")
@@ -385,7 +449,6 @@ def run_experiment(
     pairs = list(generate_pairs(test_cases))
     pairs_per_round = len(pairs)
 
-    # Check overall resume state across all rounds
     total_done = sum(len(_load_completed_round(_round_csv_path(output_base, r)))
                      for r in range(1, rounds + 1))
     total = pairs_per_round * rounds
@@ -399,70 +462,16 @@ def run_experiment(
     infer = LOADERS[model_name](hf_model)
     print(f"Model '{model_name}' loaded. Starting inference...", flush=True)
 
-    fieldnames = ["program_a", "variant_a", "program_b", "variant_b",
-                  "ground_truth", "timestamp", "response"]
-
     overall_done = total_done
     for round_num in range(1, rounds + 1):
-        round_csv = _round_csv_path(output_base, round_num)
-        completed = _load_completed_round(round_csv)
-
-        if len(completed) == pairs_per_round:
-            print(f"--- Round {round_num}/{rounds}: already complete, skipping ---", flush=True)
-            continue
-
-        print(f"--- Round {round_num}/{rounds} "
-              f"({len(completed)} done, {pairs_per_round - len(completed)} remaining) ---", flush=True)
-
-        Path(round_csv).parent.mkdir(parents=True, exist_ok=True)
-        file_exists = Path(round_csv).exists()
-        with open(round_csv, "a", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            if not file_exists:
-                writer.writeheader()
-
-            for tc_a, tc_b, ground_truth in pairs:
-                key = (tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
-                if key in completed:
-                    continue
-
-                response = infer(tc_a.code, tc_b.code, lang)
-                ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                overall_done += 1
-                writer.writerow({
-                    "program_a":    tc_a.program,
-                    "variant_a":    tc_a.variant,
-                    "program_b":    tc_b.program,
-                    "variant_b":    tc_b.variant,
-                    "ground_truth": ground_truth,
-                    "timestamp":    ts,
-                    "response":     response,
-                })
-                f.flush()
-                print(f"[{overall_done}/{total}] {ts} | R{round_num} | "
-                      f"{tc_a.program}/{tc_a.variant} vs "
-                      f"{tc_b.program}/{tc_b.variant} → {ground_truth}", flush=True)
-
-        print(f"Round {round_num} done → {round_csv}", flush=True)
+        overall_done = _run_round(
+            round_num, rounds,
+            _round_csv_path(output_base, round_num),
+            pairs, infer, lang, overall_done, total,
+        )
 
     print(f"All {rounds} round(s) complete. Files: "
           f"{', '.join(_round_csv_path(output_base, r) for r in range(1, rounds + 1))}")
-
-
-# ==============================================================================
-# Legacy single-call helpers (kept for quick ad-hoc use)
-# ==============================================================================
-
-def run_gguf(content_a: str, content_b: str, lang: str):
-    print(load_gguf()(content_a, content_b, lang))
-
-
-def run_original(content_a: str, content_b: str, lang: str):
-    print(load_original()(content_a, content_b, lang))
-
-
-def run_aqlm(content_a: str, content_b: str, lang: str):
-    print(load_aqlm()(content_a, content_b, lang))
 
 
 # ==============================================================================

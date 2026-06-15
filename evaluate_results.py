@@ -233,15 +233,12 @@ def evaluate_majority_vote(paths: list[str], unknown_as: str) -> list[dict | Non
         # Accumulate votes and ground truth per pair
         pair_truth:  dict[tuple, str]       = {}
         pair_votes:  dict[tuple, list[str]] = defaultdict(list)
-        first_ts:    datetime | None = None
-        last_ts:     datetime | None = None
+        round_durations: list[float] = []
 
         for csv_path in group_paths:
             rows, fts, lts = _load_csv_rows(csv_path)
-            if fts and (first_ts is None or fts < first_ts):
-                first_ts = fts
-            if lts and (last_ts is None or lts > last_ts):
-                last_ts = lts
+            if fts and lts:
+                round_durations.append((lts - fts).total_seconds())
             for row in rows:
                 pair_key = (row["program_a"], row["variant_a"],
                             row["program_b"], row["variant_b"])
@@ -281,7 +278,7 @@ def evaluate_majority_vote(paths: list[str], unknown_as: str) -> list[dict | Non
             results.append(None)
             continue
 
-        run_seconds = (last_ts - first_ts).total_seconds() if first_ts and last_ts else None
+        run_seconds = sum(round_durations) / len(round_durations) if round_durations else None
         results.append(print_report(label, y_true, y_pred, n_excluded, run_seconds))
 
     return results

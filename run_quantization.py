@@ -216,13 +216,21 @@ def load_aqlm(hf_model: str | None = None):
 
 
 def load_higgs(hf_model: str | None = None):
-    """HIGGS-GPTQ quantized model. pip install gptqmodel transformers accelerate tiktoken"""
+    """HIGGS-GPTQ 4-bit quantized model (Hadamard Incoherence + GPTQ).
+
+    Dependencies:
+        pip install gptqmodel transformers accelerate tiktoken
+
+    Default model: ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit
+    Loaded via standard transformers AutoModelForCausalLM in FP16 with
+    device_map="auto". HIGGS repos sometimes omit tokenizer files, so we
+    fall back to the base model tokenizer when that happens.
+    """
     from transformers import AutoTokenizer, AutoModelForCausalLM
     import torch
 
     model_id = hf_model or "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit"
 
-    # HIGGS repos often omit tokenizer files — fall back to the base model's tokenizer.
     try:
         tokenizer = AutoTokenizer.from_pretrained(model_id)
     except (ValueError, OSError):
@@ -459,21 +467,55 @@ def run_aqlm(content_a: str, content_b: str, lang: str):
 
 # ==============================================================================
 # Entry point
-# Usage: python run_quantization.py <model_name> [hf_model] [tests_dir] [output_base] [rounds]
-#   model_name  : original | gguf | aqlm | higgs | qtip
-#   hf_model    : HuggingFace model ID (default: hardcoded per model type)
-#                 GGUF supports 'repo_id::filename.gguf' to pick a specific quant
-#                 e.g. bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
-#   tests_dir   : path to OCD tests folder   (default: ocd/tests)
-#   output_base : base name for result files  (default: results_<model_name>[_<hf_model>])
-#                 each round is saved as {output_base}_round{N}.csv
-#   rounds      : number of times to repeat the full experiment (default: 1)
 # ==============================================================================
 if __name__ == "__main__":
-    model_name  = sys.argv[1] if len(sys.argv) > 1 else "original"
-    hf_model    = sys.argv[2] if len(sys.argv) > 2 else None
-    tests_dir   = sys.argv[3] if len(sys.argv) > 3 else "ocd/tests"
-    output_base = sys.argv[4] if len(sys.argv) > 4 else None
-    rounds      = int(sys.argv[5]) if len(sys.argv) > 5 else 1
+    import argparse
 
-    run_experiment(model_name, hf_model, tests_dir, output_base, rounds=rounds)
+    parser = argparse.ArgumentParser(
+        description="Run clone-detection inference for a quantized model.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python run_quantization.py original
+  python run_quantization.py gguf bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+  python run_quantization.py aqlm ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf --rounds 4
+  python run_quantization.py qtip relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit --output results/my_run
+        """,
+    )
+    parser.add_argument(
+        "model",
+        choices=list(LOADERS),
+        help="Quantization method / model loader to use.",
+    )
+    parser.add_argument(
+        "hf_model",
+        nargs="?",
+        default=None,
+        help="HuggingFace model ID (default: hardcoded per loader). "
+             "GGUF accepts 'repo_id::filename.gguf' to select a specific quant file.",
+    )
+    parser.add_argument(
+        "--tests-dir",
+        default="ocd/tests",
+        metavar="DIR",
+        help="Path to the OCD tests folder (default: ocd/tests).",
+    )
+    parser.add_argument(
+        "--output",
+        default=None,
+        dest="output_base",
+        metavar="BASE",
+        help="Base path for result CSV files. Each round is saved as BASE_roundN.csv. "
+             "Default: results/<model>/<sanitized_hf_model>.",
+    )
+    parser.add_argument(
+        "--rounds",
+        type=int,
+        default=1,
+        metavar="N",
+        help="Number of times to repeat the full experiment (default: 1).",
+    )
+
+    args = parser.parse_args()
+    run_experiment(args.model, args.hf_model, args.tests_dir, args.output_base,
+                   rounds=args.rounds)

@@ -1,9 +1,16 @@
 """
-Minimal inference snippets for each quantization method in Table 1.
-Each section is independent — run only the one you need.
+Clone-detection inference runner for quantized LLMs.
 
-Pre-quantized Llama-3.1-8B-Instruct models used throughout.
-Install dependencies per section before running.
+Supports five model backends (original, gguf, aqlm, higgs, qtip) and runs
+every n×n pair of Java code snippets from the OCD test suite, saving results
+to per-round CSV files that can be evaluated with evaluate_results.py.
+
+Usage:
+    python run_quantization.py <model> [hf_model] [--tests-dir DIR]
+                               [--output BASE] [--rounds N]
+    python run_quantization.py --help
+
+See exp_notes.md for per-backend setup instructions and known workarounds.
 """
 
 import csv

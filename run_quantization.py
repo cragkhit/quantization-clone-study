@@ -217,12 +217,20 @@ def load_aqlm(hf_model: str | None = None):
 
 
 def load_higgs(hf_model: str | None = None):
-    """HIGGS-GPTQ quantized model. pip install gptqmodel transformers accelerate"""
+    """HIGGS-GPTQ quantized model. pip install gptqmodel transformers accelerate tiktoken"""
     from transformers import AutoTokenizer, AutoModelForCausalLM
     import torch
 
     model_id = hf_model or "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit"
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+    # HIGGS repos often omit tokenizer files — fall back to the base model's tokenizer.
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_id)
+    except (ValueError, OSError):
+        base_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+        print(f"Tokenizer not found in {model_id}, loading from {base_id}", flush=True)
+        tokenizer = AutoTokenizer.from_pretrained(base_id)
+
     model = AutoModelForCausalLM.from_pretrained(
         model_id, device_map="auto", torch_dtype=torch.float16
     )

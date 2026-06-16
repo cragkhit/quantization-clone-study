@@ -45,7 +45,6 @@ def parse_answer(response_str: str) -> str | None:
         raw = obj[key].strip().upper() if key else ""
     except (json.JSONDecodeError, AttributeError):
         # Try to extract answer with a loose regex fallback
-        import re
         m = re.search(r'"answer"\s*:\s*"([^"]+)"', response_str, re.IGNORECASE)
         raw = m.group(1).strip().upper() if m else ""
 

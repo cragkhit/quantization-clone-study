@@ -50,9 +50,10 @@ def parse_answer(response_str: str) -> str | None:
         raw = m.group(1).strip().upper() if m else ""
 
     if not raw:
-        # Plain-text fallback: "ANSWER: YES-SIMILAR\nEXPLANATION: ..."
-        import re as _re
-        m = _re.search(r'\bANSWER\s*:\s*([A-Z_-]+)', response_str, _re.IGNORECASE)
+        # Plain-text fallback: handles both
+        #   ANSWER: YES-SIMILAR          (unquoted)
+        #   ANSWER: "YES-SIMILAR"        (quoted)
+        m = re.search(r'\bANSWER\s*:\s*"?([A-Z_-]+)"?', response_str, re.IGNORECASE)
         raw = m.group(1).strip().upper() if m else ""
 
     if raw in ("YES-SIMILAR", "YES_SIMILAR", "YES"):
@@ -261,9 +262,8 @@ def evaluate_majority_vote(paths: list[str], unknown_as: str) -> list[dict | Non
         y_pred: list[str] = []
         n_excluded = 0
 
-        for pair_key, votes in pair_votes.items():
-            if pair_key not in pair_truth:
-                continue
+        for pair_key in pair_truth:
+            votes = pair_votes.get(pair_key, [])
             clone_count     = votes.count("CLONE")
             non_clone_count = votes.count("NON-CLONE")
 

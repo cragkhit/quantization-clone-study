@@ -41,7 +41,8 @@ def parse_answer(response_str: str) -> str | None:
     """
     try:
         obj = json.loads(response_str)
-        raw = obj.get("answer", "").strip().upper()
+        key = next((k for k in obj if k.lower() == "answer"), None)
+        raw = obj[key].strip().upper() if key else ""
     except (json.JSONDecodeError, AttributeError):
         # Try to extract answer with a loose regex fallback
         import re

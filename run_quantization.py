@@ -232,12 +232,15 @@ def load_higgs(hf_model: str | None = None):
     """HIGGS-GPTQ 4-bit quantized model (Hadamard Incoherence + GPTQ).
 
     Dependencies:
-        pip install gptqmodel transformers accelerate tiktoken
+        pip install gptqmodel transformers accelerate tiktoken fast_hadamard_transform flute-kernel
 
     Default model: ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit
-    Loaded via standard transformers AutoModelForCausalLM in FP16 with
-    device_map="auto". HIGGS repos sometimes omit tokenizer files, so we
-    fall back to the base model tokenizer when that happens.
+
+    *** IMPORTANT: run with CUDA_VISIBLE_DEVICES set to a single, low-load GPU. ***
+    FLUTE template tuning (_tune) benchmarks 144 kernel variants at load time and is
+    non-deterministic under GPU contention. On a congested GPU it can select an
+    incompatible template_id, producing garbage output for all inference pairs.
+    Pinning to a free GPU (e.g. CUDA_VISIBLE_DEVICES=7) makes selection stable.
     """
     from transformers import AutoTokenizer, AutoModelForCausalLM
     import torch

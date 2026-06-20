@@ -183,6 +183,132 @@ python run_quantization.py gguf \
 
 ---
 
+## HIGGS-GPTQ Setup
+
+### Model
+- **HuggingFace model:** `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit`
+- **Quantization:** HIGGS (Hadamard Incoherence + GPTQ) 4-bit
+- **Base model:** `meta-llama/Meta-Llama-3.1-8B-Instruct`
+
+### Virtual Environment
+A dedicated `higgs_venv` was created using `uv` (the system Python 3.10 lacks `ensurepip`).
+
+```bash
+uv venv higgs_venv --python 3.10
+```
+
+Packages must be installed in this order — torch must be pinned first to prevent
+gptqmodel/xformers from upgrading it to an incompatible version:
+
+```bash
+# Step 1: pin torch 2.8+cu128 (compatible with system CUDA 12.2 driver)
+uv pip install --python higgs_venv/bin/python \
+    "torch==2.8.0+cu128" \
+    --index-url https://download.pytorch.org/whl/cu128
+
+# Step 2: install remaining deps, constraining torch
+uv pip install --python higgs_venv/bin/python \
+    "transformers==4.50.0" accelerate tiktoken sentencepiece \
+    --constraint <(echo "torch==2.8.0+cu128")
+
+# Step 3: flute-kernel (prerelease required; --no-deps to avoid vllm pull)
+uv pip install --python higgs_venv/bin/python \
+    "flute-kernel==0.4.2" --prerelease=allow --no-deps
+
+# Step 4: fast_hadamard_transform (must build from GitHub; PyPI tarball is broken)
+CC=gcc-11 CXX=g++-11 higgs_venv/bin/python -m pip install \
+    "git+https://github.com/Dao-AILab/fast-hadamard-transform.git" \
+    --no-build-isolation --no-cache-dir
+
+# Step 5: bootstrap pip (uv venvs omit pip by default) then install torchvision
+uv pip install --python higgs_venv/bin/python pip torchvision sentencepiece
+```
+
+**Why torch 2.8+cu128 (not the latest):** `gptqmodel` and `xformers` pull in
+torch 2.12+cu130, which requires a CUDA driver ≥ 13.0. The system driver is 12.2,
+so CUDA is unavailable with torch 2.12. Installing torch 2.8 first and constraining
+it prevents the upgrade.
+
+**Why transformers 4.50.0:** The HIGGS quantizer (`quantizer_higgs.py`) is present
+in transformers ≥ 4.47. Version 5.x introduces `torch.int1` which is absent in
+torch 2.8, breaking `LlamaForCausalLM` import. 4.50.0 is the highest 4.x that
+includes the HIGGS quantizer.
+
+**Why gcc-11:** `fast_hadamard_transform` uses CUDA kernels; nvcc (CUDA 12.2)
+rejects GCC > 12. GCC-12 is missing `cc1plus`; GCC-11 works correctly.
+
+**Why `flute-kernel --no-deps`:** flute-kernel 0.4.2 lists `vllm==0.7.2` as a
+dependency, which conflicts with everything else. The kernel itself doesn't need
+vllm at runtime; `--no-deps` skips the resolution conflict.
+
+### Patch Applied to `quantizer_higgs.py`
+
+The HIGGS model checkpoint (`ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit`)
+uses an older format that stores `num_sms_packed` per-layer in safetensors but omits
+`tune_metadata` from the config JSON. The transformers 4.50.0 HIGGS quantizer requires
+`tune_metadata` and raises `KeyError` on load.
+
+**Fix:** patch `_process_model_after_weight_loading` in
+`higgs_venv/lib/python3.10/site-packages/transformers/quantizers/quantizer_higgs.py`
+to recover the correct `template_id` by running FLUTE's `_tune` benchmark when
+`tune_metadata` is absent:
+
+```python
+# Replace the line:
+#   module.tune_metadata = TuneMetaData.from_dict(self.quantization_config.tune_metadata[name])
+# with:
+if name in self.quantization_config.tune_metadata:
+    module.tune_metadata = TuneMetaData.from_dict(self.quantization_config.tune_metadata[name])
+else:
+    import flute.utils as _fu
+    from flute.tune import _tune
+    _device = module.weight.device
+    _num_sms = int(getattr(module, "num_sms_packed", _fu.get_device_num_sms(_device)))
+    N = module.out_features
+    K = module.in_features
+    _tid = _tune(M=1, N=N, K=K, num_bits=module.num_bits,
+                 group_size=module.group_size, num_sms=_num_sms,
+                 dtype=module.scales.dtype, device=_device,
+                 num_seeds=1, legacy=False)
+    module.tune_metadata = TuneMetaData(
+        M=1, N=N, K=K, num_bits=module.num_bits, group_size=module.group_size,
+        num_sms=_num_sms, dtype=module.scales.dtype, device=_device, template_id=_tid,
+    )
+```
+
+This patch runs `_tune` at model load time (~3–4 minutes for 224 layers), which
+benchmarks and selects the optimal FLUTE kernel template for each layer shape.
+
+### Critical: CUDA_VISIBLE_DEVICES must be set
+
+`_tune` benchmarks 144 CUDA kernel variants by timing them. On a GPU under heavy
+load, timing is noisy and an incompatible `template_id` can be selected, producing
+garbage output for all inference pairs. **Always pin to a specific low-load GPU:**
+
+```bash
+CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 \
+  higgs_venv/bin/python run_quantization.py higgs \
+  "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit" \
+  --tests-dir ocd/tests \
+  --output results/Meta-Llama-3.1-8B-Instruct/results_higgs_llama3.1_8B_4bit \
+  --rounds 1 2>&1 | tee run_higgs.log
+```
+
+Without `CUDA_VISIBLE_DEVICES`, `device_map="auto"` may place the model on a
+contested GPU, causing `_tune` to select template_id=0 or similar incompatible
+templates that produce corrupted matrix products and garbage token output.
+
+### What is a FLUTE Template?
+
+A template specifies a CUDA kernel configuration for quantized matrix multiplication:
+tile dimensions (TileM, TileK, TileP), thread count, pipeline stages, and quant-map
+mode. The weight matrix is packed at quantization time in a layout matching a specific
+template. Running inference with a mismatched template reads memory in the wrong
+pattern, corrupting all outputs. `_tune` selects the fastest compatible template for
+the current GPU and layer shape.
+
+---
+
 ## AQLM Setup
 
 ### Model

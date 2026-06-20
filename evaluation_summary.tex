@@ -9,24 +9,38 @@
     \midrule
     \multicolumn{8}{l}{\textit{Original (FP16)}} \\
     \midrule
-    Llama-4-Scout-17B-16E-Instruct (majority vote, 1 round) & 9372 & 9372 & 0 & 768 & 201 & 0 & 8403 \\
-    Meta-Llama-3 & 8228 & 8228 & 0 & 1000 & 2460 & 0 & 4768 \\
+    Llama-4-Scout-17B-16E-Instruct & 10000 & 10000 & 0 & 967 & 201 & 33 & 8799 \\
+    Meta-Llama-3.1-8B-Instruct & 10000 & 10000 & 0 & 1000 & 2460 & 0 & 6540 \\
     \midrule
     \multicolumn{8}{l}{\textit{GGUF Quantization}} \\
     \midrule
-    llama4\_scout\_Q2\_K (majority vote, 5 rounds).gguf & 10000 & 10000 & 0 & 1000 & 283 & 0 & 8717 \\
-    llama4\_scout\_Q3\_K\_S (majority vote, 5 rounds).gguf & 10000 & 10000 & 0 & 1000 & 141 & 0 & 8859 \\
-    llama4\_scout\_Q4\_K\_M (majority vote, 5 rounds).gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 \\
-    Meta-Llama-3 & 9156 & 9156 & 0 & 1000 & 3379 & 0 & 4777 \\
-    Meta-Llama-3 & 9156 & 9156 & 0 & 1000 & 3379 & 0 & 4777 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q2\_K & 9433 & 9433 & 0 & 938 & 6596 & 0 & 1899 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q3\_K\_M & 7751 & 7751 & 0 & 999 & 4785 & 0 & 1967 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q4\_K\_M & 9156 & 9156 & 0 & 1000 & 3379 & 0 & 4777 \\
+    llama4\_scout\_Q2\_K\_round1.gguf & 10000 & 10000 & 0 & 1000 & 284 & 0 & 8716 \\
+    llama4\_scout\_Q2\_K\_round2.gguf & 10000 & 10000 & 0 & 1000 & 288 & 0 & 8712 \\
+    llama4\_scout\_Q2\_K\_round3.gguf & 10000 & 10000 & 0 & 1000 & 284 & 0 & 8716 \\
+    llama4\_scout\_Q2\_K\_round4.gguf & 10000 & 10000 & 0 & 1000 & 285 & 0 & 8715 \\
+    llama4\_scout\_Q2\_K\_round5.gguf & 10000 & 10000 & 0 & 1000 & 284 & 0 & 8716 \\
+    llama4\_scout\_Q3\_K\_S\_round1.gguf & 10000 & 10000 & 0 & 1000 & 140 & 0 & 8860 \\
+    llama4\_scout\_Q3\_K\_S\_round2.gguf & 10000 & 10000 & 0 & 1000 & 142 & 0 & 8858 \\
+    llama4\_scout\_Q3\_K\_S\_round3.gguf & 10000 & 10000 & 0 & 1000 & 142 & 0 & 8858 \\
+    llama4\_scout\_Q3\_K\_S\_round4.gguf & 10000 & 10000 & 0 & 1000 & 140 & 0 & 8860 \\
+    llama4\_scout\_Q3\_K\_S\_round5.gguf & 10000 & 10000 & 0 & 1000 & 140 & 0 & 8860 \\
+    llama4\_scout\_Q4\_K\_M\_round1.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 \\
+    llama4\_scout\_Q4\_K\_M\_round2.gguf & 10000 & 10000 & 0 & 998 & 185 & 2 & 8815 \\
+    llama4\_scout\_Q4\_K\_M\_round3.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 \\
+    llama4\_scout\_Q4\_K\_M\_round4.gguf & 10000 & 10000 & 0 & 998 & 185 & 2 & 8815 \\
+    llama4\_scout\_Q4\_K\_M\_round5.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 \\
+    Meta-Llama-3.1-8B-Instruct-GGUF & 10000 & 10000 & 0 & 1000 & 3379 & 0 & 5621 \\
+    Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 7003 & 0 & 1997 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 4791 & 1 & 4209 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 3379 & 0 & 5621 \\
+    Meta-Llama-3.1-8B-Instruct & 10000 & 10000 & 0 & 1000 & 3379 & 0 & 5621 \\
     \midrule
     \multicolumn{8}{l}{\textit{Other}} \\
     \midrule
-    results\_aqlm (majority vote, 1 round) & 10000 & 10000 & 0 & 1000 & 7289 & 0 & 1711 \\
-    results\_qtip (majority vote, 1 round) & 7873 & 7873 & 0 & 957 & 1979 & 0 & 4937 \\
+    results\_ISTA-DASLa\_\_Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf & 10000 & 10000 & 0 & 1000 & 7289 & 0 & 1711 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-2Bit\_round1 & 5666 & 5666 & 0 & 570 & 1525 & 0 & 3571 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-3Bit\_round1 & 5910 & 5910 & 0 & 590 & 1141 & 0 & 4179 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-4Bit\_round1 & 5390 & 5390 & 0 & 539 & 768 & 1 & 4082 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -42,24 +56,38 @@
     \midrule
     \multicolumn{7}{l}{\textit{Original (FP16)}} \\
     \midrule
-    Llama-4-Scout-17B-16E-Instruct (majority vote, 1 round) & 0.9786 & 0.7926 & 1.0000 & 0.8843 & 0.8798 & 55:52:49 \\
-    Meta-Llama-3 & 0.7010 & 0.2890 & 1.0000 & 0.4484 & 0.4366 & 16:21:45 \\
+    Llama-4-Scout-17B-16E-Instruct & 0.9766 & 0.8279 & 0.9670 & 0.8921 & 0.8824 & 55:52:49 \\
+    Meta-Llama-3.1-8B-Instruct & 0.7540 & 0.2890 & 1.0000 & 0.4484 & 0.4583 & 16:21:45 \\
     \midrule
     \multicolumn{7}{l}{\textit{GGUF Quantization}} \\
     \midrule
-    llama4\_scout\_Q2\_K (majority vote, 5 rounds).gguf & 0.9717 & 0.7794 & 1.0000 & 0.8760 & 0.8689 & 14:05:19 \\
-    llama4\_scout\_Q3\_K\_S (majority vote, 5 rounds).gguf & 0.9859 & 0.8764 & 1.0000 & 0.9341 & 0.9288 & 14:05:02 \\
-    llama4\_scout\_Q4\_K\_M (majority vote, 5 rounds).gguf & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 13:52:04 \\
-    Meta-Llama-3 & 0.6310 & 0.2284 & 1.0000 & 0.3718 & 0.3657 & 04:22:04 \\
-    Meta-Llama-3 & 0.6310 & 0.2284 & 1.0000 & 0.3718 & 0.3657 & 05:12:04 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q2\_K & 0.3008 & 0.1245 & 1.0000 & 0.2214 & 0.1668 & 04:28:58 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q3\_K\_M & 0.3827 & 0.1727 & 1.0000 & 0.2946 & 0.2243 & 05:32:34 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q4\_K\_M & 0.6310 & 0.2284 & 1.0000 & 0.3718 & 0.3657 & 05:45:44 \\
+    llama4\_scout\_Q2\_K\_round1.gguf & 0.9716 & 0.7788 & 1.0000 & 0.8757 & 0.8685 & 14:27:57 \\
+    llama4\_scout\_Q2\_K\_round2.gguf & 0.9712 & 0.7764 & 1.0000 & 0.8741 & 0.8669 & 14:32:51 \\
+    llama4\_scout\_Q2\_K\_round3.gguf & 0.9716 & 0.7788 & 1.0000 & 0.8757 & 0.8685 & 16:19:36 \\
+    llama4\_scout\_Q2\_K\_round4.gguf & 0.9715 & 0.7782 & 1.0000 & 0.8753 & 0.8681 & 15:08:29 \\
+    llama4\_scout\_Q2\_K\_round5.gguf & 0.9716 & 0.7788 & 1.0000 & 0.8757 & 0.8685 & 09:57:45 \\
+    llama4\_scout\_Q3\_K\_S\_round1.gguf & 0.9860 & 0.8772 & 1.0000 & 0.9346 & 0.9293 & 14:11:12 \\
+    llama4\_scout\_Q3\_K\_S\_round2.gguf & 0.9858 & 0.8757 & 1.0000 & 0.9337 & 0.9284 & 14:08:23 \\
+    llama4\_scout\_Q3\_K\_S\_round3.gguf & 0.9858 & 0.8757 & 1.0000 & 0.9337 & 0.9284 & 15:54:25 \\
+    llama4\_scout\_Q3\_K\_S\_round4.gguf & 0.9860 & 0.8772 & 1.0000 & 0.9346 & 0.9293 & 14:52:00 \\
+    llama4\_scout\_Q3\_K\_S\_round5.gguf & 0.9860 & 0.8772 & 1.0000 & 0.9346 & 0.9293 & 11:19:13 \\
+    llama4\_scout\_Q4\_K\_M\_round1.gguf & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 13:58:41 \\
+    llama4\_scout\_Q4\_K\_M\_round2.gguf & 0.9813 & 0.8436 & 0.9980 & 0.9143 & 0.9079 & 13:53:03 \\
+    llama4\_scout\_Q4\_K\_M\_round3.gguf & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 15:45:12 \\
+    llama4\_scout\_Q4\_K\_M\_round4.gguf & 0.9813 & 0.8436 & 0.9980 & 0.9143 & 0.9079 & 14:02:12 \\
+    llama4\_scout\_Q4\_K\_M\_round5.gguf & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 11:41:15 \\
+    Meta-Llama-3.1-8B-Instruct-GGUF & 0.6621 & 0.2284 & 1.0000 & 0.3718 & 0.3777 & 05:12:04 \\
+    Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 0.2997 & 0.1250 & 1.0000 & 0.2221 & 0.1665 & 04:28:58 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 0.5208 & 0.1725 & 0.9990 & 0.2943 & 0.2836 & 05:32:34 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 0.6621 & 0.2284 & 1.0000 & 0.3718 & 0.3777 & 05:45:44 \\
+    Meta-Llama-3.1-8B-Instruct & 0.6621 & 0.2284 & 1.0000 & 0.3718 & 0.3777 & 04:22:04 \\
     \midrule
     \multicolumn{7}{l}{\textit{Other}} \\
     \midrule
-    results\_aqlm (majority vote, 1 round) & 0.2711 & 0.1206 & 1.0000 & 0.2153 & 0.1514 & 21:24:56 \\
-    results\_qtip (majority vote, 1 round) & 0.7486 & 0.3260 & 1.0000 & 0.4917 & 0.4824 & 18:56:08 \\
+    results\_ISTA-DASLa\_\_Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf & 0.2711 & 0.1206 & 1.0000 & 0.2153 & 0.1514 & 21:24:56 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-2Bit\_round1 & 0.7309 & 0.2721 & 1.0000 & 0.4278 & 0.4366 & 19:18:58 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-3Bit\_round1 & 0.8069 & 0.3408 & 1.0000 & 0.5084 & 0.5174 & 19:21:07 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-4Bit\_round1 & 0.8573 & 0.4124 & 0.9981 & 0.5836 & 0.5883 & 19:24:22 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -76,24 +104,38 @@
     \midrule
     \multicolumn{14}{l}{\textit{Original (FP16)}} \\
     \midrule
-    Llama-4-Scout-17B-16E-Instruct (majority vote, 1 round) & 9372 & 9372 & 0 & 768 & 201 & 0 & 8403 & 0.9786 & 0.7926 & 1.0000 & 0.8843 & 0.8798 & 55:52:49 \\
-    Meta-Llama-3 & 8228 & 8228 & 0 & 1000 & 2460 & 0 & 4768 & 0.7010 & 0.2890 & 1.0000 & 0.4484 & 0.4366 & 16:21:45 \\
+    Llama-4-Scout-17B-16E-Instruct & 10000 & 10000 & 0 & 967 & 201 & 33 & 8799 & 0.9766 & 0.8279 & 0.9670 & 0.8921 & 0.8824 & 55:52:49 \\
+    Meta-Llama-3.1-8B-Instruct & 10000 & 10000 & 0 & 1000 & 2460 & 0 & 6540 & 0.7540 & 0.2890 & 1.0000 & 0.4484 & 0.4583 & 16:21:45 \\
     \midrule
     \multicolumn{14}{l}{\textit{GGUF Quantization}} \\
     \midrule
-    llama4\_scout\_Q2\_K (majority vote, 5 rounds).gguf & 10000 & 10000 & 0 & 1000 & 283 & 0 & 8717 & 0.9717 & 0.7794 & 1.0000 & 0.8760 & 0.8689 & 14:05:19 \\
-    llama4\_scout\_Q3\_K\_S (majority vote, 5 rounds).gguf & 10000 & 10000 & 0 & 1000 & 141 & 0 & 8859 & 0.9859 & 0.8764 & 1.0000 & 0.9341 & 0.9288 & 14:05:02 \\
-    llama4\_scout\_Q4\_K\_M (majority vote, 5 rounds).gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 13:52:04 \\
-    Meta-Llama-3 & 9156 & 9156 & 0 & 1000 & 3379 & 0 & 4777 & 0.6310 & 0.2284 & 1.0000 & 0.3718 & 0.3657 & 04:22:04 \\
-    Meta-Llama-3 & 9156 & 9156 & 0 & 1000 & 3379 & 0 & 4777 & 0.6310 & 0.2284 & 1.0000 & 0.3718 & 0.3657 & 05:12:04 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q2\_K & 9433 & 9433 & 0 & 938 & 6596 & 0 & 1899 & 0.3008 & 0.1245 & 1.0000 & 0.2214 & 0.1668 & 04:28:58 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q3\_K\_M & 7751 & 7751 & 0 & 999 & 4785 & 0 & 1967 & 0.3827 & 0.1727 & 1.0000 & 0.2946 & 0.2243 & 05:32:34 \\
-    Meta-Llama-3.1-8B-Instruct-GGUF\_Meta-Llama-3.1-8B-Instruct-Q4\_K\_M & 9156 & 9156 & 0 & 1000 & 3379 & 0 & 4777 & 0.6310 & 0.2284 & 1.0000 & 0.3718 & 0.3657 & 05:45:44 \\
+    llama4\_scout\_Q2\_K\_round1.gguf & 10000 & 10000 & 0 & 1000 & 284 & 0 & 8716 & 0.9716 & 0.7788 & 1.0000 & 0.8757 & 0.8685 & 14:27:57 \\
+    llama4\_scout\_Q2\_K\_round2.gguf & 10000 & 10000 & 0 & 1000 & 288 & 0 & 8712 & 0.9712 & 0.7764 & 1.0000 & 0.8741 & 0.8669 & 14:32:51 \\
+    llama4\_scout\_Q2\_K\_round3.gguf & 10000 & 10000 & 0 & 1000 & 284 & 0 & 8716 & 0.9716 & 0.7788 & 1.0000 & 0.8757 & 0.8685 & 16:19:36 \\
+    llama4\_scout\_Q2\_K\_round4.gguf & 10000 & 10000 & 0 & 1000 & 285 & 0 & 8715 & 0.9715 & 0.7782 & 1.0000 & 0.8753 & 0.8681 & 15:08:29 \\
+    llama4\_scout\_Q2\_K\_round5.gguf & 10000 & 10000 & 0 & 1000 & 284 & 0 & 8716 & 0.9716 & 0.7788 & 1.0000 & 0.8757 & 0.8685 & 09:57:45 \\
+    llama4\_scout\_Q3\_K\_S\_round1.gguf & 10000 & 10000 & 0 & 1000 & 140 & 0 & 8860 & 0.9860 & 0.8772 & 1.0000 & 0.9346 & 0.9293 & 14:11:12 \\
+    llama4\_scout\_Q3\_K\_S\_round2.gguf & 10000 & 10000 & 0 & 1000 & 142 & 0 & 8858 & 0.9858 & 0.8757 & 1.0000 & 0.9337 & 0.9284 & 14:08:23 \\
+    llama4\_scout\_Q3\_K\_S\_round3.gguf & 10000 & 10000 & 0 & 1000 & 142 & 0 & 8858 & 0.9858 & 0.8757 & 1.0000 & 0.9337 & 0.9284 & 15:54:25 \\
+    llama4\_scout\_Q3\_K\_S\_round4.gguf & 10000 & 10000 & 0 & 1000 & 140 & 0 & 8860 & 0.9860 & 0.8772 & 1.0000 & 0.9346 & 0.9293 & 14:52:00 \\
+    llama4\_scout\_Q3\_K\_S\_round5.gguf & 10000 & 10000 & 0 & 1000 & 140 & 0 & 8860 & 0.9860 & 0.8772 & 1.0000 & 0.9346 & 0.9293 & 11:19:13 \\
+    llama4\_scout\_Q4\_K\_M\_round1.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 13:58:41 \\
+    llama4\_scout\_Q4\_K\_M\_round2.gguf & 10000 & 10000 & 0 & 998 & 185 & 2 & 8815 & 0.9813 & 0.8436 & 0.9980 & 0.9143 & 0.9079 & 13:53:03 \\
+    llama4\_scout\_Q4\_K\_M\_round3.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 15:45:12 \\
+    llama4\_scout\_Q4\_K\_M\_round4.gguf & 10000 & 10000 & 0 & 998 & 185 & 2 & 8815 & 0.9813 & 0.8436 & 0.9980 & 0.9143 & 0.9079 & 14:02:12 \\
+    llama4\_scout\_Q4\_K\_M\_round5.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 & 0.9812 & 0.8429 & 0.9980 & 0.9139 & 0.9075 & 11:41:15 \\
+    Meta-Llama-3.1-8B-Instruct-GGUF & 10000 & 10000 & 0 & 1000 & 3379 & 0 & 5621 & 0.6621 & 0.2284 & 1.0000 & 0.3718 & 0.3777 & 05:12:04 \\
+    Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 7003 & 0 & 1997 & 0.2997 & 0.1250 & 1.0000 & 0.2221 & 0.1665 & 04:28:58 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 4791 & 1 & 4209 & 0.5208 & 0.1725 & 0.9990 & 0.2943 & 0.2836 & 05:32:34 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 3379 & 0 & 5621 & 0.6621 & 0.2284 & 1.0000 & 0.3718 & 0.3777 & 05:45:44 \\
+    Meta-Llama-3.1-8B-Instruct & 10000 & 10000 & 0 & 1000 & 3379 & 0 & 5621 & 0.6621 & 0.2284 & 1.0000 & 0.3718 & 0.3777 & 04:22:04 \\
     \midrule
     \multicolumn{14}{l}{\textit{Other}} \\
     \midrule
-    results\_aqlm (majority vote, 1 round) & 10000 & 10000 & 0 & 1000 & 7289 & 0 & 1711 & 0.2711 & 0.1206 & 1.0000 & 0.2153 & 0.1514 & 21:24:56 \\
-    results\_qtip (majority vote, 1 round) & 7873 & 7873 & 0 & 957 & 1979 & 0 & 4937 & 0.7486 & 0.3260 & 1.0000 & 0.4917 & 0.4824 & 18:56:08 \\
+    results\_ISTA-DASLa\_\_Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf & 10000 & 10000 & 0 & 1000 & 7289 & 0 & 1711 & 0.2711 & 0.1206 & 1.0000 & 0.2153 & 0.1514 & 21:24:56 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-2Bit\_round1 & 5666 & 5666 & 0 & 570 & 1525 & 0 & 3571 & 0.7309 & 0.2721 & 1.0000 & 0.4278 & 0.4366 & 19:18:58 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-3Bit\_round1 & 5910 & 5910 & 0 & 590 & 1141 & 0 & 4179 & 0.8069 & 0.3408 & 1.0000 & 0.5084 & 0.5174 & 19:21:07 \\
+    results\_relaxml\_Llama-3.1-8b-Instruct-QTIP-4Bit\_round1 & 5390 & 5390 & 0 & 539 & 768 & 1 & 4082 & 0.8573 & 0.4124 & 0.9981 & 0.5836 & 0.5883 & 19:24:22 \\
     \bottomrule
   \end{tabular}
   }

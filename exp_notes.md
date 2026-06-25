@@ -3,9 +3,9 @@
 ## QTIP Setup
 
 ### Model
-- **HuggingFace model:** `relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit`
+- **HuggingFace model:** [`relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit`](https://huggingface.co/relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit)
 - **Quantization:** QTIP 4-bit (trellis-based, `quantlut_sym` decode mode, K=4, L=16, V=2)
-- **Base model:** `meta-llama/Meta-Llama-3.1-8B-Instruct`
+- **Base model:** [`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
 
 ### Virtual Environment
 A dedicated `qtip_venv` was created (separate from `aqlm_venv`) because QTIP requires a different PyTorch version and transformers pin.
@@ -95,8 +95,8 @@ Other models (GGUF, AQLM, original) use the default `max_new_tokens=128`.
 ## Original (Full-Precision) Setup
 
 ### Models run
-- **`meta-llama/Meta-Llama-3.1-8B-Instruct`** — BF16, loaded via `transformers`
-- **`meta-llama/Llama-4-Scout-17B-16E-Instruct`** — BF16, loaded via `transformers`
+- **[`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)** — BF16, loaded via `transformers`
+- **[`meta-llama/Llama-4-Scout-17B-16E-Instruct`](https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct)** — BF16, loaded via `transformers`
 
 ### Dependencies
 No separate venv needed — uses the `aqlm_venv` (transformers 5.8.1, accelerate 1.13.0).
@@ -139,8 +139,8 @@ python run_quantization.py original \
 ## GGUF Setup
 
 ### Models run
-- **Meta-Llama-3.1-8B-Instruct:** Q2\_K, Q3\_K\_M, Q4\_K\_M from `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF`
-- **Llama-4-Scout-17B-16E-Instruct:** Q2\_K, Q3\_K\_S, Q4\_K\_M from `bartowski/Meta-Llama-4-Scout-17B-16E-Instruct-GGUF`
+- **Meta-Llama-3.1-8B-Instruct:** Q2\_K, Q3\_K\_M, Q4\_K\_M from [`bartowski/Meta-Llama-3.1-8B-Instruct-GGUF`](https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF)
+- **Llama-4-Scout-17B-16E-Instruct:** Q2\_K, Q3\_K\_S, Q4\_K\_M from [`bartowski/Meta-Llama-4-Scout-17B-16E-Instruct-GGUF`](https://huggingface.co/bartowski/Meta-Llama-4-Scout-17B-16E-Instruct-GGUF)
 
 ### Virtual Environment
 A dedicated `gguf/` venv is used (the directory acts as the venv root).
@@ -186,9 +186,9 @@ python run_quantization.py gguf \
 ## HIGGS-GPTQ Setup
 
 ### Model
-- **HuggingFace model:** `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit`
+- **HuggingFace model:** [`ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit`](https://huggingface.co/ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit)
 - **Quantization:** HIGGS (Hadamard Incoherence + GPTQ) 4-bit
-- **Base model:** `meta-llama/Meta-Llama-3.1-8B-Instruct`
+- **Base model:** [`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
 
 ### Virtual Environment
 A dedicated `higgs_venv` was created using `uv` (the system Python 3.10 lacks `ensurepip`).
@@ -309,12 +309,33 @@ the current GPU and layer shape.
 
 ---
 
+## HIGGS-GPTQ 3-bit
+
+Same `higgs_venv` and setup as the 4-bit run above. The 3-bit checkpoint
+([`ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit`](https://huggingface.co/ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit))
+does **not** include a tokenizer, so `load_higgs` falls back to loading one from
+[`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct) automatically.
+
+All other considerations (CUDA\_VISIBLE\_DEVICES, FLUTE template tuning, gcc-11)
+are identical to the 4-bit case.
+
+```bash
+CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 \
+  higgs_venv/bin/python run_quantization.py higgs \
+  "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit" \
+  --tests-dir ocd/tests \
+  --output results/Meta-Llama-3.1-8B-Instruct/results_higgs_llama3.1_8B_3bit \
+  --rounds 1 2>&1 | tee run_higgs_3bit.log
+```
+
+---
+
 ## AQLM Setup
 
 ### Model
-- **HuggingFace model:** `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf`
+- **HuggingFace model:** [`ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf`](https://huggingface.co/ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf)
 - **Quantization:** AQLM 2-bit + PV-Tuning, 1×16 codebook configuration
-- **Base model:** `meta-llama/Meta-Llama-3.1-8B-Instruct`
+- **Base model:** [`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
 
 ### Virtual Environment
 Uses `aqlm_venv` with PyTorch 2.5.1+cu121 and `aqlm[gpu]` 1.1.7.
@@ -343,3 +364,155 @@ CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm \
    safetensors). This caused randomly-initialized codebooks and garbage output. Fix:
    load `lm_head.weight` directly from the safetensors checkpoint and replace the layer
    with a proper `nn.Linear` after `from_pretrained`.
+
+---
+
+## CodeLlama-7b-Instruct-hf Setup
+
+### Models run
+- **[`codellama/CodeLlama-7b-Instruct-hf`](https://huggingface.co/codellama/CodeLlama-7b-Instruct-hf)** — BF16, full precision
+- **[`QuantFactory/CodeLlama-7b-Instruct-hf-GGUF`](https://huggingface.co/QuantFactory/CodeLlama-7b-Instruct-hf-GGUF)** — Q2\_K, Q3\_K\_M, Q4\_K\_M
+
+### Full-precision (BF16)
+
+Uses `aqlm_venv` (standard `transformers` + `accelerate`). The `codellama` backend
+in `run_quantization.py` detects the instruct variant from the model ID and wraps the
+prompt in `[INST] ... [/INST]` instead of a chat template. `max_new_tokens=256`.
+
+```bash
+source aqlm_venv/bin/activate
+python run_quantization.py codellama \
+  "codellama/CodeLlama-7b-Instruct-hf" \
+  --tests-dir ocd/tests \
+  --output results/CodeLlama-7b-Instruct-hf/results_codellama__CodeLlama-7b-Instruct-hf \
+  --rounds 1 2>&1 | tee run_codellama.log
+```
+
+### GGUF Variants
+
+Uses the `gguf` venv (same `llama-cpp-python` as the Meta-Llama GGUF runs).
+
+```bash
+source gguf/bin/activate
+
+# Q4_K_M
+python run_quantization.py gguf \
+  "QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf" \
+  --tests-dir ocd/tests \
+  --output "results/CodeLlama-7b-Instruct-hf-GGUF/results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q4_K_M.gguf" \
+  --rounds 1 2>&1 | tee run_codellama_gguf_q4km.log
+
+# Q3_K_M
+python run_quantization.py gguf \
+  "QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf" \
+  --tests-dir ocd/tests \
+  --output "results/CodeLlama-7b-Instruct-hf-GGUF/results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q3_K_M.gguf" \
+  --rounds 1 2>&1 | tee run_codellama_gguf_q3km.log
+
+# Q2_K
+python run_quantization.py gguf \
+  "QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf" \
+  --tests-dir ocd/tests \
+  --output "results/CodeLlama-7b-Instruct-hf-GGUF/results_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q2_K.gguf" \
+  --rounds 1 2>&1 | tee run_codellama_gguf_q2k.log
+```
+
+### Notes
+- No HuggingFace token needed — `codellama/CodeLlama-7b-Instruct-hf` is public.
+- The base CodeLlama model (`codellama/CodeLlama-7b-hf`) uses completion-style prompting
+  (no `[INST]` wrapper); only the `-Instruct-hf` variant uses the instruction format.
+
+---
+
+## Qwen2.5-Coder-7B Setup
+
+### Models run
+- **[`Qwen/Qwen2.5-Coder-7B-Instruct`](https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct)** — BF16, full precision (`original` backend)
+- **[`Qwen/Qwen2.5-Coder-7B-Instruct-GGUF`](https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF)** — Q2\_K, Q3\_K\_M, Q4\_K\_M (`qwen` backend)
+
+### Full-precision (BF16)
+
+Uses `aqlm_venv` via the `original` backend (`AutoModelForCausalLM` + chat template).
+Qwen2.5 does not require `trust_remote_code` in modern transformers.
+
+```bash
+source aqlm_venv/bin/activate
+python run_quantization.py original \
+  "Qwen/Qwen2.5-Coder-7B-Instruct" \
+  --tests-dir ocd/tests \
+  --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_original \
+  --rounds 1 2>&1 | tee run_qwen_original.log
+```
+
+### GGUF Variants
+
+Uses the `gguf` venv with the dedicated `qwen` backend in `run_quantization.py`.
+The `qwen` loader is identical to `load_gguf` but defaults to `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF`.
+
+```bash
+source gguf/bin/activate
+
+# Q4_K_M (default)
+python run_quantization.py qwen \
+  --tests-dir ocd/tests \
+  --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q4km \
+  --rounds 1 2>&1 | tee run_qwen_q4km.log
+
+# Q3_K_M
+python run_quantization.py qwen \
+  "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf" \
+  --tests-dir ocd/tests \
+  --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q3km \
+  --rounds 1 2>&1 | tee run_qwen_q3km.log
+
+# Q2_K
+python run_quantization.py qwen \
+  "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf" \
+  --tests-dir ocd/tests \
+  --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q2k \
+  --rounds 1 2>&1 | tee run_qwen_q2k.log
+```
+
+---
+
+## DeepSeek-Coder-V2-Lite-Instruct Setup
+
+### Models run
+- **[`deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct`](https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct)** — BF16, full precision (`deepseek` backend)
+- **[`bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF`](https://huggingface.co/bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF)** — Q4\_K\_M (`gguf` backend)
+
+### Full-precision (BF16)
+
+Uses `aqlm_venv`. The `deepseek` backend passes `trust_remote_code=True` because
+the DeepSeek-Coder-V2 architecture ships custom model code in the HuggingFace repo
+(e.g. `configuration_deepseek.py`). Transformers will warn about downloading remote
+code on first load — this is expected.
+
+```bash
+source aqlm_venv/bin/activate
+python run_quantization.py deepseek \
+  "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct" \
+  --tests-dir ocd/tests \
+  --output results/DeepSeek-Coder-V2-Lite-Instruct/results_deepseek_coder_v2_lite \
+  --rounds 1 2>&1 | tee run_deepseek.log
+```
+
+### GGUF (Q4\_K\_M)
+
+Uses the standard `gguf` backend and venv. The GGUF file is from Bartowski's
+community quantizations.
+
+```bash
+source gguf/bin/activate
+python run_quantization.py gguf \
+  "bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF::DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf" \
+  --tests-dir ocd/tests \
+  --output results/DeepSeek-Coder-V2-Lite-Instruct/results_deepseek_coder_v2_lite_q4km \
+  --rounds 1 2>&1 | tee run_deepseek_q4km.log
+```
+
+### Notes
+- The GGUF context warning (`n_ctx_seq (8192) < n_ctx_train (163840)`) is harmless;
+  our prompts are well within 8192 tokens.
+- `trust_remote_code=True` is only needed for the BF16 path; the GGUF file is
+  self-contained and does not execute model-repo Python code.

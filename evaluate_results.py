@@ -354,17 +354,26 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
     Return (group_label, model_name) derived from a results CSV filename.
 
     Naming conventions handled:
-      results_original_{provider}__{model}     → ("Original (FP16)",    model)
-      results_gguf_{provider}__{repo}_{f}.gguf → ("GGUF Quantization",  f.gguf)
-      results_gguf_{provider}__{repo}           → ("GGUF Quantization",  repo)
-      results_gguf_{anything}                   → ("GGUF Quantization",  anything.gguf)
+      results_original_{provider}__{model}       → ("Original (FP16)",    model)
+      results_gguf_{provider}__{repo}_{f}.gguf   → ("GGUF Quantization",  f.gguf)
+      results_gguf_{provider}__{repo}             → ("GGUF Quantization",  repo)
+      results_gguf_{anything}                     → ("GGUF Quantization",  anything.gguf)
+      results_higgs_{model}                       → ("HIGGS Quantization", model)
+      results_qtip_{provider}__{model}            → ("QTIP Quantization",  model)
+      results_{provider}_{model-containing-QTIP}  → ("QTIP Quantization",  model)
     """
-    stem = Path(filename).stem  # strip .csv
+    stem = Path(filename).stem  # strip .csv extension if present
+    # Strip majority-vote label suffix added by evaluate_majority_vote
+    stem = re.sub(r"\s*\(majority\s+vote[^)]*\)$", "", stem).strip()
+    # Extract _roundN suffix before stripping so it can be re-appended to the model name
+    round_match = re.search(r"_round(\d+)$", stem)
+    round_suffix = f" (round {round_match.group(1)})" if round_match else ""
+    stem = re.sub(r"_round\d+$", "", stem)
 
     if stem.startswith("results_original_"):
         rest = stem[len("results_original_"):]
         model_name = rest.split("__", 1)[1] if "__" in rest else rest
-        return "Original (FP16)", model_name
+        return "Original (FP16)", model_name + round_suffix
 
     if stem.startswith("results_gguf_"):
         rest = stem[len("results_gguf_"):]
@@ -378,9 +387,25 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
                 model_name = after_dunder
         else:
             model_name = rest + ".gguf"
-        return "GGUF Quantization", model_name
+        return "GGUF Quantization", model_name + round_suffix
 
-    return "Other", stem
+    if stem.startswith("results_higgs_"):
+        model_name = stem[len("results_higgs_"):]
+        return "HIGGS Quantization", model_name + round_suffix
+
+    if stem.startswith("results_qtip_"):
+        rest = stem[len("results_qtip_"):]
+        model_name = rest.split("__", 1)[1] if "__" in rest else rest
+        return "QTIP Quantization", model_name + round_suffix
+
+    if "qtip" in stem.lower():
+        # e.g. results_relaxml_Llama-3.1-8b-Instruct-QTIP-2Bit
+        rest = stem[len("results_"):] if stem.startswith("results_") else stem
+        # Strip provider prefix (everything up to and including the first underscore)
+        model_name = rest.split("_", 1)[1] if "_" in rest else rest
+        return "QTIP Quantization", model_name + round_suffix
+
+    return "Other", stem + round_suffix
 
 
 def write_latex_table(rows: list[dict], output_path: str) -> None:
@@ -394,7 +419,7 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
             "caption": "Clone Detection Evaluation Summary --- Count Statistics",
             "label":   "tab:evaluation_counts",
             "size":    r"\small",
-            "resize":  False,
+            "resize":  True,
             "headers": ["Model", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN"],
             "keys":    ["file", "rows_total", "rows_evaluated", "rows_excluded",
                         "TP", "FP", "FN", "TN"],
@@ -403,7 +428,7 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
             "caption": "Clone Detection Evaluation Summary --- Performance Metrics",
             "label":   "tab:evaluation_metrics",
             "size":    r"\small",
-            "resize":  False,
+            "resize":  True,
             "headers": ["Model", "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"],
             "keys":    ["file", "accuracy", "precision", "recall", "f1", "mcc", "run_time"],
         },
@@ -433,7 +458,7 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
             group_order.append(group)
         grouped[group].append((model_name, r))
 
-    preferred = ["Original (FP16)", "GGUF Quantization"]
+    preferred = ["Original (FP16)", "GGUF Quantization", "HIGGS Quantization", "QTIP Quantization"]
     group_order.sort(key=lambda g: preferred.index(g) if g in preferred else 99)
 
     all_lines: list[str] = []

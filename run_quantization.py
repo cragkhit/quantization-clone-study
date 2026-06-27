@@ -1,7 +1,7 @@
 """
 Clone-detection inference runner for quantized LLMs.
 
-Supports five model backends (original, gguf, aqlm, higgs, qtip) and runs
+Supports eight model backends (original, gguf, qwen, deepseek, aqlm, higgs, qtip, codellama) and runs
 every n×n pair of Java code snippets from the OCD test suite, saving results
 to per-round CSV files that can be evaluated with evaluate_results.py.
 
@@ -132,6 +132,20 @@ def load_original(hf_model: str | None = None):
     return _make_transformers_infer(model, tokenizer)
 
 
+def load_deepseek(hf_model: str | None = None):
+    """DeepSeek-Coder-V2-Lite BF16. pip install transformers accelerate"""
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    import torch
+
+    model_id = hf_model or "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct"
+    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id, torch_dtype=torch.bfloat16, device_map="auto",
+        trust_remote_code=True,
+    )
+    return _make_transformers_infer(model, tokenizer)
+
+
 def load_gguf(hf_model: str | None = None):
     """GGUF Q4_K_M. pip install llama-cpp-python
     hf_model format: 'repo_id' or 'repo_id::filename.gguf'
@@ -140,6 +154,41 @@ def load_gguf(hf_model: str | None = None):
 
     default_repo = "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
     default_file = "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
+
+    if hf_model and "::" in hf_model:
+        repo_id, filename = hf_model.split("::", 1)
+    else:
+        repo_id = hf_model or default_repo
+        filename = default_file
+
+    llm = Llama.from_pretrained(
+        repo_id=repo_id,
+        filename=filename,
+        n_gpu_layers=-1,
+        n_ctx=8192,
+        verbose=False,
+    )
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        output = llm.create_chat_completion(
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=128,
+        )
+        return output["choices"][0]["message"]["content"]
+
+    return infer
+
+
+def load_qwen(hf_model: str | None = None):
+    """Qwen2.5-Coder GGUF. pip install llama-cpp-python
+    hf_model format: 'repo_id::filename.gguf' or omit for default Q4_K_M.
+    Default: Qwen/Qwen2.5-Coder-7B-Instruct-GGUF (Q4_K_M)
+    """
+    from llama_cpp import Llama
+
+    default_repo = "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF"
+    default_file = "qwen2.5-coder-7b-instruct-q4_k_m.gguf"
 
     if hf_model and "::" in hf_model:
         repo_id, filename = hf_model.split("::", 1)
@@ -260,6 +309,46 @@ def load_higgs(hf_model: str | None = None):
     return _make_transformers_infer(model, tokenizer)
 
 
+def load_codellama(hf_model: str | None = None):
+    """CodeLlama base or instruct model. pip install transformers accelerate
+    Default: codellama/CodeLlama-7b-hf (base model, completion-style prompting)
+    For instruct variant: codellama/CodeLlama-7b-Instruct-hf ([INST]...[/INST] format)
+    """
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    import torch
+
+    model_id = hf_model or "codellama/CodeLlama-7b-hf"
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id, torch_dtype=torch.bfloat16, device_map="auto"
+    )
+
+    is_instruct = "instruct" in model_id.lower()
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        if is_instruct:
+            formatted = f"[INST] {prompt} [/INST]"
+        else:
+            # Base model: pass prompt as plain completion input
+            formatted = prompt
+
+        inputs = tokenizer(formatted, return_tensors="pt").to(model.device)
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs, max_new_tokens=256,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+        return tokenizer.decode(
+            outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True
+        )
+
+    return infer
+
+
 def load_qtip(hf_model: str | None = None):
     """QTIP 4-bit. Requires qtip/ repo (Cornell-RelaxML/qtip) and qtip_venv.
     Run with: source qtip_venv/bin/activate && CC=gcc-11 CXX=g++-11 python run_quantization.py qtip
@@ -340,11 +429,14 @@ def load_qtip(hf_model: str | None = None):
 
 
 LOADERS = {
-    "original": load_original,
-    "gguf":     load_gguf,
-    "aqlm":     load_aqlm,
-    "higgs":    load_higgs,
-    "qtip":     load_qtip,
+    "original":   load_original,
+    "gguf":       load_gguf,
+    "qwen":       load_qwen,
+    "deepseek":   load_deepseek,
+    "aqlm":       load_aqlm,
+    "higgs":      load_higgs,
+    "qtip":       load_qtip,
+    "codellama":  load_codellama,
 }
 
 
@@ -499,6 +591,8 @@ Examples:
   python run_quantization.py gguf bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
   python run_quantization.py aqlm ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf --rounds 4
   python run_quantization.py qtip relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit --output results/my_run
+  python run_quantization.py codellama
+  python run_quantization.py codellama codellama/CodeLlama-7b-Instruct-hf
         """,
     )
     parser.add_argument(

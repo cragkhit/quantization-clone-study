@@ -98,12 +98,21 @@ Other models (GGUF, AQLM, original) use the default `max_new_tokens=128`.
 - **[`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)** — BF16, loaded via `transformers`
 - **[`meta-llama/Llama-4-Scout-17B-16E-Instruct`](https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct)** — BF16, loaded via `transformers`
 
-### Dependencies
-No separate venv needed — uses the `aqlm_venv` (transformers 5.8.1, accelerate 1.13.0).
+### Virtual Environments
+
+**For Meta-Llama-3.1-8B-Instruct:** use `aqlm_venv` (Python 3.9, transformers 5.8.1).
+
+**For Llama-4-Scout-17B-16E-Instruct:** use `llama4_venv` (Python 3.10, transformers 5.12.1).
+`aqlm_venv` cannot be used for Scout because it runs Python 3.9, which rejects the `str | None`
+type-union syntax in `run_quantization.py` at import time. `higgs_venv` (Python 3.10) also fails
+because its transformers 4.50.0 does not recognise the `llama4` model type. `llama4_venv` was
+created specifically to resolve both constraints.
 
 ```bash
-source aqlm_venv/bin/activate
-pip install transformers accelerate
+uv venv llama4_venv --python 3.10
+uv pip install --python llama4_venv/bin/python \
+    torch --index-url https://download.pytorch.org/whl/cu121
+uv pip install --python llama4_venv/bin/python transformers accelerate
 ```
 
 ### Model loading in `load_original`
@@ -115,18 +124,20 @@ pip install transformers accelerate
 
 ### Running the Experiment
 ```bash
+# Meta-Llama-3.1-8B-Instruct
 source aqlm_venv/bin/activate
 python run_quantization.py original \
   "meta-llama/Meta-Llama-3.1-8B-Instruct" \
-  ocd/tests \
-  "results/Meta-Llama-3.1-8B-Instruct/results_original_meta-llama__Meta-Llama-3.1-8B-Instruct" \
-  1 2>&1 | tee run_original.log
+  --tests-dir ocd/tests \
+  --output "results/Meta-Llama-3.1-8B-Instruct/results_original_meta-llama__Meta-Llama-3.1-8B-Instruct" \
+  --rounds 5 2>&1 | tee run_original.log
 
-python run_quantization.py original \
+# Llama-4-Scout-17B-16E-Instruct
+llama4_venv/bin/python run_quantization.py original \
   "meta-llama/Llama-4-Scout-17B-16E-Instruct" \
-  ocd/tests \
-  "results/Llama-4-Scout-17B-16E-Instruct/results_original_meta-llama__Llama-4-Scout-17B-16E-Instruct" \
-  1 2>&1 | tee run_original_llama4_scout.log
+  --tests-dir ocd/tests \
+  --output "results/Llama-4-Scout-17B-16E-Instruct/results_original_meta-llama__Llama-4-Scout-17B-16E-Instruct" \
+  --rounds 5 2>&1 | tee run_original_llama4_scout.log
 ```
 
 ### Notes

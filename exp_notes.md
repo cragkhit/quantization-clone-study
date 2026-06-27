@@ -166,6 +166,41 @@ pip install llama-cpp-python==0.3.26   # GPU build with CUDA support
 automatically during install. No separate GCC version management is needed — the
 package handles compiler selection internally.
 
+#### H100 (sm_90): must rebuild from source
+
+The prebuilt `llama-cpp-python==0.3.26` CUDA wheel **crashes on H100 GPUs** with:
+
+```
+CUDA error: no kernel image is available for execution on the device
+  in function ggml_cuda_kernel_can_use_pdl (common.cuh:1602)
+```
+
+The model loads, but the **first decode** aborts in the fused RMS-norm / PDL
+(Programmatic Dependent Launch) path — the wheel has no kernel image for the
+H100's compute capability (sm_90). On A100 (sm_80), `can_use_pdl` returns false
+and the non-fused path runs, so the prebuilt wheel works there; on this all-H100
+allocation it does not. This affects **every GGUF backend** (`gguf`, `qwen`, and
+the Scout/CodeLlama/DeepSeek GGUF runs) — but not the PyTorch/`transformers`
+backends (`original`, `deepseek` BF16, etc.).
+
+**Fix — rebuild from source targeting sm_90.** `nvcc` (CUDA 12.2) supports sm_90.
+The host compiler must be set explicitly: `CC`/`CXX` env vars do **not** reach
+nvcc's `-ccbin`, so without `-DCMAKE_CUDA_HOST_COMPILER` the build fails with
+`unsupported GNU version! gcc versions later than 12` (system default is gcc-13).
+
+```bash
+CMAKE_ARGS="-DGGML_CUDA=on -DCMAKE_CUDA_ARCHITECTURES=90 \
+  -DCMAKE_C_COMPILER=gcc-11 -DCMAKE_CXX_COMPILER=g++-11 \
+  -DCMAKE_CUDA_HOST_COMPILER=g++-11" \
+CC=gcc-11 CXX=g++-11 \
+  gguf/bin/pip install --force-reinstall --no-cache-dir \
+    --no-binary llama-cpp-python "llama-cpp-python==0.3.26"
+```
+
+After the rebuild, `libggml-cuda.so.0` grows from ~140 MB to ~214 MB (native
+sm_90 kernels) and inference runs on H100 without the crash. Fused vs non-fused
+RMS-norm is numerically equivalent, so results mix cleanly with earlier A100 runs.
+
 ### Model loading in `load_gguf`
 - Uses `Llama.from_pretrained(repo_id, filename)` which downloads the `.gguf` shard
   from HuggingFace Hub and loads it directly into VRAM.

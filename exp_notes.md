@@ -421,17 +421,31 @@ CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm \
 
 ### Full-precision (BF16)
 
-Uses `aqlm_venv` (standard `transformers` + `accelerate`). The `codellama` backend
+Uses a dedicated **`codellama_venv` (Python 3.10)**. The `codellama` backend
 in `run_quantization.py` detects the instruct variant from the model ID and wraps the
 prompt in `[INST] ... [/INST]` instead of a chat template. `max_new_tokens=256`.
 
+> **Why a new venv:** rounds 1–2 were originally produced with `aqlm_venv`, but that
+> venv runs **Python 3.9**, which now fails to import `run_quantization.py` at module
+> load (`_PROMPT_TEMPLATE: str | None = None` uses the PEP 604 `X | None` union, which
+> is 3.10+). `codellama_venv` replicates `aqlm_venv`'s exact package versions on
+> Python 3.10 so later rounds stay consistent with the earlier ones:
+> torch 2.8.0+cu128, transformers 4.57.6, accelerate 1.10.1.
+
 ```bash
-source aqlm_venv/bin/activate
-python run_quantization.py codellama \
+# One-time setup (uv; system Python 3.10)
+uv venv codellama_venv --python 3.10
+uv pip install --python codellama_venv/bin/python \
+  torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+uv pip install --python codellama_venv/bin/python \
+  transformers==4.57.6 accelerate==1.10.1
+
+# Run (CUDA_VISIBLE_DEVICES pins a single GPU; the script auto-resumes partial rounds)
+CUDA_VISIBLE_DEVICES=3 codellama_venv/bin/python run_quantization.py codellama \
   "codellama/CodeLlama-7b-Instruct-hf" \
   --tests-dir ocd/tests \
   --output results/CodeLlama-7b-Instruct-hf/results_codellama__CodeLlama-7b-Instruct-hf \
-  --rounds 1 2>&1 | tee run_codellama.log
+  --rounds 5 2>&1 | tee run_codellama.log
 ```
 
 ### GGUF Variants

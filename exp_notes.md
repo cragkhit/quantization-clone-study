@@ -1,5 +1,59 @@
 # Experiment Notes
 
+## Environment Preservation & Restoration
+
+Each venv's installed packages are frozen to `requirements/<venv>.lock.txt`
+(via `uv pip freeze`) and committed. These pin exact versions so a venv can be
+recreated; they complement — but do not replace — the per-backend setup steps in
+the sections below.
+
+| Venv | Python | Lock file | Used by |
+| --- | --- | --- | --- |
+| `aqlm_venv` | 3.9 | `requirements/aqlm_venv.lock.txt` | AQLM; older Llama-3.1-8B / Qwen / DeepSeek BF16 runs |
+| `qtip_venv` | 3.10 | `requirements/qtip_venv.lock.txt` | QTIP (+ source-built CUDA kernel) |
+| `llama4_venv` | 3.10 | `requirements/llama4_venv.lock.txt` | Llama-4-Scout original |
+| `higgs_venv` | 3.10 | `requirements/higgs_venv.lock.txt` | HIGGS-GPTQ 3-bit / 4-bit |
+| `gguf` | 3.10 | `requirements/gguf.lock.txt` | all GGUF backends (+ source-built `llama-cpp-python` for sm_90) |
+| `codellama_venv` | 3.10 | `requirements/codellama_venv.lock.txt` | CodeLlama / DeepSeek BF16 |
+
+### Restoring a venv
+
+Recreate with the **same Python version** shown above, then install from the lock file:
+
+```bash
+# Example: codellama_venv (Python 3.10)
+uv venv codellama_venv --python 3.10
+uv pip install --python codellama_venv/bin/python -r requirements/codellama_venv.lock.txt
+```
+
+For an `aqlm_venv`-style Python 3.9 venv, substitute `--python 3.9`. The `+cuXXX`
+local version tags in the lock files (e.g. `torch==2.8.0+cu128`) resolve from PyPI
+for recent torch; if a pin is not found, reinstall torch from its CUDA index first
+(see the relevant backend section) and then install the rest of the lock file.
+
+### Caveats — source-compiled components (lock file is not enough)
+
+Two venvs contain components built from source that `pip install -r` **cannot**
+reproduce from PyPI. After restoring the lock file, redo these build steps:
+
+- **`gguf`** — `llama-cpp-python` was rebuilt from source for H100 `sm_90`.
+  Installing the pinned version from PyPI pulls the prebuilt wheel that crashes on
+  H100. See [GGUF Setup → H100 (sm_90): must rebuild from source](#h100-sm_90-must-rebuild-from-source).
+- **`qtip_venv`** — the QTIP CUDA kernel is compiled in-place under `qtip/qtip-kernels/`
+  (not a pip package). See [QTIP Repository & CUDA Kernel](#qtip-repository--cuda-kernel).
+  `fast-hadamard-transform` (in `qtip_venv` and `higgs_venv`) is likewise built from
+  GitHub, not PyPI.
+
+### Regenerating a lock file
+
+After changing a venv, refresh its snapshot and commit:
+
+```bash
+uv pip freeze --python <venv>/bin/python > requirements/<venv>.lock.txt
+```
+
+---
+
 ## QTIP Setup
 
 ### Model

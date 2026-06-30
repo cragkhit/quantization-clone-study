@@ -14,7 +14,8 @@ the sections below.
 | `llama4_venv` | 3.10 | `requirements/llama4_venv.lock.txt` | Llama-4-Scout original |
 | `higgs_venv` | 3.10 | `requirements/higgs_venv.lock.txt` | HIGGS-GPTQ 3-bit / 4-bit |
 | `gguf` | 3.10 | `requirements/gguf.lock.txt` | all GGUF backends (+ source-built `llama-cpp-python` for sm_90) |
-| `codellama_venv` | 3.10 | `requirements/codellama_venv.lock.txt` | CodeLlama / DeepSeek BF16 |
+| `codellama_venv` | 3.10 | `requirements/codellama_venv.lock.txt` | CodeLlama BF16 |
+| `deepseek_venv` | 3.10 | `requirements/deepseek_venv.lock.txt` | DeepSeek-Coder-V2-Lite BF16 (transformers 4.45.2) |
 
 ### Restoring a venv
 
@@ -597,18 +598,35 @@ python run_quantization.py qwen \
 
 ### Full-precision (BF16)
 
-Uses `aqlm_venv`. The `deepseek` backend passes `trust_remote_code=True` because
-the DeepSeek-Coder-V2 architecture ships custom model code in the HuggingFace repo
-(e.g. `configuration_deepseek.py`). Transformers will warn about downloading remote
-code on first load — this is expected.
+Uses a dedicated **`deepseek_venv` (Python 3.10, transformers 4.45.2)**. The
+`deepseek` backend passes `trust_remote_code=True` because the DeepSeek-Coder-V2
+architecture ships custom model code in the HuggingFace repo (e.g.
+`configuration_deepseek.py`). Transformers will warn about downloading remote code
+on first load — this is expected.
+
+> **Why transformers 4.45.2 (its own venv):** the DeepSeek remote `modeling_deepseek.py`
+> calls `past_key_values.seen_tokens`, an attribute removed from `DynamicCache` in
+> transformers ~4.46+. `aqlm_venv`/`codellama_venv` (transformers 4.57.6) therefore
+> crash on the first decode with
+> `AttributeError: 'DynamicCache' object has no attribute 'seen_tokens'`. 4.45.2 is the
+> newest release that still exposes `seen_tokens` (now only a deprecation warning) and
+> runs on Python 3.10. Round 1 was produced earlier with an older transformers; a load
+> + short-generate smoke test confirmed 4.45.2 yields valid output before the resume.
 
 ```bash
-source aqlm_venv/bin/activate
-python run_quantization.py deepseek \
+# One-time setup (uv; system Python 3.10)
+uv venv deepseek_venv --python 3.10
+uv pip install --python deepseek_venv/bin/python \
+  torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+uv pip install --python deepseek_venv/bin/python \
+  "transformers==4.45.2" accelerate sentencepiece protobuf
+
+# Run (CUDA_VISIBLE_DEVICES pins a single GPU; the script auto-resumes partial rounds)
+CUDA_VISIBLE_DEVICES=3 deepseek_venv/bin/python run_quantization.py deepseek \
   "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct" \
   --tests-dir ocd/tests \
   --output results/DeepSeek-Coder-V2-Lite-Instruct/results_deepseek_coder_v2_lite \
-  --rounds 1 2>&1 | tee run_deepseek.log
+  --rounds 5 2>&1 | tee run_deepseek.log
 ```
 
 ### GGUF (Q4\_K\_M)

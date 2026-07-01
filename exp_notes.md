@@ -408,6 +408,56 @@ template. Running inference with a mismatched template reads memory in the wrong
 pattern, corrupting all outputs. `_tune` selects the fastest compatible template for
 the current GPU and layer shape.
 
+### H100 (sm_90): FLUTE source build + num_sms override
+
+On the H100 box, HIGGS needs two fixes (in addition to the `higgs_venv` setup above).
+Without them the run crashes at model load, never reaching inference.
+
+**1. Rebuild `flute-kernel` from source for sm_90.** The prebuilt `flute-kernel==0.4.2`
+wheel ships SASS for **sm_80/86/89 only** (verify with
+`cuobjdump flute/_C*.so | grep 'arch = sm_'`), so on H100 FLUTE's `qgemm` aborts during
+`_tune` with `CUDA error: no kernel image is available for execution on the device`.
+0.4.2 is the latest release and there is **no sdist on PyPI**, so build from GitHub
+(FLUTE lists H100 as supported "unoptimized" only via source build):
+
+```bash
+# CUTLASS v3.4.1 is required; setup.py hard-codes CUTLASS_PATH — edit it to your clone.
+git clone --depth 1 --branch v3.4.1 https://github.com/NVIDIA/cutlass.git /path/to/cutlass
+git clone --branch v0.4.2 https://github.com/HanGuo97/flute && cd flute
+sed -i 's#CUTLASS_PATH = "/workspace/cutlass/"#CUTLASS_PATH = "/path/to/cutlass/"#' setup.py
+
+TORCH_CUDA_ARCH_LIST="9.0" MAX_JOBS=8 CC=gcc-11 CXX=g++-11 \
+  NVCC_PREPEND_FLAGS="-ccbin /usr/bin/g++-11" \
+  higgs_venv/bin/pip install . --force-reinstall --no-build-isolation --no-deps
+```
+
+`--no-deps` avoids FLUTE's `vllm` requirement; `-ccbin g++-11` keeps nvcc off system
+gcc-13. The rebuilt `_C.so` reports `arch = sm_90` and version `0.4.2+cu122`.
+
+**2. Force `num_sms=108` (the packed value).** The ISTA checkpoints are FLUTE stream-K
+packed for **num_sms=108** (A100; stored per-layer as `num_sms_packed`). The H100 has
+132 SMs, but FLUTE's template configs only cover the packed value, so tuning/repacking
+for 132 yields an empty candidate set → `ValueError: min() arg is an empty sequence`.
+Two edits pin everything to 108 (inference num_sms must match the packing):
+
+- `transformers/quantizers/quantizer_higgs.py` (`_process_model_after_weight_loading`):
+  set `_num_sms = int(os.environ.get("HIGGS_NUM_SMS", 108))` instead of the device count.
+- `flute/utils.py` (`get_device_num_sms`): return `int(os.environ["FLUTE_NUM_SMS"])`
+  when set, else the real count. This makes `maybe_tune_and_repack` skip repacking
+  (metadata 108 == reported 108) and `tune_and_pack` target 108.
+
+Then run with **`FLUTE_NUM_SMS=108`** set. Verified correct: HIGGS 3-bit round-2 labels
+on H100 matched the A100 round-1 labels on 619/619 overlapping pairs (100%).
+
+```bash
+CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 FLUTE_NUM_SMS=108 \
+  higgs_venv/bin/python run_quantization.py higgs \
+  "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit" \
+  --tests-dir ocd/tests \
+  --output results/Meta-Llama-3.1-8B-Instruct/results_higgs_llama3.1_8B_3bit \
+  --rounds 5 2>&1 | tee run_higgs_3bit_5rounds.log
+```
+
 ---
 
 ## HIGGS-GPTQ 3-bit

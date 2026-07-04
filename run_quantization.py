@@ -58,10 +58,41 @@ def load_test_cases(tests_dir: str = "ocd/tests") -> list[TestCase]:
 
 
 def generate_pairs(test_cases: list[TestCase]):
-    """Full Cartesian product (n×n = 10,000 pairs). Ground truth is CLONE iff same program."""
+    """Full Cartesian product (n×n = 10,000 pairs). Ground truth is CLONE iff same program.
+
+    Yields (tc_a, tc_b, ground_truth, pair_id). pair_id is None here, so the resume
+    key falls back to the (program_a, variant_a, program_b, variant_b) 4-tuple.
+    """
     for tc_a, tc_b in itertools.product(test_cases, repeat=2):
         ground_truth = "CLONE" if tc_a.program == tc_b.program else "NON-CLONE"
-        yield tc_a, tc_b, ground_truth
+        yield tc_a, tc_b, ground_truth, None
+
+
+def load_pairs_file(pairs_csv: str, files_dir: str | None = None):
+    """Load an explicit list of pairs from a CSV (e.g. gcj_java_clones/pairs.csv).
+
+    Expected columns: pair_id, label (1=clone/0=non-clone), file1, file2,
+    problem1, problem2. Source code is read from files_dir (default: a `files/`
+    folder next to the CSV). Yields (tc_a, tc_b, ground_truth, pair_id); the
+    pair_id makes each row's resume key unique even if a (file1, file2) pair
+    happens to repeat.
+    """
+    pairs_path = Path(pairs_csv)
+    fdir = Path(files_dir) if files_dir else pairs_path.parent / "files"
+    code_cache: dict[str, str] = {}
+
+    def _case(fname: str, problem: str) -> TestCase:
+        if fname not in code_cache:
+            code_cache[fname] = (fdir / fname).read_text(errors="replace")
+        return TestCase(program=problem, variant=Path(fname).stem,
+                        filepath=fdir / fname, code=code_cache[fname])
+
+    with open(pairs_path, newline="") as f:
+        for row in csv.DictReader(f):
+            gt = "CLONE" if str(row["label"]).strip() == "1" else "NON-CLONE"
+            tc_a = _case(row["file1"], row["problem1"])
+            tc_b = _case(row["file2"], row["problem2"])
+            yield tc_a, tc_b, gt, str(row["pair_id"])
 
 
 def build_prompt(content_a: str, content_b: str, lang: str) -> str:
@@ -449,21 +480,27 @@ def _round_csv_path(base: str, round_num: int) -> str:
     return f"{base}_round{round_num}.csv"
 
 
-def _load_completed_round(round_csv: str) -> set[tuple]:
-    """Return set of (program_a, variant_a, program_b, variant_b) done in a round CSV."""
+def _resume_key(pair_id, program_a, variant_a, program_b, variant_b):
+    """Unique key for a pair. Uses pair_id when present (explicit --pairs-file
+    mode), else the (program_a, variant_a, program_b, variant_b) 4-tuple."""
+    return pair_id if pair_id else (program_a, variant_a, program_b, variant_b)
+
+
+def _load_completed_round(round_csv: str) -> set:
+    """Return set of resume keys already done in a round CSV."""
     completed = set()
     p = Path(round_csv)
     if not p.exists():
         return completed
     with open(round_csv, newline="") as f:
         for row in csv.DictReader(f):
-            completed.add((row["program_a"], row["variant_a"],
-                           row["program_b"], row["variant_b"]))
+            completed.add(_resume_key(row.get("pair_id"), row["program_a"], row["variant_a"],
+                                      row["program_b"], row["variant_b"]))
     return completed
 
 
 _FIELDNAMES = ["program_a", "variant_a", "program_b", "variant_b",
-               "ground_truth", "timestamp", "response"]
+               "ground_truth", "timestamp", "response", "pair_id"]
 
 
 def _run_round(
@@ -498,8 +535,8 @@ def _run_round(
         if not file_exists:
             writer.writeheader()
 
-        for tc_a, tc_b, ground_truth in pairs:
-            key = (tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
+        for tc_a, tc_b, ground_truth, pair_id in pairs:
+            key = _resume_key(pair_id, tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
             if key in completed:
                 continue
 
@@ -514,6 +551,7 @@ def _run_round(
                 "ground_truth": ground_truth,
                 "timestamp":    ts,
                 "response":     response,
+                "pair_id":      pair_id if pair_id else "",
             })
             f.flush()
             print(f"[{overall_done}/{total}] {ts} | R{round_num} | "
@@ -531,6 +569,8 @@ def run_experiment(
     output_base: str | None = None,
     lang: str = "Java",
     rounds: int = 1,
+    pairs_file: str | None = None,
+    files_dir: str | None = None,
 ):
     """Run model_name on all test pairs for the given number of rounds.
 
@@ -547,14 +587,19 @@ def run_experiment(
         else:
             output_base = f"results_{model_name}"
 
-    test_cases = load_test_cases(tests_dir)
-    pairs = list(generate_pairs(test_cases))
+    if pairs_file:
+        pairs = list(load_pairs_file(pairs_file, files_dir))
+        source_desc = f"{len(pairs)} pairs from {pairs_file}"
+    else:
+        test_cases = load_test_cases(tests_dir)
+        pairs = list(generate_pairs(test_cases))
+        source_desc = f"{len(test_cases)} files → {len(pairs)} pairs"
     pairs_per_round = len(pairs)
 
     total_done = sum(len(_load_completed_round(_round_csv_path(output_base, r)))
                      for r in range(1, rounds + 1))
     total = pairs_per_round * rounds
-    print(f"Loaded {len(test_cases)} files → {pairs_per_round} pairs × {rounds} round(s) = {total} total "
+    print(f"Loaded {source_desc} × {rounds} round(s) = {total} total "
           f"({total_done} already done, {total - total_done} remaining)", flush=True)
 
     if total_done == total:
@@ -611,7 +656,22 @@ Examples:
         "--tests-dir",
         default="ocd/tests",
         metavar="DIR",
-        help="Path to the OCD tests folder (default: ocd/tests).",
+        help="Path to the OCD tests folder (default: ocd/tests). "
+             "Ignored when --pairs-file is given.",
+    )
+    parser.add_argument(
+        "--pairs-file",
+        default=None,
+        metavar="CSV",
+        help="Evaluate an explicit pair list (columns: pair_id, label, file1, "
+             "file2, problem1, problem2) instead of the n×n OCD product.",
+    )
+    parser.add_argument(
+        "--files-dir",
+        default=None,
+        metavar="DIR",
+        help="Directory holding the source files referenced by --pairs-file "
+             "(default: a 'files/' folder next to the pairs CSV).",
     )
     parser.add_argument(
         "--output",
@@ -631,4 +691,5 @@ Examples:
 
     args = parser.parse_args()
     run_experiment(args.model, args.hf_model, args.tests_dir, args.output_base,
-                   rounds=args.rounds)
+                   rounds=args.rounds, pairs_file=args.pairs_file,
+                   files_dir=args.files_dir)

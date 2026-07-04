@@ -127,7 +127,7 @@ CC=gcc-11 CXX=g++-11 python run_quantization.py qtip \
   "relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit" \
   ocd/tests \
   "results/Meta-Llama-3.1-8B-Instruct/results_relaxml_Llama-3.1-8b-Instruct-QTIP-4Bit" \
-  1 2>&1 | tee run_qtip.log
+  1 2>&1 | tee logs/run_qtip.log
 ```
 
 ---
@@ -186,14 +186,14 @@ python run_quantization.py original \
   "meta-llama/Meta-Llama-3.1-8B-Instruct" \
   --tests-dir ocd/tests \
   --output "results/Meta-Llama-3.1-8B-Instruct/results_original_meta-llama__Meta-Llama-3.1-8B-Instruct" \
-  --rounds 5 2>&1 | tee run_original.log
+  --rounds 5 2>&1 | tee logs/run_original.log
 
 # Llama-4-Scout-17B-16E-Instruct
 llama4_venv/bin/python run_quantization.py original \
   "meta-llama/Llama-4-Scout-17B-16E-Instruct" \
   --tests-dir ocd/tests \
   --output "results/Llama-4-Scout-17B-16E-Instruct/results_original_meta-llama__Llama-4-Scout-17B-16E-Instruct" \
-  --rounds 5 2>&1 | tee run_original_llama4_scout.log
+  --rounds 5 2>&1 | tee logs/run_original_llama4_scout.log
 ```
 
 ### Notes
@@ -280,7 +280,7 @@ python run_quantization.py gguf \
   "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf" \
   ocd/tests \
   "results/Meta-Llama-3.1-8B-Instruct/results_gguf_bartowski__Meta-Llama-3.1-8B-Instruct-GGUF_Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf" \
-  1 2>&1 | tee run_gguf_q4km.log
+  1 2>&1 | tee logs/run_gguf_q4km.log
 ```
 
 ---
@@ -393,7 +393,7 @@ CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 \
   "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit" \
   --tests-dir ocd/tests \
   --output results/Meta-Llama-3.1-8B-Instruct/results_higgs_llama3.1_8B_4bit \
-  --rounds 1 2>&1 | tee run_higgs.log
+  --rounds 1 2>&1 | tee logs/run_higgs.log
 ```
 
 Without `CUDA_VISIBLE_DEVICES`, `device_map="auto"` may place the model on a
@@ -456,7 +456,7 @@ CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 FLUTE_NUM_SMS=108 \
   "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit" \
   --tests-dir ocd/tests \
   --output results/Meta-Llama-3.1-8B-Instruct/results_higgs_llama3.1_8B_3bit \
-  --rounds 5 2>&1 | tee run_higgs_3bit_5rounds.log
+  --rounds 5 2>&1 | tee logs/run_higgs_3bit_5rounds.log
 ```
 
 ---
@@ -477,7 +477,7 @@ CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 \
   "ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit" \
   --tests-dir ocd/tests \
   --output results/Meta-Llama-3.1-8B-Instruct/results_higgs_llama3.1_8B_3bit \
-  --rounds 1 2>&1 | tee run_higgs_3bit.log
+  --rounds 1 2>&1 | tee logs/run_higgs_3bit.log
 ```
 
 ---
@@ -509,13 +509,16 @@ uv pip install --python aqlm_venv310/bin/python -r requirements/aqlm_venv310.loc
 ```
 
 ```bash
-# Run (the trailing integer is the number of rounds)
+# Run (the trailing integer is the number of rounds).
+# The output base must be the descriptive model name so all rounds share a base and
+# the evaluator groups them: {base}_round{N}.csv. Round 1 already exists as
+# results_ISTA-DASLa__..._round1.csv; _run_round skips complete rounds and resumes at 2.
 source aqlm_venv310/bin/activate
 CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm \
   "ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf" \
   ocd/tests \
-  "results/Meta-Llama-3.1-8B-Instruct/results_aqlm" \
-  1 2>&1 | tee run_aqlm.log
+  "results/Meta-Llama-3.1-8B-Instruct/results_ISTA-DASLa__Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf" \
+  5 2>&1 | tee logs/run_aqlm.log
 ```
 
 ### Fixes Applied in `load_aqlm`
@@ -568,7 +571,7 @@ CUDA_VISIBLE_DEVICES=3 codellama_venv/bin/python run_quantization.py codellama \
   "codellama/CodeLlama-7b-Instruct-hf" \
   --tests-dir ocd/tests \
   --output results/CodeLlama-7b-Instruct-hf/results_codellama__CodeLlama-7b-Instruct-hf \
-  --rounds 5 2>&1 | tee run_codellama.log
+  --rounds 5 2>&1 | tee logs/run_codellama.log
 ```
 
 ### GGUF Variants
@@ -583,21 +586,21 @@ python run_quantization.py gguf \
   "QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf" \
   --tests-dir ocd/tests \
   --output "results/CodeLlama-7b-Instruct-hf-GGUF/results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q4_K_M.gguf" \
-  --rounds 1 2>&1 | tee run_codellama_gguf_q4km.log
+  --rounds 1 2>&1 | tee logs/run_codellama_gguf_q4km.log
 
 # Q3_K_M
 python run_quantization.py gguf \
   "QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf" \
   --tests-dir ocd/tests \
   --output "results/CodeLlama-7b-Instruct-hf-GGUF/results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q3_K_M.gguf" \
-  --rounds 1 2>&1 | tee run_codellama_gguf_q3km.log
+  --rounds 1 2>&1 | tee logs/run_codellama_gguf_q3km.log
 
 # Q2_K
 python run_quantization.py gguf \
   "QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf" \
   --tests-dir ocd/tests \
   --output "results/CodeLlama-7b-Instruct-hf-GGUF/results_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q2_K.gguf" \
-  --rounds 1 2>&1 | tee run_codellama_gguf_q2k.log
+  --rounds 1 2>&1 | tee logs/run_codellama_gguf_q2k.log
 ```
 
 ### Notes
@@ -624,7 +627,7 @@ python run_quantization.py original \
   "Qwen/Qwen2.5-Coder-7B-Instruct" \
   --tests-dir ocd/tests \
   --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_original \
-  --rounds 1 2>&1 | tee run_qwen_original.log
+  --rounds 1 2>&1 | tee logs/run_qwen_original.log
 ```
 
 ### GGUF Variants
@@ -639,21 +642,21 @@ source gguf/bin/activate
 python run_quantization.py qwen \
   --tests-dir ocd/tests \
   --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q4km \
-  --rounds 1 2>&1 | tee run_qwen_q4km.log
+  --rounds 1 2>&1 | tee logs/run_qwen_q4km.log
 
 # Q3_K_M
 python run_quantization.py qwen \
   "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf" \
   --tests-dir ocd/tests \
   --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q3km \
-  --rounds 1 2>&1 | tee run_qwen_q3km.log
+  --rounds 1 2>&1 | tee logs/run_qwen_q3km.log
 
 # Q2_K
 python run_quantization.py qwen \
   "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf" \
   --tests-dir ocd/tests \
   --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q2k \
-  --rounds 1 2>&1 | tee run_qwen_q2k.log
+  --rounds 1 2>&1 | tee logs/run_qwen_q2k.log
 ```
 
 ---
@@ -694,7 +697,7 @@ CUDA_VISIBLE_DEVICES=3 deepseek_venv/bin/python run_quantization.py deepseek \
   "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct" \
   --tests-dir ocd/tests \
   --output results/DeepSeek-Coder-V2-Lite-Instruct/results_deepseek_coder_v2_lite \
-  --rounds 5 2>&1 | tee run_deepseek.log
+  --rounds 5 2>&1 | tee logs/run_deepseek.log
 ```
 
 ### GGUF (Q4\_K\_M)
@@ -708,7 +711,7 @@ python run_quantization.py gguf \
   "bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF::DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf" \
   --tests-dir ocd/tests \
   --output results/DeepSeek-Coder-V2-Lite-Instruct/results_deepseek_coder_v2_lite_q4km \
-  --rounds 1 2>&1 | tee run_deepseek_q4km.log
+  --rounds 1 2>&1 | tee logs/run_deepseek_q4km.log
 ```
 
 ### Notes
@@ -716,3 +719,38 @@ python run_quantization.py gguf \
   our prompts are well within 8192 tokens.
 - `trust_remote_code=True` is only needed for the BF16 path; the GGUF file is
   self-contained and does not execute model-repo Python code.
+
+## Datasets
+
+### GCJ2-4lang (cross-language clones)
+
+[HuggingFace: lihy11/GCJ2-4lang](https://huggingface.co/datasets/lihy11/GCJ2-4lang) —
+the 4-language extended version of the GCJ2 dataset from
+[MultiPerspectiveCloneEval](https://github.com/lihy11/MultiPerspectiveCloneEval)
+(ISSRE 2023). Supports **cross-language** code clone detection, unlike the
+Java-only MultiPerspectiveCloneEval release.
+
+Download (single 71 MB pickle; gitignored):
+
+```bash
+curl -sL -o gcj4.pkl \
+  "https://huggingface.co/datasets/lihy11/GCJ2-4lang/resolve/main/gcj4.pkl"
+```
+
+Load as a pandas DataFrame (37,364 rows, one solution per row):
+
+```python
+import pickle
+df = pickle.load(open("gcj4.pkl", "rb"))
+```
+
+Key columns:
+- `flines` — full source code of the solution (string).
+- `lan` — language: `java` (12,447), `cpp` (11,985), `py` (11,608), `php` (1,324).
+- `year`, `round`, `task` — identify the GCJ **problem** (the clone group).
+- `file`, `lines`, `funid`, `username`, `index`, `solution` — metadata.
+
+Clone pairing (Type-4 / functional): two solutions are clones iff they share the
+same `(year, round, task)`. There are **20 distinct problems, each solved in all
+4 languages**, so a **cross-language** clone pair is any pair with the same
+`(year, round, task)` but different `lan`. Non-clones come from different problems.

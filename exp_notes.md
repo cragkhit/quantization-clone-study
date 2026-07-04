@@ -781,3 +781,34 @@ Outputs:
 
 The generator asserts the invariants (48 unique files, 48/48 balance, all false
 pairs cross-problem, no false pair colliding with a true pair).
+
+### Derived cross-language clone pair set (`gcj_crosslang_clones/`, GCJ^CL)
+
+The cross-language counterpart, produced by `prepare_gcj_crosslang.py`
+(reproducible, `SEED=42`):
+
+```bash
+python3 prepare_gcj_crosslang.py
+```
+
+Protocol:
+- Randomly sample **16 problems** solved in all 4 languages, and **3 submissions
+  per language** each (4 x 3 = 12 per problem) -> **192 unique files**.
+- **True pairs (192)**, cross-language + same problem, `label=1`: for each
+  submission index `i` in `{0,1,2}`, connect the 4 languages in a **ring**
+  `java -> cpp -> py -> php -> java`, pairing same-index submissions
+  (4 edges x 3 indices = 12/problem x 16). Every file lands in exactly 2 true
+  pairs; all submissions to a GCJ problem are semantic clones, so each is a
+  genuine cross-language clone. Even coverage: 48 pairs per ring edge.
+- **False pairs (192)**, `label=0`: one per file, paired with a random extracted
+  submission from a **different problem AND different language**.
+- Result: **384 pairs over 192 files** (balanced 192/192).
+
+Outputs:
+- `gcj_crosslang_clones/files/<id>.<ext>` — 192 files (48 each java/cpp/py/php).
+- `gcj_crosslang_clones/pairs.csv` — `pair_id, label, file1, file2, lang1, lang2, problem1, problem2`.
+- `gcj_crosslang_clones/files_meta.csv` — `file_id, problem, lan, file, lines`.
+
+The generator asserts the invariants (192 files, all true pairs cross-language &
+same-problem, all false pairs different-problem & different-language, every file
+participates in a true pair, 192/192 balance).

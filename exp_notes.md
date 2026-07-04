@@ -812,3 +812,41 @@ Outputs:
 The generator asserts the invariants (192 files, all true pairs cross-language &
 same-problem, all false pairs different-problem & different-language, every file
 participates in a true pair, 192/192 balance).
+
+### Evaluating a derived pair set (`--pairs-file`)
+
+By default `run_quantization.py` evaluates the full n×n Cartesian product of the
+`*.java` files under `--tests-dir` (ground truth = CLONE iff same parent
+`program` dir). The `--pairs-file` flag instead evaluates an **explicit pair
+list** — used for the curated GCJ sets above:
+
+```bash
+python run_quantization.py <backend> <hf_model> \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --files-dir  gcj_java_clones/files \   # optional; defaults to <pairs_csv dir>/files
+  --output results_gcj_java/<Model>/... --rounds 5
+```
+
+The CSV needs columns `pair_id, label, file1, file2, problem1, problem2`
+(`label` 1=clone / 0=non-clone). Source is read from `--files-dir` (default:
+`files/` next to the CSV). A `pair_id` column was added to the result CSVs so
+each row's resume key is unique even if a `(file1, file2)` pair repeats; the
+OCD n×n mode is unchanged (empty `pair_id`, resume still keyed on the
+`program_a/variant_a/program_b/variant_b` 4-tuple).
+
+Results for the derived GCJ sets live under **`results_gcj_java/`** (kept
+separate from the OCD-based `results/`).
+
+### Original Llama-4-Scout on GCJ Java (`gcj_java_clones`)
+
+```bash
+CUDA_VISIBLE_DEVICES=1,2,3,5,6,7 llama4_venv/bin/python run_quantization.py original \
+  "meta-llama/Llama-4-Scout-17B-16E-Instruct" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Llama-4-Scout-17B-16E-Instruct/results_original_meta-llama__Llama-4-Scout-17B-16E-Instruct" \
+  --rounds 5 2>&1 | tee logs/run_original_llama4_scout_gcj_java.log
+```
+
+96 pairs × 5 rounds = 480 inferences. `CUDA_VISIBLE_DEVICES` pins the run to idle
+GPUs so it does not collide with other jobs (Scout's MoE in BF16 is distributed
+across them via `device_map="auto"`).

@@ -1,0 +1,361 @@
+program_a,variant_a,program_b,variant_b,ground_truth,timestamp,response,pair_id
+2013_0_1,103399,2013_0_1,49244,CLONE,2026-07-04 20:40:59,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing a game of Tic-Tac-Toe. They read the game board from a file, and then determine the winner of the game. The main difference is in the implementation details, but the overall functionality is the same. The first code snippet uses a more object-oriented approach, while the second code snippet uses a more procedural approach. However, the end result is the same: determining the winner of the game.""
+}",0
+2013_0_1,103399,2013_0_1,126886,CLONE,2026-07-04 20:41:00,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing a game of Tic Tac Toe. They are checking for wins in rows, columns, and diagonals, and also checking for a draw if the game is not completed. The main difference is in the implementation details, but the functionality is the same.""
+}",1
+2013_0_1,49244,2013_0_1,126886,CLONE,2026-07-04 20:41:00,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing a game of Tic Tac Toe. They both check for a winner in the same way: by checking rows, columns, and diagonals. They also both check for a draw by checking if there are any empty cells left. The main difference is in the implementation details, but the overall logic and functionality are the same.""
+}",2
+2013_0_2,84557,2013_0_2,134288,CLONE,2026-07-04 20:41:01,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem: given a 2D array, determine if it is possible to cut the lawn in such a way that each row or column has a unique minimum value. They achieve this by iterating over the rows and columns, checking for unique minimum values, and printing 'YES' or 'NO' accordingly. Although the implementation details differ, the overall logic and functionality are the same.""
+}",3
+2013_0_2,84557,2013_0_2,57926,CLONE,2026-07-04 20:41:02,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine whether it is possible to cut the lawn in a given grid based on the heights of the grass. They both iterate over the grid, checking if the current position can be cut by comparing it with the positions in the same row and column. If it is not possible to cut the lawn, they print 'NO', otherwise they print 'YES'. The main difference is in the structure and organization of the code, but the logic and functionality are the same.""
+}",4
+2013_0_2,134288,2013_0_2,57926,CLONE,2026-07-04 20:41:03,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem: given a 2D array, for each row, check if all elements are the smallest in their column and the largest in their row. If such a row is found, print 'NO' and exit. Otherwise, print 'YES'. The code snippets use different approaches to achieve this, but the logic is the same. The first snippet uses a nested loop to find the smallest element in each row and then checks if all elements in that row are equal to the smallest. The second snippet uses a different",5
+2013_0_3,61623,2013_0_3,51052,CLONE,2026-07-04 20:41:04,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the number of perfect squares that are also palindromes within a given range. They use different approaches to achieve this, but the end result is the same. The first code snippet uses a brute force approach to generate all palindromes and then checks if they are perfect squares, while the second code snippet uses a more efficient approach to generate perfect squares that are also palindromes. Both code snippets have the same functionality, but the second code snippet is more efficient and",6
+2013_0_3,61623,2013_0_3,90494,CLONE,2026-07-04 20:41:05,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem: given a range of numbers, count the number of perfect squares that are palindromes within that range. They use different approaches and algorithms, but the overall functionality is the same. The first code snippet generates all palindromic numbers up to a certain limit, then counts the number of perfect squares that are palindromes within a given range. The second code snippet uses a more complex algorithm to count the number of palindromic perfect squares within a given range. Both code snippets achieve",7
+2013_0_3,51052,2013_0_3,90494,CLONE,2026-07-04 20:41:06,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to count the number of palindromic numbers up to a given number. They use different approaches, but the end result is the same. The first code snippet uses a precomputed array of perfect squares and a recursive function to count the palindromic numbers, while the second code snippet uses a dynamic programming approach to count the palindromic numbers. Both code snippets have a similar structure and logic, and they achieve the same result.""
+}",8
+2013_1_1,33468,2013_1_1,40857,CLONE,2026-07-04 20:41:07,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the square root of a number and use it to calculate a result. They both use a similar algorithm to find the square root, and then use that result to calculate the final answer. The main difference is in the implementation details, such as the way they read input and write output, but the overall logic and functionality are the same.""
+}",9
+2013_1_1,33468,2013_1_1,38253,CLONE,2026-07-04 20:41:07,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the square root of a number and use it to calculate a result. They both use a similar approach to find the square root, which is to use a binary search algorithm. The main difference is in the implementation details, such as the way the square root is calculated and the way the result is printed. However, the overall logic and functionality of the two code snippets are the same.""
+}",10
+2013_1_1,40857,2013_1_1,38253,CLONE,2026-07-04 20:41:08,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is finding the smallest value that satisfies a certain condition. They both use a similar approach, which is to use a binary search to find the solution. The main difference is in the implementation details, such as the use of different classes and methods, but the overall logic and approach are the same.""
+}",11
+2014_2_1,128224,2014_2_1,130165,CLONE,2026-07-04 20:41:09,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem. They are reading input strings, checking if it's possible to achieve a certain result, and if it's possible, they are calculating the minimum number of operations required to achieve that result. The main difference is in the implementation details, but the overall functionality is the same. The first code snippet uses a more object-oriented approach, while the second code snippet uses a more procedural approach. However, the logic and the steps taken to solve the problem are identical.""
+}",12
+2014_2_1,128224,2014_2_1,120720,CLONE,2026-07-04 20:41:10,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem. They are reading input from a file, processing the input to find the minimum number of operations required to make all strings have the same prefix, and writing the result to an output file. The main difference is in the implementation details, such as the data structures used and the algorithmic approaches. However, the overall functionality and the problem they are trying to solve are the same.""
+}",13
+2014_2_1,130165,2014_2_1,120720,CLONE,2026-07-04 20:41:11,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum cost to make all strings equal. They both use a similar approach: first, they remove duplicate characters from the strings, then they calculate the cost to make all strings equal by finding the minimum and maximum number of each character in the strings. Finally, they calculate the total cost by finding the minimum cost for each character. The main difference is in the implementation details, but the overall logic and approach are the same.""
+}",14
+2014_3_1,135747,2014_3_1,140695,CLONE,2026-07-04 20:41:12,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the number of bits required to represent the product of two numbers (P and Q) as a power of 2. They both use a similar approach to calculate this, by first finding the greatest common divisor (GCD) of P and Q, and then dividing P and Q by the GCD. They then use a loop to find the smallest power of 2 that is greater than or equal to Q. The number of bits required to represent the product of P and Q as",15
+2014_3_1,135747,2014_3_1,133240,CLONE,2026-07-04 20:41:12,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the maximum power of 2 that can be subtracted from the denominator of a fraction without making the fraction impossible. They both use the greatest common divisor (GCD) to simplify the fraction and then iterate through powers of 2 to find the maximum power that can be subtracted. The main difference is in the implementation details, but the overall logic and functionality are the same.""
+}",16
+2014_3_1,140695,2014_3_1,133240,CLONE,2026-07-04 20:41:13,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the maximum number of bits required to represent the result of a division operation. They both take the input in the format of 'num/den' and calculate the result. The main difference is in the approach used to calculate the result. The first code snippet uses bitwise operations and logarithms, while the second code snippet uses the gcd function and BigInteger operations. However, the end result is the same, which is to find the maximum number of bits required to represent the result.""
+}",17
+2015_0_1,62292,2015_0_1,91911,CLONE,2026-07-04 20:41:14,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum number of people that need to be added to a spectrum to make it a valid spectrum. They both use a similar approach, iterating over the spectrum and adding people as needed. The main difference is in the implementation details, such as the use of different data structures and input/output methods. However, the overall logic and functionality of the two code snippets are the same.""
+}",18
+2015_0_1,62292,2015_0_1,62229,CLONE,2026-07-04 20:41:15,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to calculate the minimum number of steps required to reach a certain position in a spectrum. They both read input from a file, process the data, and write the output to another file. The main difference is in the implementation details, such as the use of different classes and methods, but the overall logic and functionality are the same.""
+}",19
+2015_0_1,91911,2015_0_1,62229,CLONE,2026-07-04 20:41:15,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is a common problem on coding challenges. They both read input from a file or standard input, and then for each case, they calculate the minimum number of steps required to reach a certain position. The main difference is in the way they handle the input and output, but the logic of the solve function is the same in both snippets.""
+}",20
+2015_0_2,107903,2015_0_2,105985,CLONE,2026-07-04 20:41:16,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum number of 'sleeps' required to satisfy a set of 'b' values. They both use a similar approach, iterating over all possible values of 'a' and calculating the minimum number of 'sleeps' required. The only difference is in the implementation details and the variable names used.""
+}",21
+2015_0_2,107903,2015_0_2,108334,CLONE,2026-07-04 20:41:17,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum cost to cut a set of empty containers into slices of a given size. They both use a similar approach, iterating over all possible slice sizes and calculating the minimum cost. The main difference is in the implementation details, such as the use of different data structures and input/output methods. However, the core logic of the algorithms is the same, and they both achieve the same result.""
+}",22
+2015_0_2,105985,2015_0_2,108334,CLONE,2026-07-04 20:41:18,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is a classic problem of finding the minimum cost to cut a set of intervals. They use different approaches, but the end goal is the same. The first code snippet uses a brute-force approach with a time complexity of O(N*1000), while the second code snippet uses a more efficient approach with a time complexity of O(N*log N). However, they both achieve the same result, which is to find the minimum cost to cut the intervals.""
+}",23
+2015_0_3,68460,2015_0_3,69655,CLONE,2026-07-04 20:41:19,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the Dijkstra algorithm to solve a problem. They use a similar approach to calculate the result, which involves multiplying the current value with the value of the current character and checking if the result matches a specific pattern. The main difference is in the implementation details, but the overall logic and functionality are the same.""
+}",24
+2015_0_3,68460,2015_0_3,83332,CLONE,2026-07-04 20:41:20,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine if a given string can be transformed into a specific pattern by applying a set of rules. They use similar approaches, such as using a matrix to represent the transformations and applying the rules to the input string. The main difference is in the implementation details and the specific rules used, but the overall logic and functionality are similar.""
+}",25
+2015_0_3,69655,2015_0_3,83332,CLONE,2026-07-04 20:41:21,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be implementing the same algorithm, which is a variant of the Dijkstra's algorithm. They both seem to be solving a problem related to finding a specific sequence of characters within a given string, and then checking if the resulting product after a certain number of operations matches a certain value. The implementation details and data structures used are different, but the overall logic and purpose of the code are similar.""
+}",26
+2015_0_4,98778,2015_0_4,66992,CLONE,2026-07-04 20:41:22,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine whether Richard or Gabriel wins in a game. They both read input from a file, parse the input, and then use the parsed values to make a decision. The logic for making the decision is similar in both snippets, with the main difference being the implementation details. The first snippet uses a more object-oriented approach with classes and methods, while the second snippet uses a more procedural approach with methods and variables. Despite these differences, the overall functionality of the two snippets is the same.""
+}",27
+2015_0_4,98778,2015_0_4,90431,CLONE,2026-07-04 20:41:23,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine whether Richard or Gabriel wins in a game based on the size of a rectangle and the values of x and y. The logic used in both code snippets is similar, with the main difference being the implementation details. The first code snippet uses a more object-oriented approach with classes and methods, while the second code snippet uses a more procedural approach with functions and conditional statements. However, the overall logic and functionality of both code snippets are the same.""
+}",28
+2015_0_4,66992,2015_0_4,90431,CLONE,2026-07-04 20:41:24,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is designed to read files and extract data from them, while the second code snippet is designed to solve a specific problem (Problem D) and write the solutions to a file. They have different purposes and do not perform the same task, even if they share some similarities in their use of file reading and writing.""
+}",29
+2015_1_1,121210,2015_1_1,112152,CLONE,2026-07-04 20:41:24,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem. They are taking an array of integers, and then calculating two values: the sum of the differences between consecutive elements in the array, and the sum of the minimum of each element and the maximum difference found so far. They then print these two values as the solution. The code snippets use different approaches and syntax, but they achieve the same result.""
+}",30
+2015_1_1,121210,2015_1_1,123066,CLONE,2026-07-04 20:41:25,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the sum of the differences between consecutive elements in an array and the sum of the minimum of each element and the maximum difference found so far. They use different approaches and data structures, but the logic and the final result are the same.""
+}",31
+2015_1_1,112152,2015_1_1,123066,CLONE,2026-07-04 20:41:26,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the sum of the differences between consecutive elements in an array and the sum of the minimum of each element and the maximum difference found so far. They both use a similar approach to solve the problem, with some minor differences in syntax and structure. The logic and algorithm used in both code snippets are identical, making them functionally similar.""
+}",32
+2016_0_1,160961,2016_0_1,79433,CLONE,2026-07-04 20:41:27,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to generate a sequence of numbers that eventually lead to the string 'INSOMNIA' when the input is 0, or a specific number when the input is not 0. They use different approaches to achieve this, but the end result is the same. The first code snippet uses a while loop to generate the sequence, while the second code snippet uses a StringBuilder to build the sequence. Both code snippets also handle the case where the input is 0 by printing 'INSOMNIA",33
+2016_0_1,160961,2016_0_1,50763,CLONE,2026-07-04 20:41:27,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find a number that has 10 unique digits. They use different approaches, but the end goal is the same. The first code snippet uses a TreeSet to keep track of unique digits, while the second code snippet uses a HashSet. Both code snippets also handle the case where the input is 0, and they both output the result in a similar format.""
+}",34
+2016_0_1,79433,2016_0_1,50763,CLONE,2026-07-04 20:41:28,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the smallest number that contains all digits 0-9 at least once. They use different approaches, but the end goal is the same. The first code snippet uses a StringBuilder to build the number, while the second code snippet uses a HashSet to keep track of the digits. Both code snippets also handle the case where the input number is 0, in which case the output is 'INSOMNIA'.""
+}",35
+2016_0_4,44475,2016_0_4,150104,CLONE,2026-07-04 20:41:29,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the positions of tiles in a fractile. They both take three inputs (K, C, and S) and produce the same output for the same inputs. The main difference is in the approach used to calculate the positions, but the overall functionality is the same.""
+}",36
+2016_0_4,44475,2016_0_4,51535,CLONE,2026-07-04 20:41:30,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the fractiles for a given set of input values. They both use a similar approach to solve the problem, with the main difference being in the implementation details. The first code snippet uses a more object-oriented approach, while the second code snippet uses a more procedural approach. However, the overall logic and functionality of the two code snippets are similar.""
+}",37
+2016_0_4,150104,2016_0_4,51535,CLONE,2026-07-04 20:41:30,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to generate a sequence of numbers based on the given parameters k, c, and s. They both use a recursive approach to generate the sequence, with the first code snippet using a brute-force approach and the second code snippet using a more efficient divide-and-conquer approach. The main difference is in the implementation details, but the overall logic and functionality are the same.""
+}",38
+2016_1_1,15911,2016_1_1,31319,CLONE,2026-07-04 20:41:31,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are functionally similar as they achieve the same result. They both take a string input and return a new string where the characters are ordered in ascending order. The only differences are in the syntax, structure, and specific steps they take to accomplish this task. The first code snippet uses a Scanner to read input from a file, while the second code snippet uses a BufferedReader to read input from a file. The logic of the calc method in the first code snippet and the answer variable in the second code snippet are identical, indicating that they are",39
+2016_1_1,15911,2016_1_1,14479,CLONE,2026-07-04 20:41:32,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the lexicographically largest string that can be formed from a given string by removing characters. The first code snippet uses a simple iterative approach, while the second code snippet uses a more complex approach with a FastScanner class. However, the logic of the two code snippets is the same, and they produce the same output for a given input.""
+}",40
+2016_1_1,31319,2016_1_1,14479,CLONE,2026-07-04 20:41:33,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the same task, which is to find the lexicographically largest string from a given string by removing characters in a specific order. They differ in syntax and structure, but the logic behind the implementation is the same. The first code snippet uses a simple loop to find the largest character and build the result string, while the second code snippet uses a more complex approach with a helper method to find the largest character and build the result string. However, the overall functionality is the same.""
+}",41
+2016_1_2,33376,2016_1_2,32339,CLONE,2026-07-04 20:41:34,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the odd numbers in a grid of size N x (2N-1) and print them in sorted order for each test case. They use similar logic and data structures to achieve this, with some minor differences in implementation details. The main difference is that the second code snippet uses objects and methods to organize the code, while the first code snippet is more procedural. However, the overall functionality and output of both code snippets are the same.""
+}",42
+2016_1_2,33376,2016_1_2,4423,CLONE,2026-07-04 20:41:34,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the numbers that appear an odd number of times in a given set of input lines. They both use a similar approach to achieve this: they read the input lines, count the occurrences of each number, and then print out the numbers that appear an odd number of times. The main difference is in the way they read the input and process it, but the overall logic and functionality are the same.""
+}",43
+2016_1_2,32339,2016_1_2,4423,CLONE,2026-07-04 20:41:35,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the odd numbers in a set of input numbers. They use different approaches, but the end result is the same. The first code snippet uses a hash table to track the numbers and then sorts the odd numbers, while the second code snippet uses a set to track the numbers and then sorts the remaining numbers. Both code snippets produce the same output, which is the sorted list of odd numbers.""
+}",44
+2016_2_1,180999,2016_2_1,203192,CLONE,2026-07-04 20:41:36,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to convert a given string into a phone number. They use similar logic to achieve this, with the main difference being in the implementation details. The first code snippet uses a more manual approach, while the second code snippet uses a HashMap to store the character counts and then uses this information to construct the phone number. Both code snippets produce the same output for a given input.""
+}",45
+2016_2_1,180999,2016_2_1,179890,CLONE,2026-07-04 20:41:37,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to process a string and replace certain characters with numbers. They use similar logic to achieve this, with the main difference being in the implementation details. The first code snippet uses a more object-oriented approach with methods to remove characters and add numbers, while the second code snippet uses a more procedural approach with loops and conditional statements. However, the overall functionality of both code snippets is the same.""
+}",46
+2016_2_1,203192,2016_2_1,179890,CLONE,2026-07-04 20:41:38,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a specific problem, where they take a string input and output a string representing a phone number. They use a similar approach to achieve this, by identifying and counting specific characters in the input string to form the digits of the phone number. The main difference is in the implementation details, with the first snippet using a HashMap to store character counts and the second snippet using a while loop to replace characters in the input string. However, the overall logic and functionality of both snippets are similar.""
+}",47
+2013_0_1,103399,2013_0_3,90494,NON-CLONE,2026-07-04 20:41:40,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem related to checking the status of a game, specifically a 4x4 tic-tac-toe game. The first code snippet is checking the status of the game based on the current state of the board, while the second code snippet is checking the number of possible moves in a palindromic number. However, upon closer inspection, it appears that the second code snippet is actually counting the number of possible moves in a palindromic number that is a square root of a given number, which is similar",48
+2013_0_1,103399,2015_0_4,98778,NON-CLONE,2026-07-04 20:41:41,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine the winner of a game of Tic-Tac-Toe. The first code snippet is reading the game board from a file and determining the winner, while the second code snippet is reading the game parameters from an input file and determining the winner. The logic used in both code snippets to determine the winner is the same, which is to check for rows, columns, diagonals, and a draw condition. The only difference is in the input and output handling, which does not affect the functionality",49
+2013_0_1,49244,2013_1_1,33468,NON-CLONE,2026-07-04 20:41:42,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they are given a 4x4 grid and they need to determine the winner of the game. The first code snippet uses a Game class with a winner() method to determine the winner, while the second code snippet uses a Main class with a main() method to calculate the winner. Although the implementation is different, the functionality is the same. They both check for a winner in the same way, by checking rows, columns, and diagonals for a winning condition. If no winner is found, they check",50
+2013_0_2,84557,2015_0_3,69655,NON-CLONE,2026-07-04 20:41:42,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine if it is possible to cut the lawn in a specific way. They both read input, parse it, and then check if it is possible to cut the lawn in a specific way. The main difference is in the implementation details, but the overall logic and functionality are the same.""
+}",51
+2013_0_2,84557,2015_0_3,69655,NON-CLONE,2026-07-04 20:41:43,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine if it's possible to cut the lawn in a specific way. They both read in a 2D array, and then check each element to see if it's possible to cut the lawn in a specific way. They both use a similar approach to check the elements, and both print out 'YES' or 'NO' depending on whether it's possible to cut the lawn. The main difference is in the way they read in the input and the specific logic used to check the elements",52
+2013_0_2,134288,2016_1_1,14479,NON-CLONE,2026-07-04 20:41:44,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to find the smallest value in each row of a 2D array and then check if all other values in that row are equal to the smallest value. If they are, they print 'YES', otherwise they print 'NO'. The main difference is in the input handling and the structure of the code, but the logic is the same.""
+}",53
+2013_0_3,61623,2015_0_1,91911,NON-CLONE,2026-07-04 20:41:45,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the number of perfect squares within a given range. The first code snippet generates all perfect numbers up to a certain limit, then finds the perfect squares among them. The second code snippet generates a string of digits, then counts the number of times a digit is increased by a certain amount. However, upon closer inspection, it appears that the second code snippet is actually generating a string of digits and counting the number of times a digit is increased by a certain amount to find the number of perfect",54
+2013_0_3,61623,2013_0_1,126886,NON-CLONE,2026-07-04 20:41:46,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to determine the outcome of a game or a situation based on a set of input conditions. The first code snippet is finding all perfect squares that are palindromes and then determining how many of these perfect squares fall within a given range for a series of test cases. The second code snippet is determining the outcome of a Tic Tac Toe game based on a set of input conditions. Although the syntax and structure of the code are different, the underlying logic and problem-solving approach are similar. Both code snippets",55
+2013_0_3,51052,2015_1_1,123066,NON-CLONE,2026-07-04 20:41:46,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the sum of the differences between consecutive elements in an array, and the sum of the elements in the array that are less than or equal to the maximum difference. They use different approaches and data structures, but they achieve the same result.""
+}",56
+2013_1_1,33468,2016_0_4,150104,NON-CLONE,2026-07-04 20:41:47,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the fractile of a given number. They both take the number of cases (t) as input, and for each case, they take three integers (k, c, and s) as input. They then calculate the fractile based on the values of k, c, and s, and print the result. Although the algorithms used are different, the overall functionality of both code snippets is the same.""
+}",57
+2013_1_1,33468,2013_0_3,51052,NON-CLONE,2026-07-04 20:41:48,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the number of perfect squares less than a given number. They use different approaches, but the end result is the same. The first code snippet uses a binary search approach, while the second code snippet uses a precomputed table of perfect squares. Both code snippets also handle input/output operations and have a similar structure.""
+}",58
+2013_1_1,40857,2015_0_4,98778,NON-CLONE,2026-07-04 20:41:49,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine whether a given rectangle can be divided into equal parts of a certain size. The first code snippet uses a more complex algorithm to achieve this, while the second code snippet uses a simpler approach. However, the end result is the same: to determine whether the rectangle can be divided into equal parts of a certain size. The main difference between the two code snippets is the approach used to solve the problem, but the end result is the same.""
+}",59
+2014_2_1,128224,2013_0_2,57926,NON-CLONE,2026-07-04 20:41:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to check if a certain condition is met for each test case. They both read input from a file, process the input, and then write the output to a file. The main difference is in the way they process the input and the condition they check. However, the overall structure and functionality of the two code snippets are similar.""
+}",60
+2014_2_1,128224,2016_0_4,51535,NON-CLONE,2026-07-04 20:41:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to find the minimum number of operations to achieve a certain goal. In the first code snippet, the goal is to find the minimum number of operations to make all strings have the same result, while in the second code snippet, the goal is to find the minimum number of operations to fill a range with a certain number. Both code snippets use a similar approach, where they first calculate the result of each string or range, and then try to find the minimum number of operations to make all results or ranges",61
+2014_2_1,130165,2015_0_2,107903,NON-CLONE,2026-07-04 20:41:51,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem where it needs to find the minimum cost to rip a set of strings, while Code Snippet 2 is solving a problem where it needs to find the minimum number of parts to divide a set of numbers. The algorithms used in both code snippets are different, and the problems they are trying to solve are not the same.""
+}",62
+2014_3_1,135747,2016_1_2,32339,NON-CLONE,2026-07-04 20:41:52,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. The first code snippet seems to be solving a problem related to finding the number of bits required to represent a number in a certain format, while the second code snippet appears to be solving a problem related to ranking and filing numbers in a grid. The code structures and algorithms used in the two snippets are also quite different, making it difficult to determine their functional similarity.""
+}",63
+2014_3_1,135747,2016_1_2,33376,NON-CLONE,2026-07-04 20:41:53,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to find the largest power of 2 that divides a given number. They both use a similar approach to find this power of 2. The first code snippet uses a more complex approach involving the greatest common divisor (GCD) and modular arithmetic, while the second code snippet uses a simpler approach by counting the occurrences of each number in a given range. However, both snippets ultimately aim to find the largest power of 2 that divides the given number, making them functionally similar.""
+}",64
+2014_3_1,140695,2015_0_3,83332,NON-CLONE,2026-07-04 20:41:54,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 seems to be solving a problem involving bit manipulation and division, while Code Snippet 2 appears to be solving a problem involving string manipulation and modular arithmetic. The code structure and syntax are also quite different, making it difficult to determine functional similarity without more context or information about the specific problems being solved.""
+}",65
+2015_0_1,62292,2016_1_1,15911,NON-CLONE,2026-07-04 20:41:55,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they are given a string of numbers and they need to output a new string where the numbers are in the correct order. The first code snippet is using a more complex approach with a BitSet and a StringTokenizer, while the second code snippet is using a simpler approach with a StringBuilder. However, the logic behind both code snippets is the same: they are both sorting the numbers in the input string in ascending order.""
+}",66
+2015_0_1,62292,2014_2_1,128224,NON-CLONE,2026-07-04 20:41:55,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a similar problem, which is to find the minimum number of operations required to make a sequence of strings. They both use a similar approach, where they first check if it's possible to make the sequence, and then they calculate the minimum number of operations required. The main difference is in the implementation details, but the overall logic and approach are similar.""
+}",67
+2015_0_1,91911,2013_0_2,134288,NON-CLONE,2026-07-04 20:41:56,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to find the minimum value in each row of a 2D array and then check if all elements in that row are equal to the minimum value. If they are not, they need to check if there is any column where all elements are greater than the minimum value. If such a column is found, they print 'NO', otherwise they print 'YES'. The code snippets use different approaches to solve this problem, but the logic is the same. The first snippet uses a string to store the binary",68
+2015_0_2,107903,2013_0_1,126886,NON-CLONE,2026-07-04 20:41:57,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Although the two code snippets have different structures and syntax, they both appear to be solving the same problem. The first code snippet is solving a problem where it needs to find the minimum number of moves required to make all the numbers in an array equal. The second code snippet is checking the winner of a Tic Tac Toe game. However, upon closer inspection, it appears that the second code snippet is actually checking for the winner of a game where the board is represented as a 4x4 grid with 'T' as a wildcard, and the first",69
+2015_0_2,107903,2016_2_1,180999,NON-CLONE,2026-07-04 20:41:58,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to find the minimum number of parts to cut a set of sticks. The first code snippet is using a brute force approach to try all possible values of the number of parts, while the second code snippet is using a more complex approach to remove certain characters from a string and then sort the remaining characters. However, upon closer inspection, it appears that the second code snippet is actually solving the same problem as the first code snippet, but with a different input format. The second code snippet is taking a string",70
+2015_0_2,105985,2014_2_1,120720,NON-CLONE,2026-07-04 20:41:59,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum number of operations required to make all strings in a given set of strings equal. They use different approaches, but the end goal is the same. The first code snippet uses a brute force approach to try all possible operations, while the second code snippet uses a more efficient approach to find the minimum number of operations required for each character position. Both code snippets also handle the case where the strings are not equal and print the result accordingly.""
+}",71
+2015_0_3,68460,2015_0_1,62292,NON-CLONE,2026-07-04 20:42:00,"{
+  ""answer"": ""DONT-KNOW"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. The first code snippet seems to be solving a problem related to matrix multiplication and finding a specific pattern in a string, while the second code snippet appears to be solving a problem related to counting the number of steps required to reach a certain position in a spectrum. The code structure and syntax are also quite different, making it difficult to determine their functional similarity.""
+}",72
+2015_0_3,68460,2013_0_2,57926,NON-CLONE,2026-07-04 20:42:01,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine if a given set of numbers can be arranged in a specific way. The first code snippet uses a more complex approach involving matrix multiplication and modular arithmetic, while the second code snippet uses a simpler approach involving comparison of adjacent elements. However, the underlying logic and the problem they are trying to solve are the same. The first code snippet is trying to find a specific pattern in the numbers, and the second code snippet is trying to determine if the numbers can be arranged in a way that satisfies",73
+2015_0_3,69655,2014_2_1,120720,NON-CLONE,2026-07-04 20:42:02,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be implementing the Dijkstra's algorithm to solve a problem. They both read input from a file, process it, and output the result. Although the implementation details and data structures used are different, the overall logic and functionality of the two code snippets seem to be similar. The first code snippet uses a matrix representation of the graph and a set to keep track of visited nodes, while the second code snippet uses an array of strings and a custom class to represent the graph. However, the core idea of finding the shortest path and",74
+2015_0_4,98778,2013_0_3,61623,NON-CLONE,2026-07-04 20:42:03,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the number of perfect squares within a given range. They use different approaches, but the end result is the same. The first code snippet uses a more complex approach with two different methods (simple and hard) to determine if a number is a perfect square, while the second code snippet uses a simpler approach with a helper function to check if a number is a palindrome. However, the overall functionality of both code snippets is the same.""
+}",75
+2015_0_4,98778,2015_0_3,68460,NON-CLONE,2026-07-04 20:42:03,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to determine whether a given set of numbers can be reduced to a specific pattern. They use different approaches and data structures, but the overall logic and goal are the same. The first code snippet uses a more straightforward approach with two separate methods for simple and hard cases, while the second code snippet uses a more complex approach with matrix multiplication and a loop. However, the underlying problem and solution are the same.""
+}",76
+2015_0_4,66992,2014_3_1,133240,NON-CLONE,2026-07-04 20:42:05,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to read input from a file and perform some operation on it. In the first code snippet, it reads the input line by line and performs some operation on it, while in the second code snippet, it reads the input as a string and splits it into two parts to perform some operation. Although the syntax and structure are different, the functionality of both code snippets is similar. They both read input from a file and perform some operation on it.""
+}",77
+2015_1_1,121210,2015_0_4,90431,NON-CLONE,2026-07-04 20:42:06,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to determine the result of a certain task based on the input size and other parameters. They use different approaches and data structures, but the overall logic and purpose of the code are similar. The first code snippet is using a more complex approach with multiple classes and threads, while the second code snippet is using a simpler approach with a single class and a switch statement. However, the output of both code snippets is the same, which is the solution to the problem.""
+}",78
+2015_1_1,121210,2016_1_2,32339,NON-CLONE,2026-07-04 20:42:06,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the rank and file of a matrix. They both take input from a file, process the data, and output the result. Although the implementation details are different, the overall functionality is the same. The first code snippet uses a more complex approach with threads and a custom FastReader class, while the second code snippet uses a simpler approach with a Scanner object. However, the logic behind the solution is the same, and they both achieve the same result.""
+}",79
+2015_1_1,112152,2015_0_2,108334,NON-CLONE,2026-07-04 20:42:07,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum cost to cut a plate into slices. They both read input from a file, process the data, and output the result to a file. Although the implementation details are different, the overall logic and functionality are the same.""
+}",80
+2016_0_1,160961,2013_1_1,40857,NON-CLONE,2026-07-04 20:42:08,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to generate a sequence of numbers based on user input. In the first code snippet, it uses a TreeSet to generate a sequence of numbers, while in the second code snippet, it uses a mathematical formula to generate the sequence. However, the output of both code snippets is the same, which is a sequence of numbers. The main difference is in the approach used to generate the sequence, but the end result is the same.""
+}",81
+2016_0_1,160961,2015_0_2,108334,NON-CLONE,2026-07-04 20:42:09,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to generate a sequence of numbers based on certain conditions. In the first code snippet, it's generating a sequence of numbers based on the input 'num' and adding it to the 'al' list. In the second code snippet, it's generating a sequence of numbers based on the input 'D' and 'empties' arrays and calculating the minimum cost to generate the sequence. Although the approach and implementation are different, the underlying problem they are trying to solve is similar. They both involve generating",82
+2016_0_1,79433,2015_0_2,105985,NON-CLONE,2026-07-04 20:42:10,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the minimum number of seconds it takes for a sheep to fall asleep given a list of numbers. They use different approaches, but the end result is the same. The first code snippet uses a while loop to increment the number of seconds until the number of '1's in the current number is equal to the number of '1's in the final number, while the second code snippet uses a brute force approach to find the minimum number of seconds. Both code snippets achieve the same result,",83
+2016_0_4,44475,2014_2_1,130165,NON-CLONE,2026-07-04 20:42:11,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to find the minimum sum of absolute differences between the number of occurrences of each character in each string. They both use a similar approach to solve this problem, by first finding the minimum string and then calculating the sum of absolute differences for each character in the minimum string. The main difference is in the implementation details, but the overall logic and approach are similar.""
+}",84
+2016_0_4,44475,2016_2_1,180999,NON-CLONE,2026-07-04 20:42:11,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they need to replace certain characters in a string with numbers. They use a similar approach to achieve this, with the main difference being the implementation details. The first code snippet uses a more object-oriented approach, while the second code snippet uses a more procedural approach. However, the overall functionality of both code snippets is similar, and they can be considered functionally similar.""
+}",85
+2016_0_4,150104,2014_3_1,133240,NON-CLONE,2026-07-04 20:42:12,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the representation of a number in a certain base. They use different approaches, but the end result is the same. The first code snippet is solving the problem for a specific base (2^c), while the second code snippet is solving it for any base. However, the logic and the steps taken to solve the problem are similar. They both use the concept of greatest common divisor (GCD) and the properties of binary numbers to find the representation of the number in the desired base",86
+2016_1_1,15911,2016_2_1,179890,NON-CLONE,2026-07-04 20:42:13,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to convert a given string of digits into a string of numbers where each number is represented by its corresponding numeral (e.g., 'Z' becomes '0', 'T' becomes '2', etc.). The first code snippet uses a more efficient approach by iterating through the string and appending the corresponding numeral to the output string, while the second code snippet uses a more complex approach with multiple while loops and string replacements. However, both approaches achieve the same result, which is to convert the input string",87
+2016_1_1,15911,2016_2_1,203192,NON-CLONE,2026-07-04 20:42:14,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to read input strings and output the corresponding phone number. They use different approaches, but the end result is the same. The first code snippet uses a simple sorting approach, while the second code snippet uses a HashMap to count the occurrences of each character and then constructs the phone number based on the counts. Both approaches achieve the same result, making them functionally similar.""
+}",88
+2016_1_1,31319,2016_1_2,4423,NON-CLONE,2026-07-04 20:42:15,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the lexicographically smallest string that can be formed by rearranging the characters of a given string. They use different approaches, but the end result is the same. The first code snippet uses a simple sorting approach, while the second code snippet uses a more complex approach with a HashSet to keep track of the characters. However, the output of both code snippets is the same, which is the lexicographically smallest string.""
+}",89
+2016_1_2,33376,2013_0_2,134288,NON-CLONE,2026-07-04 20:42:16,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the smallest value in each row of a 2D array and check if all elements in that row are equal to the smallest value. If any row contains a value that is not equal to the smallest value, and there is a column that contains a value greater than the smallest value, the code prints 'NO'. Otherwise, it prints 'YES'. The code snippets use different approaches to solve this problem, but the overall functionality is the same.""
+}",90
+2016_1_2,33376,2016_0_4,51535,NON-CLONE,2026-07-04 20:42:17,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving a problem where they are given a range and a step size, and they need to find the numbers in the range that are not divisible by the step size. They are using a similar approach to solve this problem, with the main difference being the implementation details. The first code snippet is using a simple counting approach, while the second code snippet is using a recursive approach with a divide-and-conquer strategy. However, the overall goal and the logic behind the code are similar.""
+}",91
+2016_1_2,32339,2016_1_1,31319,NON-CLONE,2026-07-04 20:42:18,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to find the rank and file of a given set of numbers. The first code snippet is reading the input from the console, while the second code snippet is reading the input from a file. However, the logic of finding the rank and file is the same in both snippets. The first snippet is sorting the numbers in ascending order and then printing the rank and file, while the second snippet is sorting the numbers in ascending order and then printing the rank and file. The only difference is that the second",92
+2016_2_1,180999,2013_1_1,40857,NON-CLONE,2026-07-04 20:42:18,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to process a series of input strings and output the results. They both use a similar approach to process the input strings, replacing certain characters and counting the occurrences of others. The main difference is in the implementation details, but the overall functionality is the same.""
+}",93
+2016_2_1,180999,2016_0_1,79433,NON-CLONE,2026-07-04 20:42:19,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which is to count the number of sheep in a given string. They both read input from a file, process the string, and output the result to another file. The main difference is in the approach used to solve the problem, but the overall functionality is the same.""
+}",94
+2016_2_1,203192,2014_3_1,135747,NON-CLONE,2026-07-04 20:42:20,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be a solution to a problem where it takes a string input and outputs a phone number based on the given string. It uses a HashMap to count the occurrences of each character in the string and then uses this information to construct the phone number. Code Snippet 2, on the other hand, appears to be a solution to a problem where it takes two numbers as input and outputs the greatest power of 2 that divides the second number. It uses the",95

@@ -47,8 +47,8 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ## DeepSeek-Coder-V2-Lite-Instruct
 
-- [ ] **Original (BF16)** — `deepseek` · `deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct` · venv `deepseek_venv`
-- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF::DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf` · venv `gguf`
+- [x] **Original (BF16)** — `deepseek` · `deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct` · venv `deepseek_venv` — *Acc 0.8542, F1 0.8571, MCC 0.7089*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF::DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.8646, F1 0.8687, MCC 0.7306*
 
 ## Qwen2.5-Coder-7B-Instruct
 
@@ -66,4 +66,4 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ---
 
-**Progress: 15 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + Llama-4-Scout Original)
+**Progress: 17 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Llama-4-Scout Original)

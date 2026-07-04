@@ -5,6 +5,7 @@
 set -u
 cd /home/chaiyong.rag/quantization-clone-study
 source gguf/bin/activate
+mkdir -p logs
 
 REPO="QuantFactory/CodeLlama-7b-Instruct-hf-GGUF"
 DIR="results/CodeLlama-7b-Instruct-hf"
@@ -15,7 +16,7 @@ run() {  # $1=hf_file  $2=output_base  $3=logfile
     "${REPO}::$1" \
     --tests-dir ocd/tests \
     --output "$2" \
-    --rounds 5 2>&1 | tee -a "$3"
+    --rounds 5 2>&1 | tee -a "logs/$3"
   echo "[chain] $(date '+%Y-%m-%d %H:%M:%S') finished $1"
 }
 

@@ -5,6 +5,7 @@
 set -u
 cd /home/chaiyong.rag/quantization-clone-study
 source gguf/bin/activate
+mkdir -p logs
 
 echo "[chain] waiting for q2k (PID 897571) to exit..."
 while kill -0 897571 2>/dev/null; do sleep 30; done
@@ -14,7 +15,7 @@ CUDA_VISIBLE_DEVICES=7 python run_quantization.py qwen \
   "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf" \
   --tests-dir ocd/tests \
   --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q3km \
-  --rounds 5 2>&1 | tee -a run_qwen_q3km_5rounds.log
+  --rounds 5 2>&1 | tee -a logs/run_qwen_q3km_5rounds.log
 
 echo "[chain] q3km done at $(date '+%Y-%m-%d %H:%M:%S'); starting q4km"
 
@@ -22,6 +23,6 @@ CUDA_VISIBLE_DEVICES=7 python run_quantization.py qwen \
   "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf" \
   --tests-dir ocd/tests \
   --output results/Qwen2.5-Coder-7B-Instruct/results_qwen2.5_coder_7B_q4km \
-  --rounds 5 2>&1 | tee -a run_qwen_q4km_5rounds.log
+  --rounds 5 2>&1 | tee -a logs/run_qwen_q4km_5rounds.log
 
 echo "[chain] q4km done at $(date '+%Y-%m-%d %H:%M:%S'); Qwen GGUF sweep complete"

@@ -6,6 +6,7 @@
 set -u
 cd /home/chaiyong.rag/quantization-clone-study
 source gguf/bin/activate
+mkdir -p logs
 
 REPO="bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
 DIR="results/Meta-Llama-3.1-8B-Instruct"
@@ -16,7 +17,7 @@ run() {  # $1=hf_file  $2=output_base  $3=logfile
     "${REPO}::$1" \
     --tests-dir ocd/tests \
     --output "$2" \
-    --rounds 5 2>&1 | tee -a "$3"
+    --rounds 5 2>&1 | tee -a "logs/$3"
   echo "[chain] $(date '+%Y-%m-%d %H:%M:%S') finished $1"
 }
 

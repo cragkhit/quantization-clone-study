@@ -247,8 +247,12 @@ def evaluate_majority_vote(paths: list[str], unknown_as: str) -> list[dict | Non
             if fts and lts:
                 round_durations.append((lts - fts).total_seconds())
             for row in rows:
-                pair_key = (row["program_a"], row["variant_a"],
-                            row["program_b"], row["variant_b"])
+                # Prefer the explicit pair_id (--pairs-file runs) so duplicate
+                # (file1, file2) pairs stay distinct; fall back to the OCD
+                # program/variant 4-tuple when absent.
+                pair_key = row.get("pair_id") or (
+                    row["program_a"], row["variant_a"],
+                    row["program_b"], row["variant_b"])
                 gt = row["ground_truth"].strip().upper()
                 if gt in ("CLONE", "NON-CLONE"):
                     pair_truth[pair_key] = gt

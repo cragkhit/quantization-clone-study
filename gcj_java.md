@@ -40,10 +40,10 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ## CodeLlama-7b-Instruct-hf
 
-- [ ] **Original (BF16)** — `codellama` · `codellama/CodeLlama-7b-Instruct-hf` · venv `codellama_venv`
-- [ ] **GGUF Q2_K** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf` · venv `gguf`
-- [ ] **GGUF Q3_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf` · venv `gguf`
-- [ ] **GGUF Q4_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf` · venv `gguf`
+- [x] **Original (BF16)** — `codellama` · `codellama/CodeLlama-7b-Instruct-hf` · venv `codellama_venv` — *Acc 0.5393, F1 0.7007, MCC 0.0000 (degenerate: predicts all CLONE)*
+- [x] **GGUF Q2_K** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf` · venv `gguf` — *Acc 0.5000, F1 0.6667, MCC 0.0000 (degenerate: predicts all CLONE)*
+- [x] **GGUF Q3_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf` · venv `gguf` — *Acc 0.5109, F1 0.6763, MCC 0.0000 (degenerate: predicts all CLONE)*
+- [x] **GGUF Q4_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf` · venv `gguf` — *Acc 0.5000, F1 0.6667, MCC 0.0000 (degenerate: predicts all CLONE)*
 
 ## DeepSeek-Coder-V2-Lite-Instruct
 
@@ -66,4 +66,4 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ---
 
-**Progress: 11 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + Llama-4-Scout Original)
+**Progress: 15 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + Llama-4-Scout Original)

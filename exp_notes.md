@@ -754,3 +754,30 @@ Clone pairing (Type-4 / functional): two solutions are clones iff they share the
 same `(year, round, task)`. There are **20 distinct problems, each solved in all
 4 languages**, so a **cross-language** clone pair is any pair with the same
 `(year, round, task)` but different `lan`. Non-clones come from different problems.
+
+### Derived Java semantic-clone pair set (`gcj_java_clones/`)
+
+A small labeled Java-only clone-pair benchmark sampled from `gcj4.pkl`,
+produced by `prepare_gcj_clones.py` (reproducible, `SEED=42`):
+
+```bash
+python3 prepare_gcj_clones.py
+```
+
+Protocol:
+- Randomly sample **16 problems** (from those with >=3 Java submissions) and
+  **3 Java submissions each** -> **48 unique files**.
+- **True pairs (48)**: all within-problem submission pairs (C(3,2)=3 per problem
+  x 16), same language, `label=1`.
+- **False pairs (48)**: each true pair's first submission paired with a random
+  extracted submission from a *different* problem, same language, `label=0`.
+  Partners are drawn only from the 48 extracted files, so the file set stays 48.
+- Result: **96 pairs over 48 files** (balanced 48/48).
+
+Outputs:
+- `gcj_java_clones/files/<id>.java` — the 48 extracted source files.
+- `gcj_java_clones/pairs.csv` — `pair_id, label, lang, file1, file2, problem1, problem2`.
+- `gcj_java_clones/files_meta.csv` — `file_id, problem, lan, file, lines`.
+
+The generator asserts the invariants (48 unique files, 48/48 balance, all false
+pairs cross-problem, no false pair colliding with a true pair).

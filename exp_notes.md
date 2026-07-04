@@ -9,7 +9,8 @@ the sections below.
 
 | Venv | Python | Lock file | Used by |
 | --- | --- | --- | --- |
-| `aqlm_venv` | 3.9 | `requirements/aqlm_venv.lock.txt` | AQLM; older Llama-3.1-8B / Qwen / DeepSeek BF16 runs |
+| `aqlm_venv` | 3.9 | `requirements/aqlm_venv.lock.txt` | AQLM (round 1 only); older Llama-3.1-8B / Qwen / DeepSeek BF16 runs |
+| `aqlm_venv310` | 3.10 | `requirements/aqlm_venv310.lock.txt` | AQLM (rounds 2+); Python 3.10 rebuild of `aqlm_venv` so `run_quantization.py` imports |
 | `qtip_venv` | 3.10 | `requirements/qtip_venv.lock.txt` | QTIP (+ source-built CUDA kernel) |
 | `llama4_venv` | 3.10 | `requirements/llama4_venv.lock.txt` | Llama-4-Scout original |
 | `higgs_venv` | 3.10 | `requirements/higgs_venv.lock.txt` | HIGGS-GPTQ 3-bit / 4-bit |
@@ -489,10 +490,27 @@ CUDA_VISIBLE_DEVICES=7 CC=gcc-11 CXX=g++-11 \
 - **Base model:** [`meta-llama/Meta-Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
 
 ### Virtual Environment
-Uses `aqlm_venv` with PyTorch 2.5.1+cu121 and `aqlm[gpu]` 1.1.7.
+
+Round 1 was produced with `aqlm_venv` (Python 3.9). That venv can **no longer run**
+`run_quantization.py`: the module fails to import at load because
+`_PROMPT_TEMPLATE: str | None = None` uses the PEP 604 `X | None` union (Python 3.10+).
+
+Rounds 2+ therefore use **`aqlm_venv310` (Python 3.10)**, a rebuild of `aqlm_venv`'s
+exact package set on Python 3.10 (torch 2.8.0+cu128, transformers 4.57.6,
+accelerate 1.10.1, `aqlm` 1.1.7) so results stay consistent across rounds.
 
 ```bash
-source aqlm_venv/bin/activate
+# One-time setup (uv; system Python 3.10). Mirrors the venv-restore pattern above:
+# install cu128 torch first, then the rest of the lock file.
+uv venv aqlm_venv310 --python 3.10
+uv pip install --python aqlm_venv310/bin/python \
+  torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+uv pip install --python aqlm_venv310/bin/python -r requirements/aqlm_venv310.lock.txt
+```
+
+```bash
+# Run (the trailing integer is the number of rounds)
+source aqlm_venv310/bin/activate
 CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm \
   "ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf" \
   ocd/tests \

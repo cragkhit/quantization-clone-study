@@ -828,11 +828,18 @@ python run_quantization.py <backend> <hf_model> \
 ```
 
 The CSV needs columns `pair_id, label, file1, file2, problem1, problem2`
-(`label` 1=clone / 0=non-clone). Source is read from `--files-dir` (default:
-`files/` next to the CSV). A `pair_id` column was added to the result CSVs so
-each row's resume key is unique even if a `(file1, file2)` pair repeats; the
-OCD n×n mode is unchanged (empty `pair_id`, resume still keyed on the
-`program_a/variant_a/program_b/variant_b` 4-tuple).
+(`label` 1=clone / 0=non-clone), plus a language column — either a single `lang`
+(monolingual set) or `lang1`/`lang2` (cross-language set). Source is read from
+`--files-dir` (default: `files/` next to the CSV). A `pair_id` column was added
+to the result CSVs so each row's resume key is unique even if a `(file1, file2)`
+pair repeats; the OCD n×n mode is unchanged (empty `pair_id`, resume still keyed
+on the `program_a/variant_a/program_b/variant_b` 4-tuple).
+
+**Per-pair prompt language.** The prompt's `{lang}` field ("Compare the two
+{lang} code snippets") is filled per pair from the CSV: `lang` (or matching
+`lang1`/`lang2`) → e.g. `Java`; differing `lang1`/`lang2` → e.g.
+`Java and C++` (codes mapped java→Java, cpp→C++, py→Python, php→PHP). The OCD
+n×n mode still uses the single experiment-wide `--lang` (default `Java`).
 
 Results for the derived GCJ sets live under **`results_gcj_java/`** (kept
 separate from the OCD-based `results/`).

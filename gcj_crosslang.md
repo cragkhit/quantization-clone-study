@@ -1,0 +1,60 @@
+# GCJ Cross-Language Clone Experiments — Run Tracker
+
+Same 24-model set as the [GCJ Java tracker](gcj_java.md), now on the
+**cross-language** clone set (GCJ^CL).
+
+- **Dataset:** `gcj_crosslang_clones/pairs.csv` (384 pairs, 192 clone / 192 non-clone; true pairs are same-problem cross-language, false pairs are different-problem + different-language)
+- **Rounds:** 5 per run
+- **Results:** `results_gcj_crosslang/<Model>/...`
+- **Prompt language:** filled per pair from `lang1`/`lang2`, e.g. "Compare the two Java and C++ code snippets." (harness `--pairs-file` mode)
+- **Eval:** `python evaluate_results.py results_gcj_crosslang/<Model>/*.csv --mode majority-vote --output results_gcj_crosslang/evaluation_summary_gcj_crosslang.csv`
+
+Check a box once **all 5 rounds** for that run are complete. Runs are launched
+as per-family chains, one GPU each, in parallel:
+`chain_<family>_gcj_crosslang.sh` (metallama→GPU1, codellama→GPU2,
+deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
+
+---
+
+## Meta-Llama-3.1-8B-Instruct
+
+- [ ] **Original (BF16)** — `original` · `meta-llama/Meta-Llama-3.1-8B-Instruct` · venv `aqlm_venv310`
+- [ ] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q2_K.gguf` · venv `gguf`
+- [ ] **GGUF Q3_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q3_K_M.gguf` · venv `gguf`
+- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q4_K_M.gguf` · venv `gguf`
+- [ ] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310`
+- [ ] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv`
+- [ ] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv`
+- [ ] **QTIP 2-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-2Bit` · venv `qtip_venv`
+- [ ] **QTIP 3-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-3Bit` · venv `qtip_venv`
+- [ ] **QTIP 4-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit` · venv `qtip_venv`
+
+## CodeLlama-7b-Instruct-hf
+
+- [ ] **Original (BF16)** — `codellama` · `codellama/CodeLlama-7b-Instruct-hf` · venv `codellama_venv`
+- [ ] **GGUF Q2_K** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf` · venv `gguf`
+- [ ] **GGUF Q3_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf` · venv `gguf`
+- [ ] **GGUF Q4_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf` · venv `gguf`
+
+## DeepSeek-Coder-V2-Lite-Instruct
+
+- [ ] **Original (BF16)** — `deepseek` · `deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct` · venv `deepseek_venv`
+- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF::DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf` · venv `gguf`
+
+## Qwen2.5-Coder-7B-Instruct
+
+- [ ] **Original (BF16)** — `original` · `Qwen/Qwen2.5-Coder-7B-Instruct` · venv `aqlm_venv310`
+- [ ] **GGUF Q2_K** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf` · venv `gguf`
+- [ ] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf`
+- [ ] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf`
+
+## Llama-4-Scout-17B-16E-Instruct
+
+- [ ] **Original (BF16)** — `original` · `meta-llama/Llama-4-Scout-17B-16E-Instruct` · venv `llama4_venv` *(run separately; not in the scout_gguf chain)*
+- [ ] **GGUF Q2_K** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q2_K.gguf` · venv `gguf`
+- [ ] **GGUF Q3_K_S** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q3_K_S.gguf` · venv `gguf`
+- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q4_K_M-00001-of-00002.gguf` (split) · venv `gguf`
+
+---
+
+**Progress: 0 / 24 runs complete.**

@@ -52,10 +52,10 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ## Qwen2.5-Coder-7B-Instruct
 
-- [ ] **Original (BF16)** — `original` · `Qwen/Qwen2.5-Coder-7B-Instruct` · venv `aqlm_venv310`
-- [ ] **GGUF Q2_K** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf` · venv `gguf`
-- [ ] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf`
-- [ ] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf`
+- [x] **Original (BF16)** — `original` · `Qwen/Qwen2.5-Coder-7B-Instruct` · venv `aqlm_venv310` — *Acc 0.8021, F1 0.7532, MCC 0.6579 (precision 1.0)*
+- [x] **GGUF Q2_K** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf` · venv `gguf` — *Acc 0.8958, F1 0.8837, MCC 0.8094 (best Qwen)*
+- [x] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf` — *Acc 0.7917, F1 0.7368, MCC 0.6417*
+- [x] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf` — *Acc 0.8333, F1 0.8000, MCC 0.7071*
 
 ## Llama-4-Scout-17B-16E-Instruct
 
@@ -66,4 +66,4 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ---
 
-**Progress: 17 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Llama-4-Scout Original)
+**Progress: 21 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout Original)

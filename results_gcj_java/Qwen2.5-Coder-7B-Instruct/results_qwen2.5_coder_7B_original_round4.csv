@@ -1,0 +1,558 @@
+program_a,variant_a,program_b,variant_b,ground_truth,timestamp,response,pair_id
+2013_0_1,103399,2013_0_1,49244,CLONE,2026-07-05 09:29:36,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a similar problem: determining the winner of a tic-tac-toe game on a 4x4 board. They both read input from a file, parse the board state, and determine the game's outcome based on rows, columns, diagonals, and empty spaces.""
+}
+```",0
+2013_0_1,103399,2013_0_1,126886,CLONE,2026-07-05 09:29:37,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to analyze a tic-tac-toe board for a win condition involving the character 'T'. They both read input from a file, process each board, and output the result based on whether 'X' or 'O' wins, or if the game is incomplete.""
+}
+```",1
+2013_0_1,49244,2013_0_1,126886,CLONE,2026-07-05 09:29:39,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be implementing a game logic for a 4x4 game where 'X', 'O', 'T', and '.' represent different states, and it checks for a winner or draw. Code Snippet 2 seems to be solving a different problem, possibly related to a 4x4 grid but does not provide enough context to confirm its exact functionality. Therefore, based on the given information, they are not similar.""
+}
+```",2
+2013_0_2,84557,2013_0_2,134288,CLONE,2026-07-05 09:29:40,"```json
+{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are designed to solve the problem of determining if a given lawn can be cut such that all rows and columns contain only the smallest value in their respective row or column. They both read input, process the lawn data, and output whether the lawn can be cut according to the rules. While there are differences in syntax and some minor implementation details, the core functionality and logic are the same.""
+}
+```",3
+2013_0_2,84557,2013_0_2,57926,CLONE,2026-07-05 09:29:42,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the problem of determining whether each cell in a grid represents a position from which a lawnmower can cut all surrounding grass. They both read input data, process it to check for each cell's ability to cut its neighbors in all directions (rows and columns), and output the results accordingly.""
+}
+```",4
+2013_0_2,134288,2013_0_2,57926,CLONE,2026-07-05 09:29:43,"```json
+{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets appear to implement a solution for determining if there exists at least one element in each row and column of a given matrix that is smaller than all other elements in its respective row and column. They both read input from a file, process the data, and output whether such an element exists.""
+}
+```",5
+2013_0_3,61623,2013_0_3,51052,CLONE,2026-07-05 09:29:44,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same algorithm to find the count of fair and square numbers within a given range. They both generate palindromic numbers and then check if their squares are also palindromic. The logic and functionality are essentially the same, despite differences in variable names, data structures, and some implementation details.""
+}
+```",6
+2013_0_3,61623,2013_0_3,90494,CLONE,2026-07-05 09:29:45,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding fair and square numbers within a given range, while Code Snippet 2 contains functions for calculating square roots using Newton's method and counting numbers up to a given number. The functionality and purpose of these two code snippets are different.""
+}
+```",7
+2013_0_3,51052,2013_0_3,90494,CLONE,2026-07-05 09:29:46,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written for different tasks. Code Snippet 1 appears to be solving a problem related to finding fair and square numbers within a given range, while Code Snippet 2 seems to be counting palindromic numbers up to a certain value using combinatorial methods. They use different algorithms and data structures, and solve fundamentally different problems.""
+}
+```",8
+2013_1_1,33468,2013_1_1,40857,CLONE,2026-07-05 09:29:48,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 calculates the square root of a number using a binary search approach, while Code Snippet 2 appears to calculate a different mathematical expression involving cube roots and arithmetic operations. The algorithms and the variables used are significantly different.""
+}
+```",9
+2013_1_1,33468,2013_1_1,38253,CLONE,2026-07-05 09:29:49,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to have different functionalities despite similarities in structure. Code Snippet 1 calculates the square root using a binary search approach for a given number, then uses this value in further calculations. Code Snippet 2 also uses a binary search approach but seems to be calculating something entirely different, possibly related to finding a specific mathematical relationship between input values.""
+}
+```",10
+2013_1_1,40857,2013_1_1,38253,CLONE,2026-07-05 09:29:50,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a problem involving binary search on large integers. They both read input values for `n` and then process each case using a binary search approach to find a value `m` that satisfies a certain condition related to the inputs `r` and `t`. The logic and variables used in both snippets are essentially the same, despite differences in variable names and some minor syntactical variations.""
+}
+```",11
+2014_2_1,128224,2014_2_1,130165,CLONE,2026-07-05 09:29:52,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to solve a problem related to processing strings and calculating operations based on character counts and differences. They both read input from a file, process multiple test cases, and write results to an output file. The core logic involves checking if all strings can be reduced to the same format and then calculating the minimum number of operations required to make them identical.""
+}
+```",12
+2014_2_1,128224,2014_2_1,120720,CLONE,2026-07-05 09:29:53,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to solve the same problem, which involves processing multiple test cases where each case consists of a sequence of strings. The goal is to determine if all strings can be transformed into a single string by removing duplicates, and if so, calculate the minimum number of operations required for this transformation.""
+}
+```",13
+2014_2_1,130165,2014_2_1,120720,CLONE,2026-07-05 09:29:54,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to solve the same problem, which involves processing multiple test cases where each case consists of a list of strings. The goal is to determine if all strings can be transformed into a single string by removing duplicate characters and then calculate the minimum number of operations required to make all strings equal. Both snippets use a similar approach to achieve this, including identifying the minimum unique string, counting character occurrences, and calculating the minimum operations needed.""
+}
+```",14
+2014_3_1,135747,2014_3_1,140695,CLONE,2026-07-05 09:29:55,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. While both handle input from standard input and perform some mathematical operations related to fractions and logarithms, the specific algorithms and logic used are different.""
+}
+```",15
+2014_3_1,135747,2014_3_1,133240,CLONE,2026-07-05 09:29:57,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be solving the same problem, which involves processing input data, performing calculations related to fractions, and determining certain properties of those fractions. They both use the greatest common divisor (GCD) to simplify fractions and then check conditions based on the simplified fraction's denominator and numerator. The overall logic and purpose of both programs seem to align, despite differences in implementation details such as variable names, method signatures, and the use of `BigInteger` versus primitive types.""
+}
+```",16
+2014_3_1,140695,2014_3_1,133240,CLONE,2026-07-05 09:29:58,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads input from standard input, processes it, and prints the result based on some mathematical operations. Code Snippet 2 reads input from a file, processes it using different mathematical operations including GCD and power calculations, and writes the result to another file. While both snippets involve reading input, processing it, and printing/writing results, the specific algorithms and data structures used are different.""
+}
+```",17
+2015_0_1,62292,2015_0_1,91911,CLONE,2026-07-05 09:30:00,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be solving a problem related to processing a string representing a spectrum and calculating the number of additional people needed at certain points based on the values in the string. They both use loops to iterate through the input data, calculate the necessary additions, and print the results in the format 'Case #x: y'. The core logic and functionality are similar despite differences in variable names, file handling methods, and some method implementations.""
+}
+```",18
+2015_0_1,62292,2015_0_1,62229,CLONE,2026-07-05 09:30:01,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to solve a problem where given a string representing a spectrum and a maximum number of steps (Smax), the goal is to calculate the minimum number of additional steps required to reach each position in the spectrum from the starting position. The first snippet uses BufferedReader for reading input and PrintWriter for writing output, while the second snippet uses FileReader and FileWriter. Despite the differences in file handling methods and some variable names, both snippets iterate through the spectrum string, calculate the required steps to move forward, and write the results to an output",19
+2015_0_1,91911,2015_0_1,62229,CLONE,2026-07-05 09:30:03,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a problem where given a string representing a sequence of numbers, the goal is to calculate the minimum number of extra people needed to ensure that at every position in the string, the cumulative sum of the digits up to that position is greater than or equal to the position index. The logic in both snippets iterates through the string, calculates the cumulative sum, and adjusts for positions where the current sum is less than the required value.""
+}
+```",20
+2015_0_2,107903,2015_0_2,105985,CLONE,2026-07-05 09:30:05,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 seems to be related to Code Jam and involves reading input from a file, processing data, and writing output to another file. It appears to be calculating the minimum number of operations needed to make all elements in an array divisible by a given number. Code Snippet 2 also seems to be related to Code Jam but appears to be solving a different problem. It reads input from a file, processes data, and writes output to another file. The",21
+2015_0_2,107903,2015_0_2,108334,CLONE,2026-07-05 09:30:06,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a problem related to distributing numbers into groups such that each group has at most a certain number of elements. They both read input from a file, process the data, and write the results to another file. The core logic involves finding the minimum cost to distribute the numbers under the given constraints.""
+}
+```",22
+2015_0_2,105985,2015_0_2,108334,CLONE,2026-07-05 09:30:07,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to solve different problems based on their functionality and implementation details. Code Snippet 1 seems to solve a problem related to calculating the minimum number of operations required to make an array of integers equal by performing division operations, while Code Snippet 2 appears to solve a problem related to distributing items into bins with a given capacity and minimizing the number of bins used.""
+}
+```",23
+2015_0_3,68460,2015_0_3,69655,CLONE,2026-07-05 09:30:09,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement a solution to a problem involving complex numbers represented as characters ('1', 'i', 'j', 'k') and their multiplication rules defined in a matrix. They both read input from a file, process the data according to specific rules, and write the output to another file. The core logic, including the use of matrices for multiplication and the checking for specific sequences ('I', 'J', 'K'), is consistent between the two snippets.""
+}
+```",24
+2015_0_3,68460,2015_0_3,83332,CLONE,2026-07-05 09:30:10,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be solving the same problem related to a mathematical operation on a sequence of characters ('i', 'j', 'k') and determining if a certain condition is met based on the product of these operations. They both use similar logic for mapping characters to values, performing multiplications, and checking conditions.""
+}
+```",25
+2015_0_3,69655,2015_0_3,83332,CLONE,2026-07-05 09:30:11,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be from different programs. Code Snippet 1 seems to implement Dijkstra's algorithm, while Code Snippet 2 appears to handle input/output operations for solving problem C on Google Hash Code. They have different purposes and logic.""
+}
+```",26
+2015_0_4,98778,2015_0_4,66992,CLONE,2026-07-05 09:30:12,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to determining if Richard or Gabriel can win a game based on given parameters, while Code Snippet 2 seems to be reading from files and parsing different types of data. They have different functionalities and structures.""
+}
+```",27
+2015_0_4,98778,2015_0_4,90431,CLONE,2026-07-05 09:30:14,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is part of a solution for a Code Jam problem where it reads input from a file named 'in.txt', processes the data, and writes output to 'out.txt'. It uses a custom `InputReader` class to read integers and a `Solver` class to determine the outcome based on the input values. Code Snippet 2 appears to be a standalone solution for a different problem, possibly related to a Code Jam or similar competition, but it",28
+2015_0_4,66992,2015_0_4,90431,CLONE,2026-07-05 09:30:16,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be a utility class for reading files and converting their contents into various data types. It includes methods for reading lines, integers, longs, floats, and more from a file. Code Snippet 2, on the other hand, is a simple program that reads input from a file named 'problemD-large.in', processes it according to certain rules, and writes the results to a file named 'problemD'. The functionality of these two",29
+2015_1_1,121210,2015_1_1,112152,CLONE,2026-07-05 09:30:17,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to be solving a problem related to calculating values based on an array of integers. They both iterate through the array to calculate two different results, which are then printed as output. The logic and structure of the calculations performed in both snippets are very similar.""
+}
+```",30
+2015_1_1,121210,2015_1_1,123066,CLONE,2026-07-05 09:30:18,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are solving the same problem, which involves processing input data and calculating two sums based on the differences between consecutive elements in an array. They both handle multiple test cases, read input from files, and write output to files. While there are some differences in the implementation details such as the use of classes, methods, and libraries, the core functionality remains the same.""
+}
+```",31
+2015_1_1,112152,2015_1_1,123066,CLONE,2026-07-05 09:30:19,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a problem related to analyzing an array of integers and calculating two sums based on certain conditions. They both read input from a file named 'A-large.in', process the data to calculate the differences between consecutive elements, and then compute two different sums based on these differences and the maximum difference found. The results are printed and saved to an output file.""
+}
+```",32
+2016_0_1,160961,2016_0_1,79433,CLONE,2026-07-05 09:30:21,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads input from standard input and processes numbers to find the smallest number whose digits include all ten digits from 0 to 9. It then prints the results. Code Snippet 2 reads input from a file, processes numbers similarly, but formats the output as 'Case #X: Y', where X is the case number and Y is the result. The primary differences are in the input/output handling, formatting, and the use of file operations.""
+",33
+2016_0_1,160961,2016_0_1,50763,CLONE,2026-07-05 09:30:22,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the problem of finding the smallest number greater than or equal to a given number that contains all ten digits at least once. They use different data structures and variable names, but the core logic and algorithm remain the same.""
+}
+```",34
+2016_0_1,79433,2016_0_1,50763,CLONE,2026-07-05 09:30:23,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to solve the problem of determining the smallest number that contains all ten digits at least once when multiplied by a given integer. They both use loops and sets to track the digits encountered. However, there are some differences in implementation details such as file handling, input/output methods, and variable types.""
+}
+```",35
+2016_0_4,44475,2016_0_4,150104,CLONE,2026-07-05 09:30:24,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads input from a file and processes it according to the problem constraints, writing the results to another file. Code Snippet 2 reads input from standard input and prints the results directly to the console. They have different structures, use different libraries, and handle input/output differently.""
+}
+```",36
+2016_0_4,44475,2016_0_4,51535,CLONE,2026-07-05 09:30:26,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to implement different algorithms for solving a problem related to fractiles. Code Snippet 1 uses a random approach to generate tile positions, while Code Snippet 2 uses a depth-first search (DFS) algorithm to calculate positions based on mathematical calculations. The overall functionality and implementation details differ significantly.""
+}
+```",37
+2016_0_4,150104,2016_0_4,51535,CLONE,2026-07-05 09:30:27,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets appear to implement a solution for calculating fractile values based on given inputs. They both handle cases where the calculation is impossible and provide valid results otherwise. The logic and flow of both programs seem to be equivalent, despite differences in variable names, data types, and some implementation details.""
+}
+```",38
+2016_1_1,15911,2016_1_1,31319,CLONE,2026-07-05 09:30:28,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to read input from a file, process each line to rearrange characters in a specific order, and print the results. They both iterate through the characters of the input string, compare them with the current output, and insert them in the correct position to form a non-decreasing sequence. The logic and the final output of both snippets will be identical given the same input.""
+}
+```",39
+2016_1_1,15911,2016_1_1,14479,CLONE,2026-07-05 09:30:30,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a simple solution for a problem where it reads multiple test cases from a file, processes each case by rearranging characters in a specific order, and outputs the results. Code Snippet 2 is a more complex solution that handles file I/O, uses a custom `FastScanner` class for efficient reading, and includes additional logic for solving the problem. While both snippets solve a similar problem, the implementation details and structures are significantly different.""
+}
+```",40
+2016_1_1,31319,2016_1_1,14479,CLONE,2026-07-05 09:30:31,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads input from a file named 'text', processes each line to sort characters in a specific order, and prints the sorted string with case number. Code Snippet 2, on the other hand, appears to be part of a larger program designed to read multiple input files matching a certain pattern, process them using a custom `TaskA` class, and write output to 'a.out'. The functionality and purpose of the two snippets are different.""
+}
+",41
+2016_1_2,33376,2016_1_2,32339,CLONE,2026-07-05 09:30:33,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the same problem, which is to find and print the odd occurring numbers from a series of inputs for multiple test cases. They both use a similar approach to count occurrences of numbers and then filter out the odd ones. The differences in variable names, comments, and some minor structural changes do not affect the functionality.""
+}
+```",42
+2016_1_2,33376,2016_1_2,4423,CLONE,2026-07-05 09:30:34,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems based on their functionality. Code Snippet 1 reads from standard input, processes a series of test cases where each case consists of a number N followed by N*(2*N-1) integers, and prints out the odd numbers encountered. Code Snippet 2 also reads from standard input but appears to process a list of strings, tracking the presence of elements and outputting the sorted unique elements. Therefore, they are not functionally similar.""
+}
+```",43
+2016_1_2,32339,2016_1_2,4423,CLONE,2026-07-05 09:30:35,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 seems to solve a problem related to finding the most frequent odd numbers in a series of inputs, while Code Snippet 2 appears to solve a problem involving tracking unique items across multiple lines of input and outputting them sorted.""
+}
+```",44
+2016_2_1,180999,2016_2_1,203192,CLONE,2026-07-05 09:30:37,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads from a file named 'input.in' and processes each line to convert letters into digits according to specific rules, then writes the results to 'output.out'. Code Snippet 2 uses a `JFileChooser` to open a file, reads the number of test cases, and then attempts to process each test case by counting occurrences of certain characters and converting them into digits. However, the logic and character mappings are different between the two snippets.""
+}
+",45
+2016_2_1,180999,2016_2_1,179890,CLONE,2026-07-05 09:30:38,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a problem related to converting letters into digits based on certain rules. They both read input from a file, process the data according to predefined mappings, sort the results, and then write the output to a file. The core logic and steps involved in processing the input string are very similar, despite differences in variable names, comments, and some minor structural variations.""
+}
+```",46
+2016_2_1,203192,2016_2_1,179890,CLONE,2026-07-05 09:30:40,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are designed to solve a problem where given a string representing a number written in words, the program converts it into its numeric form. They both use a similar approach by iterating through the characters of the input string and replacing them with their corresponding digits based on the presence of specific letters. The resulting digits are then sorted and concatenated to form the final numeric representation.""
+}
+```",47
+2013_0_1,103399,2013_0_3,90494,NON-CLONE,2026-07-05 09:30:42,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to determining the winner of a tic-tac-toe game based on a given board configuration. It reads input from a file, processes each board, checks for win conditions (horizontal, vertical, diagonal), and outputs the results. Code Snippet 2, on the other hand, seems to be calculating the number of palindromic numbers up to a certain limit using dynamic programming and combinatorial mathematics.",48
+2013_0_1,103399,2015_0_4,98778,NON-CLONE,2026-07-05 09:30:43,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets appear to be written for different purposes and contain entirely different logic. Code Snippet 1 appears to be solving a problem related to a game board (likely Tic-Tac-Toe), while Code Snippet 2 seems to be solving a problem from Google Code Jam related to determining the winner of a game based on input dimensions.""
+}
+```",49
+2013_0_1,49244,2013_1_1,33468,NON-CLONE,2026-07-05 09:30:44,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is a game logic implementation for tic-tac-toe, while Code Snippet 2 calculates the square root using the Babylonian method. They have completely different functionalities and purposes.""
+}
+```",50
+2013_0_2,84557,2015_0_3,69655,NON-CLONE,2026-07-05 09:30:45,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to solve a problem related to determining if a lawn can be cut based on its height distribution, while Code Snippet 2 seems to implement Dijkstra's algorithm for finding the shortest path in a graph. They have different logic, inputs, and outputs.""
+}
+```",51
+2013_0_2,84557,2015_0_3,69655,NON-CLONE,2026-07-05 09:30:46,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to determining if a lawn can be cut based on its height differences. Code Snippet 2, on the other hand, seems to implement Dijkstra's algorithm for finding the shortest path in a graph, which is entirely different from the lawn-cutting problem.""
+}
+```",52
+2013_0_2,134288,2016_1_1,14479,NON-CLONE,2026-07-05 09:30:48,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads input from a file named 'input.in', processes a 2D array, and checks if there exists a row where all elements are equal to the minimum element in that row. It then prints 'YES' if such a row exists, otherwise 'NO'. Code Snippet 2 also reads input from files but does not process a 2D array. Instead, it solves a problem related to finding the maximum character in a string and constructing",53
+2013_0_3,61623,2015_0_1,91911,NON-CLONE,2026-07-05 09:30:49,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 is designed to find the number of fair squares within a given range, while Code Snippet 2 is designed to solve a problem related to counting people based on a string input. They have different functionalities and structures.""
+}
+```",54
+2013_0_3,61623,2013_0_1,126886,NON-CLONE,2026-07-05 09:30:50,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written for different problems and have completely different functionalities. Code Snippet 1 is designed to find and count fair and square numbers within a given range, while Code Snippet 2 is designed to determine the winner of a game of Tic-Tac-Toe with Tomek's rule applied.""
+}
+```",55
+2013_0_3,51052,2015_1_1,123066,NON-CLONE,2026-07-05 09:30:51,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding fair and square numbers within a given range, while Code Snippet 2 seems to be solving a different problem involving array manipulation and calculating sums and differences.""
+}
+```",56
+2013_1_1,33468,2016_0_4,150104,NON-CLONE,2026-07-05 09:30:53,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to calculating square roots using the Newton-Raphson method and processing input from a file to produce output. On the other hand, Code Snippet 2 seems to be handling a different problem involving fractiles and reading input from standard input. The logic and operations performed in each snippet are distinct.""
+}
+```",57
+2013_1_1,33468,2013_0_3,51052,NON-CLONE,2026-07-05 09:30:54,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be unrelated. Code Snippet 1 calculates the square root of a large integer using the Newton-Raphson method, reads input from a file, performs calculations, and writes output to another file. Code Snippet 2 generates fair and square numbers within a given range and counts them. They have different functionalities and purposes.""
+}
+```",58
+2013_1_1,40857,2015_0_4,98778,NON-CLONE,2026-07-05 09:30:56,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding a specific value using binary search and some mathematical operations. Code Snippet 2, on the other hand, seems to be solving a different problem from Code Snippet 1. It reads input from a file, processes it, and writes output to another file based on certain conditions related to integers. There is no direct comparison between the functionalities of these two code snippets.""
+}
+```",59
+2014_2_1,128224,2013_0_2,57926,NON-CLONE,2026-07-05 09:30:57,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 seems to be related to string processing and operations on arrays, while Code Snippet 2 appears to be solving a problem involving finding local maxima in a 2D array.""
+}
+```",60
+2014_2_1,128224,2016_0_4,51535,NON-CLONE,2026-07-05 09:30:58,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to string processing and optimization, while Code Snippet 2 seems to be dealing with a different type of problem involving recursion and mathematical calculations.""
+}
+```",61
+2014_2_1,130165,2015_0_2,107903,NON-CLONE,2026-07-05 09:30:59,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding the minimum number of operations to make all strings in an array equal by considering character repetitions. On the other hand, Code Snippet 2 seems to be solving a different problem, possibly related to distributing numbers into groups such that the sum of the maximum elements in each group is minimized.""
+}
+```",62
+2014_3_1,135747,2016_1_2,32339,NON-CLONE,2026-07-05 09:31:00,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets appear to be solving different problems. The first snippet seems to be solving a problem related to processing input strings and calculating a result based on the greatest common divisor (GCD), while the second snippet appears to be solving a problem related to finding unique numbers from a sequence and sorting them.""
+}
+```",63
+2014_3_1,135747,2016_1_2,33376,NON-CLONE,2026-07-05 09:31:02,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding the smallest power of 2 greater than or equal to a given ratio P/Q after simplifying the fraction. Code Snippet 2, on the other hand, reads multiple test cases from input, where each test case consists of an integer N followed by N*(2*N-1) integers. It then counts the occurrences of each number and prints out all numbers that appear an odd number of times in",64
+2014_3_1,140695,2015_0_3,83332,NON-CLONE,2026-07-05 09:31:03,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to calculating powers of numbers and checking conditions based on those calculations. On the other hand, Code Snippet 2 seems to be part of a larger program that handles file I/O and solves a different problem, likely involving string manipulation and pattern matching.""
+}
+```",65
+2015_0_1,62292,2016_1_1,15911,NON-CLONE,2026-07-05 09:31:05,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to processing a string representing a spectrum and calculating the number of additions needed to reach certain points based on the values in the string. Code Snippet 2, however, seems to be solving a different problem where it reads a series of strings and rearranges them according to a specific rule. They use different data structures, algorithms, and file handling methods, making their functions distinctly different.""
+}
+```",66
+2015_0_1,62292,2014_2_1,128224,NON-CLONE,2026-07-05 09:31:06,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems based on their functionality. Code Snippet 1 reads a spectrum string and calculates the number of operations needed to reach a certain standing, while Code Snippet 2 deals with parsing multiple strings and determining if they can be transformed into a common sequence with a minimum number of operations.""
+}
+```",67
+2015_0_1,91911,2013_0_2,134288,NON-CLONE,2026-07-05 09:31:08,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads input from the standard input, processes a series of test cases where each case involves a string representing numbers and calculates the number of people needed to reach certain positions based on these numbers. It then prints the result for each test case. On the other hand, Code Snippet 2 also reads input from the standard input but processes a different problem where it checks if there exists a column in a grid such that all elements in that column are equal to",68
+2015_0_2,107903,2013_0_1,126886,NON-CLONE,2026-07-05 09:31:09,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written for different purposes and are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding the minimum number of partitions needed for an array based on its maximum value, while Code Snippet 2 seems to be implementing a game logic for Tic Tac Toe with a special character 'T'. They have completely different functionalities and structures.""
+}
+```",69
+2015_0_2,107903,2016_2_1,180999,NON-CLONE,2026-07-05 09:31:10,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding the minimum number of operations to make an array non-decreasing, while Code Snippet 2 seems to be solving a different problem involving counting digits in a string.""
+}
+```",70
+2015_0_2,105985,2014_2_1,120720,NON-CLONE,2026-07-05 09:31:11,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 seems to be solving a problem related to calculating the minimum number of operations needed to balance arrays based on given constraints. Code Snippet 2 appears to be solving a problem related to counting characters and determining the minimum operations required to make all character counts equal. The tasks and algorithms used in both snippets are distinctly different.""
+}
+```",71
+2015_0_3,68460,2015_0_1,62292,NON-CLONE,2026-07-05 09:31:13,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be unrelated. Code Snippet 1 appears to implement Dijkstra's algorithm for graph traversal, while Code Snippet 2 seems to process input from a file to calculate some value based on a spectrum string. There is no apparent functional similarity between the two.""
+}
+```",72
+2015_0_3,68460,2013_0_2,57926,NON-CLONE,2026-07-05 09:31:14,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 appears to implement Dijkstra's algorithm for a specific mathematical problem involving complex numbers and modular arithmetic. Code Snippet 2 appears to implement a solution for determining if there exists a path in a grid where each cell has a height value, such that no cell is taller than all cells in its row and column. Therefore, the code snippets are not functionally similar.""
+}
+```",73
+2015_0_3,69655,2014_2_1,120720,NON-CLONE,2026-07-05 09:31:15,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written for different purposes. Code Snippet 1 appears to implement Dijkstra's algorithm for graph traversal, while Code Snippet 2 seems to be related to string processing and character counting. They have no apparent functional similarity.""
+}
+```",74
+2015_0_4,98778,2013_0_3,61623,NON-CLONE,2026-07-05 09:31:17,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to determining if a game scenario results in a win for player 'Richard' or 'Gabriel'. It reads input from a file, processes it according to certain rules based on the values of x, r, and c, and writes the output to another file. On the other hand, Code Snippet 2 seems to be generating and counting fair and square numbers within a given range. It reads input from standard",75
+2015_0_4,98778,2015_0_3,68460,NON-CLONE,2026-07-05 09:31:18,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to determining if Richard or Gabriel can win a game based on given parameters, while Code Snippet 2 seems to be implementing a solution for a different problem involving complex number multiplication and array manipulation.""
+}
+```",76
+2015_0_4,66992,2014_3_1,133240,NON-CLONE,2026-07-05 09:31:20,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be a utility class for reading and processing files, including converting lines into integers, strings, and handling different data types. Code Snippet 2, on the other hand, is a simple program that reads input from a file, processes it using the greatest common divisor (GCD) and power functions, and writes output to another file. They serve completely different purposes and have no functional overlap.""
+}
+```",77
+2015_1_1,121210,2015_0_4,90431,NON-CLONE,2026-07-05 09:31:21,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to calculating differences between elements in an array and generating output based on those calculations. Code Snippet 2, on the other hand, seems to be implementing a game logic where players take turns placing stones on a grid, and the outcome depends on the dimensions of the grid and the number of stones placed. These tasks are fundamentally different.""
+}
+```",78
+2015_1_1,121210,2016_1_2,32339,NON-CLONE,2026-07-05 09:31:22,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. The first snippet seems to be related to calculating the sum of maximum differences between consecutive elements in an array and the sum of minimum values adjusted by the maximum difference, while the second snippet appears to be sorting and outputting unique integers from input based on their frequency.""
+}
+```",79
+2015_1_1,112152,2015_0_2,108334,NON-CLONE,2026-07-05 09:31:24,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems based on their logic and implementation details. The first snippet seems to be dealing with calculating costs related to plate values, while the second snippet appears to be solving a problem involving slices and limits. Therefore, they are not functionally similar.""
+}
+```",80
+2016_0_1,160961,2013_1_1,40857,NON-CLONE,2026-07-05 09:31:25,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written in different languages and serve different purposes. Code Snippet 1 is a Java program that reads input from the user, processes it according to specific rules, and outputs results. Code Snippet 2 is also a Java program, but it appears to implement a binary search algorithm to find a solution to a mathematical problem involving Big Integers. Therefore, they are not functionally similar.""
+}
+```",81
+2016_0_1,160961,2015_0_2,108334,NON-CLONE,2026-07-05 09:31:26,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written for different tasks. Code Snippet 1 appears to generate numbers based on certain rules related to digit uniqueness, while Code Snippet 2 seems to solve a problem related to minimizing costs associated with slicing integers into unique parts. Therefore, they are not functionally similar.""
+}
+```",82
+2016_0_1,79433,2015_0_2,105985,NON-CLONE,2026-07-05 09:31:28,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are written in different packages and have different purposes. Code Snippet 1 appears to be solving a problem related to counting sheep and generating the smallest number that contains all digits from 0 to 9 at least once when multiplied by a given integer. Code Snippet 2 seems to be solving a problem where it calculates the minimum number of nights a person needs to stay at a hotel based on the number of days each hotel offers discounts. Therefore, they are not functionally similar.""
+}
+```",83
+2016_0_4,44475,2014_2_1,130165,NON-CLONE,2026-07-05 09:31:29,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be written for different problems and have significantly different functionalities. Code Snippet 1 seems to be solving a problem related to finding fractiles in a large dataset, while Code Snippet 2 appears to be solving a problem related to comparing strings and calculating the minimum difference between their character counts. Therefore, they are not functionally similar.""
+}
+```",84
+2016_0_4,44475,2016_2_1,180999,NON-CLONE,2026-07-05 09:31:30,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to finding fractiles, while Code Snippet 2 seems to be processing strings and replacing certain characters with digits.""
+}
+```",85
+2016_0_4,150104,2014_3_1,133240,NON-CLONE,2026-07-05 09:31:31,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to fractiles, while Code Snippet 2 seems to be dealing with fraction simplification and calculation of binary representation length.""
+}
+```",86
+2016_1_1,15911,2016_2_1,179890,NON-CLONE,2026-07-05 09:31:32,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to rearranging characters in a string, while Code Snippet 2 seems to be converting a string representing digits into actual numbers by replacing letters with their corresponding digits.""
+}
+```",87
+2016_1_1,15911,2016_2_1,203192,NON-CLONE,2026-07-05 09:31:34,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 reads a series of strings from a file and rearranges them lexicographically. Code Snippet 2 reads a string from a file and attempts to decode it as a phone number based on the frequency of letters in English words. Therefore, they are not functionally similar.""
+}
+```",88
+2016_1_1,31319,2016_1_2,4423,NON-CLONE,2026-07-05 09:31:35,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads characters from a file, sorts them lexicographically, and prints the sorted string. Code Snippet 2 processes lines from a file, tracks unique elements using a set, and outputs the sorted list of these unique elements. While both involve reading from files and processing strings, their specific tasks and operations differ.""
+}
+```",89
+2016_1_2,33376,2013_0_2,134288,NON-CLONE,2026-07-05 09:31:36,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 reads integers from input, counts their occurrences, and prints odd-counted numbers. Code Snippet 2 reads a grid of integers, checks if each row contains only the minimum value, and prints 'YES' if all rows meet this condition, otherwise 'NO'. The tasks performed by the two snippets are different.""
+}
+```",90
+2016_1_2,33376,2016_0_4,51535,NON-CLONE,2026-07-05 09:31:38,"```json
+{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to counting occurrences of numbers and printing odd ones. Code Snippet 2 seems to be dealing with a different problem involving recursive depth-first search (DFS) on a fractal-like structure. They use different algorithms and data structures, and solve distinct problems.""
+}
+```",91
+2016_1_2,32339,2016_1_1,31319,NON-CLONE,2026-07-05 09:31:39,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to be solving different problems. Code Snippet 1 is designed to solve a problem related to finding unique odd numbers from a sequence of integers, while Code Snippet 2 seems to be solving a problem involving rearranging characters in a string based on their ASCII values.""
+}
+```",92
+2016_2_1,180999,2013_1_1,40857,NON-CLONE,2026-07-05 09:31:40,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are written in different languages (Java vs. Java) and have completely different functionalities. Code Snippet 1 reads numbers from a file, replaces certain characters with digits, and writes the result back to a file. Code Snippet 2 reads two integers from standard input, performs a complex mathematical calculation using these integers, and prints the result. They are not functionally similar.""
+}
+```",93
+2016_2_1,180999,2016_0_1,79433,NON-CLONE,2026-07-05 09:31:41,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets are not functionally similar. Code Snippet 1 appears to be solving a problem related to converting certain letters into digits based on specific rules, while Code Snippet 2 is solving a different problem known as 'Counting Sheep', which involves determining the smallest number greater than or equal to a given number that contains all unique digits from 0 to 9.""
+}
+```",94
+2016_2_1,203192,2014_3_1,135747,NON-CLONE,2026-07-05 09:31:43,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets appear to have different functionalities. Code Snippet 1 reads a string from a file, counts the occurrences of certain characters, and attempts to form valid digit sequences based on those counts. Code Snippet 2 processes input from standard input, calculates the greatest common divisor (GCD) of two numbers, and determines if there exists a power of 2 that is greater than or equal to the second number divided by the GCD. The tasks performed by these snippets are distinct.""
+}
+```",95

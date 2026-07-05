@@ -60,10 +60,10 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 ## Llama-4-Scout-17B-16E-Instruct
 
 - [x] **Original (BF16)** — `original` · `meta-llama/Llama-4-Scout-17B-16E-Instruct` · venv `llama4_venv` — *done: Acc 0.9688, F1 0.9684, MCC 0.9377*
-- [ ] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-4-Scout-17B-16E-Instruct-GGUF` (Q2_K) · venv `gguf`
-- [ ] **GGUF Q3_K_S** — `gguf` · `bartowski/Meta-Llama-4-Scout-17B-16E-Instruct-GGUF` (Q3_K_S) · venv `gguf`
-- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-4-Scout-17B-16E-Instruct-GGUF` (Q4_K_M) · venv `gguf`
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q2_K.gguf` · venv `gguf` — *Acc 0.9792, F1 0.9787, MCC 0.9592 (beats BF16)*
+- [x] **GGUF Q3_K_S** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q3_K_S.gguf` · venv `gguf` — *Acc 0.9479, F1 0.9462, MCC 0.8976*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q4_K_M-00001-of-00002.gguf` (split) · venv `gguf` — *Acc 0.9688, F1 0.9677, MCC 0.9393*
 
 ---
 
-**Progress: 21 / 24 runs complete.** (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout Original)
+**Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)

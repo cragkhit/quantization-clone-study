@@ -60,22 +60,47 @@ def load_test_cases(tests_dir: str = "ocd/tests") -> list[TestCase]:
 def generate_pairs(test_cases: list[TestCase]):
     """Full Cartesian product (n×n = 10,000 pairs). Ground truth is CLONE iff same program.
 
-    Yields (tc_a, tc_b, ground_truth, pair_id). pair_id is None here, so the resume
-    key falls back to the (program_a, variant_a, program_b, variant_b) 4-tuple.
+    Yields (tc_a, tc_b, ground_truth, pair_id, pair_lang). pair_id and pair_lang
+    are None here, so the resume key falls back to the
+    (program_a, variant_a, program_b, variant_b) 4-tuple and the prompt uses the
+    experiment-wide language.
     """
     for tc_a, tc_b in itertools.product(test_cases, repeat=2):
         ground_truth = "CLONE" if tc_a.program == tc_b.program else "NON-CLONE"
-        yield tc_a, tc_b, ground_truth, None
+        yield tc_a, tc_b, ground_truth, None, None
+
+
+# Map GCJ language codes to human-readable names used in the prompt.
+_LANG_NAMES = {"java": "Java", "cpp": "C++", "py": "Python", "php": "PHP"}
+
+
+def _pair_lang(row: dict) -> str | None:
+    """Human-readable language for a pair, or None if the CSV carries no language.
+
+    - `lang1`/`lang2` columns (cross-language set): "Java and Python", or just
+      "Java" when the two sides share a language.
+    - single `lang` column (monolingual set): that language's name.
+    """
+    def name(code):
+        return _LANG_NAMES.get(str(code).strip().lower(), str(code).strip())
+
+    if row.get("lang1") and row.get("lang2"):
+        a, b = name(row["lang1"]), name(row["lang2"])
+        return a if a == b else f"{a} and {b}"
+    if row.get("lang"):
+        return name(row["lang"])
+    return None
 
 
 def load_pairs_file(pairs_csv: str, files_dir: str | None = None):
     """Load an explicit list of pairs from a CSV (e.g. gcj_java_clones/pairs.csv).
 
     Expected columns: pair_id, label (1=clone/0=non-clone), file1, file2,
-    problem1, problem2. Source code is read from files_dir (default: a `files/`
-    folder next to the CSV). Yields (tc_a, tc_b, ground_truth, pair_id); the
-    pair_id makes each row's resume key unique even if a (file1, file2) pair
-    happens to repeat.
+    problem1, problem2, and either `lang` or `lang1`/`lang2`. Source code is read
+    from files_dir (default: a `files/` folder next to the CSV). Yields
+    (tc_a, tc_b, ground_truth, pair_id, pair_lang); pair_id makes each row's
+    resume key unique even if a (file1, file2) pair repeats, and pair_lang lets
+    the prompt name the actual language(s) of each pair.
     """
     pairs_path = Path(pairs_csv)
     fdir = Path(files_dir) if files_dir else pairs_path.parent / "files"
@@ -92,7 +117,7 @@ def load_pairs_file(pairs_csv: str, files_dir: str | None = None):
             gt = "CLONE" if str(row["label"]).strip() == "1" else "NON-CLONE"
             tc_a = _case(row["file1"], row["problem1"])
             tc_b = _case(row["file2"], row["problem2"])
-            yield tc_a, tc_b, gt, str(row["pair_id"])
+            yield tc_a, tc_b, gt, str(row["pair_id"]), _pair_lang(row)
 
 
 def build_prompt(content_a: str, content_b: str, lang: str) -> str:
@@ -535,12 +560,12 @@ def _run_round(
         if not file_exists:
             writer.writeheader()
 
-        for tc_a, tc_b, ground_truth, pair_id in pairs:
+        for tc_a, tc_b, ground_truth, pair_id, pair_lang in pairs:
             key = _resume_key(pair_id, tc_a.program, tc_a.variant, tc_b.program, tc_b.variant)
             if key in completed:
                 continue
 
-            response = infer(tc_a.code, tc_b.code, lang)
+            response = infer(tc_a.code, tc_b.code, pair_lang or lang)
             ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             overall_done += 1
             writer.writerow({

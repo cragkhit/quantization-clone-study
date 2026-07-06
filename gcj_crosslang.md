@@ -24,7 +24,7 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 - [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q4_K_M.gguf` · venv `gguf` — *Acc 0.5654, F1 0.6971, MCC 0.2646*
 - [x] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310` — *Acc 0.5104, F1 0.6713, MCC 0.1026*
 - [x] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv` — *Acc 0.5409, F1 0.6882, MCC 0.1910*
-- [ ] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv` — *re-running (round-1 CUDA device-side assert; resuming on GPU 3)*
+- [x] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv` — *Acc 0.5699, F1 0.6998, MCC 0.2458 (re-run after transient round-1 CUDA assert)*
 - [x] **QTIP 2-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-2Bit` · venv `qtip_venv` — *Acc 0.5039, F1 0.6678, MCC 0.0298*
 - [x] **QTIP 3-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-3Bit` · venv `qtip_venv` — *Acc 0.5726, F1 0.7033, MCC 0.2693*
 - [x] **QTIP 4-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit` · venv `qtip_venv` — *Acc 0.5957, F1 0.7154, MCC 0.3035*
@@ -57,4 +57,4 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 
 ---
 
-**Progress: 23 / 24 runs complete.** (all except Meta-Llama-3.1-8B HIGGS 4-bit, which is re-running after a round-1 CUDA assert)
+**Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)

@@ -18,16 +18,16 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 
 ## Meta-Llama-3.1-8B-Instruct
 
-- [ ] **Original (BF16)** — `original` · `meta-llama/Meta-Llama-3.1-8B-Instruct` · venv `aqlm_venv310`
-- [ ] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q2_K.gguf` · venv `gguf`
-- [ ] **GGUF Q3_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q3_K_M.gguf` · venv `gguf`
-- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q4_K_M.gguf` · venv `gguf`
-- [ ] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310`
-- [ ] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv`
-- [ ] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv`
-- [ ] **QTIP 2-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-2Bit` · venv `qtip_venv`
-- [ ] **QTIP 3-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-3Bit` · venv `qtip_venv`
-- [ ] **QTIP 4-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit` · venv `qtip_venv`
+- [x] **Original (BF16)** — `original` · `meta-llama/Meta-Llama-3.1-8B-Instruct` · venv `aqlm_venv310` — *Acc 0.6107, F1 0.7224, MCC 0.3247*
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q2_K.gguf` · venv `gguf` — *Acc 0.5130, F1 0.6714, MCC 0.0973*
+- [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q3_K_M.gguf` · venv `gguf` — *Acc 0.5317, F1 0.6845, MCC 0.1587*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q4_K_M.gguf` · venv `gguf` — *Acc 0.5654, F1 0.6971, MCC 0.2646*
+- [x] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310` — *Acc 0.5104, F1 0.6713, MCC 0.1026*
+- [x] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv` — *Acc 0.5409, F1 0.6882, MCC 0.1910*
+- [ ] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv` — *re-running (round-1 CUDA device-side assert; resuming on GPU 3)*
+- [x] **QTIP 2-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-2Bit` · venv `qtip_venv` — *Acc 0.5039, F1 0.6678, MCC 0.0298*
+- [x] **QTIP 3-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-3Bit` · venv `qtip_venv` — *Acc 0.5726, F1 0.7033, MCC 0.2693*
+- [x] **QTIP 4-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit` · venv `qtip_venv` — *Acc 0.5957, F1 0.7154, MCC 0.3035*
 
 ## CodeLlama-7b-Instruct-hf
 
@@ -50,11 +50,11 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 
 ## Llama-4-Scout-17B-16E-Instruct
 
-- [ ] **Original (BF16)** — `original` · `meta-llama/Llama-4-Scout-17B-16E-Instruct` · venv `llama4_venv` *(run separately; not in the scout_gguf chain)*
-- [ ] **GGUF Q2_K** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q2_K.gguf` · venv `gguf`
-- [ ] **GGUF Q3_K_S** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q3_K_S.gguf` · venv `gguf`
-- [ ] **GGUF Q4_K_M** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q4_K_M-00001-of-00002.gguf` (split) · venv `gguf`
+- [x] **Original (BF16)** — `original` · `meta-llama/Llama-4-Scout-17B-16E-Instruct` · venv `llama4_venv` *(run separately on GPUs 3,4,5,7)* — *Acc 0.9714, F1 0.9711, MCC 0.9428*
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q2_K.gguf` · venv `gguf` — *Acc 0.9714, F1 0.9710, MCC 0.9430*
+- [x] **GGUF Q3_K_S** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q3_K_S.gguf` · venv `gguf` — *Acc 0.9688, F1 0.9683, MCC 0.9380*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q4_K_M-00001-of-00002.gguf` (split) · venv `gguf` — *Acc 0.9661, F1 0.9655, MCC 0.9329*
 
 ---
 
-**Progress: 10 / 24 runs complete.** (CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4; Meta-Llama-3.1-8B ×10 + Scout ×4 in progress)
+**Progress: 23 / 24 runs complete.** (all except Meta-Llama-3.1-8B HIGGS 4-bit, which is re-running after a round-1 CUDA assert)

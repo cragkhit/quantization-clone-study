@@ -1,0 +1,336 @@
+<title>Quantization × Code-Clone Detection — GCJ Results</title>
+<style>
+  :root{
+    --bg:#eef0f3; --surface:#ffffff; --surface-2:#f6f8fa; --surface-3:#eef1f5;
+    --ink:#171a20; --ink-muted:#59616e; --ink-faint:#8b93a1;
+    --border:#e2e6ea; --border-strong:#cdd3da;
+    --java:#3b6fd4; --cross:#e0863a;
+    --good:#2f9e6f; --bad:#d1544c; --warn:#c1832a;
+    --shadow:0 1px 2px rgba(16,22,34,.04),0 8px 24px rgba(16,22,34,.05);
+    --font-sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0e1116; --surface:#161a20; --surface-2:#1b2027; --surface-3:#20262f;
+      --ink:#e9ecf1; --ink-muted:#9aa4b2; --ink-faint:#69727f;
+      --border:#282e37; --border-strong:#343c47;
+      --java:#6f97ec; --cross:#eaa05f;
+      --good:#4cc38a; --bad:#e46a62; --warn:#d7a641;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#eef0f3; --surface:#ffffff; --surface-2:#f6f8fa; --surface-3:#eef1f5;
+    --ink:#171a20; --ink-muted:#59616e; --ink-faint:#8b93a1;
+    --border:#e2e6ea; --border-strong:#cdd3da;
+    --java:#3b6fd4; --cross:#e0863a; --good:#2f9e6f; --bad:#d1544c; --warn:#c1832a;
+    --shadow:0 1px 2px rgba(16,22,34,.04),0 8px 24px rgba(16,22,34,.05);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1116; --surface:#161a20; --surface-2:#1b2027; --surface-3:#20262f;
+    --ink:#e9ecf1; --ink-muted:#9aa4b2; --ink-faint:#69727f;
+    --border:#282e37; --border-strong:#343c47;
+    --java:#6f97ec; --cross:#eaa05f; --good:#4cc38a; --bad:#e46a62; --warn:#d7a641;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);
+    line-height:1.5;-webkit-font-smoothing:antialiased;font-size:15px}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 24px 64px}
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+  .eyebrow{font-size:11.5px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* header */
+  header{margin-bottom:30px}
+  h1{font-size:clamp(26px,4.4vw,40px);font-weight:760;letter-spacing:-.025em;
+    line-height:1.06;margin:.35em 0 .18em;text-wrap:balance;max-width:20ch}
+  .thesis{font-size:clamp(15px,2vw,17.5px);color:var(--ink-muted);max-width:60ch;margin:0}
+  .thesis b{color:var(--ink);font-weight:640}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip{font-size:12px;padding:4px 10px;border:1px solid var(--border);border-radius:999px;
+    background:var(--surface);color:var(--ink-muted)}
+  .chip b{color:var(--ink);font-weight:640}
+
+  /* KPI tiles */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 34px}
+  @media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:460px){.kpis{grid-template-columns:1fr}}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:16px 16px 15px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .kpi .lab{font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--ink-muted);margin-bottom:9px}
+  .kpi .big{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+    font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1}
+  .kpi .sub{font-size:12.5px;color:var(--ink-faint);margin-top:7px}
+  .kpi .rail{position:absolute;left:0;top:0;bottom:0;width:3px}
+
+  section{margin-top:36px}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:4px}
+  h2{font-size:19px;font-weight:680;letter-spacing:-.015em;margin:0}
+  .sec-note{font-size:13px;color:var(--ink-faint);margin:5px 0 16px;max-width:70ch}
+
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    box-shadow:var(--shadow);padding:22px 22px 18px}
+
+  /* legend */
+  .legend{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-muted);font-weight:550}
+  .sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+  /* bar chart */
+  .chart-wrap{overflow-x:auto}
+  svg{display:block;width:100%;height:auto;min-width:520px}
+  .bar{cursor:pointer;transition:opacity .12s}
+  .bar:hover{opacity:.82}
+  .axlab{fill:var(--ink-muted);font-size:12px;font-family:var(--font-sans)}
+  .axlab.fam{fill:var(--ink);font-weight:600;font-size:12.5px}
+  .grid{stroke:var(--border);stroke-width:1}
+  .zero{stroke:var(--border-strong);stroke-width:1.4}
+  .vlab{fill:var(--ink);font-size:10.5px;font-family:var(--font-mono);font-weight:600}
+
+  /* matrix */
+  .mx-wrap{overflow-x:auto;border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:660px;font-size:13px}
+  thead th{position:sticky;top:0;background:var(--surface);z-index:1}
+  th,td{text-align:right;padding:7px 11px;white-space:nowrap}
+  th.grp{text-align:center;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;border-bottom:1px solid var(--border);padding-bottom:5px}
+  th.col{font-size:11px;font-weight:600;color:var(--ink-muted);border-bottom:1px solid var(--border-strong);padding-bottom:8px}
+  td.name,th.name{text-align:left}
+  td.name{color:var(--ink);font-weight:500}
+  td.dim{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--ink-faint);font-size:12px}
+  td.heat{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:600;
+    border-radius:6px;cursor:default;transition:transform .08s}
+  td.heat:hover{transform:scale(1.04)}
+  .famrow td{background:var(--surface-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .famrow .fn{font-weight:680;font-size:12.5px;letter-spacing:-.01em}
+  .famrow .fmeta{font-family:var(--font-mono);color:var(--ink-faint);font-weight:500;font-size:11.5px}
+  .sep{border-left:1px solid var(--border);padding-left:14px}
+  .dchip{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:600;font-size:12px;
+    padding:2px 7px;border-radius:6px;display:inline-block;min-width:52px;text-align:center}
+  .tag{font-size:10px;font-weight:650;letter-spacing:.03em;text-transform:uppercase;
+    padding:1.5px 6px;border-radius:5px;margin-left:7px;vertical-align:middle}
+  .tag.deg{color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,transparent)}
+  .tag.top{color:var(--good);background:color-mix(in srgb,var(--good) 15%,transparent)}
+
+  /* heat scale legend */
+  .scale{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .scale .grad{height:11px;width:200px;border-radius:6px;border:1px solid var(--border)}
+  .scale small{font-size:11.5px;color:var(--ink-faint)}
+
+  /* tooltip */
+  #tt{position:fixed;pointer-events:none;z-index:50;opacity:0;transform:translateY(3px);
+    transition:opacity .1s;background:var(--ink);color:var(--surface);
+    padding:8px 11px;border-radius:9px;font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.28);max-width:240px}
+  #tt .tw{font-weight:680;margin-bottom:3px;font-size:12.5px}
+  #tt .tr{display:flex;justify-content:space-between;gap:14px;font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;color:color-mix(in srgb,var(--surface) 72%,transparent)}
+  #tt .tr b{color:var(--surface);font-weight:600}
+
+  footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);
+    font-size:12.5px;color:var(--ink-faint);line-height:1.65}
+  footer b{color:var(--ink-muted);font-weight:600}
+  .takeaways{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin:8px 0 0}
+  @media(max-width:640px){.takeaways{grid-template-columns:1fr}}
+  .takeaways li{margin:0 0 2px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Quantization · Code-clone detection · GCJ benchmark</div>
+    <h1>Does quantization break clone detection?</h1>
+    <p class="thesis"><b>Model capability dominates — quantization barely matters.</b>
+      Twenty-four model×precision configurations across five families, scored on a
+      monolingual Java set and a cross-language set. The strong models stay strong at
+      2-bit; the weak ones were already broken at full precision.</p>
+    <div class="meta">
+      <span class="chip"><b>24</b> configs × <b>2</b> benchmarks</span>
+      <span class="chip"><b>5</b> rounds · majority vote</span>
+      <span class="chip">Java <b>96</b> pairs · Cross-lang <b>384</b> pairs</span>
+      <span class="chip">metric: <b>MCC</b></span>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <div class="sec-head"><h2>Best MCC by model family</h2>
+      <div class="legend">
+        <span class="lg"><span class="sw" style="background:var(--java)"></span>Java</span>
+        <span class="lg"><span class="sw" style="background:var(--cross)"></span>Cross-lang</span>
+      </div>
+    </div>
+    <p class="sec-note">Each family's strongest configuration on each benchmark. The gap
+      between families (0.00 → 0.96) dwarfs any effect of precision within a family.</p>
+    <div class="panel"><div class="chart-wrap"><div id="bars"></div></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Every configuration, both benchmarks</h2></div>
+    <p class="sec-note">MCC cells are heat-shaded (pale → deep teal = 0 → 1). Δ is
+      cross-language minus Java. Acc/F1 shown muted for context; MCC is the headline.</p>
+    <div class="panel">
+      <div class="mx-wrap"><table id="matrix"></table></div>
+      <div class="scale">
+        <small>MCC</small>
+        <span class="grad" id="grad"></span>
+        <small class="mono">0.0</small><small class="mono" style="margin-left:170px">1.0</small>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="eyebrow" style="margin-bottom:10px">What the numbers say</div>
+    <ul class="takeaways">
+      <li><b>Capability &gt; precision.</b> Family spread 0.00–0.96 MCC; within a family, bit-width moves MCC far less.</li>
+      <li><b>Strong models are quant-robust.</b> Scout, DeepSeek &amp; Qwen match or beat BF16 at low bit-width.</li>
+      <li><b>Cross-language isn't harder for good models.</b> DeepSeek &amp; Qwen edge <i>up</i> cross-lingually.</li>
+      <li><b>Weak model degrades cross-lang.</b> Llama-3.1-8B drops, and its low-bit quants drop most.</li>
+      <li><b>CodeLlama is degenerate everywhere</b> — predicts "clone" for every pair (MCC 0).</li>
+      <li><b>Same story on both benchmarks</b> — the ranking of families is stable Java → cross-language.</li>
+    </ul>
+    <p style="margin-top:16px">Data: GCJ2-4lang (Java / C++ / Python / PHP). True pairs = same problem;
+      cross-language pairs span different languages. Positive class = clone; metric = Matthews correlation coefficient.
+      Majority vote over 5 rounds. Prompt names each pair's language(s).</p>
+  </footer>
+</div>
+
+<div id="tt" role="tooltip"></div>
+
+<script type="application/json" id="data">
+[{"family":"Llama-4-Scout-17B","variant":"Original","java":{"acc":0.9688,"f1":0.9684,"mcc":0.9377,"excl":0},"cross":{"acc":0.9714,"f1":0.9711,"mcc":0.9428,"excl":0}},{"family":"Llama-4-Scout-17B","variant":"GGUF Q2_K","java":{"acc":0.9792,"f1":0.9787,"mcc":0.9592,"excl":0},"cross":{"acc":0.9714,"f1":0.971,"mcc":0.943,"excl":0}},{"family":"Llama-4-Scout-17B","variant":"GGUF Q3_K_S","java":{"acc":0.9479,"f1":0.9462,"mcc":0.8976,"excl":0},"cross":{"acc":0.9688,"f1":0.9683,"mcc":0.938,"excl":0}},{"family":"Llama-4-Scout-17B","variant":"GGUF Q4_K_M","java":{"acc":0.9688,"f1":0.9677,"mcc":0.9393,"excl":0},"cross":{"acc":0.9661,"f1":0.9655,"mcc":0.9329,"excl":0}},{"family":"DeepSeek-V2-Lite","variant":"Original","java":{"acc":0.8542,"f1":0.8571,"mcc":0.7089,"excl":0},"cross":{"acc":0.8828,"f1":0.8794,"mcc":0.7669,"excl":0}},{"family":"DeepSeek-V2-Lite","variant":"GGUF Q4_K_M","java":{"acc":0.8646,"f1":0.8687,"mcc":0.7306,"excl":0},"cross":{"acc":0.8724,"f1":0.8672,"mcc":0.7471,"excl":0}},{"family":"Qwen2.5-Coder-7B","variant":"Original","java":{"acc":0.8021,"f1":0.7532,"mcc":0.6579,"excl":0},"cross":{"acc":0.8073,"f1":0.7628,"mcc":0.663,"excl":0}},{"family":"Qwen2.5-Coder-7B","variant":"GGUF Q2_K","java":{"acc":0.8958,"f1":0.8837,"mcc":0.8094,"excl":0},"cross":{"acc":0.8982,"f1":0.8908,"mcc":0.8044,"excl":1}},{"family":"Qwen2.5-Coder-7B","variant":"GGUF Q3_K_M","java":{"acc":0.7917,"f1":0.7368,"mcc":0.6417,"excl":0},"cross":{"acc":0.8333,"f1":0.8012,"mcc":0.7044,"excl":0}},{"family":"Qwen2.5-Coder-7B","variant":"GGUF Q4_K_M","java":{"acc":0.8333,"f1":0.8,"mcc":0.7071,"excl":0},"cross":{"acc":0.8516,"f1":0.8267,"mcc":0.7339,"excl":0}},{"family":"Meta-Llama-3.1-8B","variant":"Original","java":{"acc":0.6526,"f1":0.7402,"mcc":0.3985,"excl":1},"cross":{"acc":0.6107,"f1":0.7224,"mcc":0.3247,"excl":9}},{"family":"Meta-Llama-3.1-8B","variant":"GGUF Q2_K","java":{"acc":0.5104,"f1":0.6713,"mcc":0.1026,"excl":0},"cross":{"acc":0.513,"f1":0.6714,"mcc":0.0973,"excl":0}},{"family":"Meta-Llama-3.1-8B","variant":"GGUF Q3_K_M","java":{"acc":0.5319,"f1":0.6812,"mcc":0.1099,"excl":2},"cross":{"acc":0.5317,"f1":0.6845,"mcc":0.1587,"excl":6}},{"family":"Meta-Llama-3.1-8B","variant":"GGUF Q4_K_M","java":{"acc":0.5729,"f1":0.6963,"mcc":0.2502,"excl":0},"cross":{"acc":0.5654,"f1":0.6971,"mcc":0.2646,"excl":2}},{"family":"Meta-Llama-3.1-8B","variant":"AQLM 2-bit","java":{"acc":0.5,"f1":0.6667,"mcc":0.0,"excl":0},"cross":{"acc":0.5104,"f1":0.6713,"mcc":0.1026,"excl":0}},{"family":"Meta-Llama-3.1-8B","variant":"QTIP 2-bit","java":{"acc":0.573,"f1":0.7031,"mcc":0.1751,"excl":7},"cross":{"acc":0.5039,"f1":0.6678,"mcc":0.0298,"excl":1}},{"family":"Meta-Llama-3.1-8B","variant":"QTIP 3-bit","java":{"acc":0.6129,"f1":0.7231,"mcc":0.3116,"excl":3},"cross":{"acc":0.5726,"f1":0.7033,"mcc":0.2693,"excl":5}},{"family":"Meta-Llama-3.1-8B","variant":"QTIP 4-bit","java":{"acc":0.6596,"f1":0.746,"mcc":0.406,"excl":2},"cross":{"acc":0.5957,"f1":0.7154,"mcc":0.3035,"excl":8}},{"family":"Meta-Llama-3.1-8B","variant":"HIGGS 3-bit","java":{"acc":0.5978,"f1":0.7176,"mcc":0.2707,"excl":4},"cross":{"acc":0.5409,"f1":0.6882,"mcc":0.191,"excl":5}},{"family":"Meta-Llama-3.1-8B","variant":"HIGGS 4-bit","java":{"acc":0.6562,"f1":0.7402,"mcc":0.4093,"excl":0},"cross":{"acc":0.5699,"f1":0.6998,"mcc":0.2458,"excl":5}},{"family":"CodeLlama-7b","variant":"Original","java":{"acc":0.5393,"f1":0.7007,"mcc":0.0,"excl":7},"cross":{"acc":0.5631,"f1":0.7205,"mcc":0.0,"excl":59}},{"family":"CodeLlama-7b","variant":"GGUF Q2_K","java":{"acc":0.5,"f1":0.6667,"mcc":0.0,"excl":0},"cross":{"acc":0.5,"f1":0.6667,"mcc":0.0,"excl":0}},{"family":"CodeLlama-7b","variant":"GGUF Q3_K_M","java":{"acc":0.5109,"f1":0.6763,"mcc":0.0,"excl":4},"cross":{"acc":0.522,"f1":0.6859,"mcc":0.0,"excl":20}},{"family":"CodeLlama-7b","variant":"GGUF Q4_K_M","java":{"acc":0.5,"f1":0.6667,"mcc":0.0,"excl":0},"cross":{"acc":0.512,"f1":0.6772,"mcc":0.0,"excl":9}}]
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById('data').textContent);
+const FAM_ORDER = ["Llama-4-Scout-17B","DeepSeek-V2-Lite","Qwen2.5-Coder-7B","Meta-Llama-3.1-8B","CodeLlama-7b"];
+const FAM_META = {
+  "Llama-4-Scout-17B":{tag:"109B MoE"},"DeepSeek-V2-Lite":{tag:"16B MoE"},
+  "Qwen2.5-Coder-7B":{tag:"7B"},"Meta-Llama-3.1-8B":{tag:"8B"},"CodeLlama-7b":{tag:"7B"}
+};
+const fmt=v=>v==null?"—":v.toFixed(3);
+const byFam=f=>DATA.filter(d=>d.family===f);
+const bestMcc=(f,key)=>Math.max(...byFam(f).map(d=>d[key]?d[key].mcc:-1));
+
+/* ---------- theme + heat ramp ---------- */
+const RAMP={
+  light:[[0,[238,243,242]],[.25,[201,229,222]],[.5,[141,202,189]],[.75,[63,158,140]],[1,[14,95,84]]],
+  dark: [[0,[32,39,44]],[.28,[32,66,62]],[.55,[40,110,98]],[.78,[52,160,140]],[1,[92,208,184]]]
+};
+function theme(){const t=document.documentElement.getAttribute('data-theme');
+  if(t)return t; return matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
+function lerp(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t));}
+function heat(v){const r=RAMP[theme()];v=Math.max(0,Math.min(1,v));
+  for(let i=1;i<r.length;i++){if(v<=r[i][0]){const[p0,c0]=r[i-1],[p1,c1]=r[i];
+    return lerp(c0,c1,(v-p0)/(p1-p0));}}return r[r.length-1][1];}
+const rgb=c=>`rgb(${c[0]},${c[1]},${c[2]})`;
+function readable(c){const L=(0.2126*c[0]+0.7152*c[1]+0.0722*c[2])/255;return L>0.58?'#0c0f13':'#f6f8fa';}
+
+/* ---------- tooltip ---------- */
+const tt=document.getElementById('tt');
+function showTip(html,x,y){tt.innerHTML=html;tt.style.opacity='1';
+  const r=tt.getBoundingClientRect();let nx=x+14,ny=y-10;
+  if(nx+r.width>innerWidth-8)nx=x-r.width-14; if(ny<8)ny=8;
+  tt.style.left=nx+'px';tt.style.top=ny+'px';}
+function hideTip(){tt.style.opacity='0';}
+
+/* ---------- KPIs ---------- */
+function kpis(){
+  const scout=bestMcc("Llama-4-Scout-17B","cross");
+  const tiles=[
+    {lab:"Top MCC (Llama-4-Scout)",big:"0.94",sub:"BF16 & 2-bit alike, both benchmarks",col:"var(--java)"},
+    {lab:"Family spread (MCC)",big:"0.00–0.96",sub:"capability dwarfs precision",col:"var(--cross)"},
+    {lab:"Quant-robust families",big:"3 / 5",sub:"Scout · DeepSeek · Qwen ≈ lossless",col:"var(--good)"},
+    {lab:"Degenerate models",big:"CodeLlama",sub:"predicts clone for all pairs (MCC 0)",col:"var(--bad)"},
+  ];
+  document.getElementById('kpis').innerHTML=tiles.map(t=>
+    `<div class="kpi"><div class="rail" style="background:${t.col}"></div>
+     <div class="lab">${t.lab}</div><div class="big">${t.big}</div><div class="sub">${t.sub}</div></div>`).join('');
+}
+
+/* ---------- grouped bar chart ---------- */
+function bars(){
+  const W=680,H=310,mL=40,mR=14,mT=16,mB=52,pw=W-mL-mR,ph=H-mT-mB;
+  const y=v=>mT+ph*(1-v), groups=FAM_ORDER.length, gw=pw/groups;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Best MCC by family, Java vs cross-language">`;
+  for(let g=0;g<=5;g++){const gv=g/5,yy=y(gv);
+    s+=`<line class="${g===0?'zero':'grid'}" x1="${mL}" y1="${yy.toFixed(1)}" x2="${W-mR}" y2="${yy.toFixed(1)}"/>`;
+    s+=`<text class="axlab mono" x="${mL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end">${gv.toFixed(1)}</text>`;}
+  s+=`<text class="axlab" transform="translate(13,${mT+ph/2}) rotate(-90)" text-anchor="middle" style="font-size:11px">MCC</text>`;
+  FAM_ORDER.forEach((f,i)=>{
+    const cx=mL+gw*i, bw=Math.min(34,gw*0.30), gap=8, x0=cx+gw/2-bw-gap/2;
+    const jv=Math.max(0,bestMcc(f,'java')), xv=Math.max(0,bestMcc(f,'cross'));
+    const short=f.replace('Meta-','').replace('-Coder','').replace('-V2','');
+    [[jv,'var(--java)','Java',x0],[xv,'var(--cross)','Cross-lang',x0+bw+gap]].forEach(([v,c,nm,bx])=>{
+      const bh=Math.max(v*ph,0.5), by=y(v);
+      s+=`<rect class="bar" x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw}" height="${(mT+ph-by).toFixed(1)}"
+            rx="4" fill="${c}" data-f="${f}" data-nm="${nm}" data-v="${v.toFixed(3)}"/>`;
+      s+=`<text class="vlab" x="${(bx+bw/2).toFixed(1)}" y="${(by-5).toFixed(1)}" text-anchor="middle">${v.toFixed(2)}</text>`;
+    });
+    s+=`<text class="axlab fam" x="${(cx+gw/2).toFixed(1)}" y="${H-mB+20}" text-anchor="middle">${short}</text>`;
+    s+=`<text class="axlab" x="${(cx+gw/2).toFixed(1)}" y="${H-mB+35}" text-anchor="middle" style="font-size:10.5px;fill:var(--ink-faint)">${FAM_META[f].tag}</text>`;
+  });
+  s+=`</svg>`;
+  const host=document.getElementById('bars'); host.innerHTML=s;
+  host.querySelectorAll('.bar').forEach(b=>{
+    b.addEventListener('mousemove',e=>showTip(
+      `<div class="tw">${b.dataset.f}</div>
+       <div class="tr"><span>${b.dataset.nm} · best MCC</span><b>${b.dataset.v}</b></div>`,e.clientX,e.clientY));
+    b.addEventListener('mouseleave',hideTip);
+  });
+}
+
+/* ---------- matrix ---------- */
+function matrix(){
+  let h=`<thead>
+    <tr><th class="name"></th><th class="grp" colspan="3">GCJ Java (96)</th>
+        <th class="grp sep" colspan="3">Cross-lang (384)</th><th class="grp sep">Δ MCC</th></tr>
+    <tr><th class="name col">Model / variant</th>
+        <th class="col">Acc</th><th class="col">F1</th><th class="col">MCC</th>
+        <th class="col sep">Acc</th><th class="col">F1</th><th class="col">MCC</th>
+        <th class="col sep">X − J</th></tr></thead><tbody>`;
+  FAM_ORDER.forEach(f=>{
+    const jb=bestMcc(f,'java'), xb=bestMcc(f,'cross');
+    h+=`<tr class="famrow"><td class="name fn" colspan="4">${f}</td>
+        <td class="fmeta" colspan="4">${FAM_META[f].tag} · best MCC ${Math.max(0,jb).toFixed(3)} → ${Math.max(0,xb).toFixed(3)}</td></tr>`;
+    byFam(f).forEach(d=>{
+      const j=d.java,x=d.cross;
+      const dl=(j&&x)?x.mcc-j.mcc:null;
+      const deg=(j&&j.mcc===0&&x&&x.mcc===0);
+      const cellHeat=(o,best)=>{const c=heat(o.mcc);
+        const top=(o.mcc===best&&best>0)?`<span class="tag top">best</span>`:'';
+        return `<td class="heat" style="background:${rgb(c)};color:${readable(c)}"
+                 data-nm="${d.family} · ${d.variant}" data-b="${o===j?'Java':'Cross-lang'}"
+                 data-acc="${o.acc.toFixed(3)}" data-f1="${o.f1.toFixed(3)}" data-mcc="${o.mcc.toFixed(3)}" data-x="${o.excl}">${o.mcc.toFixed(3)}</td>`;};
+      let dchip='<td class="dim sep">—</td>';
+      if(dl!=null){const col=Math.abs(dl)<0.02?'var(--ink-faint)':(dl>0?'var(--good)':'var(--bad)');
+        const bg=Math.abs(dl)<0.02?'transparent':(dl>0?'color-mix(in srgb,var(--good) 14%,transparent)':'color-mix(in srgb,var(--bad) 14%,transparent)');
+        dchip=`<td class="sep"><span class="dchip" style="color:${col};background:${bg}">${dl>=0?'+':''}${dl.toFixed(3)}</span></td>`;}
+      const nmeta=deg?`<span class="tag deg">degenerate</span>`:'';
+      h+=`<tr>
+        <td class="name">${d.variant}${nmeta}</td>
+        <td class="dim">${j?j.acc.toFixed(3):'—'}</td><td class="dim">${j?j.f1.toFixed(3):'—'}</td>${j?cellHeat(j,jb):'<td class="dim">—</td>'}
+        <td class="dim sep">${x?x.acc.toFixed(3):'—'}</td><td class="dim">${x?x.f1.toFixed(3):'—'}</td>${x?cellHeat(x,xb):'<td class="dim">—</td>'}
+        ${dchip}</tr>`;
+    });
+  });
+  h+=`</tbody>`;
+  const t=document.getElementById('matrix'); t.innerHTML=h;
+  t.querySelectorAll('td.heat').forEach(c=>{
+    c.addEventListener('mousemove',e=>showTip(
+      `<div class="tw">${c.dataset.nm}</div>
+       <div class="tr"><span>${c.dataset.b} · MCC</span><b>${c.dataset.mcc}</b></div>
+       <div class="tr"><span>Accuracy</span><b>${c.dataset.acc}</b></div>
+       <div class="tr"><span>F1</span><b>${c.dataset.f1}</b></div>
+       <div class="tr"><span>Excluded</span><b>${c.dataset.x}</b></div>`,e.clientX,e.clientY));
+    c.addEventListener('mouseleave',hideTip);
+  });
+}
+
+function gradient(){const stops=[];for(let i=0;i<=10;i++){const c=heat(i/10);stops.push(`${rgb(c)} ${i*10}%`);}
+  document.getElementById('grad').style.background=`linear-gradient(90deg,${stops.join(',')})`;}
+
+function renderThemed(){matrix();gradient();bars();}
+kpis();renderThemed();
+new MutationObserver(renderThemed).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderThemed);
+</script>

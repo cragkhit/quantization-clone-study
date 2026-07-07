@@ -1,5 +1,30 @@
 # Experiment Notes
 
+## Experimental Environment
+
+All experiments were run on a single shared GPU server:
+
+| Component | Spec |
+| --- | --- |
+| GPU | 8 × NVIDIA H100 80 GB HBM3 (compute capability `sm_90`) |
+| GPU driver | 535.161.08 (CUDA driver API 12.2) |
+| CUDA toolkit (`nvcc`) | 12.2.140 |
+| CPU | 2 × Intel Xeon Platinum 8480C (112 physical cores / 224 threads) |
+| RAM | 2.0 TiB |
+| OS / kernel | Ubuntu 22.04.2 LTS / Linux 5.15.0-1053-nvidia |
+
+**GPU usage per run.** Each experiment is pinned to a **single H100** via
+`CUDA_VISIBLE_DEVICES=<id>` — an 8B model in BF16 fits comfortably in 80 GB (QTIP's
+dequantized weight cache adds ~7 GB). Pinning to one idle GPU also avoids cross-run
+contention, which is **mandatory for HIGGS**: its FLUTE kernel mis-tunes its template
+under GPU contention and produces garbage output (see [HIGGS-GPTQ Setup](#higgs-gptq-setup)).
+
+**sm_90 note.** The H100 is compute capability `sm_90`. Prebuilt CUDA wheels that lack
+sm_90 support must be rebuilt from source — this affects `llama-cpp-python` (GGUF backends)
+and the FLUTE kernel (HIGGS); see their setup sections and the source-compiled-components
+caveats below. Separately, `nvcc` 12.2 does not support the system's default GCC 13, so
+CUDA compilation and the QTIP / AQLM / HIGGS runs use `CC=gcc-11 CXX=g++-11`.
+
 ## Environment Preservation & Restoration
 
 Each venv's installed packages are frozen to `requirements/<venv>.lock.txt`
@@ -156,7 +181,11 @@ Other models (GGUF, AQLM, original) use the default `max_new_tokens=128`.
 
 ### Virtual Environments
 
-**For Meta-Llama-3.1-8B-Instruct:** use `aqlm_venv` (Python 3.9, transformers 5.8.1).
+**For Meta-Llama-3.1-8B-Instruct:** use `aqlm_venv310` (Python 3.10, transformers 4.57.6).
+Round 1 was originally produced with `aqlm_venv` (Python 3.9), but that venv can no longer
+run `run_quantization.py` — it fails to import at load because `_PROMPT_TEMPLATE: str | None`
+uses the PEP 604 `X | None` union (Python 3.10+). Rounds 2–5 therefore use `aqlm_venv310`
+(the same Python 3.10 rebuild used for AQLM; see [AQLM Setup → Virtual Environment](#virtual-environment-3)).
 
 **For Llama-4-Scout-17B-16E-Instruct:** use `llama4_venv` (Python 3.10, transformers 5.12.1).
 `aqlm_venv` cannot be used for Scout because it runs Python 3.9, which rejects the `str | None`
@@ -180,13 +209,13 @@ uv pip install --python llama4_venv/bin/python transformers accelerate
 
 ### Running the Experiment
 ```bash
-# Meta-Llama-3.1-8B-Instruct
-source aqlm_venv/bin/activate
-python run_quantization.py original \
+# Meta-Llama-3.1-8B-Instruct (rounds 2-5 use aqlm_venv310; round 1 already exists as
+# ..._round1.csv and is skipped on resume by _run_round)
+aqlm_venv310/bin/python run_quantization.py original \
   "meta-llama/Meta-Llama-3.1-8B-Instruct" \
   --tests-dir ocd/tests \
   --output "results/Meta-Llama-3.1-8B-Instruct/results_original_meta-llama__Meta-Llama-3.1-8B-Instruct" \
-  --rounds 5 2>&1 | tee logs/run_original.log
+  --rounds 5 2>&1 | tee logs/run_original_meta-llama_rounds2-5.log
 
 # Llama-4-Scout-17B-16E-Instruct
 llama4_venv/bin/python run_quantization.py original \

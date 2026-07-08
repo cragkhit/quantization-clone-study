@@ -2,20 +2,20 @@
 """Prepare a Java semantic-clone pair dataset from GCJ2-4lang (gcj4.pkl).
 
 Process (per the study protocol):
-  * Randomly sample 16 problems from the GCJ dataset.
-  * For each problem, randomly sample 3 Java submissions  -> 48 unique files.
+  * Randomly sample 20 problems from the GCJ dataset.
+  * For each problem, randomly sample 5 Java submissions  -> 100 unique files.
   * TRUE pairs  = all within-problem pairs of the extracted submissions
-                  (C(3,2)=3 per problem x 16 = 48), same language (Java).
+                  (C(5,2)=10 per problem x 20 = 200), same language (Java).
   * FALSE pairs = for each true pair, its first submission paired with a
                   randomly extracted submission from a DIFFERENT problem,
-                  same language (48). Partners are drawn only from the
-                  already-extracted 48 files, so the file set stays at 48.
-  => 96 pairs over 48 unique files.
+                  same language (200). Partners are drawn only from the
+                  already-extracted 100 files, so the file set stays at 100.
+  => 400 pairs over 100 unique files.
 
 Outputs:
-  gcj_java_clones/files/<index>.java   the 48 extracted source files
-  gcj_java_clones/pairs.csv            the 96 labeled pairs
-  gcj_java_clones/files_meta.csv       metadata for the 48 files
+  gcj_java_clones/files/<index>.java   the 100 extracted source files
+  gcj_java_clones/pairs.csv            the 400 labeled pairs
+  gcj_java_clones/files_meta.csv       metadata for the 100 files
 """
 import os
 import pickle
@@ -25,8 +25,8 @@ from itertools import combinations
 import pandas as pd
 
 SEED = 42
-N_PROBLEMS = 16
-N_SUBS = 3
+N_PROBLEMS = 20
+N_SUBS = 5
 LANG = "java"
 PKL = "gcj4.pkl"
 OUTDIR = "gcj_java_clones"
@@ -68,7 +68,7 @@ def main():
     for p in problems:
         for a, b in combinations(extracted[p], 2):
             true_pairs.append((a, b))
-    assert len(true_pairs) == N_PROBLEMS * 3, len(true_pairs)
+    assert len(true_pairs) == N_PROBLEMS * (N_SUBS * (N_SUBS - 1) // 2), len(true_pairs)
 
     # ---- FALSE pairs: first submission of each true pair vs a random
     #      extracted submission from a different problem ----

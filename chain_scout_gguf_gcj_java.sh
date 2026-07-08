@@ -12,7 +12,7 @@ if pgrep -af "run_quantization.py" | grep -q "results_gcj_java/Llama-4-Scout-17B
   exit 1
 fi
 
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-1}
 
 PAIRS=gcj_java_clones/pairs.csv
 OUTDIR=results_gcj_java/Llama-4-Scout-17B-16E-Instruct

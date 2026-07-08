@@ -12,7 +12,7 @@ if pgrep -af "run_quantization.py" | grep -q "results_gcj_java/DeepSeek-Coder-V2
   exit 1
 fi
 
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-1}
 export CC=gcc-11 CXX=g++-11
 
 PAIRS=gcj_java_clones/pairs.csv

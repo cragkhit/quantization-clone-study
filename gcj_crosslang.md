@@ -7,7 +7,9 @@ Same 24-model set as the [GCJ Java tracker](gcj_java.md), now on the
 - **Rounds:** 5 per run
 - **Results:** `results_gcj_crosslang/<Model>/...`
 - **Prompt language:** filled per pair from `lang1`/`lang2`, e.g. "Compare the two Java and C++ code snippets." (harness `--pairs-file` mode)
-- **Eval:** `python evaluate_results.py results_gcj_crosslang/<Model>/*.csv --mode majority-vote --output results_gcj_crosslang/evaluation_summary_gcj_crosslang.csv`
+- **Eval (all models):** `python evaluate_results.py --dataset gcj-cross-language --mode majority-vote`
+  (auto-selects `results_gcj_crosslang/` and writes `results_gcj_crosslang/evaluation_summary_gcj_crosslang.csv`)
+- **Eval (one model):** `python evaluate_results.py results_gcj_crosslang/<Model>/*.csv --mode majority-vote --output results_gcj_crosslang/evaluation_summary_gcj_crosslang.csv`
 
 Check a box once **all 5 rounds** for that run are complete. Runs are launched
 as per-family chains, one GPU each, in parallel:

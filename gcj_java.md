@@ -5,7 +5,9 @@ Mirrors the full model set from the OCD study, now on the **GCJ Java** clone set
 - **Dataset:** `gcj_java_clones/pairs.csv` (96 pairs, 48 clone / 48 non-clone)
 - **Rounds:** 5 per run
 - **Results:** `results_gcj_java/<Model>/...`
-- **Eval:** `python evaluate_results.py results_gcj_java/<Model>/*.csv --mode majority-vote --output results_gcj_java/evaluation_summary_gcj_java.csv`
+- **Eval (all models):** `python evaluate_results.py --dataset gcj-java --mode majority-vote`
+  (auto-selects `results_gcj_java/` and writes `results_gcj_java/evaluation_summary_gcj_java.csv`)
+- **Eval (one model):** `python evaluate_results.py results_gcj_java/<Model>/*.csv --mode majority-vote --output results_gcj_java/evaluation_summary_gcj_java.csv`
 
 Check a box once **all 5 rounds** for that run are complete. Environment setup
 (venvs, kernels, per-backend quirks) is documented in `exp_notes.md`.

@@ -11,6 +11,8 @@ For each CSV it:
 Usage:
     python evaluate_results.py                                      # all results/**/*.csv, individual mode
     python evaluate_results.py --mode majority-vote                # majority vote across _roundN files
+    python evaluate_results.py --dataset gcj-java                  # evaluate the GCJ Java set
+    python evaluate_results.py --dataset gcj-cross-language        # evaluate the GCJ cross-language set
     python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/*.csv  # specific folder
     python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/results_aqlm_round1.csv  # single file
     python evaluate_results.py --unknown-as non-clone              # treat unknowns as NON-CLONE
@@ -28,6 +30,50 @@ import sys
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
+
+
+# ---------------------------------------------------------------------------
+# Datasets
+# ---------------------------------------------------------------------------
+# Each dataset produces result CSVs with the same column schema (they only
+# differ in which directory they live in and how the summary is named), so a
+# dataset just selects the default results directory and default output name.
+DATASETS = {
+    "ocd": {
+        "results_dir": "results",
+        "default_output": "evaluation_summary.csv",
+        "default_latex": "evaluation_summary.tex",
+    },
+    "gcj-java": {
+        "results_dir": "results_gcj_java",
+        "default_output": "results_gcj_java/evaluation_summary_gcj_java.csv",
+        "default_latex": "results_gcj_java/evaluation_summary_gcj_java.tex",
+    },
+    "gcj-cross-language": {
+        "results_dir": "results_gcj_crosslang",
+        "default_output": "results_gcj_crosslang/evaluation_summary_gcj_crosslang.csv",
+        "default_latex": "results_gcj_crosslang/evaluation_summary_gcj_crosslang.tex",
+    },
+}
+
+
+# Sentinel used when --latex is given with no value: fall back to the
+# dataset's default_latex path.
+_LATEX_DEFAULT = object()
+
+
+def dataset_result_paths(dataset: str) -> list[str]:
+    """Return sorted result CSV paths for a dataset's default results directory.
+
+    Only files named ``results_*.csv`` are returned so that top-level summary
+    files (``evaluation_summary_*.csv``) living in the same directory are not
+    mistaken for result files.
+    """
+    results_dir = DATASETS[dataset]["results_dir"]
+    return sorted(
+        p for p in glob.glob(f"{results_dir}/**/*.csv", recursive=True)
+        if Path(p).name.startswith("results_")
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -353,6 +399,12 @@ def write_summary_csv(rows: list[dict], output_path: str) -> None:
     print(f"Summary written to: {output_path}")
 
 
+def _base_model_name(stem: str) -> str:
+    """Strip a leading 'results_' and any '{provider}__' prefix from a stem."""
+    rest = stem[len("results_"):] if stem.startswith("results_") else stem
+    return rest.split("__", 1)[1] if "__" in rest else rest
+
+
 def _extract_model_info(filename: str) -> tuple[str, str]:
     """
     Return (group_label, model_name) derived from a results CSV filename.
@@ -365,8 +417,15 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
       results_higgs_{model}                       → ("HIGGS Quantization", model)
       results_qtip_{provider}__{model}            → ("QTIP Quantization",  model)
       results_{provider}_{model-containing-QTIP}  → ("QTIP Quantization",  model)
+      results_{...}aqlm{...}                       → ("AQLM Quantization",  model)
+      results_...{.gguf | _q2k/_q3km/_q4km}        → ("GGUF Quantization",  model)
+      results_codellama_* / results_deepseek_*     → ("Original (FP16)",    model)
+      results_..._original                         → ("Original (FP16)",    model)
     """
-    stem = Path(filename).stem  # strip .csv extension if present
+    # Strip a literal .csv only. Path(...).stem would strip everything after the
+    # last dot, mangling version numbers (Meta-Llama-3.1-... → Meta-Llama-3) for
+    # majority-vote labels, which carry no .csv extension.
+    stem = filename[:-4] if filename.endswith(".csv") else filename
     # Strip majority-vote label suffix added by evaluate_majority_vote
     stem = re.sub(r"\s*\(majority\s+vote[^)]*\)$", "", stem).strip()
     # Extract _roundN suffix before stripping so it can be re-appended to the model name
@@ -408,6 +467,23 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
         # Strip provider prefix (everything up to and including the first underscore)
         model_name = rest.split("_", 1)[1] if "_" in rest else rest
         return "QTIP Quantization", model_name + round_suffix
+
+    if "aqlm" in stem.lower():
+        # e.g. results_ISTA-DASLab__Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf
+        return "AQLM Quantization", _base_model_name(stem) + round_suffix
+
+    # GGUF runs named without the results_gguf_ prefix: either an explicit .gguf
+    # suffix (results_QuantFactory__...Q2_K.gguf) or a short quant token used for
+    # custom runs (results_qwen2.5_coder_7B_q2k, ..._q3km, ..._q4km).
+    if stem.endswith(".gguf") or re.search(r"_q\d+k?[ms]?$", stem, re.IGNORECASE):
+        return "GGUF Quantization", _base_model_name(stem) + round_suffix
+
+    # BF16 baselines with custom names: results_qwen2.5_coder_7B_original,
+    # results_codellama__CodeLlama-7b-Instruct-hf, results_deepseek_coder_v2_lite.
+    if (stem.endswith("_original")
+            or stem.startswith("results_codellama_")
+            or stem.startswith("results_deepseek_")):
+        return "Original (FP16)", _base_model_name(stem) + round_suffix
 
     return "Other", stem + round_suffix
 
@@ -462,7 +538,8 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
             group_order.append(group)
         grouped[group].append((model_name, r))
 
-    preferred = ["Original (FP16)", "GGUF Quantization", "HIGGS Quantization", "QTIP Quantization"]
+    preferred = ["Original (FP16)", "GGUF Quantization", "AQLM Quantization",
+                 "HIGGS Quantization", "QTIP Quantization"]
     group_order.sort(key=lambda g: preferred.index(g) if g in preferred else 99)
 
     all_lines: list[str] = []
@@ -529,7 +606,18 @@ def main() -> None:
     parser.add_argument(
         "files",
         nargs="*",
-        help="CSV file(s) to evaluate. Defaults to all results/**/*.csv.",
+        help="CSV file(s) to evaluate. Defaults to the selected dataset's results.",
+    )
+    parser.add_argument(
+        "--dataset",
+        choices=list(DATASETS),
+        default="ocd",
+        metavar="NAME",
+        help=(
+            "Dataset to evaluate when no files are given: "
+            f"{', '.join(DATASETS)} (default: ocd). "
+            "Selects the results directory and the default --output name."
+        ),
     )
     parser.add_argument(
         "--mode",
@@ -554,23 +642,33 @@ def main() -> None:
     )
     parser.add_argument(
         "--output",
-        default="evaluation_summary.csv",
+        default=None,
         metavar="FILE",
-        help="Output CSV file for the summary table (default: evaluation_summary.csv).",
+        help="Output CSV file for the summary table "
+             "(default: derived from --dataset, e.g. evaluation_summary.csv).",
     )
     parser.add_argument(
         "--latex",
+        nargs="?",
         default=None,
+        const=_LATEX_DEFAULT,
         metavar="FILE",
-        help="Write a LaTeX booktabs table to FILE (e.g. evaluation_summary.tex).",
+        help="Write a LaTeX booktabs table. Pass a FILE to choose the path, or "
+             "give the flag alone to use the --dataset default "
+             "(e.g. evaluation_summary.tex).",
     )
     args = parser.parse_args()
 
-    paths = args.files or sorted(glob.glob("results/**/*.csv", recursive=True))
+    paths = args.files or dataset_result_paths(args.dataset)
     if not paths:
         print("No result CSV files found.", file=sys.stderr)
         sys.exit(1)
 
+    output_path = args.output or DATASETS[args.dataset]["default_output"]
+
+    if not args.files:
+        print(f"Dataset: {args.dataset} "
+              f"(results dir: {DATASETS[args.dataset]['results_dir']}/)")
     print(f"Unknown/ambiguous responses: treated as '{args.unknown_as}'")
     print(f"Mode: {args.mode}")
 
@@ -593,9 +691,11 @@ def main() -> None:
                 summary_rows.append(result)
 
     print_summary_table(summary_rows)
-    write_summary_csv(summary_rows, args.output)
-    if args.latex:
-        write_latex_table(summary_rows, args.latex)
+    write_summary_csv(summary_rows, output_path)
+    if args.latex is not None:
+        latex_path = (DATASETS[args.dataset]["default_latex"]
+                      if args.latex is _LATEX_DEFAULT else args.latex)
+        write_latex_table(summary_rows, latex_path)
 
 
 if __name__ == "__main__":

@@ -221,7 +221,7 @@ def load_gguf(hf_model: str | None = None):
         repo_id=repo_id,
         filename=filename,
         n_gpu_layers=-1,
-        n_ctx=8192,
+        n_ctx=16384,
         verbose=False,
     )
 
@@ -256,7 +256,7 @@ def load_qwen(hf_model: str | None = None):
         repo_id=repo_id,
         filename=filename,
         n_gpu_layers=-1,
-        n_ctx=8192,
+        n_ctx=16384,
         verbose=False,
     )
 

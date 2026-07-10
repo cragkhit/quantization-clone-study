@@ -690,6 +690,67 @@ python run_quantization.py qwen \
 
 ---
 
+## Qwen3-Coder-30B-A3B FP8 Setup
+
+### Model run
+- **[`Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8`](https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8)** — fine-grained (block) FP8, 30B MoE with ~3B active params (`qwen3fp8` backend)
+
+### Why vLLM (not transformers)
+
+The `qwen3fp8` loader serves the model with **vLLM**, not `transformers`. On this
+model `transformers` generation is decode-latency-bound: ~25 s/pair with the GPU
+at only ~23% utilisation (≈14 days for the 5-round OCD sweep). vLLM's FP8-MoE
+kernels + paged attention run at ~0.9 s/pair with the GPU at ~91% (the full
+50,000-inference OCD sweep finishes in well under a day).
+
+### Virtual Environment (`vllm_venv`)
+
+```bash
+# uv venv, system Python 3.10
+uv venv vllm_venv --python 3.10
+
+# vLLM 0.11 ships torch 2.8+cu128, which runs on the 535.161 / CUDA 12.2 driver.
+# (vLLM 0.24 pulls torch cu130 → "driver too old", CUDA unavailable. Do not use.)
+uv pip install --python vllm_venv/bin/python --torch-backend=cu128 "vllm==0.11.0"
+
+# vLLM only floors transformers (>=4.55.2); uv otherwise resolves transformers 5.x,
+# whose tokenizer API breaks vLLM ("Qwen2Tokenizer has no attribute
+# all_special_tokens_extended"). Pin the 4.57 line:
+uv pip install --python vllm_venv/bin/python "transformers==4.57.6"
+```
+
+Lock file: `requirements/vllm_venv.lock.txt`.
+
+### Model loading in `load_qwen3fp8`
+
+- `LLM(max_model_len=32768, gpu_memory_utilization=0.80, max_num_seqs=64)`.
+  The **0.80** cap is deliberate: the untuned fused-MoE path (no tuned config for
+  the `E=128,N=768,fp8_w8a8` shape on H100) allocates a large transient workspace
+  during CUDA-graph capture, so a higher KV-cache claim OOMs at graph-capture
+  time. `max_num_seqs=64` is fine since pairs are issued one at a time.
+- Sampling uses Qwen3-Coder's recommended non-thinking settings
+  (`temperature=0.7, top_p=0.8, top_k=20, repetition_penalty=1.05, max_tokens=256`);
+  `temperature>0` also supplies the per-round variation majority-vote relies on.
+- `llm.chat()` applies the model's chat template. Requires an H100/sm_90 GPU
+  (native FP8). Launch fully detached (`setsid`) so a shell/tool timeout can't
+  signal the vLLM EngineCore subprocess mid-startup.
+
+### Running the Experiment (OCD)
+
+```bash
+setsid env CUDA_VISIBLE_DEVICES=<gpu> PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+  vllm_venv/bin/python run_quantization.py qwen3fp8 \
+  "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8" \
+  --tests-dir ocd/tests \
+  --output results/Qwen3-Coder-30B-A3B-Instruct-FP8/results_qwen3_coder_30B_a3b_fp8 \
+  --rounds 5 > logs/run_qwen3fp8_ocd_5rounds.log 2>&1 < /dev/null &
+```
+
+OCD 5-round majority vote: **Acc 0.9878, Precision 1.0000, Recall 0.8780,
+F1 0.9350, MCC 0.9307** (0 excluded — all responses parsed cleanly).
+
+---
+
 ## DeepSeek-Coder-V2-Lite-Instruct Setup
 
 ### Models run

@@ -1,0 +1,179 @@
+Loaded 384 pairs from gcj_crosslang_clones/pairs.csv × 5 round(s) = 1920 total (0 already done, 1920 remaining)
+Tokenizer not found in ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit, loading from meta-llama/Meta-Llama-3.1-8B-Instruct
+[FLUTE]: Template configs loaded from /home/chaiyong.rag/quantization-clone-study/higgs_venv/lib/python3.10/site-packages/flute/data/qgemm_kernel_raw_generated_configs.pth
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:13<00:13, 13.89s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:14<00:00,  6.21s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:14<00:00,  7.36s/it]
+Some weights of the model checkpoint at ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit were not used when initializing LlamaForCausalLM: ['model.layers.0.mlp.down_proj.num_sms_packed', 'model.layers.0.mlp.gate_proj.num_sms_packed', 'model.layers.0.mlp.up_proj.num_sms_packed', 'model.layers.0.self_attn.k_proj.num_sms_packed', 'model.layers.0.self_attn.o_proj.num_sms_packed', 'model.layers.0.self_attn.q_proj.num_sms_packed', 'model.layers.0.self_attn.v_proj.num_sms_packed', 'model.layers.1.mlp.down_proj.num_sms_packed', 'model.layers.1.mlp.gate_proj.num_sms_packed', 'model.layers.1.mlp.up_proj.num_sms_packed', 'model.layers.1.self_attn.k_proj.num_sms_packed', 'model.layers.1.self_attn.o_proj.num_sms_packed', 'model.layers.1.self_attn.q_proj.num_sms_packed', 'model.layers.1.self_attn.v_proj.num_sms_packed', 'model.layers.10.mlp.down_proj.num_sms_packed', 'model.layers.10.mlp.gate_proj.num_sms_packed', 'model.layers.10.mlp.up_proj.num_sms_packed', 'model.layers.10.self_attn.k_proj.num_sms_packed', 'model.layers.10.self_attn.o_proj.num_sms_packed', 'model.layers.10.self_attn.q_proj.num_sms_packed', 'model.layers.10.self_attn.v_proj.num_sms_packed', 'model.layers.11.mlp.down_proj.num_sms_packed', 'model.layers.11.mlp.gate_proj.num_sms_packed', 'model.layers.11.mlp.up_proj.num_sms_packed', 'model.layers.11.self_attn.k_proj.num_sms_packed', 'model.layers.11.self_attn.o_proj.num_sms_packed', 'model.layers.11.self_attn.q_proj.num_sms_packed', 'model.layers.11.self_attn.v_proj.num_sms_packed', 'model.layers.12.mlp.down_proj.num_sms_packed', 'model.layers.12.mlp.gate_proj.num_sms_packed', 'model.layers.12.mlp.up_proj.num_sms_packed', 'model.layers.12.self_attn.k_proj.num_sms_packed', 'model.layers.12.self_attn.o_proj.num_sms_packed', 'model.layers.12.self_attn.q_proj.num_sms_packed', 'model.layers.12.self_attn.v_proj.num_sms_packed', 'model.layers.13.mlp.down_proj.num_sms_packed', 'model.layers.13.mlp.gate_proj.num_sms_packed', 'model.layers.13.mlp.up_proj.num_sms_packed', 'model.layers.13.self_attn.k_proj.num_sms_packed', 'model.layers.13.self_attn.o_proj.num_sms_packed', 'model.layers.13.self_attn.q_proj.num_sms_packed', 'model.layers.13.self_attn.v_proj.num_sms_packed', 'model.layers.14.mlp.down_proj.num_sms_packed', 'model.layers.14.mlp.gate_proj.num_sms_packed', 'model.layers.14.mlp.up_proj.num_sms_packed', 'model.layers.14.self_attn.k_proj.num_sms_packed', 'model.layers.14.self_attn.o_proj.num_sms_packed', 'model.layers.14.self_attn.q_proj.num_sms_packed', 'model.layers.14.self_attn.v_proj.num_sms_packed', 'model.layers.15.mlp.down_proj.num_sms_packed', 'model.layers.15.mlp.gate_proj.num_sms_packed', 'model.layers.15.mlp.up_proj.num_sms_packed', 'model.layers.15.self_attn.k_proj.num_sms_packed', 'model.layers.15.self_attn.o_proj.num_sms_packed', 'model.layers.15.self_attn.q_proj.num_sms_packed', 'model.layers.15.self_attn.v_proj.num_sms_packed', 'model.layers.16.mlp.down_proj.num_sms_packed', 'model.layers.16.mlp.gate_proj.num_sms_packed', 'model.layers.16.mlp.up_proj.num_sms_packed', 'model.layers.16.self_attn.k_proj.num_sms_packed', 'model.layers.16.self_attn.o_proj.num_sms_packed', 'model.layers.16.self_attn.q_proj.num_sms_packed', 'model.layers.16.self_attn.v_proj.num_sms_packed', 'model.layers.17.mlp.down_proj.num_sms_packed', 'model.layers.17.mlp.gate_proj.num_sms_packed', 'model.layers.17.mlp.up_proj.num_sms_packed', 'model.layers.17.self_attn.k_proj.num_sms_packed', 'model.layers.17.self_attn.o_proj.num_sms_packed', 'model.layers.17.self_attn.q_proj.num_sms_packed', 'model.layers.17.self_attn.v_proj.num_sms_packed', 'model.layers.18.mlp.down_proj.num_sms_packed', 'model.layers.18.mlp.gate_proj.num_sms_packed', 'model.layers.18.mlp.up_proj.num_sms_packed', 'model.layers.18.self_attn.k_proj.num_sms_packed', 'model.layers.18.self_attn.o_proj.num_sms_packed', 'model.layers.18.self_attn.q_proj.num_sms_packed', 'model.layers.18.self_attn.v_proj.num_sms_packed', 'model.layers.19.mlp.down_proj.num_sms_packed', 'model.layers.19.mlp.gate_proj.num_sms_packed', 'model.layers.19.mlp.up_proj.num_sms_packed', 'model.layers.19.self_attn.k_proj.num_sms_packed', 'model.layers.19.self_attn.o_proj.num_sms_packed', 'model.layers.19.self_attn.q_proj.num_sms_packed', 'model.layers.19.self_attn.v_proj.num_sms_packed', 'model.layers.2.mlp.down_proj.num_sms_packed', 'model.layers.2.mlp.gate_proj.num_sms_packed', 'model.layers.2.mlp.up_proj.num_sms_packed', 'model.layers.2.self_attn.k_proj.num_sms_packed', 'model.layers.2.self_attn.o_proj.num_sms_packed', 'model.layers.2.self_attn.q_proj.num_sms_packed', 'model.layers.2.self_attn.v_proj.num_sms_packed', 'model.layers.20.mlp.down_proj.num_sms_packed', 'model.layers.20.mlp.gate_proj.num_sms_packed', 'model.layers.20.mlp.up_proj.num_sms_packed', 'model.layers.20.self_attn.k_proj.num_sms_packed', 'model.layers.20.self_attn.o_proj.num_sms_packed', 'model.layers.20.self_attn.q_proj.num_sms_packed', 'model.layers.20.self_attn.v_proj.num_sms_packed', 'model.layers.21.mlp.down_proj.num_sms_packed', 'model.layers.21.mlp.gate_proj.num_sms_packed', 'model.layers.21.mlp.up_proj.num_sms_packed', 'model.layers.21.self_attn.k_proj.num_sms_packed', 'model.layers.21.self_attn.o_proj.num_sms_packed', 'model.layers.21.self_attn.q_proj.num_sms_packed', 'model.layers.21.self_attn.v_proj.num_sms_packed', 'model.layers.22.mlp.down_proj.num_sms_packed', 'model.layers.22.mlp.gate_proj.num_sms_packed', 'model.layers.22.mlp.up_proj.num_sms_packed', 'model.layers.22.self_attn.k_proj.num_sms_packed', 'model.layers.22.self_attn.o_proj.num_sms_packed', 'model.layers.22.self_attn.q_proj.num_sms_packed', 'model.layers.22.self_attn.v_proj.num_sms_packed', 'model.layers.23.mlp.down_proj.num_sms_packed', 'model.layers.23.mlp.gate_proj.num_sms_packed', 'model.layers.23.mlp.up_proj.num_sms_packed', 'model.layers.23.self_attn.k_proj.num_sms_packed', 'model.layers.23.self_attn.o_proj.num_sms_packed', 'model.layers.23.self_attn.q_proj.num_sms_packed', 'model.layers.23.self_attn.v_proj.num_sms_packed', 'model.layers.24.mlp.down_proj.num_sms_packed', 'model.layers.24.mlp.gate_proj.num_sms_packed', 'model.layers.24.mlp.up_proj.num_sms_packed', 'model.layers.24.self_attn.k_proj.num_sms_packed', 'model.layers.24.self_attn.o_proj.num_sms_packed', 'model.layers.24.self_attn.q_proj.num_sms_packed', 'model.layers.24.self_attn.v_proj.num_sms_packed', 'model.layers.25.mlp.down_proj.num_sms_packed', 'model.layers.25.mlp.gate_proj.num_sms_packed', 'model.layers.25.mlp.up_proj.num_sms_packed', 'model.layers.25.self_attn.k_proj.num_sms_packed', 'model.layers.25.self_attn.o_proj.num_sms_packed', 'model.layers.25.self_attn.q_proj.num_sms_packed', 'model.layers.25.self_attn.v_proj.num_sms_packed', 'model.layers.26.mlp.down_proj.num_sms_packed', 'model.layers.26.mlp.gate_proj.num_sms_packed', 'model.layers.26.mlp.up_proj.num_sms_packed', 'model.layers.26.self_attn.k_proj.num_sms_packed', 'model.layers.26.self_attn.o_proj.num_sms_packed', 'model.layers.26.self_attn.q_proj.num_sms_packed', 'model.layers.26.self_attn.v_proj.num_sms_packed', 'model.layers.27.mlp.down_proj.num_sms_packed', 'model.layers.27.mlp.gate_proj.num_sms_packed', 'model.layers.27.mlp.up_proj.num_sms_packed', 'model.layers.27.self_attn.k_proj.num_sms_packed', 'model.layers.27.self_attn.o_proj.num_sms_packed', 'model.layers.27.self_attn.q_proj.num_sms_packed', 'model.layers.27.self_attn.v_proj.num_sms_packed', 'model.layers.28.mlp.down_proj.num_sms_packed', 'model.layers.28.mlp.gate_proj.num_sms_packed', 'model.layers.28.mlp.up_proj.num_sms_packed', 'model.layers.28.self_attn.k_proj.num_sms_packed', 'model.layers.28.self_attn.o_proj.num_sms_packed', 'model.layers.28.self_attn.q_proj.num_sms_packed', 'model.layers.28.self_attn.v_proj.num_sms_packed', 'model.layers.29.mlp.down_proj.num_sms_packed', 'model.layers.29.mlp.gate_proj.num_sms_packed', 'model.layers.29.mlp.up_proj.num_sms_packed', 'model.layers.29.self_attn.k_proj.num_sms_packed', 'model.layers.29.self_attn.o_proj.num_sms_packed', 'model.layers.29.self_attn.q_proj.num_sms_packed', 'model.layers.29.self_attn.v_proj.num_sms_packed', 'model.layers.3.mlp.down_proj.num_sms_packed', 'model.layers.3.mlp.gate_proj.num_sms_packed', 'model.layers.3.mlp.up_proj.num_sms_packed', 'model.layers.3.self_attn.k_proj.num_sms_packed', 'model.layers.3.self_attn.o_proj.num_sms_packed', 'model.layers.3.self_attn.q_proj.num_sms_packed', 'model.layers.3.self_attn.v_proj.num_sms_packed', 'model.layers.30.mlp.down_proj.num_sms_packed', 'model.layers.30.mlp.gate_proj.num_sms_packed', 'model.layers.30.mlp.up_proj.num_sms_packed', 'model.layers.30.self_attn.k_proj.num_sms_packed', 'model.layers.30.self_attn.o_proj.num_sms_packed', 'model.layers.30.self_attn.q_proj.num_sms_packed', 'model.layers.30.self_attn.v_proj.num_sms_packed', 'model.layers.31.mlp.down_proj.num_sms_packed', 'model.layers.31.mlp.gate_proj.num_sms_packed', 'model.layers.31.mlp.up_proj.num_sms_packed', 'model.layers.31.self_attn.k_proj.num_sms_packed', 'model.layers.31.self_attn.o_proj.num_sms_packed', 'model.layers.31.self_attn.q_proj.num_sms_packed', 'model.layers.31.self_attn.v_proj.num_sms_packed', 'model.layers.4.mlp.down_proj.num_sms_packed', 'model.layers.4.mlp.gate_proj.num_sms_packed', 'model.layers.4.mlp.up_proj.num_sms_packed', 'model.layers.4.self_attn.k_proj.num_sms_packed', 'model.layers.4.self_attn.o_proj.num_sms_packed', 'model.layers.4.self_attn.q_proj.num_sms_packed', 'model.layers.4.self_attn.v_proj.num_sms_packed', 'model.layers.5.mlp.down_proj.num_sms_packed', 'model.layers.5.mlp.gate_proj.num_sms_packed', 'model.layers.5.mlp.up_proj.num_sms_packed', 'model.layers.5.self_attn.k_proj.num_sms_packed', 'model.layers.5.self_attn.o_proj.num_sms_packed', 'model.layers.5.self_attn.q_proj.num_sms_packed', 'model.layers.5.self_attn.v_proj.num_sms_packed', 'model.layers.6.mlp.down_proj.num_sms_packed', 'model.layers.6.mlp.gate_proj.num_sms_packed', 'model.layers.6.mlp.up_proj.num_sms_packed', 'model.layers.6.self_attn.k_proj.num_sms_packed', 'model.layers.6.self_attn.o_proj.num_sms_packed', 'model.layers.6.self_attn.q_proj.num_sms_packed', 'model.layers.6.self_attn.v_proj.num_sms_packed', 'model.layers.7.mlp.down_proj.num_sms_packed', 'model.layers.7.mlp.gate_proj.num_sms_packed', 'model.layers.7.mlp.up_proj.num_sms_packed', 'model.layers.7.self_attn.k_proj.num_sms_packed', 'model.layers.7.self_attn.o_proj.num_sms_packed', 'model.layers.7.self_attn.q_proj.num_sms_packed', 'model.layers.7.self_attn.v_proj.num_sms_packed', 'model.layers.8.mlp.down_proj.num_sms_packed', 'model.layers.8.mlp.gate_proj.num_sms_packed', 'model.layers.8.mlp.up_proj.num_sms_packed', 'model.layers.8.self_attn.k_proj.num_sms_packed', 'model.layers.8.self_attn.o_proj.num_sms_packed', 'model.layers.8.self_attn.q_proj.num_sms_packed', 'model.layers.8.self_attn.v_proj.num_sms_packed', 'model.layers.9.mlp.down_proj.num_sms_packed', 'model.layers.9.mlp.gate_proj.num_sms_packed', 'model.layers.9.mlp.up_proj.num_sms_packed', 'model.layers.9.self_attn.k_proj.num_sms_packed', 'model.layers.9.self_attn.o_proj.num_sms_packed', 'model.layers.9.self_attn.q_proj.num_sms_packed', 'model.layers.9.self_attn.v_proj.num_sms_packed']
+- This IS expected if you are initializing LlamaForCausalLM from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LlamaForCausalLM from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Repacking HIGGS modules:   0%|          | 0/224 [00:00<?, ?it/s]Repacking HIGGS modules:   0%|          | 1/224 [00:37<2:17:55, 37.11s/it]Repacking HIGGS modules:   1%|          | 2/224 [01:09<2:06:35, 34.22s/it]Repacking HIGGS modules:   2%|▏         | 5/224 [01:45<1:07:05, 18.38s/it]Repacking HIGGS modules:   3%|▎         | 7/224 [02:12<59:22, 16.42s/it]                                                                          Model 'higgs' loaded. Starting inference...
+--- Round 1/5 (0 done, 384 remaining) ---
+[1/1920] 2026-07-06 09:06:05 | R1 | 2013_0_1/103399 vs 2013_0_1/99825 → CLONE
+[2/1920] 2026-07-06 09:06:08 | R1 | 2013_0_1/99825 vs 2013_0_1/125888 → CLONE
+[3/1920] 2026-07-06 09:06:12 | R1 | 2013_0_1/125888 vs 2013_0_1/84842 → CLONE
+[4/1920] 2026-07-06 09:06:16 | R1 | 2013_0_1/84842 vs 2013_0_1/103399 → CLONE
+[5/1920] 2026-07-06 09:06:19 | R1 | 2013_0_1/49244 vs 2013_0_1/98087 → CLONE
+[6/1920] 2026-07-06 09:06:22 | R1 | 2013_0_1/98087 vs 2013_0_1/91336 → CLONE
+[7/1920] 2026-07-06 09:06:26 | R1 | 2013_0_1/91336 vs 2013_0_1/102913 → CLONE
+[8/1920] 2026-07-06 09:06:30 | R1 | 2013_0_1/102913 vs 2013_0_1/49244 → CLONE
+[9/1920] 2026-07-06 09:06:34 | R1 | 2013_0_1/126886 vs 2013_0_1/72071 → CLONE
+[10/1920] 2026-07-06 09:06:37 | R1 | 2013_0_1/72071 vs 2013_0_1/70537 → CLONE
+[11/1920] 2026-07-06 09:06:41 | R1 | 2013_0_1/70537 vs 2013_0_1/127485 → CLONE
+[12/1920] 2026-07-06 09:06:45 | R1 | 2013_0_1/127485 vs 2013_0_1/126886 → CLONE
+[13/1920] 2026-07-06 09:06:49 | R1 | 2013_0_2/95524 vs 2013_0_2/83774 → CLONE
+[14/1920] 2026-07-06 09:06:52 | R1 | 2013_0_2/83774 vs 2013_0_2/78034 → CLONE
+[15/1920] 2026-07-06 09:06:55 | R1 | 2013_0_2/78034 vs 2013_0_2/71957 → CLONE
+[16/1920] 2026-07-06 09:06:59 | R1 | 2013_0_2/71957 vs 2013_0_2/95524 → CLONE
+[17/1920] 2026-07-06 09:07:03 | R1 | 2013_0_2/44471 vs 2013_0_2/140779 → CLONE
+[18/1920] 2026-07-06 09:07:06 | R1 | 2013_0_2/140779 vs 2013_0_2/122219 → CLONE
+[19/1920] 2026-07-06 09:07:09 | R1 | 2013_0_2/122219 vs 2013_0_2/96711 → CLONE
+[20/1920] 2026-07-06 09:07:13 | R1 | 2013_0_2/96711 vs 2013_0_2/44471 → CLONE
+[21/1920] 2026-07-06 09:07:16 | R1 | 2013_0_2/55421 vs 2013_0_2/91409 → CLONE
+[22/1920] 2026-07-06 09:07:19 | R1 | 2013_0_2/91409 vs 2013_0_2/85165 → CLONE
+[23/1920] 2026-07-06 09:07:22 | R1 | 2013_0_2/85165 vs 2013_0_2/68303 → CLONE
+[24/1920] 2026-07-06 09:07:26 | R1 | 2013_0_2/68303 vs 2013_0_2/55421 → CLONE
+[25/1920] 2026-07-06 09:07:30 | R1 | 2013_0_3/108834 vs 2013_0_3/102625 → CLONE
+[26/1920] 2026-07-06 09:07:33 | R1 | 2013_0_3/102625 vs 2013_0_3/102207 → CLONE
+[27/1920] 2026-07-06 09:07:37 | R1 | 2013_0_3/102207 vs 2013_0_3/89287 → CLONE
+[28/1920] 2026-07-06 09:07:40 | R1 | 2013_0_3/89287 vs 2013_0_3/108834 → CLONE
+[29/1920] 2026-07-06 09:07:43 | R1 | 2013_0_3/59317 vs 2013_0_3/81195 → CLONE
+[30/1920] 2026-07-06 09:07:46 | R1 | 2013_0_3/81195 vs 2013_0_3/51164 → CLONE
+[31/1920] 2026-07-06 09:07:49 | R1 | 2013_0_3/51164 vs 2013_0_3/92037 → CLONE
+[32/1920] 2026-07-06 09:07:52 | R1 | 2013_0_3/92037 vs 2013_0_3/59317 → CLONE
+[33/1920] 2026-07-06 09:07:55 | R1 | 2013_0_3/74156 vs 2013_0_3/53348 → CLONE
+[34/1920] 2026-07-06 09:07:59 | R1 | 2013_0_3/53348 vs 2013_0_3/70289 → CLONE
+[35/1920] 2026-07-06 09:08:03 | R1 | 2013_0_3/70289 vs 2013_0_3/132829 → CLONE
+[36/1920] 2026-07-06 09:08:06 | R1 | 2013_0_3/132829 vs 2013_0_3/74156 → CLONE
+[37/1920] 2026-07-06 09:08:09 | R1 | 2013_1_1/42047 vs 2013_1_1/28766 → CLONE
+[38/1920] 2026-07-06 09:08:12 | R1 | 2013_1_1/28766 vs 2013_1_1/37029 → CLONE
+[39/1920] 2026-07-06 09:08:15 | R1 | 2013_1_1/37029 vs 2013_1_1/34507 → CLONE
+[40/1920] 2026-07-06 09:08:19 | R1 | 2013_1_1/34507 vs 2013_1_1/42047 → CLONE
+[41/1920] 2026-07-06 09:08:22 | R1 | 2013_1_1/30835 vs 2013_1_1/30228 → CLONE
+[42/1920] 2026-07-06 09:08:24 | R1 | 2013_1_1/30228 vs 2013_1_1/32497 → CLONE
+[43/1920] 2026-07-06 09:08:28 | R1 | 2013_1_1/32497 vs 2013_1_1/39026 → CLONE
+[44/1920] 2026-07-06 09:08:31 | R1 | 2013_1_1/39026 vs 2013_1_1/30835 → CLONE
+[45/1920] 2026-07-06 09:08:34 | R1 | 2013_1_1/32414 vs 2013_1_1/30618 → CLONE
+[46/1920] 2026-07-06 09:08:37 | R1 | 2013_1_1/30618 vs 2013_1_1/30519 → CLONE
+[47/1920] 2026-07-06 09:08:41 | R1 | 2013_1_1/30519 vs 2013_1_1/31779 → CLONE
+[48/1920] 2026-07-06 09:08:44 | R1 | 2013_1_1/31779 vs 2013_1_1/32414 → CLONE
+[49/1920] 2026-07-06 09:08:48 | R1 | 2014_2_1/115757 vs 2014_2_1/131278 → CLONE
+[50/1920] 2026-07-06 09:08:51 | R1 | 2014_2_1/131278 vs 2014_2_1/128920 → CLONE
+[51/1920] 2026-07-06 09:08:55 | R1 | 2014_2_1/128920 vs 2014_2_1/118754 → CLONE
+[52/1920] 2026-07-06 09:08:59 | R1 | 2014_2_1/118754 vs 2014_2_1/115757 → CLONE
+[53/1920] 2026-07-06 09:09:03 | R1 | 2014_2_1/129296 vs 2014_2_1/119165 → CLONE
+[54/1920] 2026-07-06 09:09:07 | R1 | 2014_2_1/119165 vs 2014_2_1/118416 → CLONE
+[55/1920] 2026-07-06 09:09:10 | R1 | 2014_2_1/118416 vs 2014_2_1/116147 → CLONE
+[56/1920] 2026-07-06 09:09:14 | R1 | 2014_2_1/116147 vs 2014_2_1/129296 → CLONE
+[57/1920] 2026-07-06 09:09:18 | R1 | 2014_2_1/131873 vs 2014_2_1/118489 → CLONE
+[58/1920] 2026-07-06 09:09:23 | R1 | 2014_2_1/118489 vs 2014_2_1/121201 → CLONE
+[59/1920] 2026-07-06 09:09:26 | R1 | 2014_2_1/121201 vs 2014_2_1/114208 → CLONE
+[60/1920] 2026-07-06 09:09:29 | R1 | 2014_2_1/114208 vs 2014_2_1/131873 → CLONE
+[61/1920] 2026-07-06 09:09:32 | R1 | 2014_3_1/135560 vs 2014_3_1/138308 → CLONE
+[62/1920] 2026-07-06 09:09:36 | R1 | 2014_3_1/138308 vs 2014_3_1/139209 → CLONE
+[63/1920] 2026-07-06 09:09:39 | R1 | 2014_3_1/139209 vs 2014_3_1/142092 → CLONE
+[64/1920] 2026-07-06 09:09:42 | R1 | 2014_3_1/142092 vs 2014_3_1/135560 → CLONE
+[65/1920] 2026-07-06 09:09:46 | R1 | 2014_3_1/138333 vs 2014_3_1/134611 → CLONE
+[66/1920] 2026-07-06 09:09:50 | R1 | 2014_3_1/134611 vs 2014_3_1/139370 → CLONE
+[67/1920] 2026-07-06 09:09:53 | R1 | 2014_3_1/139370 vs 2014_3_1/134295 → CLONE
+[68/1920] 2026-07-06 09:09:56 | R1 | 2014_3_1/134295 vs 2014_3_1/138333 → CLONE
+[69/1920] 2026-07-06 09:09:59 | R1 | 2014_3_1/140281 vs 2014_3_1/132142 → CLONE
+[70/1920] 2026-07-06 09:10:03 | R1 | 2014_3_1/132142 vs 2014_3_1/143074 → CLONE
+[71/1920] 2026-07-06 09:10:06 | R1 | 2014_3_1/143074 vs 2014_3_1/132975 → CLONE
+[72/1920] 2026-07-06 09:10:10 | R1 | 2014_3_1/132975 vs 2014_3_1/140281 → CLONE
+[73/1920] 2026-07-06 09:10:13 | R1 | 2015_0_1/47939 vs 2015_0_1/44230 → CLONE
+[74/1920] 2026-07-06 09:10:16 | R1 | 2015_0_1/44230 vs 2015_0_1/106809 → CLONE
+[75/1920] 2026-07-06 09:10:20 | R1 | 2015_0_1/106809 vs 2015_0_1/25955 → CLONE
+[76/1920] 2026-07-06 09:10:23 | R1 | 2015_0_1/25955 vs 2015_0_1/47939 → CLONE
+[77/1920] 2026-07-06 09:10:26 | R1 | 2015_0_1/43660 vs 2015_0_1/64620 → CLONE
+[78/1920] 2026-07-06 09:10:30 | R1 | 2015_0_1/64620 vs 2015_0_1/86599 → CLONE
+[79/1920] 2026-07-06 09:10:33 | R1 | 2015_0_1/86599 vs 2015_0_1/28465 → CLONE
+[80/1920] 2026-07-06 09:10:37 | R1 | 2015_0_1/28465 vs 2015_0_1/43660 → CLONE
+[81/1920] 2026-07-06 09:10:40 | R1 | 2015_0_1/100718 vs 2015_0_1/65110 → CLONE
+[82/1920] 2026-07-06 09:10:43 | R1 | 2015_0_1/65110 vs 2015_0_1/60803 → CLONE
+[83/1920] 2026-07-06 09:10:47 | R1 | 2015_0_1/60803 vs 2015_0_1/96593 → CLONE
+[84/1920] 2026-07-06 09:10:50 | R1 | 2015_0_1/96593 vs 2015_0_1/100718 → CLONE
+[85/1920] 2026-07-06 09:10:53 | R1 | 2015_0_2/91000 vs 2015_0_2/96440 → CLONE
+[86/1920] 2026-07-06 09:10:57 | R1 | 2015_0_2/96440 vs 2015_0_2/36519 → CLONE
+[87/1920] 2026-07-06 09:11:00 | R1 | 2015_0_2/36519 vs 2015_0_2/103402 → CLONE
+[88/1920] 2026-07-06 09:11:04 | R1 | 2015_0_2/103402 vs 2015_0_2/91000 → CLONE
+[89/1920] 2026-07-06 09:11:06 | R1 | 2015_0_2/21812 vs 2015_0_2/88257 → CLONE
+[90/1920] 2026-07-06 09:11:10 | R1 | 2015_0_2/88257 vs 2015_0_2/81081 → CLONE
+[91/1920] 2026-07-06 09:11:14 | R1 | 2015_0_2/81081 vs 2015_0_2/102321 → CLONE
+[92/1920] 2026-07-06 09:11:17 | R1 | 2015_0_2/102321 vs 2015_0_2/21812 → CLONE
+[93/1920] 2026-07-06 09:11:20 | R1 | 2015_0_2/40957 vs 2015_0_2/38840 → CLONE
+[94/1920] 2026-07-06 09:11:24 | R1 | 2015_0_2/38840 vs 2015_0_2/100159 → CLONE
+[95/1920] 2026-07-06 09:11:27 | R1 | 2015_0_2/100159 vs 2015_0_2/55775 → CLONE
+[96/1920] 2026-07-06 09:11:31 | R1 | 2015_0_2/55775 vs 2015_0_2/40957 → CLONE
+[97/1920] 2026-07-06 09:11:35 | R1 | 2015_0_3/42051 vs 2015_0_3/41900 → CLONE
+[98/1920] 2026-07-06 09:11:39 | R1 | 2015_0_3/41900 vs 2015_0_3/103585 → CLONE
+[99/1920] 2026-07-06 09:11:42 | R1 | 2015_0_3/103585 vs 2015_0_3/19800 → CLONE
+[100/1920] 2026-07-06 09:11:46 | R1 | 2015_0_3/19800 vs 2015_0_3/42051 → CLONE
+[101/1920] 2026-07-06 09:11:51 | R1 | 2015_0_3/47513 vs 2015_0_3/49764 → CLONE
+[102/1920] 2026-07-06 09:11:55 | R1 | 2015_0_3/49764 vs 2015_0_3/103774 → CLONE
+[103/1920] 2026-07-06 09:11:59 | R1 | 2015_0_3/103774 vs 2015_0_3/102323 → CLONE
+[104/1920] 2026-07-06 09:12:03 | R1 | 2015_0_3/102323 vs 2015_0_3/47513 → CLONE
+[105/1920] 2026-07-06 09:12:07 | R1 | 2015_0_3/96608 vs 2015_0_3/23036 → CLONE
+[106/1920] 2026-07-06 09:12:11 | R1 | 2015_0_3/23036 vs 2015_0_3/72742 → CLONE
+[107/1920] 2026-07-06 09:12:15 | R1 | 2015_0_3/72742 vs 2015_0_3/18309 → CLONE
+[108/1920] 2026-07-06 09:12:19 | R1 | 2015_0_3/18309 vs 2015_0_3/96608 → CLONE
+[109/1920] 2026-07-06 09:12:23 | R1 | 2015_0_4/86262 vs 2015_0_4/63026 → CLONE
+[110/1920] 2026-07-06 09:12:25 | R1 | 2015_0_4/63026 vs 2015_0_4/57828 → CLONE
+[111/1920] 2026-07-06 09:12:28 | R1 | 2015_0_4/57828 vs 2015_0_4/68310 → CLONE
+[112/1920] 2026-07-06 09:12:32 | R1 | 2015_0_4/68310 vs 2015_0_4/86262 → CLONE
+[113/1920] 2026-07-06 09:12:35 | R1 | 2015_0_4/30398 vs 2015_0_4/86932 → CLONE
+[114/1920] 2026-07-06 09:12:37 | R1 | 2015_0_4/86932 vs 2015_0_4/94256 → CLONE
+[115/1920] 2026-07-06 09:12:41 | R1 | 2015_0_4/94256 vs 2015_0_4/19708 → CLONE
+[116/1920] 2026-07-06 09:12:44 | R1 | 2015_0_4/19708 vs 2015_0_4/30398 → CLONE
+[117/1920] 2026-07-06 09:12:47 | R1 | 2015_0_4/29877 vs 2015_0_4/60776 → CLONE
+[118/1920] 2026-07-06 09:12:51 | R1 | 2015_0_4/60776 vs 2015_0_4/74018 → CLONE
+[119/1920] 2026-07-06 09:12:54 | R1 | 2015_0_4/74018 vs 2015_0_4/78114 → CLONE
+[120/1920] 2026-07-06 09:12:58 | R1 | 2015_0_4/78114 vs 2015_0_4/29877 → CLONE
+[121/1920] 2026-07-06 09:13:01 | R1 | 2015_1_1/112276 vs 2015_1_1/111086 → CLONE
+[122/1920] 2026-07-06 09:13:04 | R1 | 2015_1_1/111086 vs 2015_1_1/117734 → CLONE
+[123/1920] 2026-07-06 09:13:06 | R1 | 2015_1_1/117734 vs 2015_1_1/122934 → CLONE
+[124/1920] 2026-07-06 09:13:10 | R1 | 2015_1_1/122934 vs 2015_1_1/112276 → CLONE
+[125/1920] 2026-07-06 09:13:14 | R1 | 2015_1_1/118030 vs 2015_1_1/122263 → CLONE
+[126/1920] 2026-07-06 09:13:17 | R1 | 2015_1_1/122263 vs 2015_1_1/124602 → CLONE
+[127/1920] 2026-07-06 09:13:20 | R1 | 2015_1_1/124602 vs 2015_1_1/111264 → CLONE
+[128/1920] 2026-07-06 09:13:23 | R1 | 2015_1_1/111264 vs 2015_1_1/118030 → CLONE
+[129/1920] 2026-07-06 09:13:26 | R1 | 2015_1_1/112898 vs 2015_1_1/111866 → CLONE
+[130/1920] 2026-07-06 09:13:29 | R1 | 2015_1_1/111866 vs 2015_1_1/111647 → CLONE
+[131/1920] 2026-07-06 09:13:32 | R1 | 2015_1_1/111647 vs 2015_1_1/121770 → CLONE
+[132/1920] 2026-07-06 09:13:35 | R1 | 2015_1_1/121770 vs 2015_1_1/112898 → CLONE
+[133/1920] 2026-07-06 09:13:39 | R1 | 2016_0_1/76319 vs 2016_0_1/65647 → CLONE
+[134/1920] 2026-07-06 09:13:42 | R1 | 2016_0_1/65647 vs 2016_0_1/94639 → CLONE
+[135/1920] 2026-07-06 09:13:46 | R1 | 2016_0_1/94639 vs 2016_0_1/48618 → CLONE
+[136/1920] 2026-07-06 09:13:49 | R1 | 2016_0_1/48618 vs 2016_0_1/76319 → CLONE
+[137/1920] 2026-07-06 09:13:52 | R1 | 2016_0_1/117099 vs 2016_0_1/134225 → CLONE
+[138/1920] 2026-07-06 09:13:56 | R1 | 2016_0_1/134225 vs 2016_0_1/88781 → CLONE
+[139/1920] 2026-07-06 09:13:59 | R1 | 2016_0_1/88781 vs 2016_0_1/39027 → CLONE
+[140/1920] 2026-07-06 09:14:03 | R1 | 2016_0_1/39027 vs 2016_0_1/117099 → CLONE
+[141/1920] 2026-07-06 09:14:06 | R1 | 2016_0_1/100898 vs 2016_0_1/143909 → CLONE
+[142/1920] 2026-07-06 09:14:10 | R1 | 2016_0_1/143909 vs 2016_0_1/71388 → CLONE
+[143/1920] 2026-07-06 09:14:13 | R1 | 2016_0_1/71388 vs 2016_0_1/113708 → CLONE
+[144/1920] 2026-07-06 09:14:16 | R1 | 2016_0_1/113708 vs 2016_0_1/100898 → CLONE
+[145/1920] 2026-07-06 09:14:20 | R1 | 2016_0_4/136626 vs 2016_0_4/135114 → CLONE
+[146/1920] 2026-07-06 09:14:23 | R1 | 2016_0_4/135114 vs 2016_0_4/63570 → CLONE
+[147/1920] 2026-07-06 09:14:26 | R1 | 2016_0_4/63570 vs 2016_0_4/80717 → CLONE
+../aten/src/ATen/native/cuda/TensorCompare.cu:110: _assert_async_cuda_kernel: block: [0,0,0], thread: [0,0,0] Assertion `probability tensor contains either `inf`, `nan` or element < 0` failed.
+Traceback (most recent call last):
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 718, in <module>
+    run_experiment(args.model, args.hf_model, args.tests_dir, args.output_base,
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 639, in run_experiment
+    overall_done = _run_round(
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 568, in _run_round
+    response = infer(tc_a.code, tc_b.code, pair_lang or lang)
+  File "/home/chaiyong.rag/quantization-clone-study/run_quantization.py", line 164, in infer
+    outputs = model.generate(**inputs, max_new_tokens=max_new_tokens,
+  File "/home/chaiyong.rag/quantization-clone-study/higgs_venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/higgs_venv/lib/python3.10/site-packages/transformers/generation/utils.py", line 2326, in generate
+    result = self._sample(
+  File "/home/chaiyong.rag/quantization-clone-study/higgs_venv/lib/python3.10/site-packages/transformers/generation/utils.py", line 3277, in _sample
+    while self._has_unfinished_sequences(this_peer_finished, synced_gpus, device=input_ids.device):
+  File "/home/chaiyong.rag/quantization-clone-study/higgs_venv/lib/python3.10/site-packages/transformers/generation/utils.py", line 2477, in _has_unfinished_sequences
+    elif this_peer_finished:
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

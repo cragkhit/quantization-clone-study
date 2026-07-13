@@ -1,7 +1,7 @@
 """
 Clone-detection inference runner for quantized LLMs.
 
-Supports eight model backends (original, gguf, qwen, deepseek, aqlm, higgs, qtip, codellama) and runs
+Supports nine model backends (original, gguf, qwen, qwen3fp8, deepseek, aqlm, higgs, qtip, codellama) and runs
 every n×n pair of Java code snippets from the OCD test suite, saving results
 to per-round CSV files that can be evaluated with evaluate_results.py.
 
@@ -271,6 +271,45 @@ def load_qwen(hf_model: str | None = None):
     return infer
 
 
+def load_qwen3fp8(hf_model: str | None = None):
+    """Qwen3-Coder-30B-A3B-Instruct FP8 (fine-grained FP8, MoE) served via vLLM.
+
+    vLLM's FP8-MoE kernels are far faster than transformers here, which is
+    decode-latency-bound on this model (~25s/pair, GPU ~23%). Requires vllm_venv
+    (vLLM 0.11 / torch 2.8+cu128, compatible with the 535/CUDA-12.2 driver) and
+    an H100/sm_90 GPU. Pin one GPU with CUDA_VISIBLE_DEVICES:
+      CUDA_VISIBLE_DEVICES=<gpu> vllm_venv/bin/python run_quantization.py qwen3fp8
+    """
+    from vllm import LLM, SamplingParams
+
+    model_id = hf_model or "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8"
+    # gpu_memory_utilization is kept moderate: the untuned fused-MoE path
+    # allocates a large transient workspace during CUDA-graph capture, which
+    # OOMs if KV cache claims too much of the 80 GiB card. max_num_seqs is small
+    # because inference is issued one pair at a time (no need for high batching).
+    llm = LLM(
+        model=model_id,
+        max_model_len=32768,
+        gpu_memory_utilization=0.80,
+        max_num_seqs=64,
+    )
+    # Qwen3-Coder-Instruct recommended decoding settings (non-thinking model).
+    # Sampling (temperature > 0) also gives the per-round variation the
+    # majority-vote evaluation relies on.
+    sampling = SamplingParams(
+        temperature=0.7, top_p=0.8, top_k=20,
+        repetition_penalty=1.05, max_tokens=256,
+    )
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        messages = [{"role": "user", "content": prompt}]
+        outputs = llm.chat(messages, sampling, use_tqdm=False)
+        return outputs[0].outputs[0].text
+
+    return infer
+
+
 def load_aqlm(hf_model: str | None = None):
     """AQLM 2-bit + PV-Tuning. pip install transformers accelerate aqlm[gpu]
     Run with: CC=gcc-11 CXX=g++-11 python run_quantization.py aqlm
@@ -488,6 +527,7 @@ LOADERS = {
     "original":   load_original,
     "gguf":       load_gguf,
     "qwen":       load_qwen,
+    "qwen3fp8":   load_qwen3fp8,
     "deepseek":   load_deepseek,
     "aqlm":       load_aqlm,
     "higgs":      load_higgs,
@@ -661,6 +701,7 @@ Examples:
   python run_quantization.py gguf bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
   python run_quantization.py aqlm ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf --rounds 4
   python run_quantization.py qtip relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit --output results/my_run
+  python run_quantization.py qwen3fp8 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 --rounds 5
   python run_quantization.py codellama
   python run_quantization.py codellama codellama/CodeLlama-7b-Instruct-hf
         """,

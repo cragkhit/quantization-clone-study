@@ -494,6 +494,15 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
 
     float_cols = {"accuracy", "precision", "recall", "f1", "mcc"}
 
+    # Highlight the 5 highest MCC scores with a green gradient (darker = higher).
+    # Requires \usepackage[table]{xcolor} (for \cellcolor) in the document preamble.
+    _MCC_SHADES = [50, 40, 30, 20, 10]
+    _mcc_ranked = sorted(
+        (r for r in rows if isinstance(r.get("mcc"), (int, float))),
+        key=lambda r: r["mcc"], reverse=True,
+    )[:len(_MCC_SHADES)]
+    mcc_shade = {id(r): _MCC_SHADES[i] for i, r in enumerate(_mcc_ranked)}
+
     TABLES = [
         {
             "caption": "Clone Detection Evaluation Summary --- Count Statistics",
@@ -509,8 +518,8 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
             "label":   "tab:evaluation_metrics",
             "size":    r"\small",
             "resize":  True,
-            "headers": ["Model", "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"],
-            "keys":    ["file", "accuracy", "precision", "recall", "f1", "mcc", "run_time"],
+            "headers": ["Model", "Accuracy", "Precision", "Recall", "F1", "MCC"],
+            "keys":    ["file", "accuracy", "precision", "recall", "f1", "mcc"],
         },
         {
             "caption": "Clone Detection Evaluation Summary --- Full Results",
@@ -518,10 +527,10 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
             "size":    r"\footnotesize",
             "resize":  True,
             "headers": ["Model", "Total", "Eval", "Excl", "TP", "FP", "FN", "TN",
-                        "Accuracy", "Precision", "Recall", "F1", "MCC", "Run Time"],
+                        "Accuracy", "Precision", "Recall", "F1", "MCC"],
             "keys":    ["file", "rows_total", "rows_evaluated", "rows_excluded",
                         "TP", "FP", "FN", "TN",
-                        "accuracy", "precision", "recall", "f1", "mcc", "run_time"],
+                        "accuracy", "precision", "recall", "f1", "mcc"],
         },
     ]
 
@@ -542,7 +551,10 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
                  "HIGGS Quantization", "QTIP Quantization"]
     group_order.sort(key=lambda g: preferred.index(g) if g in preferred else 99)
 
-    all_lines: list[str] = []
+    all_lines: list[str] = [
+        r"% Requires \usepackage[table]{xcolor} for the \cellcolor MCC highlights.",
+        "",
+    ]
 
     for tbl in TABLES:
         headers = tbl["headers"]
@@ -580,7 +592,10 @@ def write_latex_table(rows: list[dict], output_path: str) -> None:
                     if k == "file":
                         cells.append(escape(model_name))
                     elif k in float_cols:
-                        cells.append(f"{r[k]:.4f}")
+                        val = f"{r[k]:.3f}"
+                        if k == "mcc" and id(r) in mcc_shade:
+                            val = f"\\cellcolor{{green!{mcc_shade[id(r)]}}}{val}"
+                        cells.append(val)
                     else:
                         cells.append(str(r[k]))
                 lines.append("    " + " & ".join(cells) + r" \\")

@@ -947,3 +947,111 @@ CUDA_VISIBLE_DEVICES=1,2,3,5,6,7 llama4_venv/bin/python run_quantization.py orig
 96 pairs × 5 rounds = 480 inferences. `CUDA_VISIBLE_DEVICES` pins the run to idle
 GPUs so it does not collide with other jobs (Scout's MoE in BF16 is distributed
 across them via `device_map="auto"`).
+
+---
+
+## Fine-Tuning (QLoRA): Qwen2.5-Coder-7B on AIZU, evaluated on GCJ-Java
+
+**Goal.** Fine-tune a LoRA adapter for the clone task and measure the lift at the
+**same quantization** as an existing baseline: the Qwen2.5-Coder-7B **GGUF
+Q4_K_M** row (GCJ-Java Acc 0.8175 / MCC 0.6821).
+
+**Design (fair comparison).** A GGUF k-quant is not differentiable, so you cannot
+back-prop through the `.gguf` directly. Instead:
+1. Train a LoRA adapter in PyTorch with **QLoRA** — the base Qwen2.5-Coder-7B is
+   loaded 4-bit NF4 (bitsandbytes) and frozen; only the adapter (bf16) trains.
+2. Convert the adapter to GGUF.
+3. At inference, apply the adapter **on top of the existing
+   `qwen2.5-coder-7b-instruct-q4_k_m.gguf`** via llama.cpp `lora_path` (the new
+   `gguf_lora` backend). The base bytes are identical to the benchmarked Q4_K_M
+   model, so the metric delta isolates the fine-tuning effect.
+
+Caveat: the adapter is trained against the NF4 base and applied to the K-quant
+Q4_K_M base — a mild train/inference quant mismatch (same as QLoRA's own NF4
+assumption). Report the result as its own row, not a drop-in Q4_K_M replacement.
+
+### Training data — SimilBench AIZU384F
+
+AIZU Online Judge submissions (a *different source* than GCJ, so no problem
+overlap with the GCJ-Java test set). 384 balanced pairs (192 clone / 192
+non-clone) across 15 languages. Ground truth: `truth/AIZU384F.csv`
+(`Truth,fileA,fileB,lang`; T=clone, F=non-clone).
+
+```bash
+# The SimilBench repo (contains data/AIZU384F/ + truth/AIZU384F.csv) lives in
+# finetune_data/SimilBench-main/ (downloaded from the SimilBench Google-Drive zip).
+# Build the chat-format train/val JSONL (all 15 languages, (A,B)+(B,A) swap aug,
+# 15% stratified val). No GPU needed:
+env -u PYTHONPATH finetune_venv/bin/python prepare_aizu_finetune.py
+# -> finetune_data/aizu_train.jsonl (652 ex)  finetune_data/aizu_val.jsonl (116 ex)
+```
+
+Each example's user turn is the exact `prompt.md` template (via `build_prompt`);
+the assistant turn is the JSON `{"answer": "YES-SIMILAR"|"NO-NOT-SIMILAR", ...}`
+that `evaluate_results.parse_answer` reads. Loss is masked to the answer only.
+
+### Virtual environment (`finetune_venv`)
+
+```bash
+# uv venv, system Python 3.10 (matches the other venvs). Install cu128 torch
+# first, then the training deps.
+uv venv --python /usr/bin/python3.10 finetune_venv
+uv pip install --python finetune_venv/bin/python \
+    torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+uv pip install --python finetune_venv/bin/python -r requirements/finetune.txt
+# requirements/finetune.txt: transformers 4.57.6, accelerate 1.10.1, peft,
+# bitsandbytes, datasets, sentencepiece, huggingface_hub.
+```
+
+> All commands use `env -u PYTHONPATH` because a shared Jupyter Python 3.9 on
+> `PYTHONPATH` otherwise shadows the venv's site-packages.
+
+### Training
+
+Requires a CUDA GPU. QLoRA (r=16, α=32, dropout=0.05) on q/k/v/o/gate/up/down,
+LR 2e-4 cosine, 3 epochs, effective batch 16 (bs 2 × grad-accum 8), max_len 2048.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH finetune_venv/bin/python train_lora.py \
+  --base-model Qwen/Qwen2.5-Coder-7B-Instruct \
+  --output-dir finetune_models/qwen2.5-coder-7b-aizu-qlora \
+  2>&1 | tee logs/train_qwen_aizu_qlora.log
+```
+
+`--base-model` MUST be the model your GGUF Q4_K_M is a quant of, so the adapter
+tensor shapes match. `--no-4bit` trains on the bf16 base (standard LoRA) instead.
+The adapter (a few MB) is written to the `--output-dir`.
+
+### Convert the adapter to GGUF
+
+Needs the llama.cpp repo (not bundled here) for `convert_lora_to_gguf.py`:
+
+```bash
+git clone https://github.com/ggml-org/llama.cpp   # one-time
+env -u PYTHONPATH finetune_venv/bin/python llama.cpp/convert_lora_to_gguf.py \
+  finetune_models/qwen2.5-coder-7b-aizu-qlora \
+  --base Qwen/Qwen2.5-Coder-7B-Instruct \
+  --outfile finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf --outtype f16
+```
+
+### Evaluate on GCJ-Java (`gguf_lora` backend)
+
+Applies the adapter on top of the **existing** Q4_K_M GGUF, through the same
+llama.cpp pipeline as the baseline. Uses the `gguf` venv (llama-cpp-python).
+hf_model format: `repo::base_file.gguf::adapter.gguf`.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH gguf/bin/python run_quantization.py gguf_lora \
+  "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf::finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Qwen2.5-Coder-7B-Instruct/results_qwen_q4km_aizu_lora" \
+  --rounds 5 2>&1 | tee logs/run_qwen_q4km_aizu_lora_gcj_java.log
+
+env -u PYTHONPATH gguf/bin/python evaluate_results.py \
+  results_gcj_java/Qwen2.5-Coder-7B-Instruct/results_qwen_q4km_aizu_lora_round*.csv \
+  --mode majority-vote --output results_gcj_java/evaluation_summary_gcj_java.csv
+```
+
+Compare the resulting Acc/MCC against the plain Q4_K_M row (0.8175 / 0.6821) to
+read off the fine-tuning lift. Verify at load time that this llama-cpp-python
+build honours `lora_path` (0.3.26 supports GGUF LoRA adapters).

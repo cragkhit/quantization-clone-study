@@ -271,6 +271,55 @@ def load_qwen(hf_model: str | None = None):
     return infer
 
 
+def load_gguf_lora(hf_model: str | None = None):
+    """GGUF base + a LoRA adapter applied at inference (llama.cpp `lora_path`).
+
+    Lets a fine-tuned adapter run on top of an *existing* quantized GGUF, so the
+    base weights are byte-identical to a baseline you already evaluated and the
+    metric delta isolates the fine-tuning lift at the same quantization.
+
+    hf_model format: 'repo_id::base_file.gguf::/path/to/adapter.gguf'
+    Default base: Qwen2.5-Coder-7B-Instruct Q4_K_M. The adapter path is required.
+    """
+    from llama_cpp import Llama
+
+    default_repo = "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF"
+    default_file = "qwen2.5-coder-7b-instruct-q4_k_m.gguf"
+
+    parts = (hf_model or "").split("::")
+    if len(parts) == 3:
+        repo_id, filename, lora_path = parts
+    elif len(parts) == 1 and parts[0]:
+        repo_id, filename, lora_path = default_repo, default_file, parts[0]
+    else:
+        raise ValueError(
+            "gguf_lora needs 'repo::base_file.gguf::adapter.gguf' "
+            "(or just 'adapter.gguf' to use the default Qwen Q4_K_M base).")
+
+    if not Path(lora_path).exists():
+        raise FileNotFoundError(f"LoRA adapter not found: {lora_path}")
+
+    print(f"GGUF base: {repo_id}::{filename}\nLoRA adapter: {lora_path}", flush=True)
+    llm = Llama.from_pretrained(
+        repo_id=repo_id,
+        filename=filename,
+        lora_path=lora_path,
+        n_gpu_layers=-1,
+        n_ctx=16384,
+        verbose=False,
+    )
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        output = llm.create_chat_completion(
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=128,
+        )
+        return output["choices"][0]["message"]["content"]
+
+    return infer
+
+
 def load_qwen3fp8(hf_model: str | None = None):
     """Qwen3-Coder-30B-A3B-Instruct FP8 (fine-grained FP8, MoE) served via vLLM.
 
@@ -527,6 +576,7 @@ LOADERS = {
     "original":   load_original,
     "gguf":       load_gguf,
     "qwen":       load_qwen,
+    "gguf_lora":  load_gguf_lora,
     "qwen3fp8":   load_qwen3fp8,
     "deepseek":   load_deepseek,
     "aqlm":       load_aqlm,

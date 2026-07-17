@@ -1118,3 +1118,48 @@ env -u PYTHONPATH gguf/bin/python evaluate_results.py \
 Compare the resulting Acc/MCC against the plain Q4_K_M row (0.8175 / 0.6821) to
 read off the fine-tuning lift. Verify at load time that this llama-cpp-python
 build honours `lora_path` (0.3.26 supports GGUF LoRA adapters).
+
+### Results (first run, 2026-07-18)
+
+Adapter `qwen2.5-coder-7b-aizu-qlora` (QLoRA, 4-bit NF4 base, r=16/α=32, 3 epochs,
+123 steps, ~9 min on one H100; final eval_loss 0.0004) applied on top of the
+existing `qwen2.5-coder-7b-instruct-q4_k_m.gguf`, evaluated on GCJ-Java (400
+pairs, 5 rounds, majority vote):
+
+| Metric    | Q4_K_M baseline | + AIZU QLoRA adapter | Δ      |
+|-----------|-----------------|----------------------|--------|
+| Accuracy  | 0.8175          | **0.9775**           | +0.160 |
+| Precision | 1.0000          | 0.9799               | −0.020 |
+| Recall    | 0.6350          | **0.9750**           | +0.340 |
+| F1        | 0.7768          | **0.9774**           | +0.201 |
+| MCC       | 0.6821          | **0.9550**           | +0.273 |
+
+Confusion matrices (positive = CLONE):
+
+```
+  baseline Q4_K_M                  + AIZU adapter
+                Pred C  Pred N                   Pred C  Pred N
+  True CLONE      127      73        True CLONE     195       5
+  True NON-CLONE    0     200        True NON-CLONE   4     196
+```
+
+**Interpretation.** The stock Q4_K_M model was strongly biased toward NON-CLONE:
+it never false-positived (precision 1.0) but caught only 64% of true clones
+(recall 0.635), missing 73/200. Fine-tuning on AIZU clone pairs taught it to
+recognise *functional* similarity across differing implementations — recall rose
+to 0.975 for a small precision cost (4 false positives). The resulting MCC 0.955
+matches the study's best model (Llama-4-Scout BF16, 0.959): a fine-tuned
+quantized 7B reaches 17B-level accuracy on this task.
+
+Notes on validity:
+- **True cross-dataset generalisation**: trained on AIZU (AIZU Online Judge),
+  tested on GCJ (Google Code Jam) — disjoint sources, zero problem overlap, so
+  the gain is not memorisation. (The GCJ dataset itself could not supply held-out
+  training problems: all 20 of its Java problems are in the GCJ-Java test set.)
+- **Not a format artifact**: both baseline and fine-tuned produced 0
+  `DONT-KNOW`/unparseable responses, so the lift is a real capability gain, not
+  reduced hedging.
+- The near-zero *training* loss reflects the short, templated target string, not
+  test difficulty — the GCJ-Java metrics are the meaningful signal.
+- Trained on NF4, applied to Q4_K_M (mild, expected QLoRA quant mismatch): report
+  as its own row, not a drop-in Q4_K_M replacement.

@@ -810,6 +810,69 @@ python run_quantization.py gguf \
 - `trust_remote_code=True` is only needed for the BF16 path; the GGUF file is
   self-contained and does not execute model-repo Python code.
 
+---
+
+## aya-expanse-8b Setup
+
+### Model run
+- **[`CohereLabs/aya-expanse-8b`](https://huggingface.co/CohereLabs/aya-expanse-8b)** — BF16, full precision (`original` backend)
+
+### No new backend needed
+
+`aya-expanse-8b` is a standard `CohereForCausalLM` with a chat template, so it runs
+on the existing **`original`** loader (`AutoModelForCausalLM` + `apply_chat_template`)
+— no new `load_X` function. It uses **`aqlm_venv310`** (Python 3.10, transformers
+4.57.6); that transformers line already supports the Cohere architecture, and no
+version pins, patches, or env vars are required.
+
+- The model is **gated** on HuggingFace — a stored HF token (`~/.cache/huggingface/token`
+  or `HF_TOKEN`) with the terms accepted is needed for the first download (~16 GB).
+- `torch_dtype=torch.bfloat16`, `device_map="auto"`; fits comfortably on one H100.
+- `max_new_tokens=128` (loader default).
+
+### Running the experiment (all three datasets)
+
+All three runs are chained sequentially on one GPU by `chain_aya_all.sh`
+(quick GCJ pair-sets first, long OCD n×n last; each call auto-resumes from
+existing round CSVs):
+
+```bash
+GPU=1 setsid bash chain_aya_all.sh > logs/chain_aya_all.log 2>&1 < /dev/null &
+```
+
+Equivalent individual commands:
+
+```bash
+# GCJ-Java (400 pairs × 5)
+CUDA_VISIBLE_DEVICES=1 aqlm_venv310/bin/python run_quantization.py original \
+  "CohereLabs/aya-expanse-8b" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output results_gcj_java/aya-expanse-8b/results_original_CohereLabs__aya-expanse-8b \
+  --rounds 5
+
+# GCJ cross-language (384 pairs × 5)
+CUDA_VISIBLE_DEVICES=1 aqlm_venv310/bin/python run_quantization.py original \
+  "CohereLabs/aya-expanse-8b" \
+  --pairs-file gcj_crosslang_clones/pairs.csv \
+  --output results_gcj_crosslang/aya-expanse-8b/results_original_CohereLabs__aya-expanse-8b \
+  --rounds 5
+
+# OCD (10,000 pairs × 5 = 50,000 inferences; ~18 h on one H100)
+CUDA_VISIBLE_DEVICES=1 aqlm_venv310/bin/python run_quantization.py original \
+  "CohereLabs/aya-expanse-8b" \
+  --tests-dir ocd/tests \
+  --output results/aya-expanse-8b/results_original_CohereLabs__aya-expanse-8b \
+  --rounds 5
+```
+
+### Results (5-round majority vote)
+
+| Dataset | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| GCJ-Java (400) | 0.8333 | 0.8047 | 0.8782 | 0.8398 | 0.6696 | 4 |
+| GCJ cross-language (384) | 0.7995 | 0.7889 | 0.8177 | 0.8031 | 0.5994 | 0 |
+| OCD (10,000) | 0.9325 | 0.5972 | 0.9980 | 0.7473 | 0.7424 | 0 |
+
 ## Datasets
 
 ### GCJ2-4lang (cross-language clones)

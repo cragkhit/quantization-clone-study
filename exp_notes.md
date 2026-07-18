@@ -1163,3 +1163,30 @@ Notes on validity:
   test difficulty — the GCJ-Java metrics are the meaningful signal.
 - Trained on NF4, applied to Q4_K_M (mild, expected QLoRA quant mismatch): report
   as its own row, not a drop-in Q4_K_M replacement.
+
+#### Cross-language (GCJ^CL, same adapter)
+
+The *same* adapter run through `gguf_lora` on `gcj_crosslang_clones/pairs.csv`
+(384 java/cpp/py/php pairs, 5 rounds, majority vote):
+
+| Metric   | Q4_K_M baseline | + AIZU QLoRA adapter | Δ      |
+|----------|-----------------|----------------------|--------|
+| Accuracy | 0.8516          | **0.9557**           | +0.104 |
+| F1       | 0.8267          | **0.9563**           | +0.130 |
+| MCC      | 0.7339          | **0.9118**           | +0.178 |
+
+Confusion matrix: 186 TP / 181 TN, 11 FP / 6 FN, 0 excluded (recall 0.969,
+precision 0.944). **Notable:** AIZU384F's training pairs are all *monolingual*
+(same-language, across 15 languages) — the adapter never saw a cross-language
+pair — yet cross-language detection (e.g. Java-vs-Python) improved by +0.178 MCC.
+The fine-tuning taught a general functional-similarity skill that transfers
+across the language barrier, not just within-language matching.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH \
+  LD_LIBRARY_PATH=/cm/shared/apps/cuda12.2/toolkit/12.2.2/targets/x86_64-linux/lib:$LD_LIBRARY_PATH \
+  gguf/bin/python run_quantization.py gguf_lora \
+  "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf::finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf" \
+  --pairs-file gcj_crosslang_clones/pairs.csv \
+  --output "results_gcj_crosslang/Qwen2.5-Coder-7B-Instruct/results_qwen_q4km_aizu_lora" --rounds 5
+```

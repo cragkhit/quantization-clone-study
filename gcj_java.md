@@ -59,6 +59,7 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 - [x] **GGUF Q2_K** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf` · venv `gguf` — *Acc 0.9050, F1 0.8950, MCC 0.8250*
 - [x] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf` — *Acc 0.7800, F1 0.7179, MCC 0.6236*
 - [x] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf` — *Acc 0.8175, F1 0.7768, MCC 0.6821*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9774, MCC 0.9550* (adapter trained on SimilBench AIZU384F; see exp_notes.md)
 
 ## Llama-4-Scout-17B-16E-Instruct
 
@@ -67,6 +68,12 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 - [x] **GGUF Q3_K_S** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q3_K_S.gguf` · venv `gguf` — *Acc 0.9525, F1 0.9501, MCC 0.9091*
 - [x] **GGUF Q4_K_M** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q4_K_M-00001-of-00002.gguf` (split) · venv `gguf` — *Acc 0.9600, F1 0.9583, MCC 0.9230*
 
+## aya-expanse-8b
+
+- [x] **Original (BF16)** — `original` · `CohereLabs/aya-expanse-8b` · venv `aqlm_venv310` — *Acc 0.8333, F1 0.8398, MCC 0.6696* (4 excluded)
+
 ---
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
+
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.6821→0.9550).

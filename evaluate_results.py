@@ -486,10 +486,12 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
         return "Original (FP16)", _base_model_name(stem) + round_suffix
 
     # Fine-tuned QLoRA adapter applied on top of an existing GGUF base via the
-    # gguf_lora backend, e.g. results_qwen_q4km_aizu_lora. Group with GGUF so it
-    # sits beside the Q4_K_M baseline it should be compared against.
-    if "aizu_lora" in stem:
-        return "GGUF Quantization", "qwen2.5_coder_7B_q4km + AIZU LoRA" + round_suffix
+    # gguf_lora backend, e.g. results_qwen_q4km_aizu_lora (monolingual AIZU384F)
+    # or results_qwen_q4km_aizuCL_lora (cross-language AIZU324CLF). Group with
+    # GGUF so they sit beside the Q4_K_M baseline they are compared against.
+    if "aizu" in stem.lower() and "lora" in stem.lower():
+        tag = "AIZU-CL LoRA" if "aizucl" in stem.lower() else "AIZU LoRA"
+        return "GGUF Quantization", f"qwen2.5_coder_7B_q4km + {tag}" + round_suffix
 
     return "Other", stem + round_suffix
 

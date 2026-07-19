@@ -50,6 +50,7 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 - [x] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf` — *Acc 0.8333, F1 0.8012, MCC 0.7044*
 - [x] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf` — *Acc 0.8516, F1 0.8267, MCC 0.7339*
 - [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9557, F1 0.9563, MCC 0.9118* (adapter trained on monolingual AIZU384F; transfers to cross-language — see exp_notes.md)
+- [x] **GGUF Q4_K_M + AIZU-CL QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizuCL-qlora-F16.gguf` · venv `gguf` — *Acc 0.9583, F1 0.9588, MCC 0.9169* (adapter trained on cross-language AIZU324CLF; ~tie with monolingual adapter — see exp_notes.md)
 
 ## Llama-4-Scout-17B-16E-Instruct
 
@@ -66,4 +67,4 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
 
-**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.7339→0.9118).
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.7339→0.9118), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9169 — ~tie).

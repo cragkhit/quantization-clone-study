@@ -60,6 +60,7 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 - [x] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf` — *Acc 0.7800, F1 0.7179, MCC 0.6236*
 - [x] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf` — *Acc 0.8175, F1 0.7768, MCC 0.6821*
 - [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9774, MCC 0.9550* (adapter trained on SimilBench AIZU384F; see exp_notes.md)
+- [x] **GGUF Q4_K_M + AIZU-CL QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizuCL-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9776, MCC 0.9550* (adapter trained on cross-language AIZU324CLF; identical to the monolingual adapter here — see exp_notes.md)
 
 ## Llama-4-Scout-17B-16E-Instruct
 
@@ -76,4 +77,4 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
 
-**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.6821→0.9550).
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.6821→0.9550), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9550 — identical on Java).

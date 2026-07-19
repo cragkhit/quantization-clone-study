@@ -1,11 +1,12 @@
 file,rows_total,rows_evaluated,rows_excluded,TP,FP,FN,TN,accuracy,precision,recall,f1,mcc,run_time
+"results_codellama_7b_q4km_aizu_lora (majority vote, 5 rounds)",400,400,0,161,9,39,191,0.88,0.9471,0.805,0.8703,0.7687,00:04:42
 "results_codellama__CodeLlama-7b-Instruct-hf (majority vote, 5 rounds)",400,362,38,193,169,0,0,0.5331,0.5331,1.0,0.6955,0.0,00:13:12
 "results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q2_K.gguf (majority vote, 5 rounds)",400,400,0,200,200,0,0,0.5,0.5,1.0,0.6667,0.0,08:25:39
 "results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q3_K_M.gguf (majority vote, 5 rounds)",400,392,8,199,193,0,0,0.5077,0.5077,1.0,0.6734,0.0,08:31:53
 "results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q4_K_M.gguf (majority vote, 5 rounds)",400,396,4,200,195,0,1,0.5076,0.5063,1.0,0.6723,0.0508,08:37:11
 "results_gguf_bartowski__Codestral-22B-v0.1-GGUF_Codestral-22B-v0.1-Q2_K.gguf (majority vote, 5 rounds)",400,400,0,187,13,13,187,0.935,0.935,0.935,0.935,0.87,00:16:53
-"results_gguf_bartowski__Codestral-22B-v0.1-GGUF_Codestral-22B-v0.1-Q3_K_M.gguf (majority vote, 1 round)",49,49,0,45,0,4,0,0.9184,1.0,0.9184,0.9574,0.0,00:02:01
-"results_gguf_bartowski__Codestral-22B-v0.1-GGUF_Codestral-22B-v0.1-Q4_K_M.gguf (majority vote, 1 round)",30,30,0,28,0,2,0,0.9333,1.0,0.9333,0.9655,0.0,00:02:25
+"results_gguf_bartowski__Codestral-22B-v0.1-GGUF_Codestral-22B-v0.1-Q3_K_M.gguf (majority vote, 5 rounds)",400,400,0,186,12,14,188,0.935,0.9394,0.93,0.9347,0.87,00:17:22
+"results_gguf_bartowski__Codestral-22B-v0.1-GGUF_Codestral-22B-v0.1-Q4_K_M.gguf (majority vote, 5 rounds)",400,400,0,184,8,16,192,0.94,0.9583,0.92,0.9388,0.8807,06:41:20
 "results_original_mistralai__Codestral-22B-v0.1 (majority vote, 5 rounds)",400,400,0,180,5,20,195,0.9375,0.973,0.9,0.9351,0.8775,00:45:43
 "results_deepseek_coder_v2_lite (majority vote, 5 rounds)",400,400,0,181,24,19,176,0.8925,0.8829,0.905,0.8938,0.7852,00:28:30
 "results_deepseek_coder_v2_lite_q4km (majority vote, 5 rounds)",400,400,0,178,15,22,185,0.9075,0.9223,0.89,0.9059,0.8155,08:12:18
@@ -19,6 +20,7 @@ file,rows_total,rows_evaluated,rows_excluded,TP,FP,FN,TN,accuracy,precision,reca
 "results_gguf_bartowski__Meta-Llama-3.1-8B-Instruct-GGUF_Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf (majority vote, 5 rounds)",400,396,4,199,167,1,29,0.5758,0.5437,0.995,0.7032,0.2701,08:27:32
 "results_higgs_llama3.1_8B_3bit (majority vote, 5 rounds)",400,392,8,196,144,4,48,0.6224,0.5765,0.98,0.7259,0.339,00:20:00
 "results_higgs_llama3.1_8B_4bit (majority vote, 5 rounds)",400,392,8,197,137,3,55,0.6429,0.5898,0.985,0.7378,0.3822,00:17:59
+"results_llama3.1_8b_q4km_aizu_lora (majority vote, 5 rounds)",400,400,0,179,2,21,198,0.9425,0.989,0.895,0.9396,0.889,00:03:13
 "results_original_meta-llama__Meta-Llama-3.1-8B-Instruct (majority vote, 5 rounds)",400,393,7,198,125,1,69,0.6794,0.613,0.995,0.7586,0.4582,00:11:14
 "results_relaxml_Llama-3.1-8b-Instruct-QTIP-2Bit (majority vote, 5 rounds)",400,378,22,196,151,2,29,0.5952,0.5648,0.9899,0.7193,0.2749,00:25:27
 "results_relaxml_Llama-3.1-8b-Instruct-QTIP-3Bit (majority vote, 5 rounds)",400,393,7,198,131,2,62,0.6616,0.6018,0.99,0.7486,0.4214,00:24:50

@@ -24,6 +24,7 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 - [x] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q2_K.gguf` · venv `gguf` — *Acc 0.5130, F1 0.6714, MCC 0.0973*
 - [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q3_K_M.gguf` · venv `gguf` — *Acc 0.5317, F1 0.6845, MCC 0.1587*
 - [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::...Q4_K_M.gguf` · venv `gguf` — *Acc 0.5654, F1 0.6971, MCC 0.2646*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/llama3.1-8b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9375, F1 0.9358, MCC 0.8762* (adapter trained on monolingual AIZU384F; +0.612 MCC — see exp_notes.md)
 - [x] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310` — *Acc 0.5104, F1 0.6713, MCC 0.1026*
 - [x] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv` — *Acc 0.5409, F1 0.6882, MCC 0.1910*
 - [x] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv` — *Acc 0.5699, F1 0.6998, MCC 0.2458 (re-run after transient round-1 CUDA assert)*
@@ -37,6 +38,7 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 - [x] **GGUF Q2_K** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf` · venv `gguf` — *Acc 0.5000, F1 0.6667, MCC 0.0000 (degenerate)*
 - [x] **GGUF Q3_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf` · venv `gguf` — *Acc 0.5220, F1 0.6859, MCC 0.0000 (degenerate)*
 - [x] **GGUF Q4_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf` · venv `gguf` — *Acc 0.5120, F1 0.6772, MCC 0.0000 (degenerate)*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/codellama-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.8750, F1 0.8681, MCC 0.7541* (adapter trained on monolingual AIZU384F; rescues degenerate baseline 0.0000→0.7541 — see exp_notes.md)
 
 ## DeepSeek-Coder-V2-Lite-Instruct
 

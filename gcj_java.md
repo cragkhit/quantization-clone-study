@@ -34,6 +34,7 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 - [x] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q2_K.gguf` · venv `gguf` — *Acc 0.5400, F1 0.6849, MCC 0.2041*
 - [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q3_K_M.gguf` · venv `gguf` — *Acc 0.5466, F1 0.6897, MCC 0.2131*
 - [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.5758, F1 0.7032, MCC 0.2701*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/llama3.1-8b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9425, F1 0.9396, MCC 0.8890* (adapter trained on AIZU384F; +0.619 MCC — see exp_notes.md)
 - [x] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310` — *Acc 0.5300, F1 0.6803, MCC 0.1759*
 - [x] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv` — *Acc 0.6224, F1 0.7259, MCC 0.3390*
 - [x] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv` — *Acc 0.6429, F1 0.7378, MCC 0.3822*
@@ -47,6 +48,7 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 - [x] **GGUF Q2_K** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf` · venv `gguf` — *Acc 0.5000, F1 0.6667, MCC 0.0000*
 - [x] **GGUF Q3_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf` · venv `gguf` — *Acc 0.5077, F1 0.6734, MCC 0.0000*
 - [x] **GGUF Q4_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf` · venv `gguf` — *Acc 0.5076, F1 0.6723, MCC 0.0508*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/codellama-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.8800, F1 0.8703, MCC 0.7687* (adapter trained on AIZU384F; rescues the degenerate baseline, +0.718 MCC — see exp_notes.md)
 
 ## DeepSeek-Coder-V2-Lite-Instruct
 

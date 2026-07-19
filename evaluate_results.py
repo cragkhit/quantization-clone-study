@@ -433,6 +433,26 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
     round_suffix = f" (round {round_match.group(1)})" if round_match else ""
     stem = re.sub(r"_round\d+$", "", stem)
 
+    # Fine-tuned QLoRA adapter applied on top of an existing GGUF base via the
+    # gguf_lora backend, e.g. results_qwen_q4km_aizu_lora (monolingual AIZU384F),
+    # results_qwen_q4km_aizuCL_lora (cross-language AIZU324CLF),
+    # results_llama3.1_8b_q4km_aizu_lora, results_codellama_7b_q4km_aizu_lora.
+    # Checked first so a base-model prefix (e.g. results_codellama_) does not
+    # capture it as an FP16 baseline. Grouped with GGUF so each fine-tuned row
+    # sits beside the Q4_K_M baseline it is compared against.
+    if "aizu" in stem.lower() and "lora" in stem.lower():
+        tag = "AIZU-CL LoRA" if "aizucl" in stem.lower() else "AIZU LoRA"
+        s = stem.lower()
+        if "qwen" in s:
+            base = "qwen2.5_coder_7B_q4km"
+        elif "llama3.1" in s or "llama3_1" in s:
+            base = "llama3.1_8b_q4km"
+        elif "codellama" in s:
+            base = "codellama_7b_q4km"
+        else:
+            base = re.sub(r"_aizu.*_lora$", "", _base_model_name(stem), flags=re.IGNORECASE)
+        return "GGUF Quantization", f"{base} + {tag}" + round_suffix
+
     if stem.startswith("results_original_"):
         rest = stem[len("results_original_"):]
         model_name = rest.split("__", 1)[1] if "__" in rest else rest
@@ -484,14 +504,6 @@ def _extract_model_info(filename: str) -> tuple[str, str]:
             or stem.startswith("results_codellama_")
             or stem.startswith("results_deepseek_")):
         return "Original (FP16)", _base_model_name(stem) + round_suffix
-
-    # Fine-tuned QLoRA adapter applied on top of an existing GGUF base via the
-    # gguf_lora backend, e.g. results_qwen_q4km_aizu_lora (monolingual AIZU384F)
-    # or results_qwen_q4km_aizuCL_lora (cross-language AIZU324CLF). Group with
-    # GGUF so they sit beside the Q4_K_M baseline they are compared against.
-    if "aizu" in stem.lower() and "lora" in stem.lower():
-        tag = "AIZU-CL LoRA" if "aizucl" in stem.lower() else "AIZU LoRA"
-        return "GGUF Quantization", f"qwen2.5_coder_7B_q4km + {tag}" + round_suffix
 
     return "Other", stem + round_suffix
 

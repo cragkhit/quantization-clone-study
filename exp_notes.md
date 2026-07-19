@@ -1190,3 +1190,41 @@ CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH \
   --pairs-file gcj_crosslang_clones/pairs.csv \
   --output "results_gcj_crosslang/Qwen2.5-Coder-7B-Instruct/results_qwen_q4km_aizu_lora" --rounds 5
 ```
+
+#### Cross-language-trained adapter (AIZU324CLF) and the 2×2
+
+To test whether *what* the adapter trains on matters, a second adapter was
+trained on the **cross-language** AIZU set (AIZU324CLF: 324 pairs where the two
+files are different languages solving the same problem). `prepare_aizu_cl_finetune.py`
+is the cross-language counterpart of `prepare_aizu_finetune.py`: since the csv
+`lang` column is just "CL", each pair's prompt language is derived from the file
+extensions and phrased "LangA and LangB" (e.g. "Java and Python"), matching the
+GCJ cross-language test. Training reuses `train_lora.py` unchanged:
+
+```bash
+env -u PYTHONPATH finetune_venv/bin/python prepare_aizu_cl_finetune.py   # -> aizu_cl_{train,val}.jsonl (614/34)
+CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH finetune_venv/bin/python train_lora.py \
+  --train-file finetune_data/aizu_cl_train.jsonl --val-file finetune_data/aizu_cl_val.jsonl \
+  --output-dir finetune_models/qwen2.5-coder-7b-aizuCL-qlora
+# convert (same as above) -> qwen2.5-coder-7b-aizuCL-qlora-F16.gguf, then eval both
+# GCJ sets via gguf_lora with output base ..._qwen_q4km_aizuCL_lora.
+```
+
+Both adapters evaluated on both GCJ tasks (same Q4_K_M base, 5-round majority
+vote, MCC):
+
+| adapter (training data)       | GCJ-Java | GCJ cross-language |
+|-------------------------------|----------|--------------------|
+| *none* (Q4_K_M baseline)      | 0.6821   | 0.7339             |
+| AIZU384F  (monolingual pairs) | 0.9550   | 0.9118             |
+| AIZU324CLF (cross-lang pairs) | 0.9550   | 0.9169             |
+
+**Conclusion.** The two adapters are statistically indistinguishable on *both*
+tasks (the cross-language adapter scores exactly 0.9550 on Java, identical to the
+monolingual adapter; 0.9169 vs 0.9118 on cross-language is a 1-pair difference).
+So the composition of the fine-tuning pairs — same-language vs cross-language —
+has no measurable effect: QLoRA learns a general functional-similarity skill that
+transfers across the language barrier either way. Fine-tuning the quantized 7B on
+a few hundred clone pairs from an unrelated source (AIZU) roughly triples its
+distance-to-perfect MCC and brings it to the level of the study's best model
+(Llama-4-Scout BF16).

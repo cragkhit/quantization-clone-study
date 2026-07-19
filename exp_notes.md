@@ -1228,3 +1228,43 @@ transfers across the language barrier either way. Fine-tuning the quantized 7B o
 a few hundred clone pairs from an unrelated source (AIZU) roughly triples its
 distance-to-perfect MCC and brings it to the level of the study's best model
 (Llama-4-Scout BF16).
+
+### Other models (Llama-3.1-8B, CodeLlama-7b)
+
+The identical pipeline was applied to two more models with existing GGUF Q4_K_M
+baselines — both standard Llama architectures, so `train_lora.py`,
+`convert_lora_to_gguf.py`, and the `gguf_lora` backend all work unchanged (reuse
+the AIZU384F `aizu_{train,val}.jsonl`, just change `--base-model` and the GGUF
+base). CodeLlama uses the `[INST]` chat template, consistent between the HF
+tokenizer (training) and its GGUF (inference). Commands, e.g. Llama-3.1:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH finetune_venv/bin/python train_lora.py \
+  --base-model meta-llama/Meta-Llama-3.1-8B-Instruct \
+  --output-dir finetune_models/llama3.1-8b-aizu-qlora        # then convert + gguf_lora eval
+# GGUF base: bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+# CodeLlama base: QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf
+```
+
+> Launch each training with an explicit `CUDA_VISIBLE_DEVICES`: an
+> auto-"first-free-GPU" picker can place two jobs on the same GPU because a model
+> that is still loading has not yet claimed its VRAM.
+
+All three models, AIZU384F adapter on the same Q4_K_M base (5-round majority vote,
+MCC, baseline → fine-tuned):
+
+| Model (Q4_K_M base)   | GCJ-Java            | GCJ cross-language  |
+|-----------------------|---------------------|---------------------|
+| Qwen2.5-Coder-7B      | 0.6821 → **0.9550** | 0.7339 → **0.9118** |
+| Meta-Llama-3.1-8B     | 0.2701 → **0.8890** | 0.2646 → **0.8762** |
+| CodeLlama-7b          | 0.0508 → **0.7687** | 0.0000 → **0.7541** |
+
+**Findings.** (1) **Fine-tuning rescues even a degenerate quantized model**:
+CodeLlama Q4_K_M scored MCC 0.0000 on cross-language (predicted every pair a
+clone); a 40M-parameter adapter trained on a few hundred unrelated AIZU pairs
+lifts it to 0.75 on both tasks. (2) **The absolute lift is largest for the
+weakest base** (CodeLlama +0.72/+0.75, Llama-3.1 +0.62/+0.61, Qwen +0.27/+0.18),
+so fine-tuning helps damaged/weak quantized models most — but (3) **base-model
+capability remains the ceiling**: the final ranking still tracks it
+(Qwen ~0.93 > Llama-3.1 ~0.88 > CodeLlama ~0.76). The adapter dramatically
+narrows the gap that quantization + a weak base open up, without erasing it.

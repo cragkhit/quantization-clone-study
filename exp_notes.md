@@ -873,6 +873,85 @@ CUDA_VISIBLE_DEVICES=1 aqlm_venv310/bin/python run_quantization.py original \
 | GCJ cross-language (384) | 0.7995 | 0.7889 | 0.8177 | 0.8031 | 0.5994 | 0 |
 | OCD (10,000) | 0.9325 | 0.5972 | 0.9980 | 0.7473 | 0.7424 | 0 |
 
+## Codestral-22B-v0.1 Setup
+
+### Models run
+- **[`mistralai/Codestral-22B-v0.1`](https://huggingface.co/mistralai/Codestral-22B-v0.1)** — BF16, full precision (`original` backend)
+- **[`bartowski/Codestral-22B-v0.1-GGUF`](https://huggingface.co/bartowski/Codestral-22B-v0.1-GGUF)** — Q2\_K, Q3\_K\_M, Q4\_K\_M (`gguf` backend)
+
+### No new backend needed
+
+Codestral-22B-v0.1 is a standard `MistralForCausalLM` with a `[INST] … [/INST]`
+chat template, so it runs on the existing **`original`** loader
+(`AutoModelForCausalLM` + `apply_chat_template`) — no new `load_X` function. The
+model is **gated** on HuggingFace (stored HF token with terms accepted needed for
+the first ~44 GB download); it fits on one H100 in BF16 (`device_map="auto"`,
+`max_new_tokens=128`).
+
+### Full-precision (BF16): dedicated `codestral_venv` (needs sentencepiece + protobuf)
+
+Codestral ships **only a SentencePiece tokenizer** (`tokenizer.model`, no
+`tokenizer.json`), so `AutoTokenizer.from_pretrained` must convert it on the fly.
+Without `sentencepiece` **and** `protobuf` this fails at load
+(`Cannot instantiate this tokenizer from a slow version …` / `requires the
+protobuf library`). The other transformers venvs (`aqlm_venv310`, `codellama_venv`)
+lack both, so a dedicated **`codestral_venv`** mirrors `codellama_venv`'s versions
+plus the two tokenizer deps:
+
+```bash
+# One-time setup (uv; system Python 3.10)
+uv venv codestral_venv --python 3.10
+uv pip install --python codestral_venv/bin/python \
+  torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+uv pip install --python codestral_venv/bin/python \
+  transformers==4.57.6 accelerate==1.10.1 sentencepiece protobuf
+
+# Run (GCJ-Java; CUDA_VISIBLE_DEVICES pins one GPU; auto-resumes partial rounds)
+CUDA_VISIBLE_DEVICES=1 codestral_venv/bin/python run_quantization.py original \
+  "mistralai/Codestral-22B-v0.1" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Codestral-22B-v0.1/results_original_mistralai__Codestral-22B-v0.1" \
+  --rounds 5
+```
+
+### GGUF variants: use `HF_HUB_DISABLE_XET=1` (xet backend hangs on large files)
+
+The three GGUF quants run on the standard `gguf` venv via `chain_codestral_gguf_gcj_java.sh`
+(sequential on one GPU). **Non-obvious download workaround:** HuggingFace's default
+**xet** transfer backend repeatedly stalled/truncated on the ~10–13 GB Codestral
+GGUF shards on this box — a download would hang for hours with the socket wedged
+(no progress, GPU idle), or `hf_hub_download` would raise
+`RemoteProtocolError: peer closed connection without sending complete message body`.
+Setting **`HF_HUB_DISABLE_XET=1`** forces plain resumable HTTPS, which completes
+reliably. For a hung/partial file, delete the `*.incomplete` blob under
+`~/.cache/huggingface/hub/models--bartowski--Codestral-22B-v0.1-GGUF/blobs/` and
+re-fetch; `hf_hub_download` (and the chain, which retries via `run_quantization.py`
+resume) then resumes cleanly. The chain script exports `HF_HUB_DISABLE_XET=1`.
+
+```bash
+CUDA_VISIBLE_DEVICES=4 HF_HUB_DISABLE_XET=1 setsid bash chain_codestral_gguf_gcj_java.sh \
+  > logs/chain_codestral_gguf_gcj_java.log 2>&1 < /dev/null &
+
+# Equivalent single quant (Q4_K_M shown):
+HF_HUB_DISABLE_XET=1 gguf/bin/python run_quantization.py gguf \
+  "bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q4_K_M.gguf" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Codestral-22B-v0.1/results_gguf_bartowski__Codestral-22B-v0.1-GGUF_Codestral-22B-v0.1-Q4_K_M.gguf" \
+  --rounds 5
+```
+
+### Results (GCJ-Java, 5-round majority vote)
+
+Quantization is near-lossless here — MCC barely moves from BF16, and Q4\_K\_M
+slightly edges out full precision.
+
+| Variant | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| Original (BF16) | 0.9375 | 0.9730 | 0.9000 | 0.9351 | 0.8775 | 0 |
+| GGUF Q2\_K | 0.9350 | 0.9350 | 0.9350 | 0.9350 | 0.8700 | 0 |
+| GGUF Q3\_K\_M | 0.9350 | 0.9394 | 0.9300 | 0.9347 | 0.8700 | 0 |
+| GGUF Q4\_K\_M | 0.9400 | 0.9583 | 0.9200 | 0.9388 | 0.8807 | 0 |
+
 ## Datasets
 
 ### GCJ2-4lang (cross-language clones)

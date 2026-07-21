@@ -42,6 +42,7 @@ the sections below.
 | `gguf` | 3.10 | `requirements/gguf.lock.txt` | all GGUF backends (+ source-built `llama-cpp-python` for sm_90) |
 | `codellama_venv` | 3.10 | `requirements/codellama_venv.lock.txt` | CodeLlama BF16 |
 | `deepseek_venv` | 3.10 | `requirements/deepseek_venv.lock.txt` | DeepSeek-Coder-V2-Lite BF16 (transformers 4.45.2) |
+| `codestral_venv` | 3.10 | `requirements/codestral_venv.lock.txt` | Codestral-22B-v0.1 BF16 (codellama_venv versions + sentencepiece/protobuf) |
 
 ### Restoring a venv
 

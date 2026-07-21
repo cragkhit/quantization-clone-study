@@ -59,13 +59,37 @@ families above and MatGPTQ is left as future work.
 %----------------------------------------------------------------------
 
 \subsection{Hardware and environment}
-All inference was run on a single shared GPU server: 8$\times$NVIDIA H100 80\,GB
-HBM3 (compute capability \texttt{sm\_90}), 2$\times$Intel Xeon Platinum 8480C
-(112 cores), 2.0\,TiB RAM, Ubuntu 22.04.2 / Linux 5.15, CUDA driver 12.2
-(driver 535.161.08), \texttt{nvcc} 12.2. Each run is pinned to one H100 via
+Experiments use two shared GPU servers, \texttt{tau} and \texttt{zeta}
+(Table~\ref{tab:hardware}). \textbf{All results reported here were produced on
+\texttt{tau}} (8$\times$NVIDIA H100 80\,GB HBM3, compute capability
+\texttt{sm\_90}); \texttt{zeta} (8$\times$NVIDIA A100-SXM4 80\,GB,
+\texttt{sm\_80}) is a second machine held in reserve for future runs and has not
+yet been used. Each run is pinned to a single GPU via
 \texttt{CUDA\_VISIBLE\_DEVICES}. Every backend uses an isolated Python~3.10
-virtual environment with version pins recorded per backend (GGUF and the QTIP /
-HIGGS CUDA kernels are built from source for \texttt{sm\_90}).
+virtual environment with per-backend version pins; on \texttt{tau} the GGUF
+(\texttt{llama-cpp-python}) and QTIP / HIGGS CUDA kernels are built from source
+for \texttt{sm\_90} (these source-built artifacts are architecture-specific and
+would need rebuilding on \texttt{zeta}'s \texttt{sm\_80}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{GPU servers. All results in this report were produced on \texttt{tau}.}
+  \label{tab:hardware}
+  \small
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Component} & \textbf{\texttt{tau} (all results)} & \textbf{\texttt{zeta} (future)} \\
+    \midrule
+    GPU        & 8$\times$H100 80\,GB (\texttt{sm\_90}, Hopper) & 8$\times$A100-SXM4 80\,GB (\texttt{sm\_80}, Ampere) \\
+    SMs / GPU  & 132 & 108 \\
+    GPU driver & 535.161.08 (CUDA 12.2) & 535.161.08 (CUDA 12.2) \\
+    \texttt{nvcc} & 12.2.140 & 12.2.140 \\
+    CPU        & 2$\times$Intel Xeon Platinum 8480C (112c) & 2$\times$AMD EPYC 7742 (128c) \\
+    RAM        & 2.0\,TiB & 2.0\,TiB \\
+    OS / kernel & Ubuntu 22.04.2 / Linux 5.15.0-1053-nvidia & Ubuntu 22.04.2 / Linux 5.15.0-105-generic \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Task and prompt}
 Clone detection is framed as pairwise binary classification: given two code

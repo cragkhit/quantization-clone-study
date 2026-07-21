@@ -831,8 +831,9 @@ python run_quantization.py gguf \
 
 ## aya-expanse-8b Setup
 
-### Model run
+### Models run
 - **[`CohereLabs/aya-expanse-8b`](https://huggingface.co/CohereLabs/aya-expanse-8b)** — BF16, full precision (`original` backend)
+- **[`bartowski/aya-expanse-8b-GGUF`](https://huggingface.co/bartowski/aya-expanse-8b-GGUF)** — Q2\_K, Q3\_K\_M, Q4\_K\_M (`gguf` backend)
 
 ### No new backend needed
 
@@ -882,13 +883,45 @@ CUDA_VISIBLE_DEVICES=1 aqlm_venv310/bin/python run_quantization.py original \
   --rounds 5
 ```
 
-### Results (5-round majority vote)
+### Results — Original BF16 (5-round majority vote)
 
 | Dataset | Acc | Precision | Recall | F1 | MCC | Excl |
 | --- | --- | --- | --- | --- | --- | --- |
 | GCJ-Java (400) | 0.8333 | 0.8047 | 0.8782 | 0.8398 | 0.6696 | 4 |
 | GCJ cross-language (384) | 0.7995 | 0.7889 | 0.8177 | 0.8031 | 0.5994 | 0 |
 | OCD (10,000) | 0.9325 | 0.5972 | 0.9980 | 0.7473 | 0.7424 | 0 |
+
+### GGUF variants (`gguf` backend)
+
+The three bartowski GGUF quants run on the standard `gguf` venv (source-built
+`llama-cpp-python` for sm_90). aya is a Cohere/Command-R architecture, which
+`llama.cpp` supports natively — no new backend. All three quants × all three
+datasets (9 runs) are chained sequentially on one GPU by `chain_aya_gguf_all.sh`
+(six quick GCJ runs first, then the three long OCD n×n runs; each call auto-resumes
+from existing round CSVs):
+
+```bash
+CUDA_VISIBLE_DEVICES=5 setsid bash chain_aya_gguf_all.sh \
+  > logs/chain_aya_gguf_all.log 2>&1 < /dev/null &
+```
+
+Equivalent single quant (Q4\_K\_M on GCJ-Java shown):
+
+```bash
+gguf/bin/python run_quantization.py gguf \
+  "bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q4_K_M.gguf" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/aya-expanse-8b/results_gguf_bartowski__aya-expanse-8b-GGUF_aya-expanse-8b-Q4_K_M.gguf" \
+  --rounds 5
+```
+
+Results (5-round majority vote) — filled in as runs complete:
+
+| Variant | GCJ-Java MCC | GCJ-XLang MCC | OCD MCC |
+| --- | --- | --- | --- |
+| GGUF Q2\_K | _pending_ | _pending_ | _pending_ |
+| GGUF Q3\_K\_M | _pending_ | _pending_ | _pending_ |
+| GGUF Q4\_K\_M | _pending_ | _pending_ | _pending_ |
 
 ## Codestral-22B-v0.1 Setup
 

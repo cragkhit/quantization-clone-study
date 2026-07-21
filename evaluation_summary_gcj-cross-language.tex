@@ -12,10 +12,10 @@
     \midrule
     \multicolumn{8}{l}{\textit{Original (FP16)}} \\
     \midrule
-    CodeLlama-7b-Instruct-hf & 384 & 325 & 59 & 183 & 142 & 0 & 0 \\
+    CodeLlama-7b-Instruct-hf & 384 & 384 & 0 & 183 & 142 & 9 & 50 \\
     deepseek\_coder\_v2\_lite & 384 & 384 & 0 & 164 & 17 & 28 & 175 \\
     Llama-4-Scout-17B-16E-Instruct & 384 & 384 & 0 & 185 & 4 & 7 & 188 \\
-    Meta-Llama-3.1-8B-Instruct & 384 & 375 & 9 & 190 & 144 & 2 & 39 \\
+    Meta-Llama-3.1-8B-Instruct & 384 & 384 & 0 & 190 & 144 & 2 & 48 \\
     qwen2.5\_coder\_7B\_original & 384 & 384 & 0 & 119 & 1 & 73 & 191 \\
     aya-expanse-8b & 384 & 384 & 0 & 157 & 42 & 35 & 150 \\
     \midrule
@@ -23,24 +23,24 @@
     \midrule
     codellama\_7b\_q4km + AIZU LoRA & 384 & 384 & 0 & 158 & 14 & 34 & 178 \\
     CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 384 & 384 & 0 & 192 & 192 & 0 & 0 \\
-    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 384 & 364 & 20 & 190 & 174 & 0 & 0 \\
-    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 384 & 375 & 9 & 192 & 183 & 0 & 0 \\
+    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 384 & 384 & 0 & 190 & 174 & 2 & 18 \\
+    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 384 & 384 & 0 & 192 & 183 & 0 & 9 \\
     deepseek\_coder\_v2\_lite\_q4km & 384 & 384 & 0 & 160 & 17 & 32 & 175 \\
     llama4\_scout\_Q2\_K.gguf & 384 & 384 & 0 & 184 & 3 & 8 & 189 \\
     llama4\_scout\_Q3\_K\_S.gguf & 384 & 384 & 0 & 183 & 3 & 9 & 189 \\
     llama4\_scout\_Q4\_K\_M.gguf & 384 & 384 & 0 & 182 & 3 & 10 & 189 \\
     Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 384 & 384 & 0 & 191 & 186 & 1 & 6 \\
-    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 384 & 378 & 6 & 192 & 177 & 0 & 9 \\
-    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 384 & 382 & 2 & 191 & 166 & 0 & 25 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 384 & 384 & 0 & 192 & 177 & 0 & 15 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 384 & 384 & 0 & 191 & 166 & 1 & 26 \\
     llama3.1\_8b\_q4km + AIZU LoRA & 384 & 384 & 0 & 175 & 7 & 17 & 185 \\
-    qwen2.5\_coder\_7B\_q2k & 384 & 383 & 1 & 159 & 6 & 33 & 185 \\
+    qwen2.5\_coder\_7B\_q2k & 384 & 384 & 0 & 159 & 6 & 33 & 186 \\
     qwen2.5\_coder\_7B\_q3km & 384 & 384 & 0 & 129 & 1 & 63 & 191 \\
     qwen2.5\_coder\_7B\_q4km & 384 & 384 & 0 & 136 & 1 & 56 & 191 \\
     qwen2.5\_coder\_7B\_q4km + AIZU-CL LoRA & 384 & 384 & 0 & 186 & 10 & 6 & 182 \\
     qwen2.5\_coder\_7B\_q4km + AIZU LoRA & 384 & 384 & 0 & 186 & 11 & 6 & 181 \\
-    cogito-v1-preview-llama-8b-q2\_k.gguf & 384 & 382 & 2 & 173 & 146 & 19 & 44 \\
-    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 384 & 379 & 5 & 189 & 151 & 3 & 36 \\
-    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 384 & 383 & 1 & 184 & 53 & 8 & 138 \\
+    cogito-v1-preview-llama-8b-q2\_k.gguf & 384 & 384 & 0 & 173 & 146 & 19 & 46 \\
+    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 384 & 384 & 0 & 189 & 151 & 3 & 41 \\
+    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 384 & 384 & 0 & 184 & 53 & 8 & 139 \\
     \midrule
     \multicolumn{8}{l}{\textit{AQLM Quantization}} \\
     \midrule
@@ -48,14 +48,14 @@
     \midrule
     \multicolumn{8}{l}{\textit{HIGGS Quantization}} \\
     \midrule
-    llama3.1\_8B\_3bit & 384 & 379 & 5 & 192 & 174 & 0 & 13 \\
-    llama3.1\_8B\_4bit & 384 & 379 & 5 & 190 & 161 & 2 & 26 \\
+    llama3.1\_8B\_3bit & 384 & 384 & 0 & 192 & 174 & 0 & 18 \\
+    llama3.1\_8B\_4bit & 384 & 384 & 0 & 190 & 161 & 2 & 31 \\
     \midrule
     \multicolumn{8}{l}{\textit{QTIP Quantization}} \\
     \midrule
-    Llama-3.1-8b-Instruct-QTIP-2Bit & 384 & 383 & 1 & 191 & 189 & 1 & 2 \\
-    Llama-3.1-8b-Instruct-QTIP-3Bit & 384 & 379 & 5 & 192 & 162 & 0 & 25 \\
-    Llama-3.1-8b-Instruct-QTIP-4Bit & 384 & 376 & 8 & 191 & 151 & 1 & 33 \\
+    Llama-3.1-8b-Instruct-QTIP-2Bit & 384 & 384 & 0 & 191 & 189 & 1 & 3 \\
+    Llama-3.1-8b-Instruct-QTIP-3Bit & 384 & 384 & 0 & 192 & 162 & 0 & 30 \\
+    Llama-3.1-8b-Instruct-QTIP-4Bit & 384 & 384 & 0 & 191 & 151 & 1 & 41 \\
     \midrule
     \multicolumn{8}{l}{\textit{Other}} \\
     \midrule
@@ -78,10 +78,10 @@
     \midrule
     \multicolumn{6}{l}{\textit{Original (FP16)}} \\
     \midrule
-    CodeLlama-7b-Instruct-hf & 0.563 & 0.563 & 1.000 & 0.721 & 0.000 \\
+    CodeLlama-7b-Instruct-hf & 0.607 & 0.563 & 0.953 & 0.708 & 0.296 \\
     deepseek\_coder\_v2\_lite & 0.883 & 0.906 & 0.854 & 0.879 & 0.767 \\
     Llama-4-Scout-17B-16E-Instruct & 0.971 & 0.979 & 0.964 & 0.971 & \cellcolor{green!40}0.943 \\
-    Meta-Llama-3.1-8B-Instruct & 0.611 & 0.569 & 0.990 & 0.722 & 0.325 \\
+    Meta-Llama-3.1-8B-Instruct & 0.620 & 0.569 & 0.990 & 0.722 & 0.356 \\
     qwen2.5\_coder\_7B\_original & 0.807 & 0.992 & 0.620 & 0.763 & 0.663 \\
     aya-expanse-8b & 0.799 & 0.789 & 0.818 & 0.803 & 0.599 \\
     \midrule
@@ -89,24 +89,24 @@
     \midrule
     codellama\_7b\_q4km + AIZU LoRA & 0.875 & 0.919 & 0.823 & 0.868 & 0.754 \\
     CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 0.500 & 0.500 & 1.000 & 0.667 & 0.000 \\
-    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 0.522 & 0.522 & 1.000 & 0.686 & 0.000 \\
-    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 0.512 & 0.512 & 1.000 & 0.677 & 0.000 \\
+    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 0.542 & 0.522 & 0.990 & 0.683 & 0.188 \\
+    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 0.523 & 0.512 & 1.000 & 0.677 & 0.155 \\
     deepseek\_coder\_v2\_lite\_q4km & 0.872 & 0.904 & 0.833 & 0.867 & 0.747 \\
     llama4\_scout\_Q2\_K.gguf & 0.971 & 0.984 & 0.958 & 0.971 & \cellcolor{green!50}0.943 \\
     llama4\_scout\_Q3\_K\_S.gguf & 0.969 & 0.984 & 0.953 & 0.968 & \cellcolor{green!30}0.938 \\
     llama4\_scout\_Q4\_K\_M.gguf & 0.966 & 0.984 & 0.948 & 0.966 & \cellcolor{green!20}0.933 \\
     Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 0.513 & 0.507 & 0.995 & 0.671 & 0.097 \\
-    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 0.532 & 0.520 & 1.000 & 0.684 & 0.159 \\
-    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 0.565 & 0.535 & 1.000 & 0.697 & 0.265 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 0.539 & 0.520 & 1.000 & 0.684 & 0.202 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 0.565 & 0.535 & 0.995 & 0.696 & 0.255 \\
     llama3.1\_8b\_q4km + AIZU LoRA & 0.938 & 0.962 & 0.911 & 0.936 & 0.876 \\
-    qwen2.5\_coder\_7B\_q2k & 0.898 & 0.964 & 0.828 & 0.891 & 0.804 \\
+    qwen2.5\_coder\_7B\_q2k & 0.898 & 0.964 & 0.828 & 0.891 & 0.805 \\
     qwen2.5\_coder\_7B\_q3km & 0.833 & 0.992 & 0.672 & 0.801 & 0.704 \\
     qwen2.5\_coder\_7B\_q4km & 0.852 & 0.993 & 0.708 & 0.827 & 0.734 \\
     qwen2.5\_coder\_7B\_q4km + AIZU-CL LoRA & 0.958 & 0.949 & 0.969 & 0.959 & \cellcolor{green!10}0.917 \\
     qwen2.5\_coder\_7B\_q4km + AIZU LoRA & 0.956 & 0.944 & 0.969 & 0.956 & 0.912 \\
-    cogito-v1-preview-llama-8b-q2\_k.gguf & 0.568 & 0.542 & 0.901 & 0.677 & 0.179 \\
-    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 0.594 & 0.556 & 0.984 & 0.711 & 0.291 \\
-    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 0.841 & 0.776 & 0.958 & 0.858 & 0.701 \\
+    cogito-v1-preview-llama-8b-q2\_k.gguf & 0.570 & 0.542 & 0.901 & 0.677 & 0.188 \\
+    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 0.599 & 0.556 & 0.984 & 0.711 & 0.311 \\
+    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 0.841 & 0.776 & 0.958 & 0.858 & 0.702 \\
     \midrule
     \multicolumn{6}{l}{\textit{AQLM Quantization}} \\
     \midrule
@@ -114,14 +114,14 @@
     \midrule
     \multicolumn{6}{l}{\textit{HIGGS Quantization}} \\
     \midrule
-    llama3.1\_8B\_3bit & 0.541 & 0.525 & 1.000 & 0.688 & 0.191 \\
-    llama3.1\_8B\_4bit & 0.570 & 0.541 & 0.990 & 0.700 & 0.246 \\
+    llama3.1\_8B\_3bit & 0.547 & 0.525 & 1.000 & 0.688 & 0.222 \\
+    llama3.1\_8B\_4bit & 0.576 & 0.541 & 0.990 & 0.700 & 0.270 \\
     \midrule
     \multicolumn{6}{l}{\textit{QTIP Quantization}} \\
     \midrule
-    Llama-3.1-8b-Instruct-QTIP-2Bit & 0.504 & 0.503 & 0.995 & 0.668 & 0.030 \\
-    Llama-3.1-8b-Instruct-QTIP-3Bit & 0.573 & 0.542 & 1.000 & 0.703 & 0.269 \\
-    Llama-3.1-8b-Instruct-QTIP-4Bit & 0.596 & 0.558 & 0.995 & 0.715 & 0.303 \\
+    Llama-3.1-8b-Instruct-QTIP-2Bit & 0.505 & 0.503 & 0.995 & 0.668 & 0.051 \\
+    Llama-3.1-8b-Instruct-QTIP-3Bit & 0.578 & 0.542 & 1.000 & 0.703 & 0.291 \\
+    Llama-3.1-8b-Instruct-QTIP-4Bit & 0.604 & 0.558 & 0.995 & 0.715 & 0.334 \\
     \midrule
     \multicolumn{6}{l}{\textit{Other}} \\
     \midrule
@@ -144,10 +144,10 @@
     \midrule
     \multicolumn{13}{l}{\textit{Original (FP16)}} \\
     \midrule
-    CodeLlama-7b-Instruct-hf & 384 & 325 & 59 & 183 & 142 & 0 & 0 & 0.563 & 0.563 & 1.000 & 0.721 & 0.000 \\
+    CodeLlama-7b-Instruct-hf & 384 & 384 & 0 & 183 & 142 & 9 & 50 & 0.607 & 0.563 & 0.953 & 0.708 & 0.296 \\
     deepseek\_coder\_v2\_lite & 384 & 384 & 0 & 164 & 17 & 28 & 175 & 0.883 & 0.906 & 0.854 & 0.879 & 0.767 \\
     Llama-4-Scout-17B-16E-Instruct & 384 & 384 & 0 & 185 & 4 & 7 & 188 & 0.971 & 0.979 & 0.964 & 0.971 & \cellcolor{green!40}0.943 \\
-    Meta-Llama-3.1-8B-Instruct & 384 & 375 & 9 & 190 & 144 & 2 & 39 & 0.611 & 0.569 & 0.990 & 0.722 & 0.325 \\
+    Meta-Llama-3.1-8B-Instruct & 384 & 384 & 0 & 190 & 144 & 2 & 48 & 0.620 & 0.569 & 0.990 & 0.722 & 0.356 \\
     qwen2.5\_coder\_7B\_original & 384 & 384 & 0 & 119 & 1 & 73 & 191 & 0.807 & 0.992 & 0.620 & 0.763 & 0.663 \\
     aya-expanse-8b & 384 & 384 & 0 & 157 & 42 & 35 & 150 & 0.799 & 0.789 & 0.818 & 0.803 & 0.599 \\
     \midrule
@@ -155,24 +155,24 @@
     \midrule
     codellama\_7b\_q4km + AIZU LoRA & 384 & 384 & 0 & 158 & 14 & 34 & 178 & 0.875 & 0.919 & 0.823 & 0.868 & 0.754 \\
     CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 384 & 384 & 0 & 192 & 192 & 0 & 0 & 0.500 & 0.500 & 1.000 & 0.667 & 0.000 \\
-    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 384 & 364 & 20 & 190 & 174 & 0 & 0 & 0.522 & 0.522 & 1.000 & 0.686 & 0.000 \\
-    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 384 & 375 & 9 & 192 & 183 & 0 & 0 & 0.512 & 0.512 & 1.000 & 0.677 & 0.000 \\
+    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 384 & 384 & 0 & 190 & 174 & 2 & 18 & 0.542 & 0.522 & 0.990 & 0.683 & 0.188 \\
+    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 384 & 384 & 0 & 192 & 183 & 0 & 9 & 0.523 & 0.512 & 1.000 & 0.677 & 0.155 \\
     deepseek\_coder\_v2\_lite\_q4km & 384 & 384 & 0 & 160 & 17 & 32 & 175 & 0.872 & 0.904 & 0.833 & 0.867 & 0.747 \\
     llama4\_scout\_Q2\_K.gguf & 384 & 384 & 0 & 184 & 3 & 8 & 189 & 0.971 & 0.984 & 0.958 & 0.971 & \cellcolor{green!50}0.943 \\
     llama4\_scout\_Q3\_K\_S.gguf & 384 & 384 & 0 & 183 & 3 & 9 & 189 & 0.969 & 0.984 & 0.953 & 0.968 & \cellcolor{green!30}0.938 \\
     llama4\_scout\_Q4\_K\_M.gguf & 384 & 384 & 0 & 182 & 3 & 10 & 189 & 0.966 & 0.984 & 0.948 & 0.966 & \cellcolor{green!20}0.933 \\
     Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 384 & 384 & 0 & 191 & 186 & 1 & 6 & 0.513 & 0.507 & 0.995 & 0.671 & 0.097 \\
-    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 384 & 378 & 6 & 192 & 177 & 0 & 9 & 0.532 & 0.520 & 1.000 & 0.684 & 0.159 \\
-    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 384 & 382 & 2 & 191 & 166 & 0 & 25 & 0.565 & 0.535 & 1.000 & 0.697 & 0.265 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 384 & 384 & 0 & 192 & 177 & 0 & 15 & 0.539 & 0.520 & 1.000 & 0.684 & 0.202 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 384 & 384 & 0 & 191 & 166 & 1 & 26 & 0.565 & 0.535 & 0.995 & 0.696 & 0.255 \\
     llama3.1\_8b\_q4km + AIZU LoRA & 384 & 384 & 0 & 175 & 7 & 17 & 185 & 0.938 & 0.962 & 0.911 & 0.936 & 0.876 \\
-    qwen2.5\_coder\_7B\_q2k & 384 & 383 & 1 & 159 & 6 & 33 & 185 & 0.898 & 0.964 & 0.828 & 0.891 & 0.804 \\
+    qwen2.5\_coder\_7B\_q2k & 384 & 384 & 0 & 159 & 6 & 33 & 186 & 0.898 & 0.964 & 0.828 & 0.891 & 0.805 \\
     qwen2.5\_coder\_7B\_q3km & 384 & 384 & 0 & 129 & 1 & 63 & 191 & 0.833 & 0.992 & 0.672 & 0.801 & 0.704 \\
     qwen2.5\_coder\_7B\_q4km & 384 & 384 & 0 & 136 & 1 & 56 & 191 & 0.852 & 0.993 & 0.708 & 0.827 & 0.734 \\
     qwen2.5\_coder\_7B\_q4km + AIZU-CL LoRA & 384 & 384 & 0 & 186 & 10 & 6 & 182 & 0.958 & 0.949 & 0.969 & 0.959 & \cellcolor{green!10}0.917 \\
     qwen2.5\_coder\_7B\_q4km + AIZU LoRA & 384 & 384 & 0 & 186 & 11 & 6 & 181 & 0.956 & 0.944 & 0.969 & 0.956 & 0.912 \\
-    cogito-v1-preview-llama-8b-q2\_k.gguf & 384 & 382 & 2 & 173 & 146 & 19 & 44 & 0.568 & 0.542 & 0.901 & 0.677 & 0.179 \\
-    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 384 & 379 & 5 & 189 & 151 & 3 & 36 & 0.594 & 0.556 & 0.984 & 0.711 & 0.291 \\
-    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 384 & 383 & 1 & 184 & 53 & 8 & 138 & 0.841 & 0.776 & 0.958 & 0.858 & 0.701 \\
+    cogito-v1-preview-llama-8b-q2\_k.gguf & 384 & 384 & 0 & 173 & 146 & 19 & 46 & 0.570 & 0.542 & 0.901 & 0.677 & 0.188 \\
+    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 384 & 384 & 0 & 189 & 151 & 3 & 41 & 0.599 & 0.556 & 0.984 & 0.711 & 0.311 \\
+    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 384 & 384 & 0 & 184 & 53 & 8 & 139 & 0.841 & 0.776 & 0.958 & 0.858 & 0.702 \\
     \midrule
     \multicolumn{13}{l}{\textit{AQLM Quantization}} \\
     \midrule
@@ -180,14 +180,14 @@
     \midrule
     \multicolumn{13}{l}{\textit{HIGGS Quantization}} \\
     \midrule
-    llama3.1\_8B\_3bit & 384 & 379 & 5 & 192 & 174 & 0 & 13 & 0.541 & 0.525 & 1.000 & 0.688 & 0.191 \\
-    llama3.1\_8B\_4bit & 384 & 379 & 5 & 190 & 161 & 2 & 26 & 0.570 & 0.541 & 0.990 & 0.700 & 0.246 \\
+    llama3.1\_8B\_3bit & 384 & 384 & 0 & 192 & 174 & 0 & 18 & 0.547 & 0.525 & 1.000 & 0.688 & 0.222 \\
+    llama3.1\_8B\_4bit & 384 & 384 & 0 & 190 & 161 & 2 & 31 & 0.576 & 0.541 & 0.990 & 0.700 & 0.270 \\
     \midrule
     \multicolumn{13}{l}{\textit{QTIP Quantization}} \\
     \midrule
-    Llama-3.1-8b-Instruct-QTIP-2Bit & 384 & 383 & 1 & 191 & 189 & 1 & 2 & 0.504 & 0.503 & 0.995 & 0.668 & 0.030 \\
-    Llama-3.1-8b-Instruct-QTIP-3Bit & 384 & 379 & 5 & 192 & 162 & 0 & 25 & 0.573 & 0.542 & 1.000 & 0.703 & 0.269 \\
-    Llama-3.1-8b-Instruct-QTIP-4Bit & 384 & 376 & 8 & 191 & 151 & 1 & 33 & 0.596 & 0.558 & 0.995 & 0.715 & 0.303 \\
+    Llama-3.1-8b-Instruct-QTIP-2Bit & 384 & 384 & 0 & 191 & 189 & 1 & 3 & 0.505 & 0.503 & 0.995 & 0.668 & 0.051 \\
+    Llama-3.1-8b-Instruct-QTIP-3Bit & 384 & 384 & 0 & 192 & 162 & 0 & 30 & 0.578 & 0.542 & 1.000 & 0.703 & 0.291 \\
+    Llama-3.1-8b-Instruct-QTIP-4Bit & 384 & 384 & 0 & 191 & 151 & 1 & 41 & 0.604 & 0.558 & 0.995 & 0.715 & 0.334 \\
     \midrule
     \multicolumn{13}{l}{\textit{Other}} \\
     \midrule

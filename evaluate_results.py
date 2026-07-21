@@ -41,18 +41,18 @@ from pathlib import Path
 DATASETS = {
     "ocd": {
         "results_dir": "results",
-        "default_output": "evaluation_summary.csv",
-        "default_latex": "evaluation_summary.tex",
+        "default_output": "summaries/evaluation_summary.csv",
+        "default_latex": "summaries/evaluation_summary.tex",
     },
     "gcj-java": {
         "results_dir": "results_gcj_java",
-        "default_output": "results_gcj_java/evaluation_summary_gcj_java.csv",
-        "default_latex": "results_gcj_java/evaluation_summary_gcj_java.tex",
+        "default_output": "summaries/evaluation_summary_gcj_java.csv",
+        "default_latex": "summaries/evaluation_summary_gcj_java.tex",
     },
     "gcj-cross-language": {
         "results_dir": "results_gcj_crosslang",
-        "default_output": "results_gcj_crosslang/evaluation_summary_gcj_crosslang.csv",
-        "default_latex": "results_gcj_crosslang/evaluation_summary_gcj_crosslang.tex",
+        "default_output": "summaries/evaluation_summary_gcj_crosslang.csv",
+        "default_latex": "summaries/evaluation_summary_gcj_crosslang.tex",
     },
 }
 

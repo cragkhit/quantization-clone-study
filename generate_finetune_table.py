@@ -90,8 +90,8 @@ def main():
     ap.add_argument("--metric", default="mcc", choices=["mcc", "f1", "accuracy"],
                     help="Metric shown in the LaTeX table (default: mcc). The CSV "
                          "always contains accuracy/precision/recall/f1/mcc.")
-    ap.add_argument("--tex", default="finetune_results.tex")
-    ap.add_argument("--csv", default="finetune_results.csv")
+    ap.add_argument("--tex", default="summaries/finetune_results.tex")
+    ap.add_argument("--csv", default="summaries/finetune_results.csv")
     args = ap.parse_args()
 
     # ---- Collect metrics: one record per (model, adapter, dataset) ----

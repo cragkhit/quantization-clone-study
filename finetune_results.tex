@@ -1,0 +1,19 @@
+% Requires \usepackage{booktabs}.
+\begin{table}[htbp]
+  \centering
+  \caption{QLoRA fine-tuning results (MCC, 5-round majority vote). Each adapter is applied on top of the same Q4\_K\_M GGUF base; ``base'' is that base without the adapter, ``+FT'' is with it, and $\Delta$ is the lift. Adapters are trained on AIZU (disjoint from GCJ).}
+  \label{tab:finetune_results}
+  \small
+  \begin{tabular}{ll ccc ccc}
+    \toprule
+    & & \multicolumn{3}{c}{\textbf{GCJ-Java}} & \multicolumn{3}{c}{\textbf{GCJ x-lang}} \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-8}
+    \textbf{Model} & \textbf{Fine-tune data} & base & +FT & $\Delta$ & base & +FT & $\Delta$ \\
+    \midrule
+    Qwen2.5-Coder-7B & AIZU384F (mono) & 0.682 & \textbf{0.955} & $+0.273$ & 0.734 & \textbf{0.912} & $+0.178$ \\
+    Qwen2.5-Coder-7B & AIZU324CLF (x-l) & 0.682 & \textbf{0.955} & $+0.273$ & 0.734 & \textbf{0.917} & $+0.183$ \\
+    Meta-Llama-3.1-8B & AIZU384F (mono) & 0.270 & \textbf{0.889} & $+0.619$ & 0.265 & \textbf{0.876} & $+0.612$ \\
+    CodeLlama-7b & AIZU384F (mono) & 0.051 & \textbf{0.769} & $+0.718$ & 0.000 & \textbf{0.754} & $+0.754$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}

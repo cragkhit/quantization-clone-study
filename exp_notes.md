@@ -2,27 +2,39 @@
 
 ## Experimental Environment
 
-All experiments were run on a single shared GPU server:
+Two shared GPU servers, **`tau`** and **`zeta`**. **All results currently in this
+repository were produced on `tau`**; `zeta` is a second machine available for
+future runs. They differ in GPU architecture and CPU vendor, so the setup notes
+below are not interchangeable — see the sm_80 vs sm_90 note.
 
-| Component | Spec |
-| --- | --- |
-| GPU | 8 × NVIDIA H100 80 GB HBM3 (compute capability `sm_90`) |
-| GPU driver | 535.161.08 (CUDA driver API 12.2) |
-| CUDA toolkit (`nvcc`) | 12.2.140 |
-| CPU | 2 × Intel Xeon Platinum 8480C (112 physical cores / 224 threads) |
-| RAM | 2.0 TiB |
-| OS / kernel | Ubuntu 22.04.2 LTS / Linux 5.15.0-1053-nvidia |
+| Component | `tau` (all existing results) | `zeta` |
+| --- | --- | --- |
+| GPU | 8 × NVIDIA H100 80 GB HBM3 (compute capability `sm_90`, Hopper) | 8 × NVIDIA A100-SXM4-80GB (compute capability `sm_80`, Ampere) |
+| GPU driver | 535.161.08 (CUDA driver API 12.2) | 535.161.08 (CUDA driver API 12.2) |
+| CUDA toolkit (`nvcc`) | 12.2.140 | 12.2.140 |
+| CPU | 2 × Intel Xeon Platinum 8480C (112 physical cores / 224 threads) | 2 × AMD EPYC 7742 64-Core (128 physical cores / 256 threads) |
+| RAM | 2.0 TiB | 2.0 TiB |
+| OS / kernel | Ubuntu 22.04.2 LTS / Linux 5.15.0-1053-nvidia | Ubuntu 22.04.2 LTS / Linux 5.15.0-105-generic |
+| SMs per GPU | 132 | 108 |
+| Default `gcc` | 13 (`gcc-11` available) | 13.1.0 (`gcc-9`/`gcc-11`/`gcc-12` available) |
 
-**GPU usage per run.** Each experiment is pinned to a **single H100** via
+**GPU usage per run.** Each experiment is pinned to a **single GPU** via
 `CUDA_VISIBLE_DEVICES=<id>` — an 8B model in BF16 fits comfortably in 80 GB (QTIP's
 dequantized weight cache adds ~7 GB). Pinning to one idle GPU also avoids cross-run
 contention, which is **mandatory for HIGGS**: its FLUTE kernel mis-tunes its template
 under GPU contention and produces garbage output (see [HIGGS-GPTQ Setup](#higgs-gptq-setup)).
 
-**sm_90 note.** The H100 is compute capability `sm_90`. Prebuilt CUDA wheels that lack
-sm_90 support must be rebuilt from source — this affects `llama-cpp-python` (GGUF backends)
-and the FLUTE kernel (HIGGS); see their setup sections and the source-compiled-components
-caveats below. Separately, `nvcc` 12.2 does not support the system's default GCC 13, so
+**sm_80 vs sm_90 note.** `tau`'s H100 is compute capability `sm_90`; prebuilt CUDA wheels
+that lack sm_90 support must be rebuilt from source — this affects `llama-cpp-python`
+(GGUF backends) and the FLUTE kernel (HIGGS); see their setup sections and the
+source-compiled-components caveats below. **These rebuilds are `tau`-specific.** On
+`zeta` (`sm_80`) the stock wheels are expected to work: the `llama-cpp-python` crash is
+triggered by an sm_90-only fused path (see [GGUF Setup → H100 (sm_90)](#h100-sm_90-must-rebuild-from-source)),
+and HIGGS needs no `FLUTE_NUM_SMS` override because the ISTA checkpoints are already
+packed for A100's 108 SMs. None of this is verified on `zeta` yet — no runs have been
+done there.
+
+Separately, `nvcc` 12.2 does not support the default GCC 13 on **either** machine, so
 CUDA compilation and the QTIP / AQLM / HIGGS runs use `CC=gcc-11 CXX=g++-11`.
 
 ## Environment Preservation & Restoration
@@ -63,6 +75,10 @@ for recent torch; if a pin is not found, reinstall torch from its CUDA index fir
 
 Two venvs contain components built from source that `pip install -r` **cannot**
 reproduce from PyPI. After restoring the lock file, redo these build steps:
+
+> **Machine portability.** All lock files were captured on **`tau`** (H100 / `sm_90`).
+> The source-built artifacts below are compiled for `sm_90` and are **not** portable to
+> `zeta` (A100 / `sm_80`) — rebuild them there rather than copying the venv.
 
 - **`gguf`** — `llama-cpp-python` was rebuilt from source for H100 `sm_90`.
   Installing the pinned version from PyPI pulls the prebuilt wheel that crashes on

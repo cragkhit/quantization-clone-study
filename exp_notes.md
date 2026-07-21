@@ -55,6 +55,7 @@ the sections below.
 | `codellama_venv` | 3.10 | `requirements/codellama_venv.lock.txt` | CodeLlama BF16 |
 | `deepseek_venv` | 3.10 | `requirements/deepseek_venv.lock.txt` | DeepSeek-Coder-V2-Lite BF16 (transformers 4.45.2) |
 | `codestral_venv` | 3.10 | `requirements/codestral_venv.lock.txt` | Codestral-22B-v0.1 BF16 (codellama_venv versions + sentencepiece/protobuf) |
+| `qwen36_venv` | 3.10 | `requirements/qwen36_venv.lock.txt` | Qwen3.6-27B text-only (transformers 5.14, torch 2.8+cu128 trio; `qwen36` backend) |
 
 ### Restoring a venv
 
@@ -1001,6 +1002,74 @@ slightly edges out full precision.
 | GGUF Q2\_K | 0.9350 | 0.9350 | 0.9350 | 0.9350 | 0.8700 | 0 |
 | GGUF Q3\_K\_M | 0.9350 | 0.9394 | 0.9300 | 0.9347 | 0.8700 | 0 |
 | GGUF Q4\_K\_M | 0.9400 | 0.9583 | 0.9200 | 0.9388 | 0.8807 | 0 |
+
+## Qwen3.6-27B Setup (multimodal model, run text-only)
+
+### Model run
+- **[`Qwen/Qwen3.6-27B`](https://huggingface.co/Qwen/Qwen3.6-27B)** — a Qwen3.5-family
+  **multimodal (VLM)** model (`Qwen3_5ForConditionalGeneration`, 27B **dense**,
+  64-layer hybrid Gated-DeltaNet + Gated-Attention), run **text-only** via the new
+  `qwen36` backend.
+
+### Why transformers, not vLLM (the load path is the hard part)
+
+vLLM would be the natural fast server, but **it cannot run this model on this box**:
+the `qwen3_5` architecture needs vLLM ≥ 0.19, and every vLLM that new ships
+**CUDA-13** kernels (its `vllm-flash-attn` Hopper kernel needs `libcudart.so.13`).
+This box's driver is **535 / CUDA 12.2**, which cannot run CUDA-13 code — a vLLM
+smoke test loads and profiles KV cache but then dies in the attention kernel with
+`CUDA error: CUDA driver version is insufficient for CUDA runtime version`. The last
+cu12 vLLM (0.11) predates `qwen3_5`. So the model runs on **transformers** (uses
+torch's cu128 kernels, which work on the 535 driver), served by the `qwen36` loader.
+
+### Virtual environment (`qwen36_venv`)
+
+Needs **transformers ≥ 5.14** (4.57.6 does not know `qwen3_5`). Installing
+`-U transformers` pulls **torch 2.13+cu130**, which the 535 driver rejects
+(`CUDA driver too old`); torchvision/torchaudio then mismatch a pinned-back torch
+(`operator torchvision::nms does not exist` / torchaudio `undefined symbol`). The
+fix is to pin the **whole torch trio to cu128**:
+
+```bash
+uv venv qwen36_venv --python 3.10
+uv pip install --python qwen36_venv/bin/python -U "transformers>=5.14" accelerate
+# Pin torch stack back to cu128 (the -U above pulls cu130, which the 535 driver rejects):
+uv pip install --python qwen36_venv/bin/python \
+  "torch==2.8.0" "torchvision==0.23.0" "torchaudio==2.8.0" \
+  --index-url https://download.pytorch.org/whl/cu128
+```
+
+Lock file: `requirements/qwen36_venv.lock.txt`. (During bring-up a vLLM 0.24/0.21
+was installed to test the vLLM path; it is **vestigial** — uninstalled, not needed.)
+
+### `load_qwen36` details
+
+- Loads with `AutoModelForImageTextToText` (`dtype=bfloat16`, `device_map="auto"`);
+  the 27B dense weights (~52 GB) fit one H100. **Text-only**: prompts go through the
+  plain **tokenizer** chat template — no processor/vision inputs.
+- Qwen3.6 is a hybrid **thinking** model whose template appends `<think>` by default.
+  We pass **`enable_thinking=False`** (injects an empty `<think></think>`) so it emits
+  the JSON verdict directly instead of a long reasoning trace that would overrun
+  `max_new_tokens` and fail JSON parsing. `max_new_tokens=256`,
+  `do_sample=True, temperature=0.7, top_p=0.8, top_k=20` (Qwen instruct settings; the
+  sampling also gives the per-round variation majority-vote relies on).
+- The `qwen3_5` linear-attention layers log *"fast path is not available … falling
+  back to torch implementation"* because `flash-linear-attention` / `causal-conv1d`
+  are not installed. Correctness is unaffected; it just runs at ~12 s/pair (so OCD's
+  50k inferences ≈ ~7 days on one H100).
+
+### Running the experiment (all three datasets)
+
+Chained sequentially on one GPU by `scripts/chain_qwen36_all.sh` (quick GCJ sets
+first, OCD last; each call auto-resumes from existing round CSVs):
+
+```bash
+GPU=4 setsid bash scripts/chain_qwen36_all.sh > logs/chain_qwen36_all.log 2>&1 < /dev/null &
+```
+
+### Results (5-round majority vote)
+
+_Runs in progress (launched 2026-07-22); table to be filled in when complete._
 
 ## Datasets
 

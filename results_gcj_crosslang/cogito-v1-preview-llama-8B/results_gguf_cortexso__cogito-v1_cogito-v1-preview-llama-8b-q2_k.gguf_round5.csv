@@ -1,0 +1,1485 @@
+program_a,variant_a,program_b,variant_b,ground_truth,timestamp,response,pair_id
+2013_0_1,103399,2013_0_1,99825,CLONE,2026-07-16 14:33:45,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a game of Tic-Tac-O, where players take turns placing X's or O's on a 3x3 grid. The code handles game logic, including checking for wins, draws, and game completion. While the code snippets differ in syntax and structure, they both achieve the same functional result.""
+}",0
+2013_0_1,99825,2013_0_1,125888,CLONE,2026-07-16 14:33:46,"ANSWER: YES-SIMILAR
+EXPLANATION: The two code snippets are functionally similar. Both are implementations of a Tic-Tac-Toe game analyzer. The C++ code snippet implements a game state analyzer that determines game outcomes based on player moves and game rules. The Python code snippet implements a similar game state analyzer that determines game outcomes based on player moves and game rules. While the code structure and syntax differ between the two implementations, both code snippets achieve the same task of analyzing game states and determining game outcomes. The main logic of determining game outcomes based on player moves and game rules is preserved in both code snippets,",1
+2013_0_1,125888,2013_0_1,84842,CLONE,2026-07-16 14:33:48,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Python program that analyzes game states for a Tic-Tac-Toe game, while the second code snippet is a PHP program that processes test cases for a Tic-Tac-Toe game. They have different syntax, structure, and steps to accomplish their tasks.""
+}",2
+2013_0_1,84842,2013_0_1,103399,CLONE,2026-07-16 14:33:50,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a game of O/X/T/X/T/X/X where the winner is determined by the number of O/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T/X/T",3
+2013_0_1,49244,2013_0_1,98087,CLONE,2026-07-16 14:33:52,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same game logic, where players can win by getting three of their pieces in a row, column, or diagonal. The code handles game state, checks for winners, and outputs results. The main logic is similar, though the implementation details differ between the two code snippets.",4
+2013_0_1,98087,2013_0_1,91336,CLONE,2026-07-16 14:33:54,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic, where players 'X' and 'O' compete in a grid-based game. The code handles game state, checking for winners, and determining if the game has reached a draw. The main difference is that one is written in C++ and the other in Python, but the core functionality is the same.""
+}",5
+2013_0_1,91336,2013_0_1,102913,CLONE,2026-07-16 14:33:55,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic, where players can win by getting three in a row (horizontally, vertically, or diagonally) on a 3x3 board. The code handles game state, checks for winners, and outputs game results in a similar way. The main difference is in syntax (Python vs PHP), but the functional logic is the same.""
+}",6
+2013_0_1,102913,2013_0_1,49244,CLONE,2026-07-16 14:33:57,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic, where players X and O compete in a game of tic-tac-toe. The PHP code uses procedural programming style, while the Java code uses object-oriented style, but both achieve the same functionality of determining game winners and handling game states.""
+}",7
+2013_0_1,126886,2013_0_1,72071,CLONE,2026-07-16 14:33:59,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic for Tic-Tac-Toe. They both handle input cases, check game status, determine winners, and output results. The code structure and game rules are identical, just written in different programming languages.""
+}",8
+2013_0_1,72071,2013_0_1,70537,CLONE,2026-07-16 14:34:00,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic where X, O, and T are used to determine game outcomes. The code structure is similar, with input handling, game state determination, and output formatting. The main difference is the language (C++ vs Python) and implementation details, but the core functionality is the same.""
+}
+",9
+2013_0_1,70537,2013_0_1,127485,CLONE,2026-07-16 14:34:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for a Tic-Tac game. They both handle input from files, process game states, determine winners, and output results. The code structure and game rules are identical, just written in different programming languages.""
+}",10
+2013_0_1,127485,2013_0_1,126886,CLONE,2026-07-16 14:34:03,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic for Tic-Tac-Toe. They both handle input from a file, process game states, check for wins or draws, and output results. The core game logic is identical, though the implementations differ in syntax and structure.""
+}",11
+2013_0_2,95524,2013_0_2,83774,CLONE,2026-07-16 14:34:05,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a grid-based problem. They both read input cases, process grid dimensions, check possible moves, and output 'YES' or 'NO' based on whether the grid can be traversed. The Java code uses BufferedReader and BufferedWriter for input/output operations, while the C++ code uses standard input/output operations, but the core logic and problem-solving approach is the same.""
+}",12
+2013_0_2,83774,2013_0_2,78034,CLONE,2026-07-16 14:34:06,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a lawn mowing problem. The first code snippet uses C++ and the second uses Python, but both have the same structure and logic for checking if the lawn can be mowed by the mower. The main difference is in syntax and structure, but the core logic is the same.""
+}",13
+2013_0_2,78034,2013_0_2,71957,CLONE,2026-07-16 14:34:07,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task: reading input cases, evaluating lawn mowing scenarios, and determining if lawn mowing is possible ('YES') or not ('NO'). The code structure and logic are similar, though the syntax and implementation details differ between Python and PHP.""
+}",14
+2013_0_2,71957,2013_0_2,95524,CLONE,2026-07-16 14:34:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach for evaluating cases in a grid-based scenario. The PHP code reads input cases and evaluates them using two functions (read_case and evaluate), while the Java code uses similar methods to process input and evaluate cases. The core logic of checking rows and columns for maximum values and determining if a case passes is the same across both implementations.""
+}",15
+2013_0_2,44471,2013_0_2,140779,CLONE,2026-07-16 14:34:11,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving lawn mower cases. They both read input cases, process them to determine if the lawn mower can be used, and output whether it's possible or not. The Java code uses a Scanner to read input cases, while the C++ code uses scanf, but both achieve the same result.""
+}",16
+2013_0_2,140779,2013_0_2,122219,CLONE,2026-07-16 14:34:12,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving a grid of values. The first code snippet is written in C++ and the second in Python, but they both follow the same algorithm for determining whether a solution exists. The main difference is in syntax and structure, but the functional behavior is the same.""
+}",17
+2013_0_2,122219,2013_0_2,96711,CLONE,2026-07-16 14:34:13,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement a program that reads input from files, processes test cases, and outputs results as 'YES' or 'NO' based on whether a condition is met. The core logic and structure of both programs are very similar, with the main difference being the language syntax used (Python vs PHP).""
+}",18
+2013_0_2,96711,2013_0_2,44471,CLONE,2026-07-16 14:34:15,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for lawn mowing problem. They read input cases, process each case's lawn dimensions, check if the lawn is possible to mow (row and column constraints), and output 'YES' or 'NO' based on whether the lawn can be mowed. The Java code uses more modern features like object-oriented programming, but the core logic is the same as the PHP code.""
+}",19
+2013_0_2,55421,2013_0_2,91409,CLONE,2026-07-16 14:34:16,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving lawn mower cases. They both read input cases, process them, and write output results. The code structure and logic are identical, just written in different programming languages (Java vs C++).""
+}",20
+2013_0_2,91409,2013_0_2,85165,CLONE,2026-07-16 14:34:17,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving lawn problems. They both read input from files, process cases, validate results, and output 'YES' or 'NO' based on whether the lawn is possible or not. The core logic of checking if the lawn is possible within certain height limits is the same across both implementations.""
+}",21
+2013_0_2,85165,2013_0_2,68303,CLONE,2026-07-16 14:34:19,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing lawn cases. The Python code handles input/output operations, while the PHP code uses similar file handling and array operations to process the lawn cases. The core logic of checking if it's possible to have a lawn case with minimum height and maximum height is the same in both code snippets.""
+}",22
+2013_0_2,68303,2013_0_2,55421,CLONE,2026-07-16 14:34:21,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. The first code snippet is written in PHP and the second in Java, but they both follow the same logic for solving lawn mowing cases. The code snippets have similar structure, with the first being a direct implementation of the problem-solving approach, while the second being a more structured implementation with additional error handling and input validation.""
+}",23
+2013_0_3,108834,2013_0_3,102625,CLONE,2026-07-16 14:34:23,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement similar functionality - they handle palindrome checking and calculations for a mathematical problem. The Java code uses classes and methods to implement the functionality, while the C++ code uses functions and classes to implement the same logic. The core functionality is the same, though the implementation details differ between the two languages.",24
+2013_0_3,102625,2013_0_3,102207,CLONE,2026-07-16 14:34:25,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are functionally similar as they achieve the same result. The first code snippet is a C++ program that reads input from a file, processes it, and outputs results to another file. The second code snippet is a Python program that does the same thing. Both code snippets process input data, calculate results, and output them in a similar way. The code snippets have similar structure, logic, and purpose, making them functionally similar.",25
+2013_0_3,102207,2013_0_3,89287,CLONE,2026-07-16 14:34:27,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same task - reading input from a file and processing it according to specific rules. The Python code uses functions like openAndDump(), run(), and findNoOfFnSq() to process input, while the PHP code uses functions like cin(), last(), nextp(), and solve() to achieve similar results. The core logic of reading input, processing it according to specific rules, and writing output is the same in both code snippets.""
+}",26
+2013_0_3,89287,2013_0_3,108834,CLONE,2026-07-16 14:34:30,"ANSWER: YES-SIMILAR
+
+EXPLANATION: Both code snippets implement similar functionality. The first code snippet is written in PHP and implements a solution to a problem involving numbers and palindromes, while the second code snippet is written in Java and implements a similar solution. Both code snippets have similar structure, logic, and purpose, making them functionally similar despite differences in syntax and structure.
+
+The code snippets are similar in that they both implement solutions to problems involving numbers and palindromes, with similar logic and structure. The first code snippet is written in PHP and implements a solution to a problem involving numbers and pal",27
+2013_0_3,59317,2013_0_3,81195,CLONE,2026-07-16 14:34:32,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. While both code snippets deal with palindromes and square numbers, they have different approaches and implementations. The Java code snippet uses a more complex approach with multiple loops and conditions, while the C++ code snippet uses a simpler approach with a stack-based solution. The code snippets have different structures, syntaxes, and logic, making them not functionally similar.""
+}",28
+2013_0_3,81195,2013_0_3,51164,CLONE,2026-07-16 14:34:33,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - checking palindrome numbers and counting them in a given range. The first code snippet uses C++ with STL containers, while the second uses Python with list and file operations, but both achieve the same task of counting palindrome numbers within a given range.""
+}",29
+2013_0_3,51164,2013_0_3,92037,CLONE,2026-07-16 14:34:35,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""While both code snippets deal with similar tasks of processing squares and counting cases, they differ significantly in structure, syntax, and implementation details. The PHP code uses a more modern approach with object-oriented features, while the Python code uses a procedural approach with explicit loops and conditions. The code structure, variable handling, and overall logic are quite different between the two code snippets.""
+}",30
+2013_0_3,92037,2013_0_3,59317,CLONE,2026-07-16 14:34:37,"ANSWER: YES-SIMILAR
+EXPLANATION: The two code snippets are functionally similar. They both implement a program that processes input data and outputs results in a specific format. The PHP code processes input from a file named 'input.txt' and outputs results to 'output.txt', while the Java code processes input from the console and outputs results to the console. Both code snippets use similar logic to process the input data and generate output results, although they differ in syntax and structure. The core functionality of both code snippets is to process input data and generate output results, making them functionally similar.",31
+2013_0_3,74156,2013_0_3,53348,CLONE,2026-07-16 14:34:39,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement similar functionality - checking for palindromes in numbers. The Java code uses a Scanner to read input from a file, while the C++ code uses cin to read input from standard input. Both code snippets implement a function to check if a number is a palindrome, and both code snippets have similar structure for checking palindromes in numbers. The Java code uses a while loop to check palindromes, while the C++ code uses a similar structure for checking palindromes in numbers. Both code snippets have similar functionality - checking for",32
+2013_0_3,53348,2013_0_3,70289,CLONE,2026-07-16 14:34:41,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality. The first code snippet handles palindrome checking and data processing, while the second code snippet implements palindrome checking and data processing through a different approach. Both code snippets achieve the same result and perform the same task.""
+}",33
+2013_0_3,70289,2013_0_3,132829,CLONE,2026-07-16 14:34:43,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - processing input files to calculate squares and determine if they are palindromes. The code structure and logic are similar, with functions like 'is_palindrome', 'learn', and 'solve' handling the same tasks in both code snippets.""
+}",34
+2013_0_3,132829,2013_0_3,74156,CLONE,2026-07-16 14:34:44,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - checking if a number is a palindrome square. The PHP code uses a file input/output system to process numbers and check if they are palindromes, while the Java code uses a similar approach with file I/O. The core logic of checking if a number is a palindrome square is the same in both code snippets.""
+}",35
+2013_1_1,42047,2013_1_1,28766,CLONE,2026-07-16 14:34:45,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a mathematical problem, with similar logic and structure. The first code snippet is written in Java, while the second is written in C++, but they achieve the same result and perform the same task.""
+}",36
+2013_1_1,28766,2013_1_1,37029,CLONE,2026-07-16 14:34:47,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""While both code snippets deal with similar mathematical problems involving calculations involving 'r' and 't', they are implemented differently. The first code snippet uses C++ with a while loop to calculate a value based on input parameters 'r' and 't', while the second code snippet uses Python with a for loop to calculate a value based on input parameters 'r' and 't'. The code snippets have different structures and approaches to solving the problem, but they are not functionally similar.""
+}",37
+2013_1_1,37029,2013_1_1,34507,CLONE,2026-07-16 14:34:49,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a solution to calculate volumes of paint needed for cases involving small attempts. The code snippets have similar structure and logic, with the main difference being the language (Python vs PHP). The core functionality of calculating volumes based on radius and attempts is preserved between both snippets.""
+}",38
+2013_1_1,34507,2013_1_1,42047,CLONE,2026-07-16 14:34:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same algorithm for solving a problem related to finding values in a mathematical context. The code structure and logic are very similar, with both using iterative approaches to find solutions. The main difference is in the programming language used (PHP vs Java), but the core logic and approach are the same.""
+}",39
+2013_1_1,30835,2013_1_1,30228,CLONE,2026-07-16 14:34:52,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - they process multiple test cases and calculate a value based on input values. The Java code uses a while loop to find the value, while the C++ code uses a binary search algorithm to find the value. Both code snippets have similar structure and logic, though they use different programming languages and syntax.""
+}",40
+2013_1_1,30228,2013_1_1,32497,CLONE,2026-07-16 14:34:53,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a problem involving rings and values. The main function handles input/output operations, while the helper functions process the problem's core calculations. The code structure and problem-solving approach are identical, making these code snippets functionally similar.""
+}",41
+2013_1_1,32497,2013_1_1,39026,CLONE,2026-07-16 14:34:54,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for calculating rings and checking painted used values. The main differences are in syntax and structure, but the core logic and functionality remain the same.""
+}",42
+2013_1_1,39026,2013_1_1,30835,CLONE,2026-07-16 14:34:55,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving the bullseye problem. The first snippet is written in PHP, while the second is written in Java, but they perform the same calculations and logic for solving the problem. The main differences are in syntax and structure, but the core functionality is the same.""
+}",43
+2013_1_1,32414,2013_1_1,30618,CLONE,2026-07-16 14:34:57,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - solving a mathematical problem involving finding maximum value given constraints. The code structure, variable names, and mathematical operations are very similar, though the syntax and implementation details differ. The core logic of finding maximum value through iterative calculations is the same in both code snippets.""
+}",44
+2013_1_1,30618,2013_1_1,30519,CLONE,2026-07-16 14:34:58,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a binary search algorithm to find the middle value between two given values (r and t). The first code snippet uses a while loop with a custom function 'f' to determine the middle value, while the second code snippet uses a more traditional binary search approach with a while loop and a custom function 'up_to_n'. Despite the different implementations, both code snippets achieve the same result of finding the middle value between two given numbers.""
+}",45
+2013_1_1,30519,2013_1_1,31779,CLONE,2026-07-16 14:35:00,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same algorithm for solving a problem involving binary search and circular numbers. The Python code uses a while loop with binary search to find the last value, while the PHP code uses a similar binary search approach with while loop to find the result. The core logic and steps taken are the same, even though they use different languages and syntax.""
+}",46
+2013_1_1,31779,2013_1_1,32414,CLONE,2026-07-16 14:35:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving the problem described in the problem statement. The Java code implements the same mathematical calculations and logic as the PHP code, just with different syntax and structure. The core logic of calculating the maximum value for each test case is the same in both implementations.""
+}",47
+2014_2_1,115757,2014_2_1,131278,CLONE,2026-07-16 14:35:03,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality. The Java code handles input/output operations, reads test cases, processes multiple test cases, and calculates results. The C++ code follows similar logic, implementing input/output operations, processing test cases, and calculating results. Both code snippets have similar structure and logic, making them functionally similar.""
+}",48
+2014_2_1,131278,2014_2_1,128920,CLONE,2026-07-16 14:35:04,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - processing input cases and determining if 'Fegla Won' or the correct answer should be printed. The code logic is similar, with both using loops to process cases, and determining outputs based on input conditions. The main difference is in syntax and structure, but the functional behavior is the same.""
+}",49
+2014_2_1,128920,2014_2_1,118754,CLONE,2026-07-16 14:35:06,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving the problem of calculating the minimum number of moves required for Fegla to win. The code structure, variable names, and logic are identical, making them functionally similar.""
+}",50
+2014_2_1,118754,2014_2_1,115757,CLONE,2026-07-16 14:35:08,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving the problem. The first code snippet is written in PHP, while the second is written in Java, but they both follow the same algorithm for processing input and generating output. The code structure and functionality are identical, just written in different programming languages.""
+}",51
+2014_2_1,129296,2014_2_1,119165,CLONE,2026-07-16 14:35:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for calculating results based on input data. They both process test cases, handle input/output operations, and perform calculations to determine results. The code structure and functionality are very similar, though the syntax and structure differ between Java and C++.""
+}",52
+2014_2_1,119165,2014_2_1,118416,CLONE,2026-07-16 14:35:11,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. While both code snippets deal with similar tasks of processing input data and performing calculations, they are written in different programming languages (C++ vs Python) and have different structures and syntax. The first code snippet is a C++ program that processes input data and performs calculations, while the second code snippet is a Python program that does similar tasks but with different syntax and structure. The two code snippets are not functionally similar as they are written in different programming languages and have different structures and syntax.""
+}",53
+2014_2_1,118416,2014_2_1,116147,CLONE,2026-07-16 14:35:13,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - solving a problem where taxi cabs are used to calculate distances. They use similar input/output handling methods, and both have the same logic for calculating distances and handling cases. The main difference is in the language used (Python vs PHP), but the core functionality is the same.""
+}",54
+2014_2_1,116147,2014_2_1,129296,CLONE,2026-07-16 14:35:14,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem related to token counting and calculating results based on token values. The PHP code handles input/output operations and token processing similar to the Java code, with both performing the same task of processing token values and calculating results.""
+}",55
+2014_2_1,131873,2014_2_1,118489,CLONE,2026-07-16 14:35:17,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement a solution to the same problem - processing test cases and outputting results. The Java code processes input files and determines whether ""Fegla Won"" or a numerical result is appropriate, while the C++ code does the same but with more complex data structures and template usage. The core logic of determining test case results is the same in both implementations, though the C++ code has more complex output formatting and data structure usage.",56
+2014_2_1,118489,2014_2_1,121201,CLONE,2026-07-16 14:35:20,"ANSWER: YES-SIMILAR
+
+EXPLANATION: Both code snippets implement the same functionality - a program that reads input from a file, processes test cases, and outputs results. The code structure, logic flow, and output format are identical between the two code snippets. The code is functionally similar as they achieve the same result or perform the same task, even if they differ in syntax, structure, or specific steps taken to accomplish that task.",57
+2014_2_1,121201,2014_2_1,114208,CLONE,2026-07-16 14:35:21,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for processing strings and calculating distances between them. The core logic of checking string repetitions and calculating distances is identical, though the implementation details differ slightly in terms of variable naming and structure.""
+}",58
+2014_2_1,114208,2014_2_1,131873,CLONE,2026-07-16 14:35:23,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing test cases, calculating distances, and determining whether a case is possible. The Java code uses BufferedReader and PrintWriter classes for file input/output operations, while the PHP code uses echo and ob_start() functions for output. Both code snippets have similar control flow structures, with nested loops for processing test cases and calculating distances. The core logic of processing test cases, calculating distances, and determining whether a case is possible is the same in both code snippets.""
+}",59
+2014_3_1,135560,2014_3_1,138308,CLONE,2026-07-16 14:35:24,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a problem involving calculating values based on input parameters. The code structure and problem-solving approach are identical, though the syntax and implementation details differ slightly.""
+}",60
+2014_3_1,138308,2014_3_1,139209,CLONE,2026-07-16 14:35:26,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same algorithm for calculating the minimum number of generations needed to reach a specific state. The first code snippet is written in C++ and the second in Python, but they perform the same task of determining the minimum number of generations needed to reach a specific state. The code snippets are functionally similar as they achieve the same result.""
+}",61
+2014_3_1,139209,2014_3_1,142092,CLONE,2026-07-16 14:35:27,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a mathematical problem involving division and finding minimum values. The core logic of handling division cases and finding minimum values is the same, despite differences in syntax and structure between Python and PHP implementations.""
+}",62
+2014_3_1,142092,2014_3_1,135560,CLONE,2026-07-16 14:35:29,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same problem-solving task. The PHP code reads input files, processes cases, and outputs answers for a mathematical problem. The Java code does the same, but in a more structured way with error handling and input validation. The core logic of solving mathematical problems is the same in both code snippets.""
+}",63
+2014_3_1,138333,2014_3_1,134611,CLONE,2026-07-16 14:35:30,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same mathematical operations for solving a problem involving prime numbers and their properties. The code structure and logic are very similar, with the main difference being in the language syntax (Java vs C++). The core mathematical operations and problem-solving approach are identical, making these code snippets functionally similar.""
+}",64
+2014_3_1,134611,2014_3_1,139370,CLONE,2026-07-16 14:35:31,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a mathematical problem involving prime numbers and division. The code structure and problem-solving approach are identical, with minor variations in syntax and formatting.""
+}",65
+2014_3_1,139370,2014_3_1,134295,CLONE,2026-07-16 14:35:32,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving two numbers (P and Q) where the solution involves division by their greatest common divisor (GCD), checking if Q is a power of 2, and counting how many times Q can be doubled to reach a certain value. The code structure, variable names, and algorithm steps are all identical between the two implementations.""
+}",66
+2014_3_1,134295,2014_3_1,138333,CLONE,2026-07-16 14:35:33,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same mathematical operations (GCD, division by 2) and achieve the same result (determine if case is possible or not). The code logic is very similar, with the Java code being a more modern implementation of the same problem.""
+}",67
+2014_3_1,140281,2014_3_1,132142,CLONE,2026-07-16 14:35:34,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem related to calculating values based on input cases. The code structure and problem-solving approach are very similar, though the code is written in different languages (Java vs C++).""
+}
+```",68
+2014_3_1,132142,2014_3_1,143074,CLONE,2026-07-16 14:35:37,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that reads input from a file named 'A-large.in' and processes test cases, while the second code snippet is a Python program that reads input from standard input and processes test cases. While both code snippets deal with similar mathematical operations and problem-solving tasks, they are implemented in different programming languages and have distinct syntax and structure. The code snippets are not functionally similar as they are written in different programming languages and have different approaches to solving the problem.""
+",69
+2014_3_1,143074,2014_3_1,132975,CLONE,2026-07-16 14:35:38,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. They are written in different programming languages (Python vs PHP) and have different structures and logic. The first code snippet appears to be a Python program that tests mathematical relationships, while the second code snippet is a PHP program that handles input/output operations. They have different syntax and structure, making them not functionally similar.""
+}",70
+2014_3_1,132975,2014_3_1,140281,CLONE,2026-07-16 14:35:40,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same mathematical problem-solving approach, where they take input from stdin/in, process it through a series of mathematical operations involving powers of 2, logarithms, and division, and output the results. The core mathematical operations and problem-solving approach are identical, even though they are implemented in different programming languages (PHP vs Java).""
+}",71
+2015_0_1,47939,2015_0_1,44230,CLONE,2026-07-16 14:35:40,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. They both process test cases, where each test case involves calculating the number of invitations that can be made based on the input constraints. The code structure and logic are very similar, though the syntax and implementation details differ between the two languages.""
+}",72
+2015_0_1,44230,2015_0_1,106809,CLONE,2026-07-16 14:35:41,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a problem involving counting invitations and tracking counts. The code snippets are functionally similar as they perform the same task, even though they differ in syntax, structure, and specific steps taken to accomplish that task.""
+}",73
+2015_0_1,106809,2015_0_1,25955,CLONE,2026-07-16 14:35:43,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""While both code snippets deal with similar task of processing input cases and calculating required values, they are written in different languages (Python vs PHP) and have different structures. The code snippets are not functionally similar as they are implemented in different programming languages with different syntax and structure.""
+}",74
+2015_0_1,25955,2015_0_1,47939,CLONE,2026-07-16 14:35:44,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach for calculating standing ovation cases. The PHP code processes test cases by calculating the sum of people in each case, while the Java code uses a similar approach to calculate the total sum of people in each case. Both code snippets follow the same logic structure and achieve the same result, despite differences in syntax and structure.""
+}",75
+2015_0_1,43660,2015_0_1,64620,CLONE,2026-07-16 14:35:46,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they read input values, process them, and output results. The Java code uses BufferedReader to read input values, while the C++ code uses scanf to read input values. Both code snippets process the input values and output the results, making them functionally similar.""
+}",76
+2015_0_1,64620,2015_0_1,86599,CLONE,2026-07-16 14:35:47,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic where they process input data to calculate the number of friends needed based on the difference between the current value and the initial value. The code structure and logic are very similar, though the languages and syntax differ.""
+}",77
+2015_0_1,86599,2015_0_1,28465,CLONE,2026-07-16 14:35:48,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for calculating the number of friends that can be invited based on the standing and invites. The first code snippet is written in Python, while the second is written in PHP, but they perform the same mathematical calculations and logic for determining the number of friends that can be invited.""
+}",78
+2015_0_1,28465,2015_0_1,43660,CLONE,2026-07-16 14:35:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar logic for calculating standing positions in a queue. The PHP code processes input cases to calculate total standing positions, while the Java code does the same but in a different language. The core logic of calculating standing positions based on input cases is the same, hence they are functionally similar.""
+}",79
+2015_0_1,100718,2015_0_1,65110,CLONE,2026-07-16 14:35:51,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for calculating minimum friends in Standing Ovation problem. They read input cases, process each case with same steps (calculating minimum friends based on running sum), and output the results. The code structure and algorithm are identical, just written in different programming languages (Java vs C++).""
+}",80
+2015_0_1,65110,2015_0_1,60803,CLONE,2026-07-16 14:35:52,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets process input data to generate output cases, with similar logic for handling data and calculations. The first code snippet reads input data from a file and processes it to generate output cases, while the second code snippet does the same but in a different programming language. The core logic and purpose of both code snippets are the same, making them functionally similar.""
+}",81
+2015_0_1,60803,2015_0_1,96593,CLONE,2026-07-16 14:35:53,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they both process input from a file, perform calculations based on input values, and output results in a specific format. The code structure and logic are very similar, though the syntax differs between Python and PHP.""
+}",82
+2015_0_1,96593,2015_0_1,100718,CLONE,2026-07-16 14:35:55,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving the problem of calculating the minimum number of friends needed to stand in a line, where each friend's strength is determined by their ability to clap. The code in both languages follows the same steps: reading input cases, processing each test case, calculating the required number of friends, and writing the output to a file. The core logic and implementation details are identical across both code snippets.""
+}",83
+2015_0_2,91000,2015_0_2,96440,CLONE,2026-07-16 14:35:56,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving the problem. They both read input cases, process each case's data, compute the minimum value for each case, sort the results, and output the results in the required format. The code structure and logic are identical, just written in different programming languages (Java vs C++).""
+}",84
+2015_0_2,96440,2015_0_2,36519,CLONE,2026-07-16 14:35:58,"ANSWER: DONT-KNOW
+EXPLANATION: The code snippets are written in different programming languages (C++ vs Python) and have different structures, making it difficult to determine if they are functionally similar. The first code snippet appears to be a complete program with input/output handling for a specific problem, while the second code snippet appears to be a partial program with some functions defined but not fully implemented. Without more context about the specific problem they're solving, it's hard to determine if they are functionally similar.",85
+2015_0_2,36519,2015_0_2,103402,CLONE,2026-07-16 14:35:59,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input from a file named 'file.in', processing test cases, calculating total time based on pancakes, and writing output to a file named 'file.out'. The core logic of handling test cases, calculating time based on pancakes, and writing output cases is identical between both code snippets.""
+}",86
+2015_0_2,103402,2015_0_2,91000,CLONE,2026-07-16 14:36:01,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the same problem-solving task. They both read input from a file named 'file.in', process multiple cases, and write output to a file named 'file.out'. The Java code is implementing the same problem-solving logic as the PHP code, just with different syntax and structure. The core logic of reading input, processing cases, and writing output is the same in both code snippets.""
+}",87
+2015_0_2,21812,2015_0_2,88257,CLONE,2026-07-16 14:36:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving a problem related to pancakes. They both read input cases, process them, and output the solution for each case. The code structure and problem-solving approach are identical, just written in different programming languages (Java vs C++).""
+}",88
+2015_0_2,88257,2015_0_2,81081,CLONE,2026-07-16 14:36:04,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same task - solving a problem with pancakes where the maximum value is calculated. The code structure is similar, with both using input/output handling and case processing. The main logic for calculating the maximum value and solving the problem is the same, though the implementation details differ slightly. The overall functionality is the same, making these code snippets functionally similar.",89
+2015_0_2,81081,2015_0_2,102321,CLONE,2026-07-16 14:36:05,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a programming contest problem. The Python code uses decorators and memoization for caching results, while the PHP code uses procedural programming with functions to achieve the same task. The core logic of calculating splits based on maximum values and iterating through test cases remains the same between both implementations.""
+}",90
+2015_0_2,102321,2015_0_2,21812,CLONE,2026-07-16 14:36:07,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem related to pancakes. They both read input from a file, process test cases, and calculate results using similar mathematical operations. The main differences are in syntax (PHP vs Java) and structure, but the functional logic is the same.""
+}",91
+2015_0_2,40957,2015_0_2,38840,CLONE,2026-07-16 14:36:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem related to finding maximum values in arrays. The Java code uses a class-based structure with methods for reading input, solving the problem, and debugging, while the C++ code uses a procedural structure with functions for reading input, solving the problem, and outputting results. The core logic of finding maximum values and handling errors is the same in both implementations.""
+}",92
+2015_0_2,38840,2015_0_2,100159,CLONE,2026-07-16 14:36:10,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""While both code snippets deal with similar problems involving plates and calculations, they have significant differences in their approaches and implementations. The first code snippet is written in C++ and uses a more procedural approach with direct calculations, while the second code snippet is written in Python and uses a more object-oriented approach with classes and methods. The code structures, syntaxes, and problem-solving approaches are quite different, making these code snippets not functionally similar.""
+}",93
+2015_0_2,100159,2015_0_2,55775,CLONE,2026-07-16 14:36:12,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving the problem of calculating the minimum number of moves needed to reach the highest plate. The Python code uses similar variable names and function structures to achieve the same result as the PHP code. The core logic of calculating the maximum plate and determining the minimum moves required is identical between both implementations.""
+}",94
+2015_0_2,55775,2015_0_2,40957,CLONE,2026-07-16 14:36:13,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same solution for the Infinite House of Pancakes problem. They both use a similar approach of reducing stacks and solving cases, with the Java code being a more detailed implementation that includes additional error handling and threading features. The core logic of calculating stack reductions and solving cases is the same, making these code snippets functionally similar.""
+}",95
+2015_0_3,42051,2015_0_3,41900,CLONE,2026-07-16 14:36:15,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for processing cases and solving problems, with the same structure and purpose, despite differences in syntax and structure.""
+}",96
+2015_0_3,41900,2015_0_3,103585,CLONE,2026-07-16 14:36:17,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. They are written in different programming languages (C++ vs Python) and have different structures and syntax. The first code snippet is a complete C++ program with multiple sections including includes, definitions, and main function. The second code snippet is a Python program with functions, variables, and logic for processing input and output. While both code snippets deal with similar concepts of processing input and output, they are not functionally similar as they are written in different languages and have different implementations.""
+}",97
+2015_0_3,103585,2015_0_3,19800,CLONE,2026-07-16 14:36:18,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing input strings and determining if they should return 'YES' or 'NO'. The core multiplication logic is identical, with the PHP implementation using a function-based approach while the Python implementation uses a dictionary-based approach, but the functional behavior is the same.""
+}",98
+2015_0_3,19800,2015_0_3,42051,CLONE,2026-07-16 14:36:20,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a similar algorithm for quaternion multiplication and testing, with the same logic for handling i, j, k, and l values, and checking conditions for accepting or rejecting cases. The code structure and mathematical operations are functionally equivalent, though written in different programming languages and syntax styles.""
+}",99
+2015_0_3,47513,2015_0_3,49764,CLONE,2026-07-16 14:36:22,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality for solving a problem related to string manipulation and case processing. The Java code snippet contains a main class with methods for handling input/output operations, while the C++ code snippet contains similar functionality for string manipulation and case processing, though with different syntax and structure. The core logic and purpose of both code snippets are similar, despite differences in syntax and structure.""
+}",100
+2015_0_3,49764,2015_0_3,103774,CLONE,2026-07-16 14:36:24,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for handling mathematical operations and symbol transformations. The code structure, variable usage, and mathematical operations are consistent across both code snippets, indicating a functional similarity.""
+}",101
+2015_0_3,103774,2015_0_3,102323,CLONE,2026-07-16 14:36:25,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process input data to determine if a certain value should be accepted or rejected, and return a boolean result. The code structure and logic are very similar, with both using functions to process input and determine outcomes.""
+}",102
+2015_0_3,102323,2015_0_3,47513,CLONE,2026-07-16 14:36:27,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for parsing input cases, validating results, and determining outputs. The code structure and functionality are very similar, with the Java code implementing the same logic as the PHP code, just in different programming languages.""
+}",103
+2015_0_3,96608,2015_0_3,23036,CLONE,2026-07-16 14:36:29,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same algorithm for solving problems related to mathematical expressions and case scenarios. The code structure, variable usage, and logic flow are very similar between the two code snippets.""
+}",104
+2015_0_3,23036,2015_0_3,72742,CLONE,2026-07-16 14:36:30,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality for handling input/output operations, with the first snippet being a C++ implementation and the second being a Python implementation. The code structure and purpose are similar across both implementations.""
+}",105
+2015_0_3,72742,2015_0_3,18309,CLONE,2026-07-16 14:36:33,"ANSWER: YES-SIMILAR
+
+EXPLANATION: Both code snippets are implementing similar functionality for handling input/output operations, with the Python code using classes and methods to handle input/output operations, while the PHP code uses functions and classes to handle input/output operations. The Python code uses classes like InputFileReader and OutputFileWriter to handle input/output operations, while the PHP code uses classes like IO to handle input/output operations. Both code snippets are implementing similar functionality for handling input/output operations, with the Python code using classes and methods to handle input/output operations, while the PHP code uses functions and classes to handle input/output operations.",106
+2015_0_3,18309,2015_0_3,96608,CLONE,2026-07-16 14:36:35,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem involving variables i, j, and k, where the solution involves checking if a product of terms equals -1, and the code structure is very similar, with both using functions to process input and perform calculations.""
+}",107
+2015_0_4,86262,2015_0_4,63026,CLONE,2026-07-16 14:36:37,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem related to determining whether a case can be solved or not. The code structure, variable names, and overall approach to solving the problem are similar. The Java code uses classes and methods while the C++ code uses functions and classes, but the core logic and problem-solving approach is the same.""
+}",108
+2015_0_4,63026,2015_0_4,57828,CLONE,2026-07-16 14:36:39,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they both handle input cases and output results based on the same logic. The first code snippet reads input cases and outputs results based on the same logic as the second code snippet, which reads input cases and outputs results based on the same logic. The first code snippet also handles input cases and outputs results based on the same logic as the second code snippet, which handles input cases and outputs results based on the same logic.""
+}",109
+2015_0_4,57828,2015_0_4,68310,CLONE,2026-07-16 14:36:40,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for determining whether a person is 'RICHARD' or 'GABRIEL' based on specific conditions. The code structure and problem-solving approach are identical, even though they're written in different programming languages.""
+}",110
+2015_0_4,68310,2015_0_4,86262,CLONE,2026-07-16 14:36:42,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving Omino problem. They both process input files to determine whether cases should be won by RICHARD or lost by GABRIEL. The Java code uses ArrayList to store test cases and BufferedWriter to output results, while the PHP code uses arrays and loops to process statements. The core logic of determining whether to return RICHARD or GABRIEL based on input conditions is the same in both implementations.""
+}",111
+2015_0_4,30398,2015_0_4,86932,CLONE,2026-07-16 14:36:43,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they perform the same task - reading input from a file named 'D-large.in' and writing output to a file named 'D-large.out'. The code logic is identical, with the main difference being the programming language used (Java vs C++).""
+}",112
+2015_0_4,86932,2015_0_4,94256,CLONE,2026-07-16 14:36:44,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for determining the winner between two players (GABRIEL and RICHARD) based on input values. The code structure, variable names, and decision-making processes are very similar, though the syntax and implementation details differ between C++ and Python.""
+}",113
+2015_0_4,94256,2015_0_4,19708,CLONE,2026-07-16 14:36:46,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same logic for solving the problem of determining the winner between two players (Gabriel and Richard) based on input parameters. The code structure, variable usage, and decision-making logic are identical, though the syntax and implementation details differ between the two code snippets. The core functionality and task are the same, making these code snippets functionally similar.",114
+2015_0_4,19708,2015_0_4,30398,CLONE,2026-07-16 14:36:48,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for determining whether Richard will win in the problem. They both check the same conditions for when Richard will win, and they both output the same result. The Java code is a direct translation of the PHP code logic, with the same conditions and same output format. The only difference is in syntax and structure, but the functional behavior is identical.""
+}",115
+2015_0_4,29877,2015_0_4,60776,CLONE,2026-07-16 14:36:49,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. While both code snippets handle input/output operations and contain similar logic for determining whether 'RICHARD' or 'GABRIEL' wins based on input values, they are written in different programming languages (Java vs C++). The code structure, syntax, and implementation details differ significantly between the two code snippets, making them not functionally similar.""
+}",116
+2015_0_4,60776,2015_0_4,74018,CLONE,2026-07-16 14:36:50,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for determining whether to return 'GABRIEL' or 'RICHARD' based on input values. The first snippet uses C++ with scanf input method, while the second uses Python with input() method, but the core logic of checking conditions for Gabriel or Richard is the same.""
+}",117
+2015_0_4,74018,2015_0_4,78114,CLONE,2026-07-16 14:36:52,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for determining the winner between 'RICHARD' and 'GABRIEL' based on input values. The core algorithm and decision-making process is identical, even though the implementations differ in syntax and structure.""
+}",118
+2015_0_4,78114,2015_0_4,29877,CLONE,2026-07-16 14:36:53,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - determining whether 'RICHARD' or 'GABRIEL' wins in a series of test cases. The code structure and logic are very similar, with the Java code implementing the same decision-making process as the PHP code. The main difference is in syntax and structure, but the functional behavior is the same.""
+}",119
+2015_1_1,112276,2015_1_1,111086,CLONE,2026-07-16 14:36:55,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input from a text file, processing multiple test cases, and writing output to a file. The code structure and logic are very similar, with the main difference being the language used (Java vs C++). The core functionality of reading input, processing test cases, and writing output is the same across both code snippets.""
+}",120
+2015_1_1,111086,2015_1_1,117734,CLONE,2026-07-16 14:36:56,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem involving two arrays of numbers, where the goal is to calculate two values (a and b) based on the maximum and minimum values in those arrays. The code structure and logic are very similar, with the main difference being the programming language used (C++ vs Python).""
+}",121
+2015_1_1,117734,2015_1_1,122934,CLONE,2026-07-16 14:36:58,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm to solve a problem involving two methods (first and second) that calculate values based on array elements. The code structure and logic are very similar, though the syntax and implementation details differ between Python and PHP.""
+}",122
+2015_1_1,122934,2015_1_1,112276,CLONE,2026-07-16 14:36:59,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are functionally similar as they achieve the same result. They both process input data to calculate two values: firstMethod and secondMethod. The code snippets use similar logic to calculate these values, with the main difference being the programming language used (PHP vs Java). The overall structure and purpose of the code is the same, just implemented in different languages.",123
+2015_1_1,118030,2015_1_1,122263,CLONE,2026-07-16 14:37:00,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Java and contains methods for calculating eaten mushrooms and eating at a constant rate. The second code snippet is written in C++ and contains methods for solving mathematical problems. While both code snippets deal with mathematical calculations, they are written in different programming languages and have different purposes, making them not functionally similar.""
+}",124
+2015_1_1,122263,2015_1_1,124602,CLONE,2026-07-16 14:37:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem involving arrays of numbers, where the goal is to calculate two values (ans and ans2) based on the differences between elements in the arrays. The code structure, logic, and output format are identical between the two implementations.""
+}",125
+2015_1_1,124602,2015_1_1,111264,CLONE,2026-07-16 14:37:03,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for calculating minimum and maximum values from a sequence of numbers. The core logic of calculating minimum values and maximum values from a sequence of numbers is identical between the two code snippets.""
+}",126
+2015_1_1,111264,2015_1_1,118030,CLONE,2026-07-16 14:37:04,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for calculating minimum mushrooms eaten at different rates. The PHP code calculates minimums using a plate-based system, while the Java code uses a more traditional approach with explicit calculations. The core logic of calculating minimum mushrooms eaten is the same in both implementations.""
+}",127
+2015_1_1,112898,2015_1_1,111866,CLONE,2026-07-16 14:37:05,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for calculating minimum and maximum values in test cases. The Java code uses BufferedReader to read input and BufferedWriter to write output, while the C++ code uses similar file operations and calculations. The core algorithm for calculating minimum and maximum values is identical, just implemented in different languages.""
+}",128
+2015_1_1,111866,2015_1_1,111647,CLONE,2026-07-16 14:37:07,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The code snippets are not similar. The first snippet is a complete C++ program that reads input from a file and processes it to calculate some values. The second snippet is a collection of Python functions that read data from a file and process it to create lists. These code snippets serve different purposes and are written in different programming languages, so they are not similar.""
+}",129
+2015_1_1,111647,2015_1_1,121770,CLONE,2026-07-16 14:37:09,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are functionally similar as they implement similar functionality - the first one defines several utility functions for parsing input data, while the second one implements a test case processing system using those utility functions. They both handle similar tasks and achieve the same results, despite differences in syntax and structure.
+
+The first code snippet defines several functions for parsing input data, including functions for reading integers, floats, and lists of various types. The second code snippet implements a test case processing system that uses those utility functions to process input data.
+
+Both code snippets are functionally similar as they implement similar",130
+2015_1_1,121770,2015_1_1,112898,CLONE,2026-07-16 14:37:11,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same logic for calculating eaten mushrooms and printing results. The PHP code handles test cases and calculates eaten mushrooms similar to the Java code. The core logic of calculating eaten mushrooms and printing results is the same across both implementations. The Java code has more verbose structure with explicit file handling, while the PHP code is more concise but functionally equivalent in their approach to solving the problem.",131
+2016_0_1,76319,2016_0_1,65647,CLONE,2026-07-16 14:37:13,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. While both code snippets deal with processing input to generate output, they are written in different languages (Java vs C++) and have different structures. The Java code uses BufferedReader and BufferedWriter classes for file input/output operations, while the C++ code uses iostream and map classes for similar operations. The code logic and structure are different, making them not functionally similar.""
+}",132
+2016_0_1,65647,2016_0_1,94639,CLONE,2026-07-16 14:37:14,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for calculating sheep counts. The C++ code uses a map to track digit counts, while the Python code uses a dictionary to track digit counts. Both code snippets calculate the sum of sheep counts based on the input number, and both code snippets output the result as either 'INSOMNIA' or the calculated sum.""
+}",133
+2016_0_1,94639,2016_0_1,48618,CLONE,2026-07-16 14:37:16,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for counting sheep. They both use a multiplication by k approach to generate numbers, and both check if the resulting number has no zeros in its digits. The PHP code uses a while loop to generate numbers, while the Python code uses a while loop with a condition check. Both code snippets have the same structure and logic for checking if the number has no zeros in its digits.""
+}",134
+2016_0_1,48618,2016_0_1,76319,CLONE,2026-07-16 14:37:17,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""While both code snippets deal with similar problems of calculating and processing numbers, they are written in different languages (PHP vs Java) and have different structures. The PHP code snippet uses a while loop and conditional checks to process numbers, while the Java code snippet uses a BufferedReader and BufferedWriter to process input from a file. The code logic and structure are different, making them not functionally similar.""
+}",135
+2016_0_1,117099,2016_0_1,134225,CLONE,2026-07-16 14:37:18,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem related to 'insomnia' cases. They both use similar techniques for handling input cases, and both have similar structures for processing data. The code logic and approach are essentially the same, even though they are written in different programming languages.""
+}",136
+2016_0_1,134225,2016_0_1,88781,CLONE,2026-07-16 14:37:19,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving the problem. They both handle the same input cases, use similar data structures (like sets and vectors), and follow the same algorithmic steps. The main difference is in the language syntax (C++ vs Python), but the functional behavior is identical.""
+}",137
+2016_0_1,88781,2016_0_1,39027,CLONE,2026-07-16 14:37:20,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Python script that implements a solution to a problem, while the second code snippet is a PHP script that implements a different problem solution. They have different structures, syntaxes, and purposes, making them not functionally similar.""
+}",138
+2016_0_1,39027,2016_0_1,117099,CLONE,2026-07-16 14:37:22,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - a program that reads input cases, processes them, and outputs results. The PHP code reads input files, processes them, and outputs results, while the Java code reads input from console, processes it, and outputs results. Both have similar logic for processing cases and handling data.""
+}",139
+2016_0_1,100898,2016_0_1,143909,CLONE,2026-07-16 14:37:23,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for counting cases and handling boolean masks. They both use similar loop structures and have matching output formats. The code logic is functionally similar despite different language implementations.""
+}",140
+2016_0_1,143909,2016_0_1,71388,CLONE,2026-07-16 14:37:25,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic: a loop that repeatedly adds a number to itself until it reaches a certain value, printing 'INSOMNIA' when the input is zero and the case number when the input is non-zero. The code snippets are functionally similar as they achieve the same result.""
+}",141
+2016_0_1,71388,2016_0_1,113708,CLONE,2026-07-16 14:37:26,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic: they read input values, check for missing digits, and print the result in a specific format. The PHP code is a direct translation of the Python code, with equivalent functionality.""
+}",142
+2016_0_1,113708,2016_0_1,100898,CLONE,2026-07-16 14:37:27,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. They are written in different programming languages (PHP vs Java) and have different logic and structure. The first code snippet is a PHP program that processes input to determine missing numbers, while the second code snippet is a Java program that processes input to determine missing numbers in a different way. They are not functionally similar.""
+}",143
+2016_0_4,136626,2016_0_4,135114,CLONE,2026-07-16 14:37:28,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem of calculating paths in a grid-like structure. The Java code uses a Scanner to read input values and process them to determine possible paths, while the C++ code uses similar logic to process input values and determine possible paths. The core logic of calculating paths based on input values is the same in both code snippets.""
+}",144
+2016_0_4,135114,2016_0_4,63570,CLONE,2026-07-16 14:37:30,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving cases with input parameters K, C, and S. The code handles the same mathematical calculations and produces the same output format, despite differences in syntax and structure between the C++ and Python implementations.""
+}",145
+2016_0_4,63570,2016_0_4,80717,CLONE,2026-07-16 14:37:31,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a mathematical problem. They both process input cases, check conditions based on input values, and generate output for each case. The core logic of checking conditions based on input values and generating outputs is the same across both code snippets, despite differences in syntax and structure.""
+}",146
+2016_0_4,80717,2016_0_4,136626,CLONE,2026-07-16 14:37:33,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a mathematical problem involving cases and solutions. The PHP code processes input files to generate answers, while the Java code reads input from the console to generate solutions. Both code snippets follow similar steps to process the input data, generate solutions, and output the results. The core logic and problem-solving approach is the same in both code snippets.""
+}",147
+2016_0_4,125922,2016_0_4,90060,CLONE,2026-07-16 14:37:34,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they process input cases and generate output cases with specific parameters. The code structure and logic are very similar, though the languages and syntax differ.""
+}",148
+2016_0_4,90060,2016_0_4,158305,CLONE,2026-07-16 14:37:35,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving guessing numbers. The C++ code snippet handles input/output operations and implements the same algorithmic steps as the Python code snippet, just with different syntax and structure. The main logic of guessing numbers and handling cases where guessing is impossible remains the same across both implementations.""
+}",149
+2016_0_4,158305,2016_0_4,139021,CLONE,2026-07-16 14:37:37,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving guessing numbers, with similar structure and methods. The code snippets have similar control flow, similar variable usage, and similar problem-solving approaches.""
+}",150
+2016_0_4,139021,2016_0_4,125922,CLONE,2026-07-16 14:37:38,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving test cases. They both handle input from a file, process test cases, and output results. The Java code uses BufferedReader to read input file, while the PHP code uses fscanf to read input file. Both code snippets handle test cases with similar logic for solving them, outputting results in a similar format.""
+}",151
+2016_0_4,99642,2016_0_4,45917,CLONE,2026-07-16 14:37:40,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same task - they read input from a file, process it, and output results to another file. The code structure is similar, with both using a main loop to process multiple cases. The key functions like reading input, solving cases, and writing output are implemented in a similar way. The only difference is in the language used (Java vs C++), but the logic and structure are the same.",152
+2016_0_4,45917,2016_0_4,142083,CLONE,2026-07-16 14:37:42,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a complete C++ program with proper structure, input/output handling, and debugging features. The second code snippet is a Python program with basic file handling and function definitions. They are written in different languages and have different structures, making them not functionally similar.""
+}",153
+2016_0_4,142083,2016_0_4,37736,CLONE,2026-07-16 14:37:43,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets handle test cases with similar logic for calculating values based on input parameters k, c, and s. They both process multiple test cases, use similar mathematical operations, and output results in a similar format. The core logic of determining values based on input parameters is the same across both code snippets.""
+}",154
+2016_0_4,37736,2016_0_4,99642,CLONE,2026-07-16 14:37:44,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input data and processing multiple test cases. The PHP code reads input from a file named 'D-large.in' and processes multiple test cases, while the Java code reads input from a file named 'input.txt' and processes multiple test cases. The core logic of both codes is similar, with the Java code being more verbose due to its use of multiple classes and methods.""
+}",155
+2016_1_1,15819,2016_1_1,15421,CLONE,2026-07-16 14:37:46,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - reading input cases and processing them to output the last word in each case. The Java code reads input from a file and processes it to write output to another file, while the C++ code reads input from standard input and processes it to write output to standard output. The core logic of processing each case and finding the last word is the same, just implemented in different languages with different syntax.""
+}",156
+2016_1_1,15421,2016_1_1,3308,CLONE,2026-07-16 14:37:47,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same functionality - they process input text to generate output text with specific formatting rules. The first snippet processes input text to generate output text with specific formatting rules, while the second snippet processes input text to generate output text with specific formatting rules. Both code snippets implement the same functionality - they process input text to generate output text with specific formatting rules.""
+}",157
+2016_1_1,3308,2016_1_1,3735,CLONE,2026-07-16 14:37:49,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing input text and printing the last word. The Python code reads input file, processes words, and prints results, while the PHP code reads input from stdin, processes words, and prints results. Both code snippets achieve the same task of processing input text and printing the last word.""
+}",158
+2016_1_1,3735,2016_1_1,15819,CLONE,2026-07-16 14:37:50,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing test cases and calculating the last word in a string. The PHP code uses fscanf and fgets to read input cases, while the Java code uses Files.readAllLines to read input cases. Both code snippets process each test case, calculate the last word by appending characters, and output the result in the same format. The main difference is in the language syntax (PHP vs Java), but the functional logic is identical.""
+}",159
+2016_1_1,28201,2016_1_1,31768,CLONE,2026-07-16 14:37:52,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - sorting characters in a string based on their ASCII values, and printing sorted results. The Java code uses a BufferedReader to read input strings, sorts them using a custom sorting method, and writes the sorted results to an output file. The C++ code uses similar logic, reading input strings, sorting them using a custom sorting method, and printing sorted results to the console. While the syntax and structure differ between the two languages, the core functionality and task are identical.""
+}",160
+2016_1_1,31768,2016_1_1,33316,CLONE,2026-07-16 14:37:53,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing input strings and generating output cases. The first code snippet handles string processing with a loop structure, while the second code snippet uses functions to process the input strings, but both achieve the same task of processing input strings to generate output cases.""
+}",161
+2016_1_1,33316,2016_1_1,18665,CLONE,2026-07-16 14:37:55,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are functionally similar as they both implement the same algorithm for solving the problem of sorting letters. The Python code snippet uses a similar approach to the PHP code snippet, where both implement the same sorting logic and output format for the problem. The core logic of both code snippets is the same, even though they use different programming languages and syntax.",162
+2016_1_1,18665,2016_1_1,28201,CLONE,2026-07-16 14:37:56,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they process input strings to generate output strings based on test cases. The Java code uses BufferedReader and BufferedWriter classes to handle input/output operations, while the PHP code uses file operations to handle input/output tasks. Both code snippets follow similar logic for processing strings and generating output, making them functionally similar.""
+}",163
+2016_1_1,22113,2016_1_1,20829,CLONE,2026-07-16 14:37:57,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a problem involving string manipulation and sorting. The code in both snippets handles input/output operations, processes multiple test cases, and performs string operations in a similar way. The core logic of comparing strings and determining the correct order of characters is present in both code snippets, making them functionally similar.""
+}",164
+2016_1_1,20829,2016_1_1,14703,CLONE,2026-07-16 14:37:58,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - processing input cases and printing results. The C++ code reads input cases and processes them using a custom sorting algorithm, while the Python code uses a similar approach with the 'play_best' function. Both code snippets achieve the same result, making them functionally similar.""
+}",165
+2016_1_1,14703,2016_1_1,4557,CLONE,2026-07-16 14:38:00,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Python program that processes input strings to find the last word, while the second code snippet is a PHP program that processes input files to generate output files. They have different structures, syntaxes, and purposes, so they are not functionally similar.""
+}",166
+2016_1_1,4557,2016_1_1,22113,CLONE,2026-07-16 14:38:01,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same functionality - processing input files to generate output files with the last word case. The Java code uses a Scanner to read input, while the PHP code uses command-line arguments, but both achieve the same task of processing input to generate output with the last word case.""
+}",167
+2016_1_2,23627,2016_1_2,7905,CLONE,2026-07-16 14:38:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - reading input cases and processing them to output results. The Java code uses a HashMap to store and process data, while the C++ code uses a dynamic array and bitwise operations to achieve the same result. The core logic of reading input cases and processing them to output results is the same in both code snippets.""
+}",168
+2016_1_2,7905,2016_1_2,30453,CLONE,2026-07-16 14:38:04,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that reads input for a problem involving counting elements in a list, while the second code snippet is a Python program that reads input for a problem involving ranking elements in a list. While both programs deal with similar problems of counting and ranking elements, they are implemented in different programming languages and have different structures, making them not functionally similar.""
+}",169
+2016_1_2,30453,2016_1_2,22155,CLONE,2026-07-16 14:38:05,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets perform the same task of ranking numbers based on their parity (odd/even). The Python code uses a function called 'rank' that takes a list of lists as input, while the PHP code uses a procedural approach with similar logic. Both code snippets process input from stdin, parse numbers, and sort them based on their parity, ultimately producing a sorted list of numbers that are printed or echoed.""
+}",170
+2016_1_2,22155,2016_1_2,23627,CLONE,2026-07-16 14:38:06,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing input data, calculating frequencies, and sorting results. While they differ in syntax and structure, they achieve the same functional result.""
+}",171
+2016_1_2,26561,2016_1_2,22827,CLONE,2026-07-16 14:38:08,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they implement the same task - processing multiple test cases with input/output operations for missing numbers in a grid. The Java code uses HashMap to store counts of missing numbers, while the C++ code uses map and vector to achieve the same result. The core logic of processing input, storing counts, and printing missing numbers is the same across both implementations.""
+}",172
+2016_1_2,22827,2016_1_2,14745,CLONE,2026-07-16 14:38:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem involving counting elements and filtering based on modulo operation. The code structure and logic are very similar, with the main difference being the programming language used (C++ vs Python). The core functionality is the same, making them functionally similar.""
+}",173
+2016_1_2,14745,2016_1_2,21265,CLONE,2026-07-16 14:38:10,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets process input data to solve a problem involving soldiers (numbers) and their counts, sorting them and printing them in cases. The PHP code processes input from command line arguments, while the Python code reads input from files, but both achieve the same task.""
+}",174
+2016_1_2,21265,2016_1_2,26561,CLONE,2026-07-16 14:38:12,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task: processing input cases to find missing soldiers in a grid. The PHP code processes input from command line arguments, while the Java code processes input from console input. Both use similar logic to calculate missing soldiers, sort them, and output the results. The core functionality is the same, just implemented in different programming languages.""
+}",175
+2016_1_2,21848,2016_1_2,26565,CLONE,2026-07-16 14:38:13,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for reading input cases, processing data, and writing output results. They both use similar data structures (maps and vectors) to store and process data, and both implement similar sorting and output mechanisms. The code structure and logic are very similar between the two code snippets.""
+}",176
+2016_1_2,26565,2016_1_2,7956,CLONE,2026-07-16 14:38:14,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same task - they read input cases, process them to find numbers with odd occurrences, sort them, and output them in a specific format. The Python code is more concise but functionally equivalent to the C++ code.""
+}",177
+2016_1_2,7956,2016_1_2,19133,CLONE,2026-07-16 14:38:15,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving counting numbers and filtering results based on parity. The core algorithm of counting unique numbers and filtering those with odd counts is present in both snippets, though the implementation details differ. The overall task and result of the code is the same, making these code snippets functionally similar.""
+}",178
+2016_1_2,19133,2016_1_2,21848,CLONE,2026-07-16 14:38:17,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem related to ranking and missing values in a table. The Java code uses a similar approach to process input data, calculate missing values, sort them, and output the results. The core logic of handling multiple cases, processing input data, and calculating missing values is the same in both code snippets.""
+}",179
+2016_2_1,201276,2016_2_1,194349,CLONE,2026-07-16 14:38:18,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing input cases and generating output. They both use similar structures for handling input and output, and both have similar steps for processing test cases. The code logic is very similar between the two code snippets.""
+}",180
+2016_2_1,194349,2016_2_1,185295,CLONE,2026-07-16 14:38:20,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. The first code snippet is a C++ program that processes multiple test cases, while the second code snippet is a Python program that processes multiple test cases. Both code snippets follow the same logic structure and implement the same problem-solving approach.""
+}",181
+2016_2_1,185295,2016_2_1,198100,CLONE,2026-07-16 14:38:22,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same logic for solving the Fractiles problem (D) in Google Code Jam 2016. They both read input from a file named 'input-file.in', process the test cases, and write the output to a file named 'input-file.out'. The code structure, variable names, and algorithm steps are identical, just written in different programming languages (Python vs PHP). The main difference is in syntax and structure, but the functional behavior is the same.",182
+2016_2_1,198100,2016_2_1,201276,CLONE,2026-07-16 14:38:25,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. They both handle input files, process test cases, and generate output files. The code structure, logic flow, and problem-solving techniques are identical between the two implementations. The Java code and PHP code are functionally similar, performing the same tasks with the same logic flow.""
+}",183
+2016_2_1,180026,2016_2_1,186531,CLONE,2026-07-16 14:38:26,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - counting letters and printing case numbers. The code logic is very similar, with the main difference being the language syntax (Java vs C++). The code structure, variables used, and overall approach are identical, making these code snippets functionally similar.""
+}",184
+2016_2_1,186531,2016_2_1,196651,CLONE,2026-07-16 14:38:28,"ANSWER: NO-NOT-SIMILAR
+EXPLANATION: The code snippets are not functionally similar. The first code snippet is a C++ program that simulates a game scenario where players input cases and process them through various while loops and conditions. The second code snippet is a Python program that reads input cases, processes them through a function called solve_case(), and outputs results to a file. These code snippets have different purposes, structures, and syntaxes, making them not functionally similar.",185
+2016_2_1,196651,2016_2_1,193717,CLONE,2026-07-16 14:38:29,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are written in different languages (Python vs PHP) and have different structures. The first code snippet deals with solving cases using a function called solve_case, while the second code snippet deals with processing input cases using a function called proc. The code snippets have different syntax and structure, making them not functionally similar.""
+}",186
+2016_2_1,193717,2016_2_1,180026,CLONE,2026-07-16 14:38:30,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same task: processing input strings to count characters and outputting results in a specific format. The PHP code processes input strings to count characters and outputs results in a specific format, while the Java code does the same task but in a different programming language. Both code snippets have similar logic of processing input strings to count characters and outputting results in a specific format.""
+}",187
+2016_2_1,193929,2016_2_1,179503,CLONE,2026-07-16 14:38:32,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. They both use similar data structures (arrays) to store digit counts, and similar logic for processing input strings and calculating digit counts. The main logic for solving the problem is identical, with only syntax differences between Java and C++ implementations.""
+}",188
+2016_2_1,179503,2016_2_1,182378,CLONE,2026-07-16 14:38:34,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar functionality - they are processing input cases and generating output based on specific patterns. The first code snippet is written in C++ and the second in Python, but they both follow similar logic for processing input cases and generating output. The main difference is in the language syntax and structure, but the core functionality is the same.""
+}",189
+2016_2_1,182378,2016_2_1,200006,CLONE,2026-07-16 14:38:35,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input from a file named '1.in' and processing it to generate output in a file named '1.out'. The code logic is identical, with the PHP code implementing the same algorithm as the Python code. The main difference is the syntax used in each language, but the functional behavior is the same.""
+}",190
+2016_2_1,200006,2016_2_1,193929,CLONE,2026-07-16 14:38:37,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach for a code jam problem. They both handle input/output operations, process test cases, and solve a specific problem involving character counts and case numbers. The code structure and logic are very similar, with only syntax differences between PHP and Java implementations.""
+}",191
+2013_0_1,103399,2015_0_2,96440,NON-CLONE,2026-07-16 14:38:38,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Java program that implements a game of Tic-Tac-Toe between two players, while the second code snippet is a C++ program that implements a different game scenario. The code structure, syntax, and logic are different between the two code snippets.""
+}",192
+2013_0_1,49244,2016_2_1,186531,NON-CLONE,2026-07-16 14:38:39,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for determining game winners and handling game states. The Java code uses constants and static methods to determine game outcomes, while the C++ code uses arrays and loops to achieve similar results. The core logic of checking game states and determining winners is the same in both code snippets.""
+}",193
+2013_0_1,126886,2016_0_4,45917,NON-CLONE,2026-07-16 14:38:41,"ANSWER: NO-NOT-SIMILAR
+EXPLANATION: The code snippets are not functionally similar. The first code snippet is a Java program that simulates a Tic-Tac-Toe game, while the second code snippet is a C++ program that simulates a different game scenario. They have different structures, syntaxes, and purposes, making them not functionally similar.",194
+2013_0_1,99825,2016_1_2,23627,NON-CLONE,2026-07-16 14:38:43,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that reads input cases, processes them, and outputs results. The first code snippet processes game scenarios and outputs results, while the second code snippet processes file input and outputs results. The structure and functionality are similar, though the second code snippet uses Java and the first uses C++.""
+}",195
+2013_0_1,98087,2014_3_1,135560,NON-CLONE,2026-07-16 14:38:45,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic where two players ('X' and 'O') compete on a 4x4 grid. The code handles input/output operations, game state management, and scoring rules. The main logic involves checking game conditions, updating scores, and determining game outcomes. The code structure and functionality are identical, making them functionally similar.""
+}",196
+2013_0_1,72071,2015_0_3,103774,NON-CLONE,2026-07-16 14:38:47,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic where players can win by getting X's, O's, or T's in a row or column. The code structure and game rules are identical, just written in different programming languages (C++ vs Python).""
+}",197
+2013_0_1,125888,2014_2_1,114208,NON-CLONE,2026-07-16 14:38:49,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar game state analysis functionality. The first code snippet is analyzing a Tic-Tac-Toe game state, while the second code snippet is analyzing a distance calculation game state. Both code snippets follow similar logic for analyzing game states and determining outcomes.""
+}",198
+2013_0_1,91336,2015_0_3,42051,NON-CLONE,2026-07-16 14:38:50,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for handling game states and determining outcomes. The first code snippet checks game status and determines winner states, while the second code snippet implements quaternion multiplication and checks for winning conditions. Both code snippets follow similar logic structures and implement similar game state handling mechanisms.""
+}",199
+2013_0_1,70537,2015_0_3,49764,NON-CLONE,2026-07-16 14:38:53,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar game logic for Tic-Tac game. The first code snippet uses Python with collections and itertools modules to implement game logic for Tic-Tac game. The second code snippet uses C++ with standard library modules to implement game logic for Tic-Tac game. Both code snippets have similar structure and logic for implementing game logic for Tic-Tac game.""
+}",200
+2013_0_1,84842,2016_1_1,28201,NON-CLONE,2026-07-16 14:38:54,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for parsing game scenarios between 'O', 'X', and 'P' (draw) outcomes. The Java code uses BufferedReader to parse input files, while the PHP code uses file() function to parse input files. Both code snippets implement the same game logic for parsing game scenarios between 'O', 'X', and 'P' (draw) outcomes.""
+}",201
+2013_0_1,102913,2016_0_4,135114,NON-CLONE,2026-07-16 14:38:56,"ANSWER: {
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a PHP program that simulates a game of Tic-Tac, while the second snippet is a C++ program that simulates a different game scenario. They have different structures, syntaxes, and purposes, making them not functionally similar.""
+}",202
+2013_0_1,127485,2016_0_1,100898,NON-CLONE,2026-07-16 14:38:58,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementations of the same task - a game of Tic-Tac-Toe where players take turns placing 'X' or 'O' symbols on a grid. The code handles game logic, checking for wins, and outputting results. While the syntax and structure differ between PHP and Java, the functional behavior is the same.""
+}",203
+2013_0_2,95524,2015_0_2,38840,NON-CLONE,2026-07-16 14:39:00,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. The Java code reads input from a file, processes test cases, and outputs results. The C++ code does the same, but in a different language. The core logic and problem-solving approach is the same in both code snippets.""
+}",204
+2013_0_2,44471,2014_2_1,114208,NON-CLONE,2026-07-16 14:39:01,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving lawn mower cases. They both read input cases, process them to determine if it's possible to mow the lawn, and output the results. The Java code uses a Scanner to read input cases, while the PHP code uses stdin to read input cases. Both code snippets have similar structure and logic for processing the cases.""
+}",205
+2013_0_2,55421,2016_2_1,196651,NON-CLONE,2026-07-16 14:39:03,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets deal with solving a problem related to lawn mowers, where the input is a test case with expected cases, and the output is a solution that can be written to a file. The code structure and problem-solving approach are similar, though the languages and syntax differ.""
+}",206
+2013_0_2,83774,2016_2_1,201276,NON-CLONE,2026-07-16 14:39:04,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a problem related to testing cases and calculating results. The code structure, variable declarations, and main logic are similar across both snippets, indicating they are functionally similar.""
+}",207
+2013_0_2,140779,2013_1_1,30519,NON-CLONE,2026-07-16 14:39:06,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that implements a solution to a problem involving checking a grid of values, while the second code snippet is a Python program that implements a binary search algorithm. They have different purposes and structures, and are not functionally equivalent.""
+}",208
+2013_0_2,91409,2013_0_3,102207,NON-CLONE,2026-07-16 14:39:07,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for a CodeJam problem. The first code snippet is written in C++ and the second in Python, but they both handle file operations, case processing, and output generation for a programming competition problem. The structure and functionality are very similar between the two code snippets.""
+}",209
+2013_0_2,78034,2014_2_1,129296,NON-CLONE,2026-07-16 14:39:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a solution to a problem involving checking rows and columns of a board for maximum values. The Python code uses a recursive approach with exception handling, while the Java code uses a more iterative approach with exception handling. Both code snippets have similar structure and logic for solving the problem, despite the different programming languages used.""
+}",210
+2013_0_2,122219,2014_3_1,138308,NON-CLONE,2026-07-16 14:39:10,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a solution to the same problem. The first code snippet reads input from a file, processes test cases, and outputs results. The second code snippet reads input from standard input, processes test cases, and outputs results. Both code snippets follow a similar structure and logic to process test cases and output results.""
+}
+",211
+2013_0_2,85165,2014_3_1,134611,NON-CLONE,2026-07-16 14:39:12,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a complex program that processes input data and generates output for a lawn problem, while the second code snippet is a simple program that calculates the greatest common divisor (GCD) of two numbers and solves a mathematical problem. The two code snippets have different purposes, structures, and logic, making them not functionally similar.""
+}",212
+2013_0_2,71957,2016_1_1,15819,NON-CLONE,2026-07-16 14:39:13,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets handle test cases for a programming competition, read input from a file, process multiple test cases, and write output to another file. The main logic for processing each test case is similar, though the implementation details differ due to different programming languages and frameworks used.""
+}",213
+2013_0_2,96711,2013_0_3,51164,NON-CLONE,2026-07-16 14:39:15,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar logic for handling test cases and checking conditions. The first code snippet handles test cases and checks conditions for lawn mowing, while the second code snippet handles test cases and checks conditions for square numbers. Both code snippets follow similar patterns in how they process test cases and verify conditions.""
+}",214
+2013_0_2,68303,2016_0_1,71388,NON-CLONE,2026-07-16 14:39:17,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets handle test cases with similar logic. The first code snippet processes input cases and determines if a solution is possible, while the second code snippet processes input cases and determines if a solution is possible. Both code snippets output results for each test case, with the first code snippet outputting 'YES' or 'NO' and the second code snippet outputting a formatted string. The code structure and logic are similar, indicating that both code snippets are functionally similar.""
+}",215
+2013_0_3,108834,2016_0_1,39027,NON-CLONE,2026-07-16 14:39:20,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement similar functionality for handling input/output operations, parsing test cases, and solving mathematical problems. The Java code uses classes and methods to handle input/output operations, while the PHP code uses functions to achieve similar results. The core logic of both code snippets is to process input data, solve problems, and output results in a similar manner. The Java code uses classes like InputReader and PrintWriter to handle input/output operations, while the PHP code uses functions like readMsg and writeMsg to achieve similar results. The core logic of both code snippets is to process input data,",216
+2013_0_3,59317,2016_1_2,26565,NON-CLONE,2026-07-16 14:39:21,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Java and implements a mathematical solution for a problem involving large numbers, while the second code snippet is written in C++ and implements a simple input/output program that sorts and processes data. The two code snippets have different purposes, syntaxes, and structures, making them not functionally similar.""
+}",217
+2013_0_3,74156,2015_0_3,49764,NON-CLONE,2026-07-16 14:39:23,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality for counting square palindromes. The Java code uses a Scanner to read input and a PrintStream to write output, while the C++ code uses similar input/output handling methods. Both code snippets use similar logic for checking palindrome numbers and implementing the counting functionality.""
+}",218
+2013_0_3,102625,2013_0_1,126886,NON-CLONE,2026-07-16 14:39:26,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that processes input cases and determines the outcome of Tic-Tac-Toe games. They share similar logic for handling game states, checking wins, and processing input cases. The code structure and functionality are very similar, though the code syntax and structure differ.""
+}",219
+2013_0_3,81195,2014_2_1,131873,NON-CLONE,2026-07-16 14:39:27,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a solution to the same problem - checking palindrome numbers and counting valid cases. The Java code uses a BufferedReader and PrintWriter to process input/output files, while the C++ code uses cin/cout for input/output operations. Both code snippets have similar structure and logic for processing palindrome numbers and counting valid cases.""
+}",220
+2013_0_3,53348,2015_0_3,72742,NON-CLONE,2026-07-16 14:39:31,"ANSWER: NO-NOT-SIMILAR
+EXPLANATION: The code snippets are not similar. The first code snippet is a C++ program that implements a solution for a problem involving palindrome numbers and their properties. The second code snippet is a Python program that implements a solution for a problem involving quaternion numbers and their properties. While both code snippets deal with similar mathematical concepts, they are written in different programming languages and have different implementations. The first code snippet is a direct implementation of the problem solution, while the second code snippet is a more abstract implementation using Python classes and methods.",221
+2013_0_3,102207,2015_1_1,122934,NON-CLONE,2026-07-16 14:39:32,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Python script that processes input from a file, while the second code snippet is a PHP script that processes input from command line arguments. They have different structures, syntaxes, and purposes, making them not functionally similar.""
+}",222
+2013_0_3,51164,2014_2_1,129296,NON-CLONE,2026-07-16 14:39:34,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first snippet appears to be a Python script that processes input data and writes output to a file, while the second snippet is a Java class that calculates results based on input data. While both code snippets deal with processing data and writing output, they have different structures, syntaxes, and purposes, making them not functionally similar.""
+}",223
+2013_0_3,70289,2015_0_4,63026,NON-CLONE,2026-07-16 14:39:35,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they process input files to generate output files with specific cases handled. The code structure and logic are similar, though the syntax and implementation details differ.""
+}",224
+2013_0_3,89287,2016_1_1,15421,NON-CLONE,2026-07-16 14:39:37,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process input cases and perform calculations on input data. The PHP code handles input/output operations and performs mathematical computations on input data, while the C++ code does the same but in a different programming language. The core logic and purpose of the code is the same, even though they use different languages and syntax.""
+}",225
+2013_0_3,92037,2014_3_1,134611,NON-CLONE,2026-07-16 14:39:39,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement similar functionality - they handle input/output operations, process data, and perform calculations. The PHP code handles file operations and mathematical computations, while the C++ code does similar operations but with different syntax and structure. The core logic and purpose of both codes are the same, making them functionally similar despite the different languages used.",226
+2013_0_3,132829,2016_1_1,14703,NON-CLONE,2026-07-16 14:39:40,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they perform the same task of processing input data to calculate problems. The PHP code processes square numbers and their properties, while the Python code processes sequences of numbers, but both follow similar patterns of input processing and problem calculation.""
+}",227
+2013_1_1,42047,2013_0_1,99825,NON-CLONE,2026-07-16 14:39:41,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving a problem, with similar variable declarations and method implementations. The code structure and logic flow are very similar, indicating they are functionally similar.""
+}",228
+2013_1_1,30835,2015_0_3,103774,NON-CLONE,2026-07-16 14:39:42,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar functionality - they are solving mathematical equations involving quadratic equations. The first code snippet is written in Java and the second in Python, but they both follow the same logic and structure for solving mathematical problems.""
+}",229
+2013_1_1,32414,2016_2_1,179503,NON-CLONE,2026-07-16 14:39:45,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same functionality - they are reading input cases, processing them, and outputting results. The code structure and logic are very similar, with the Java code using BufferedReader and PrintWriter for input/output operations, while the C++ code uses cin and cout for input/output operations. The core logic of processing each test case and outputting results is the same across both implementations.""
+}",230
+2013_1_1,28766,2015_0_1,47939,NON-CLONE,2026-07-16 14:39:47,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same problem-solving approach. The first code snippet uses a mathematical formula to calculate the value of 'ans' based on input parameters 'r' and 't', while the second code snippet uses a similar mathematical approach to calculate the value of 'ans'. Both code snippets use a binary search algorithm to find the value of 'ans', and both code snippets use the same mathematical formula to calculate the value of 'ans'.""
+}",231
+2013_1_1,30228,2016_2_1,185295,NON-CLONE,2026-07-16 14:39:49,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that reads input from 'in.in' file and processes test cases, while the second code snippet is a Python program that reads input from 'A-large.in' file and processes test cases. They have different syntax, structure, and steps to accomplish the task, but they are not functionally similar.""
+}",232
+2013_1_1,30618,2014_2_1,115757,NON-CLONE,2026-07-16 14:39:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same algorithm for solving a mathematical problem involving finding roots within a given range. The code structure and logic are very similar, with the Java code being a more modern implementation of the same problem-solving approach.""
+}",233
+2013_1_1,37029,2015_0_4,86932,NON-CLONE,2026-07-16 14:39:51,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Python and appears to be a solution to a programming competition problem, while the second code snippet is written in C++ and appears to be a different solution to a different problem. The code structure, syntax, and logic are different between the two code snippets.""
+}",234
+2013_1_1,32497,2016_2_1,194349,NON-CLONE,2026-07-16 14:39:53,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that reads input from a file, processes test cases, and outputs results in a specific format. The code structure and logic are similar, with the main program handling multiple test cases and printing results in a standardized way.""
+}",235
+2013_1_1,30519,2015_0_1,65110,NON-CLONE,2026-07-16 14:39:55,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar functionality - they both handle test cases and process input/output in a similar way. The Python code handles test cases and processes input/output similar to the C++ code, though with different syntax and structure.""
+}",236
+2013_1_1,34507,2014_3_1,138308,NON-CLONE,2026-07-16 14:39:57,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a solution to a problem involving mathematical calculations and case processing. The PHP code processes cases using a function that implements mathematical calculations, while the C++ code processes cases using a similar mathematical calculation approach. The core logic and approach to solving the problem is the same, making these code snippets functionally similar.""
+}",237
+2013_1_1,39026,2016_0_1,143909,NON-CLONE,2026-07-16 14:39:59,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. They are written in different programming languages (PHP vs C++) and have different structures and logic. The first code snippet is a complete PHP program that processes input files and performs calculations, while the second code snippet is a C++ program that reads input from standard input and processes cases. They have different syntax and structure, and they do not perform the same tasks or achieve the same results.""
+}",238
+2013_1_1,31779,2014_3_1,132142,NON-CLONE,2026-07-16 14:40:01,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same logic for solving a mathematical problem, with the first snippet being a PHP implementation and the second being a C++ implementation. The core algorithmic logic is the same, though the second snippet is more complex due to additional input/output handling and error checking. The fundamental mathematical operations and problem-solving approach are identical between the two implementations.",239
+2014_2_1,115757,2013_0_1,99825,NON-CLONE,2026-07-16 14:40:04,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process input cases and determine outcomes for a game scenario. The Java code uses BufferedReader to read input cases and determine game outcomes, while the C++ code uses similar input processing techniques to determine game outcomes. The core logic of processing input cases and determining outcomes is similar between both code snippets.""
+}",240
+2014_2_1,129296,2015_1_1,122263,NON-CLONE,2026-07-16 14:40:06,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same algorithm for solving a problem. The Java code is calculating results for multiple test cases, while the C++ code is solving cases with different inputs. Both code snippets have similar logic for processing input data and calculating results, making them functionally similar.""
+}",241
+2014_2_1,131873,2016_1_2,19133,NON-CLONE,2026-07-16 14:40:08,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that reads input from files named 'data%d%d.txt' and writes output to files named 'out%d%d.txt'. The Java code uses BufferedReader and PrintWriter classes to handle input/output operations, while the PHP code uses fopen, fgets, and fputs functions to perform similar input/output operations. Both programs process multiple test cases, handling input data and writing output results to files. The logic and structure of both programs are very similar, though they use different programming languages and syntax.""
+}",242
+2014_2_1,131278,2013_0_1,91336,NON-CLONE,2026-07-16 14:40:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same game logic, with the first snippet being a C++ implementation and the second being a Python implementation. The code logic is similar, with both handling game states, checking winners, and processing game cases.""
+}",243
+2014_2_1,119165,2013_1_1,30835,NON-CLONE,2026-07-16 14:40:11,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that processes input cases to determine a winning number in a game, while the second code snippet is a Java program that calculates a mathematical value based on input cases. Although both programs handle input cases, they have different structures, syntaxes, and logic, making them functionally different.""
+}",244
+2014_2_1,118489,2016_0_1,100898,NON-CLONE,2026-07-16 14:40:14,"ANSWER: DONT-KNOW
+EXPLANATION: The code snippets are significantly different in terms of syntax, structure, and the specific steps they take to accomplish their tasks. Code snippet 1 appears to be a more complex program that handles multiple cases of input, while code snippet 2 seems to be a simpler program that processes input in a different way. Without a clear understanding of the specific tasks each code snippet is designed to perform, it's difficult to determine if they are functionally similar.",245
+2014_2_1,128920,2015_0_4,68310,NON-CLONE,2026-07-16 14:40:15,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are written in different languages (Python vs PHP) and have different structures and logic. The first snippet appears to be a Python program that processes input from a user, while the second snippet is a PHP program that processes input from command line arguments. They are not functionally similar.""
+}",246
+2014_2_1,118416,2015_0_2,102321,NON-CLONE,2026-07-16 14:40:17,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. They are written in different programming languages (Python vs PHP) and have different structures and functionalities. The first code snippet is a Python script that reads input from a file named 'B-large.in', while the second code snippet is a PHP script that reads input from a file named 'B-large.in'. They have different syntax and structure, and they are not performing the same task.""
+}",247
+2014_2_1,121201,2013_0_2,91409,NON-CLONE,2026-07-16 14:40:19,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that processes input data to determine if a given case meets certain criteria. The Python code uses functions to transform strings and calculate distances, while the C++ code uses arrays and loops to process data and determine if cases are possible. Both code snippets have similar logic for processing input data and determining if cases meet certain criteria.""
+}",248
+2014_2_1,118754,2015_0_2,81081,NON-CLONE,2026-07-16 14:40:21,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving logic for the Code Jam contest. The Python code is a more modern implementation of the same problem-solving approach as the PHP code. The core logic of reading input, processing cases, and writing output remains the same between both implementations.""
+}",249
+2014_2_1,116147,2013_0_3,74156,NON-CLONE,2026-07-16 14:40:23,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they process input from a file and output results to another file, with the same logic for handling palindrome numbers and their squares. The code structure and purpose are identical, just written in different programming languages.""
+}
+```json
+{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they process input from a file and output results to another file, with the same logic for handling palindrome numbers and their squares. The code structure and",250
+2014_2_1,114208,2013_0_3,102625,NON-CLONE,2026-07-16 14:40:25,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process cases and calculate results, though they are written in different languages (PHP vs C++). The code structure and logic are similar, with the main difference being the language syntax used.""
+}",251
+2014_3_1,135560,2016_1_2,21265,NON-CLONE,2026-07-16 14:40:28,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for processing input data to generate output cases. The Java code reads input from a file, parses it to get the number of cases, and then processes each case to generate output. The PHP code does the same thing, reading input from command line arguments, parsing it to get the number of cases, and then processing each case to generate output. The core logic of how many cases are processed and how output is generated is the same in both code snippets.""
+}",252
+2014_3_1,138333,2013_0_2,68303,NON-CLONE,2026-07-16 14:40:29,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same problem-solving task. They both process input data to determine if a case is possible or not, and output the result in a similar format. The Java code processes input from System.in and the PHP code processes input from a file, both performing similar operations to determine the feasibility of cases.""
+}",253
+2014_3_1,140281,2013_1_1,30519,NON-CLONE,2026-07-16 14:40:31,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are written in different programming languages (Java vs Python) and have different structures and functionalities. The first code snippet is a Java program that reads input from the console using Scanner class, while the second code snippet is a Python program that uses binary search to find the last value that satisfies a condition. Although both code snippets deal with mathematical computations, they are not functionally similar as they are written in different languages and serve different purposes.""
+}",254
+2014_3_1,138308,2013_1_1,30519,NON-CLONE,2026-07-16 14:40:34,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that calculates the greatest common divisor (GCD) of two numbers and checks if a number is divisible by 2. The second code snippet is a Python program that implements a binary search algorithm to find the last possible value for a given input, and counts the number of circles in a sequence. While both programs involve mathematical calculations and iterative processes, they are implemented differently and serve different purposes.""
+}",255
+2014_3_1,134611,2016_1_2,14745,NON-CLONE,2026-07-16 14:40:35,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar problem-solving logic, where the code processes input data, computes results, and outputs them in a specific format. The code structure and problem-solving approach are consistent across both snippets.""
+}",256
+2014_3_1,132142,2014_2_1,118754,NON-CLONE,2026-07-16 14:40:37,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach for Google Code Jam Round 1B Question A. They share similar logic for handling input/output operations, case processing, and output formatting. The code structure and functionality are very similar, with only syntax differences between C++ and PHP implementations.""
+}",257
+2014_3_1,139209,2015_0_3,49764,NON-CLONE,2026-07-16 14:40:39,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality. The first code snippet handles mathematical operations like finding minimum generation values, while the second code snippet deals with string manipulation and mathematical calculations. Both code snippets follow similar logic and structure, making them functionally similar.""
+}",258
+2014_3_1,139370,2016_1_1,15819,NON-CLONE,2026-07-16 14:40:40,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving test cases and handling outputs. The first code snippet is written in Python while the second is written in Java, but they both follow the same algorithm for processing input cases and generating outputs. The main difference is in syntax and structure, but the functional behavior is the same.""
+}",259
+2014_3_1,143074,2015_0_2,91000,NON-CLONE,2026-07-16 14:40:42,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets handle a problem of calculating cases based on input values, with similar logic for handling division and checking conditions. The code structure and problem-solving approach are very similar, indicating they are functionally similar.""
+}",260
+2014_3_1,142092,2015_0_1,106809,NON-CLONE,2026-07-16 14:40:43,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""While both code snippets deal with similar mathematical operations involving division and iterative calculations, they are implemented differently. The PHP code handles file input operations and mathematical calculations in a more complex way, while the Python code uses simpler numerical operations. The code structure, syntax, and mathematical operations are different enough that these code snippets are not functionally similar.""
+}",261
+2014_3_1,134295,2015_0_4,94256,NON-CLONE,2026-07-16 14:40:45,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they implement the same logic for solving mathematical problems involving GCD and division by 2. The code structure, variable names, and problem-solving approach are consistent across both snippets.""
+}",262
+2014_3_1,132975,2016_0_4,135114,NON-CLONE,2026-07-16 14:40:47,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. The first snippet is a PHP program that processes input from stdin to calculate a mathematical problem involving ratios and logarithms. The second snippet is a C++ program that processes input from stdin to calculate a mathematical problem involving ratios and logarithms. While both programs deal with similar mathematical calculations, they are written in different programming languages and have different structures, making them not functionally similar.""
+}",263
+2015_0_1,47939,2016_0_1,71388,NON-CLONE,2026-07-16 14:40:49,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same logic for solving the problem of calculating the number of times a person can stand on a single tile. The Java code uses a Scanner to read input values and a PrintWriter to output results, while the Python code uses raw_input() to read input and print output. Both code snippets follow the same algorithm steps to solve the problem, despite differences in syntax and structure.
+
+The code snippets are functionally similar because they both:
+- Read input values (N and s in Java, n in Python)
+- Process the input to calculate the answer
+- Output",264
+2015_0_1,43660,2016_1_1,33316,NON-CLONE,2026-07-16 14:40:51,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Java and appears to be a program that reads input from the user and processes it in some way. The second code snippet is written in Python and appears to be a program that reads input from a file and processes it in some way. While both code snippets deal with reading input and processing it, they are written in different programming languages and have different structures and purposes. Therefore, they are not functionally similar.""
+}",265
+2015_0_1,100718,2016_2_1,198100,NON-CLONE,2026-07-16 14:40:53,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same problem-solving approach for the Fractiles problem (D) in Google Code Jam 2016. They both read input from a file, process test cases, and write output to another file. The code structure and logic are very similar, with the main difference being the language used (Java vs PHP).""
+}",266
+2015_0_1,44230,2016_1_1,18665,NON-CLONE,2026-07-16 14:40:54,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task: processing input data to calculate the number of trains that can be invited. The C++ code uses a loop structure to process input data, while the PHP code uses a procedural approach with functions to process data. Both code snippets achieve the same result, making them functionally similar.""
+}",267
+2015_0_1,64620,2013_1_1,37029,NON-CLONE,2026-07-16 14:40:57,"ANSWER: DONT-KNOW
+EXPLANATION: The code snippets are significantly different in terms of syntax, structure, and purpose. The first code snippet is a C++ program that reads input from standard input, processes it using various functions like readLine(), readIntLine(), and others, and outputs the result to standard output. The second code snippet is a Python program that reads input from a file, processes it using functions like p1(), p1nrings1(), and p1nrings2(), and outputs the result to a file. While both code snippets deal with input processing and output generation, they are written in",268
+2015_0_1,65110,2015_0_3,42051,NON-CLONE,2026-07-16 14:40:59,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving qualification cases. They both read input cases, process each case's test string, calculate values based on test string values, and output results. The code structure and logic are very similar, though the Java implementation is more verbose with additional error handling and utility methods.""
+}",269
+2015_0_1,106809,2015_0_2,96440,NON-CLONE,2026-07-16 14:41:00,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - calculating a value based on input cases. The first snippet processes input cases and calculates values, while the second snippet does the same but with different syntax and structure. Both code snippets are functionally similar as they achieve the same result.""
+}",270
+2015_0_1,86599,2013_0_2,96711,NON-CLONE,2026-07-16 14:41:01,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets process input files containing test cases, calculate results based on input data, and output case results. The Python code processes input file 'input' and calculates friends value based on input data, while the PHP code processes input file from stdin and calculates results based on input data. Both code snippets achieve the same task of processing input data to calculate results for each test case.""
+}",271
+2015_0_1,60803,2015_1_1,111866,NON-CLONE,2026-07-16 14:41:03,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic: reading input data, processing it through a series of calculations involving arrays and sums, and outputting results in a specific format. The code structure and operations are functionally equivalent, even though they are written in different programming languages.""
+}",272
+2015_0_1,25955,2013_0_1,72071,NON-CLONE,2026-07-16 14:41:04,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that processes multiple test cases, where each case involves a specific task (like checking rows or columns) and outputs results for each case. The code structure and logic are similar, though they use different languages and syntax.""
+}",273
+2015_0_1,28465,2015_0_2,88257,NON-CLONE,2026-07-16 14:41:06,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a problem involving division and summation of values. The PHP code processes input files to calculate results, while the C++ code reads input values and calculates results for a division problem. Both code snippets follow similar logic steps and achieve the same result, making them functionally similar.""
+}",274
+2015_0_1,96593,2015_0_2,40957,NON-CLONE,2026-07-16 14:41:07,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the same problem-solving approach, where they process input data, perform calculations, and output results in a similar way. The code structure, logic flow, and output format are all consistent between the two code snippets.""
+}",275
+2015_0_2,91000,2013_0_1,98087,NON-CLONE,2026-07-16 14:41:10,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same task - reading input from a file named ""in.txt"" and writing output to a file named ""out.txt"". The Java code reads input from a file named ""B-large.in"" and writes output to a file named ""out.txt"", while the C++ code reads input from a file named ""in.txt"" and writes output to a file named ""out.txt"". Both code snippets process input data in the same way, using similar data structures and algorithms to achieve the same result. The code structure and logic are very similar, making these code",276
+2015_0_2,21812,2013_0_3,102625,NON-CLONE,2026-07-16 14:41:13,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that processes multiple test cases, reads input values, and computes a solution. The Java code uses BufferedReader to read input files, while the C++ code uses scanf to read input values. Both code snippets contain similar logic for processing multiple test cases, reading input values, and computing solutions. The main difference is in the language syntax and structure, but the functional behavior is the same.""
+}",277
+2015_0_2,40957,2013_0_2,71957,NON-CLONE,2026-07-16 14:41:14,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving cases of a problem, where each case involves reading input data, evaluating solutions, and determining outcomes. The core logic of reading input, evaluating solutions, and determining outcomes is the same in both code snippets, though they use different programming languages and syntax.""
+}",278
+2015_0_2,96440,2015_0_1,86599,NON-CLONE,2026-07-16 14:41:16,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. While both code snippets deal with input/output operations and case processing, they have different structures, syntaxes, and approaches to solving the problem. The first code snippet is written in C++ and uses standard input/output operations, while the second code snippet is written in Python and uses different input/output operations. The code snippets have different control structures, different ways of handling input/output operations, and different approaches to solving the problem.""
+}",279
+2015_0_2,88257,2013_0_2,68303,NON-CLONE,2026-07-16 14:41:18,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that reads input from standard input and processes it to calculate some values, while the second code snippet is a PHP program that reads input from a file and processes it to determine if a lawn is possible to be mowed. The two code snippets have different purposes, syntax, and structures, making them not functionally similar.""
+}",280
+2015_0_2,38840,2013_0_1,127485,NON-CLONE,2026-07-16 14:41:20,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not similar. The first code snippet is written in C++ and implements a program that reads test cases and determines the best answer based on input parameters. The second code snippet is written in PHP and implements a program that reads input from a file named 'A-large.in', processes it to determine game outcomes, and outputs results. While both programs process input to determine outcomes, they are implemented in different programming languages and have different structures, making them not functionally similar.""
+}",281
+2015_0_2,36519,2015_1_1,111086,NON-CLONE,2026-07-16 14:41:22,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input data, processing test cases, and writing output results. The code structure and logic are similar, with the main difference being the programming language used (Python vs C++).""
+}",282
+2015_0_2,81081,2013_0_3,108834,NON-CLONE,2026-07-16 14:41:25,"ANSWER: YES-SIMILAR
+
+EXPLANATION: Both code snippets are similar in that they are implementations of the same problem, with the first being a template code and the second being a Java implementation. The code snippets have similar structure and functionality, with the first being a more detailed template code and the second being a Java implementation that follows similar logic and structure. The code snippets are functionally similar as they both implement the same problem with similar steps and logic, even though they differ in syntax and structure.",283
+2015_0_2,100159,2016_2_1,179503,NON-CLONE,2026-07-16 14:41:27,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same functionality - reading input cases and processing them to output results. They have similar logic structure with input handling, case processing, and output formatting. The code snippets are functionally similar as they perform the same task.""
+}",284
+2015_0_2,103402,2015_0_1,106809,NON-CLONE,2026-07-16 14:41:28,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are written in different programming languages (PHP vs Python) and have different logic and structure. The first code snippet processes input from a file, while the second code snippet processes input from user input. The code snippets are not functionally similar.""
+}",285
+2015_0_2,102321,2015_0_3,72742,NON-CLONE,2026-07-16 14:41:29,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they handle input/output operations and perform calculations based on input data. The code structure and logic are similar, though the implementation details differ slightly.""
+}",286
+2015_0_2,55775,2016_1_2,14745,NON-CLONE,2026-07-16 14:41:31,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach, using similar logic and mathematical operations to process input data. The code structures and problem-solving strategies are very similar, though written in different programming languages (PHP vs Python).""
+}",287
+2015_0_3,42051,2015_0_1,44230,NON-CLONE,2026-07-16 14:41:34,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a program that reads input cases, processes them, and outputs results. They both use similar structures for handling multiple test cases, with the Java version using a Scanner and BufferedWriter for file input/output operations, while the C++ version uses cin and cout for input/output operations. Both code snippets have similar logic for processing each test case, though they differ in syntax and structure.""
+}",288
+2015_0_3,47513,2013_1_1,34507,NON-CLONE,2026-07-16 14:41:36,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are similar in that they handle input/output operations for a program that processes multiple cases of input data. The Java code handles input/output operations for multiple cases of input data, while the PHP code handles input/output operations for multiple cases of input data. Both code snippets have similar structure and functionality in terms of handling input/output operations for multiple cases of input data.",289
+2015_0_3,96608,2016_1_2,14745,NON-CLONE,2026-07-16 14:41:38,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem related to checking if a given input can be transformed into a specific output value. The code structure, variable usage, and logic implementation are very similar between the two code snippets.""
+}",290
+2015_0_3,41900,2015_0_1,96593,NON-CLONE,2026-07-16 14:41:40,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is a C++ program that processes input for a problem involving clapping and standing, while the second code snippet is a PHP program that processes input for a problem involving adding friends and checking if everyone is standing. They have different structures, syntaxes, and purposes, making them not functionally similar.""
+}",291
+2015_0_3,49764,2016_1_2,14745,NON-CLONE,2026-07-16 14:41:42,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for processing input data, converting it into specific formats, and determining outcomes based on input patterns. The code structure, variable handling, and output generation methods are consistent across both snippets.""
+}",292
+2015_0_3,23036,2016_0_4,142083,NON-CLONE,2026-07-16 14:41:44,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a complex C++ program that processes mathematical operations and string manipulations, while the second code snippet is a Python program that reads input from files and writes output to another file. They have different purposes, syntax, and structures, making them not functionally similar.""
+}",293
+2015_0_3,103585,2014_3_1,138308,NON-CLONE,2026-07-16 14:41:45,"ANSWER: DONT-KNOW
+EXPLANATION: The code snippets are significantly different in terms of structure, syntax, and purpose. While both involve mathematical operations and comparisons, the first code snippet is a complete program with multiple functions and data structures, while the second code snippet is a partial program with specific functions and data structures. The two code snippets are not clearly functionally similar, so I cannot determine if they are similar.",294
+2015_0_3,103774,2013_0_3,89287,NON-CLONE,2026-07-16 14:41:47,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar logic for processing input cases and determining outcomes based on input parameters. The code structure and functionality are very similar, though the syntax and implementation details differ between Python and PHP.""
+}",295
+2015_0_3,72742,2013_0_3,89287,NON-CLONE,2026-07-16 14:41:49,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for processing input/output cases. The Python code uses classes and methods to handle file operations and data processing, while the PHP code uses functions and procedural-style code to achieve similar results. The core logic of reading input, processing data, and writing output is present in both code snippets, making them functionally similar.""
+}",296
+2015_0_3,19800,2016_1_1,22113,NON-CLONE,2026-07-16 14:41:50,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for processing strings and determining if they meet certain conditions. The first code snippet is a PHP implementation, while the second is a Java implementation, but they both follow the same algorithmic logic for processing strings and determining if they meet certain conditions.""
+}",297
+2015_0_3,102323,2016_0_1,76319,NON-CLONE,2026-07-16 14:41:52,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets handle input/output operations for a problem involving numbers and cases, with similar logic for handling test cases and writing output to files. The Java code uses BufferedReader and BufferedWriter classes similar to the PHP code's use of fscanf and fgets functions. Both code snippets follow similar patterns for processing input, handling test cases, and writing output to files.""
+}",298
+2015_0_3,18309,2016_1_1,15819,NON-CLONE,2026-07-16 14:41:54,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar logic for processing test cases and handling input/output operations. The first code snippet is written in PHP and the second in Java, but both follow similar patterns for handling input/output operations, processing test cases, and implementing similar logic for handling input/output operations.""
+}",299
+2015_0_4,86262,2016_0_4,80717,NON-CLONE,2026-07-16 14:41:56,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are functionally similar as they both handle test cases and generate output files containing results. The Java code handles test cases and generates output files, while the PHP code does the same but in a different programming language. The core functionality is the same, just implemented differently in different languages.""
+}",300
+2015_0_4,30398,2016_1_2,26565,NON-CLONE,2026-07-16 14:41:57,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Java and deals with a problem of determining a winner based on certain conditions. The second code snippet is written in C++ and deals with sorting and printing elements based on certain conditions. While both code snippets deal with similar logic of determining winners based on conditions, they are written in different programming languages and have different structures, making them not functionally similar.""
+}",301
+2015_0_4,29877,2013_0_2,122219,NON-CLONE,2026-07-16 14:41:59,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for determining whether a rich person can win in a specific scenario. The Java code uses a method 'canRichWin' to determine if a rich person can win, while the Python code uses a function 'canRichWin' to determine if a rich person can win. The main logic for determining whether a rich person can win is the same in both code snippets.""
+}",302
+2015_0_4,63026,2013_0_3,92037,NON-CLONE,2026-07-16 14:42:01,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets handle input/output operations, process cases, and perform calculations. They both read input from a file, process cases, and write output to another file. The logic for processing each case is similar, though the implementation details differ slightly between the two code snippets.""
+}",303
+2015_0_4,86932,2013_0_2,71957,NON-CLONE,2026-07-16 14:42:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for evaluating cases and determining outcomes. The first code snippet uses a function 'isRichard()' to determine if a case is Richard's, while the second code snippet uses a function 'evaluate()' to determine if a case is Gabriel's. Both code snippets process input cases and determine outcomes based on the same criteria, making them functionally similar.""
+}",304
+2015_0_4,60776,2016_0_4,158305,NON-CLONE,2026-07-16 14:42:05,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that processes input values to determine if a person is Gabriel based on certain conditions. The second code snippet is a Python program that processes input values to determine if a person is Gabriel based on certain conditions. While both code snippets deal with processing input values to determine if a person is Gabriel, they are written in different programming languages and have different structures. The first code snippet uses conditional statements and loops to process input values, while the second code snippet uses functions",305
+2015_0_4,57828,2015_1_1,111866,NON-CLONE,2026-07-16 14:42:06,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving a problem. The first code snippet is written in Python and the second in C++, but they both follow the same algorithm for solving the problem. The code snippets are functionally similar as they both perform the same task of solving the problem.""
+}",306
+2015_0_4,94256,2013_1_1,42047,NON-CLONE,2026-07-16 14:42:07,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving division and checking conditions. The code structure and problem-solving approach are very similar, though the syntax and implementation details differ slightly.""
+}",307
+2015_0_4,74018,2015_0_2,91000,NON-CLONE,2026-07-16 14:42:09,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Python program that solves a problem involving richard and gabriel, while the second code snippet is a Java program that reads input from a file and writes output to another file. They have different purposes and structures, and are not functionally similar.""
+}",308
+2015_0_4,68310,2014_3_1,134611,NON-CLONE,2026-07-16 14:42:11,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving Ominous_omino problem. The PHP code processes input files and checks conditions for RICHARD and GABRIEL cases, while the C++ code implements similar logic for solving the problem with case handling. The core problem-solving logic is the same, just implemented in different languages with different syntax structures.""
+}",309
+2015_0_4,19708,2014_3_1,138308,NON-CLONE,2026-07-16 14:42:13,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem related to determining if Richard will win in a game scenario. The code structure and problem-solving approach are very similar, with the main difference being the programming language used (PHP vs C++). The code logic for determining if Richard will win is implemented in a similar way in both code snippets.""
+}",310
+2015_0_4,78114,2016_1_1,3308,NON-CLONE,2026-07-16 14:42:14,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar functionality - they are handling test cases and printing results in a specific format. The first code snippet is written in PHP and the second in Python, but they both follow the same logic of processing input cases and outputting results in a structured format.""
+}",311
+2015_1_1,112276,2013_1_1,31779,NON-CLONE,2026-07-16 14:42:16,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process input data to calculate a result for multiple test cases. The Java code uses BufferedReader and Scanner classes to read input data, while the PHP code uses file operations and functions to process input data. Both code snippets have similar structure and logic for handling multiple test cases, making them functionally similar.""
+}",312
+2015_1_1,118030,2016_1_1,15421,NON-CLONE,2026-07-16 14:42:18,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing similar functionality - they are processing input cases and performing calculations on arrays of numbers. The Java code is processing input arrays of numbers and performing calculations on them, while the C++ code is doing similar processing of input cases and calculations on arrays of numbers. The main difference is in the language syntax and structure, but the functional behavior is the same.""
+}",313
+2015_1_1,112898,2014_3_1,134611,NON-CLONE,2026-07-16 14:42:19,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar functionality - they handle test cases and perform calculations. The Java code handles input/output operations, while the C++ code handles similar mathematical operations and test cases. The core functionality is similar, even though they use different languages and structures.""
+}",314
+2015_1_1,111086,2015_0_2,55775,NON-CLONE,2026-07-16 14:42:21,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving the Infinite House of Pancakes problem. The C++ code uses templates and operator overloading to implement similar functionality to the PHP code's functions. The core logic of calculating stacks and reducing them is the same across both implementations, though the C++ code has more detailed implementation specifics.""
+}",315
+2015_1_1,122263,2016_1_2,26561,NON-CLONE,2026-07-16 14:42:23,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a similar task of processing input test cases and calculating missing values in a grid-like structure. The code structure, variable declarations, and method names are similar, though the specific implementation details differ. The overall logic and purpose of the code is the same, making them functionally similar.""
+}
+```",316
+2015_1_1,111866,2015_0_2,91000,NON-CLONE,2026-07-16 14:42:24,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving pancakes and calculating special values. The code structure and problem-solving approach are very similar, though written in different programming languages (C++ vs Java).""
+}",317
+2015_1_1,117734,2013_0_3,59317,NON-CLONE,2026-07-16 14:42:26,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same problem-solving approach. The first code snippet is a Python implementation of a problem where the task is to calculate two values based on input arrays. The second code snippet is a Java implementation of the same problem, where the task is to calculate two values based on input arrays. The core logic of both implementations is the same, where they process input arrays to calculate two values, and then return those values.""
+}",318
+2015_1_1,124602,2016_1_1,20829,NON-CLONE,2026-07-16 14:42:28,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not similar. The first code snippet is written in Python and handles input/output operations using stdin and stdout. The second code snippet is written in C++ and uses iostream library for input/output operations. While both code snippets handle similar tasks of reading input and processing cases, they are written in different programming languages and have different structures, making them not functionally similar.""
+}",319
+2015_1_1,111647,2013_0_3,92037,NON-CLONE,2026-07-16 14:42:30,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are written in different programming languages (Python vs PHP) and have different purposes. The first snippet contains helper functions for reading data from files, while the second snippet is a PHP script that processes input from a file and outputs results to another file. The code structure, syntax, and functionality are quite different between the two snippets.""
+}",320
+2015_1_1,122934,2013_0_2,83774,NON-CLONE,2026-07-16 14:42:31,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar functionality - they are both handling test cases with input/output processing, and both are using similar structures for processing multiple test cases. The code logic and structure are very similar, though the syntax and implementation details differ.""
+}",321
+2015_1_1,111264,2013_0_1,99825,NON-CLONE,2026-07-16 14:42:33,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for calculating minimum values in a game scenario. The PHP code uses functions like mushroom_minimums and calculate_minimums to process input data, while the C++ code uses functions like tick and calculate_minimums to process game scenarios. Both code snippets follow similar patterns for processing input data and calculating results, making them functionally similar.""
+}",322
+2015_1_1,121770,2013_0_3,53348,NON-CLONE,2026-07-16 14:42:35,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement similar functionality - they process test cases and output results. The PHP code processes test cases and outputs results for each case, while the C++ code processes test cases and outputs results for each case. The core functionality is the same, just implemented in different languages.",323
+2016_0_1,76319,2015_0_1,25955,NON-CLONE,2026-07-16 14:42:37,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are similar in that they both read input from a file named 'input.txt' and write output to a file named 'sheepOutput.txt' or 'codejamoutput.txt'. They both process multiple test cases, writing output for each case to the output file. The code structure and purpose are very similar, though written in different programming languages.""
+}",324
+2016_0_1,117099,2014_2_1,118754,NON-CLONE,2026-07-16 14:42:39,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same problem solution for Code Jam 2014 Round 1B Question A. They both handle input/output operations, process test cases, and output results in a similar manner. The code logic and structure are equivalent, though written in different programming languages.""
+}",325
+2016_0_1,100898,2016_0_4,142083,NON-CLONE,2026-07-16 14:42:40,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Java and implements a program that counts sheep, while the second code snippet is written in Python and implements a program that operates on a given input. The two code snippets have different purposes, syntax, and structures, making them not functionally similar.""
+}",326
+2016_0_1,65647,2016_1_2,21265,NON-CLONE,2026-07-16 14:42:43,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that processes input cases to calculate sums based on a specific algorithm involving modular arithmetic. The second code snippet is a PHP program that processes input cases to calculate sums based on a different algorithm involving array processing. While both programs process input cases to calculate sums, they use different algorithms and approaches, making them not functionally similar.""
+}",327
+2016_0_1,134225,2016_1_2,22155,NON-CLONE,2026-07-16 14:42:44,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that solves a problem related to a mathematical operation involving a mask value, while the second code snippet is a PHP program that processes input data to determine a solution. While both programs deal with similar mathematical operations, they are written in different programming languages and have different approaches to solving the problem.""
+}",328
+2016_0_1,143909,2015_0_1,47939,NON-CLONE,2026-07-16 14:42:46,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic of repeatedly adding numbers to reach a target value, with the first code being a C++ implementation and the second code being a Java implementation. The core logic of repeatedly adding numbers to reach a target value is the same in both code snippets.""
+}
+```",329
+2016_0_1,94639,2016_0_4,135114,NON-CLONE,2026-07-16 14:42:47,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task of counting sheep (numbers) in a specific way. The first code snippet uses a while loop to count sheep numbers, while the second code snippet uses a for loop to count sheep numbers. Both code snippets use similar logic to count sheep numbers, making them functionally similar.""
+}",330
+2016_0_1,88781,2013_0_2,71957,NON-CLONE,2026-07-16 14:42:49,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving a problem, where they process input data, perform calculations, and return results. The code structure, variable handling, and problem-solving approach are identical, making them functionally similar.""
+}",331
+2016_0_1,71388,2014_2_1,118754,NON-CLONE,2026-07-16 14:42:51,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for a problem-solving competition. They both handle input/output operations, process multiple test cases, and output results in a similar format. The core functionality is the same, even though they are written in different programming languages (Python vs PHP).""
+}",332
+2016_0_1,48618,2015_1_1,124602,NON-CLONE,2026-07-16 14:42:52,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not similar. They have different structures, syntaxes, and logic. The first code snippet is written in PHP and implements a specific algorithm for calculating cases, while the second code snippet is written in Python and implements a different algorithm for calculating cases. The logic, variables, and operations are different between the two code snippets.""
+}",333
+2016_0_1,39027,2013_0_1,103399,NON-CLONE,2026-07-16 14:42:54,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement similar functionality - they handle input/output operations for a program that processes test cases. The PHP code handles message reading and writing operations, while the Java code processes board states and game outcomes. Both code snippets follow similar patterns of handling input/output operations, processing test cases, and maintaining program state.""
+}",334
+2016_0_1,113708,2016_0_4,136626,NON-CLONE,2026-07-16 14:42:56,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a similar task of handling cases with missing numbers, where the missing numbers are determined by a mathematical relationship between branches, depth, and checks. The code structure and logic are similar, though the languages and syntax differ.""
+}",335
+2016_0_4,136626,2015_0_2,81081,NON-CLONE,2026-07-16 14:42:58,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement a solution for a problem involving calculating paths and checking conditions. The code structure is similar, with both using input/output handling and implementing logic for solving cases. The main differences are in syntax and structure, but the functional behavior is the same.",336
+2016_0_4,125922,2016_1_1,4557,NON-CLONE,2026-07-16 14:43:00,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets handle input files and process them to generate output, with similar logic for parsing lines and handling test cases. The Java code uses BufferedReader to read input lines, while the PHP code uses stream_get_line to process input lines, both performing similar tasks.""
+}",337
+2016_0_4,99642,2015_0_3,49764,NON-CLONE,2026-07-16 14:43:02,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they are both solving a mathematical problem involving cases and calculations, with similar structure and logic. The Java code uses BufferedReader and PrintWriter classes to handle input/output operations, while the C++ code uses similar structures and logic to process input/output operations, both achieving the same result.""
+}",338
+2016_0_4,135114,2016_1_1,15819,NON-CLONE,2026-07-16 14:43:04,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same task - reading input cases and processing them to produce output cases. The first code snippet uses C++ and the second uses Java, but both follow the same logic of reading input, processing it, and writing output cases. The main difference is in syntax and structure, but the functional behavior is the same.""
+}",339
+2016_0_4,90060,2016_1_2,21265,NON-CLONE,2026-07-16 14:43:06,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for handling multiple test cases with different parameters. The first code snippet handles multiple test cases with parameters k, c, and s, while the second code snippet handles similar parameters with a different approach. Both code snippets follow a similar structure for processing multiple test cases, making them functionally similar.""
+}",340
+2016_0_4,45917,2014_2_1,128920,NON-CLONE,2026-07-16 14:43:08,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that implements a solution to a mathematical problem involving sequences and cases. The second code snippet is a Python program that implements a solution to a mathematical problem involving sequences and cases. While both code snippets deal with mathematical problems involving sequences and cases, they are written in different programming languages and have different implementations. The first code snippet uses a more complex approach with macros and template functions, while the second code snippet uses a simpler approach with basic Python functions. The code",341
+2016_0_4,63570,2014_3_1,138308,NON-CLONE,2026-07-16 14:43:10,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same mathematical operations for calculating GCD and solving cases with different parameters. The code logic is very similar, with both implementing the same mathematical operations for calculating GCD and solving cases with different parameters.""
+}
+ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same mathematical operations for calculating GCD and solving cases with different parameters. The code logic is very similar, with both implementing the same mathematical operations for calculating GCD and solving cases with",342
+2016_0_4,158305,2015_0_3,41900,NON-CLONE,2026-07-16 14:43:12,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for solving a problem involving guessing numbers, with the Python code using a recursive approach and the C++ code using a more complex iterative approach. While the implementations differ in syntax and structure, they achieve the same result and perform the same task.""
+}",343
+2016_0_4,142083,2015_0_1,43660,NON-CLONE,2026-07-16 14:43:13,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are written in different programming languages (Python vs Java) and have different structures, syntaxes, and logic. While they both deal with input/output operations and case handling, they are not functionally similar as they are implemented in different languages with different approaches.""
+}
+",344
+2016_0_4,80717,2013_0_2,91409,NON-CLONE,2026-07-16 14:43:15,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same logic for solving a problem. The PHP code is processing input from a file, determining answers based on certain conditions, and writing output to another file. The C++ code is doing the same thing but in a different programming language. The core logic of checking conditions and determining answers is the same in both code snippets.""
+}",345
+2016_0_4,139021,2013_0_2,78034,NON-CLONE,2026-07-16 14:43:17,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement a solution for a lawn mowing problem where the program checks if the lawn can be mowed by the mower. The PHP code uses classes and methods to solve the problem, while the Python code uses functions and exception handling to solve it. Both code snippets achieve the same result and perform the same task, even though they differ in syntax, structure, and specific steps taken to accomplish that task.""
+}",346
+2016_0_4,37736,2015_0_3,72742,NON-CLONE,2026-07-16 14:43:19,"ANSWER: YES-SIMILAR
+EXPLANATION: Code snippet 1 is a PHP implementation of a problem-solving program, while code snippet 2 is a Python implementation of a problem-solving program. Both code snippets implement similar functionality - they read input data, process cases, and output results. The core logic and structure of both programs are functionally similar, even though they use different programming languages and syntax.",347
+2016_1_1,15819,2013_0_2,85165,NON-CLONE,2026-07-16 14:43:21,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are similar in that they both deal with processing input data and generating output cases. The first code snippet processes input data from a file and generates output cases with specific formatting requirements, while the second code snippet also processes input data from a file and generates output cases with specific formatting requirements. Both code snippets follow a similar pattern of processing input data and generating output cases with specific formatting requirements.""
+}",348
+2016_1_1,28201,2013_0_2,78034,NON-CLONE,2026-07-16 14:43:23,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality of sorting test cases and writing output. The Java code handles input/output operations and sorting logic, while the Python code implements similar sorting and output generation functionality. The core logic of sorting and writing output is the same, though implemented differently in each language.""
+}",349
+2016_1_1,22113,2016_1_2,7956,NON-CLONE,2026-07-16 14:43:25,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets solve the same problem - processing input to find the last word in a given string. The Java code processes input from System.in, while the Python code processes input from stdin. Both use similar logic to find the last word by comparing characters and maintaining the order of words. The code structure and logic are very similar, though the languages are different.""
+}",350
+2016_1_1,15421,2016_2_1,193929,NON-CLONE,2026-07-16 14:43:27,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets implement the same logic for solving a problem related to digits and cases. The code structure, variable usage, and problem-solving approach are very similar between the two code snippets. The code snippets handle input/output operations and case processing in a consistent manner, making them functionally similar despite some differences in syntax and structure.",351
+2016_1_1,31768,2014_2_1,118416,NON-CLONE,2026-07-16 14:43:29,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input cases and processing them to output results. The code structure and logic are similar, though written in different languages (C++ vs Python). The main difference is in syntax and structure, but the functional behavior is the same.""
+}
+",352
+2016_1_1,20829,2013_0_2,85165,NON-CLONE,2026-07-16 14:43:31,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a C++ program that reads input from a file and processes it to output results to another file. The second code snippet is a Python program that reads input from a file and processes it to output results to another file. While both code snippets deal with reading input and processing it, they use different programming languages and have different structures. The first code snippet uses a C++ structure with a main function that processes input and outputs results, while the second code snippet uses a Python",353
+2016_1_1,3308,2016_2_1,186531,NON-CLONE,2026-07-16 14:43:33,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - they process input cases and output them in a specific format. The first code snippet processes input files and outputs cases with specific formatting, while the second code snippet processes input cases and outputs them in a similar format. Both code snippets follow similar logic for processing input cases and outputting them in a specific format.""
+}",354
+2016_1_1,33316,2013_0_3,74156,NON-CLONE,2026-07-16 14:43:35,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The two code snippets are not functionally similar. The first code snippet is written in Python and appears to be a program that processes input from files to generate output, while the second code snippet is written in Java and appears to be a program that counts palindromes in a square root context. While both code snippets deal with processing input and generating output, they are written in different programming languages and serve different purposes, making them not functionally similar.""
+}",355
+2016_1_1,14703,2014_3_1,140281,NON-CLONE,2026-07-16 14:43:36,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Python program that processes strings to find the best word in a sequence, while the second code snippet is a Java program that processes input to solve a mathematical problem. They have different purposes and structures, making them not functionally similar.""
+}",356
+2016_1_1,3735,2013_0_2,85165,NON-CLONE,2026-07-16 14:43:38,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a PHP program that processes input from stdin to calculate the last word in a given string, while the second code snippet is a Python program that implements a lawn mowing simulation with multiple parameters and complex logic. The two programs have different purposes, syntax, and structures, making them not functionally similar.""
+}",357
+2016_1_1,18665,2013_0_2,85165,NON-CLONE,2026-07-16 14:43:39,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process input data to generate output cases. The first code snippet processes input strings to generate output cases, while the second code snippet processes input data to generate output cases with similar logic and structure.""
+}",358
+2016_1_1,4557,2015_0_1,106809,NON-CLONE,2026-07-16 14:43:41,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. They are written in different programming languages (PHP vs Python) and have different logic and functionality. The first code snippet processes input files and outputs results to a file, while the second code snippet processes input data and outputs results to the console. The code structures, syntax, and tasks are different between the two code snippets.""
+}",359
+2016_1_2,23627,2016_0_1,88781,NON-CLONE,2026-07-16 14:43:42,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar functionality - they process input data to determine cases and output results. The Java code processes input data to determine cases and output results, while the Python code does the same but in a different way. Both code snippets have similar structure and logic for processing input data and determining output results.""
+}
+",360
+2016_1_2,26561,2013_1_1,37029,NON-CLONE,2026-07-16 14:43:44,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is a Java program that simulates a grid-based problem where missing numbers are calculated. The second code snippet is a Python program that processes input data to calculate missing numbers in a different context. While both code snippets deal with missing numbers calculation, they are implemented in different programming languages and have different structures, making them not functionally similar.""
+}",361
+2016_1_2,21848,2015_0_2,96440,NON-CLONE,2026-07-16 14:43:46,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same logic for solving a problem involving ranking cases and handling input/output. The Java code handles input from a file and writes results to another file, while the C++ code reads input from standard input and writes results to standard output. Both use similar data structures and algorithms to process the input and generate results.""
+}",362
+2016_1_2,7905,2013_0_2,44471,NON-CLONE,2026-07-16 14:43:48,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input cases and printing results. The first code snippet uses C++ with standard input/output operations, while the second uses Java with similar input/output operations. Both code snippets follow the same logic of processing input cases and printing results, making them functionally similar.""
+}",363
+2016_1_2,22827,2013_0_3,74156,NON-CLONE,2026-07-16 14:43:50,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are similar in that they are programs that process input data to determine if certain numbers are palindromes. The Java code processes test cases from a file, while the C++ code processes input from standard input, but both perform the same task of determining palindromic numbers.""
+}",364
+2016_1_2,26565,2016_0_1,113708,NON-CLONE,2026-07-16 14:43:51,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets handle input cases and process them in a similar way. The first code snippet processes input cases using a vector and map structure, while the second code snippet processes input cases using an array and hash map structure. Both code snippets output the processed results in a similar way, with the first using cout statements and the second using echo statements. The main difference is in syntax and structure, but the functional similarity is clear.""
+}",365
+2016_1_2,30453,2016_2_1,193717,NON-CLONE,2026-07-16 14:43:53,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet appears to be a Python program that processes lists of numbers, while the second code snippet is a PHP program that processes character counts. They have different structures, syntaxes, and purposes, making them not functionally similar.""
+}",366
+2016_1_2,14745,2015_0_3,18309,NON-CLONE,2026-07-16 14:43:55,"ANSWER: DONT-KOW
+
+EXPLANATION: 
+The two code snippets are written in different programming languages (Python vs PHP) and have different syntax structures. The first code snippet is written in Python and appears to be a solution to a mathematical problem involving variables i, j, and k. The second code snippet is written in PHP and appears to be a test case implementation that involves checking mathematical equations and conditions. While both code snippets deal with mathematical problems, they are written in different programming languages and have different structures, making it difficult to determine if they are functionally similar.",367
+2016_1_2,7956,2015_0_2,96440,NON-CLONE,2026-07-16 14:43:57,"{
+    ""answer"": ""NO-NOT-SIMILAR"",
+    ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in Python and handles a different problem involving solving equations with multiple variables. The second code snippet is written in C++ and handles a different problem involving finding minimum values in a mathematical context. While both code snippets deal with mathematical problems, they are implemented in different programming languages and solve different problems, making them not functionally similar.""
+}",368
+2016_1_2,22155,2014_3_1,139370,NON-CLONE,2026-07-16 14:43:59,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same algorithm for solving a problem involving two numbers P and Q. The code snippets have similar logic where they divide numbers by 2 until they're odd, and then check if the result is 1 and P is 0. The main difference is in syntax and structure, but the core logic and functionality is the same.""
+}",369
+2016_1_2,21265,2015_0_3,72742,NON-CLONE,2026-07-16 14:44:00,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar functionality - they are reading input files and writing output files. The first code snippet is written in PHP and the second in Python, but they both perform similar tasks of reading input data and writing output data. The code structure and logic are very similar between the two code snippets.""
+}",370
+2016_1_2,19133,2015_0_1,86599,NON-CLONE,2026-07-16 14:44:02,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets are implementing the same algorithm for solving a problem related to friends and standing in a line. They both process input data to calculate friends and standing, and output the result in a similar format. The core logic of calculating friends and standing is the same, even though the syntax and structure differ between the two languages.""
+}",371
+2016_2_1,201276,2015_0_2,81081,NON-CLONE,2026-07-16 14:44:04,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are implementing a solution to the same problem. The Java code snippet is implementing a solution to a problem involving reading input files, processing data, and calculating results. The Python code snippet is implementing a solution to the same problem, but using Python's syntax and features. Both code snippets are achieving the same result and performing the same task, even though they differ in syntax, structure, and specific steps taken to accomplish that task.",372
+2016_2_1,180026,2016_0_1,143909,NON-CLONE,2026-07-16 14:44:05,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same task - reading input cases and processing them to produce output cases. The code structure and logic are very similar, with the main difference being the language syntax (Java vs C++). The core functionality is the same.""
+}",373
+2016_2_1,193929,2013_1_1,34507,NON-CLONE,2026-07-16 14:44:07,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement similar logic for solving problems related to digits and vanishing characters. The Java code handles input/output operations and digit counting logic, while the PHP code implements similar problem-solving approaches with digit processing and vanishing character checks. The core logic and problem-solving approaches are functionally similar between the two code snippets.""
+}",374
+2016_2_1,194349,2015_0_3,103774,NON-CLONE,2026-07-16 14:44:09,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing similar functionality - they are both handling test cases and processing input to generate output. The code structure and logic are very similar, with the main difference being the programming language used (C++ vs Python).""
+}",375
+2016_2_1,186531,2016_1_1,15819,NON-CLONE,2026-07-16 14:44:11,"{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The code snippets are not functionally similar. The first code snippet is written in C++ and implements a program that processes test cases with specific logic for handling different types of inputs and outputs. The second code snippet is written in Java and implements a program that reads input from a file and writes output to another file, with different logic for handling test cases. While both code snippets deal with processing test cases, they have different implementations, logic, and structures that make them not functionally similar.""
+}",376
+2016_2_1,179503,2015_0_3,18309,NON-CLONE,2026-07-16 14:44:13,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement the same logic for solving a mathematical problem involving repeated phrases. The code structures are similar, with the C++ code handling input/output operations and the PHP code implementing the same problem-solving logic. The main purpose of both codes is to process input and solve a mathematical problem involving repeated phrases.""
+}",377
+2016_2_1,185295,2013_0_3,108834,NON-CLONE,2026-07-16 14:44:15,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are functionally similar as they achieve the same result. They both process input files, handle test cases, and output results in a similar way. The code snippets have similar structure and logic for handling input/output operations, processing test cases, and generating output. The main difference is in the programming language used (Python vs Java), but the functional behavior is the same.",378
+2016_2_1,196651,2013_0_1,126886,NON-CLONE,2026-07-16 14:44:17,"{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement a solution for solving cases of Tic-Tac-Toe games. They both read input from a file, process cases, determine game outcomes, and print results. The code structure and logic are similar, though the syntax and implementation details differ between Python and Java.""
+}",379
+2016_2_1,182378,2016_1_1,15819,NON-CLONE,2026-07-16 14:44:18,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same functionality - reading input from a file named 'a-large.in', processing test cases, and writing output to 'a-large.out'. The code logic is very similar, with the Java code being a more modern implementation of the same algorithm.""
+}",380
+2016_2_1,198100,2013_0_3,51164,NON-CLONE,2026-07-16 14:44:21,"ANSWER: {
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets are implementing the same functionality - they are processing input data to generate output for a problem (D) in Google Code Jam 2016. The first code snippet is written in PHP while the second is written in Python, but they both follow the same logic and structure for processing input data and generating output. The main difference is the language syntax used, but the core functionality remains the same.""
+}",381
+2016_2_1,193717,2013_0_3,108834,NON-CLONE,2026-07-16 14:44:23,"ANSWER: YES-SIMILAR
+EXPLANATION: Both code snippets are functionally similar as they implement the same task of processing input test cases and producing output results. The code snippets share similar logic for handling test cases, processing input/output operations, and generating results. While they differ in syntax and structure, they achieve the same result and perform the same task, making them functionally similar.",382
+2016_2_1,200006,2015_0_1,47939,NON-CLONE,2026-07-16 14:44:25,"{
+    ""answer"": ""YES-SIMILAR"",
+    ""explanation"": ""Both code snippets implement the same problem-solving approach. They both process multiple test cases, where each case involves solving a problem related to standing (likely standing on something). Both code snippets read input from files named 'input.txt', process multiple test cases, and write output to files named 'output.txt'. The core logic of processing multiple test cases and solving problems related to standing is the same in both code snippets.""
+}",383

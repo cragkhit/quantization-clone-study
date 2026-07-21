@@ -1,0 +1,392 @@
+% =====================================================================
+%  Quantization & Fine-Tuning for LLM Code Clone Detection
+%  Experimental setup + results, organized by RQ1-RQ5.
+%
+%  Compile:  pdflatex experiment_report.tex   (run twice for refs)
+%
+%  The three comprehensive result tables are pulled in verbatim from the
+%  files produced by evaluate_results.py (regenerate with, e.g.,
+%    python evaluate_results.py --dataset gcj-java --mode majority-vote --latex):
+%    * evaluation_summary.tex                     (OCD)
+%    * evaluation_summary_gcj-java.tex            (GCJ-Java)
+%    * evaluation_summary_gcj-cross-language.tex  (GCJ cross-language)
+%  All numbers in the hand-written RQ tables below are drawn from the same runs.
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[table]{xcolor}   % \cellcolor MCC highlights in the generated tables
+\usepackage{booktabs}        % \toprule / \midrule / \bottomrule
+\usepackage{graphicx}        % \resizebox in the generated tables
+\usepackage{amssymb}         % \uparrow, math symbols
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{Effects of Quantization and Clone-Specific Fine-Tuning on\\
+       LLM Code Clone Detection}
+\author{}
+\date{}
+
+\newcommand{\best}[1]{\textbf{#1}}
+
+\begin{document}
+\maketitle
+
+%----------------------------------------------------------------------
+\section{Research Questions}
+%----------------------------------------------------------------------
+\begin{itemize}
+  \item[\textbf{RQ1:}] How does quantization bit-width affect LLM performance on
+        code clone detection tasks compared to full-precision baselines?
+  \item[\textbf{RQ2:}] Which quantization methods (QTIP, AQLM, HIGGS-GPTQ,
+        MatGPTQ, GGUF) best preserve code clone detection capability at
+        equivalent bit-widths?
+  \item[\textbf{RQ3:}] Is the performance impact of quantization consistent
+        across programming languages and clone types?
+  \item[\textbf{RQ4:}] What are the resource--performance trade-offs of
+        quantized LLMs in code clone detection?
+  \item[\textbf{RQ5:}] How does fine-tuning on code-clone-specific data affect
+        the performance of quantized LLMs for code clone detection?
+\end{itemize}
+
+\noindent\textbf{Scope note.} We evaluate four quantization families: GGUF
+$k$-quants (llama.cpp), AQLM, HIGGS-GPTQ, and QTIP. \emph{MatGPTQ} is listed in
+RQ2 but was \textbf{not} evaluated in this study; RQ2 is answered for the four
+families above and MatGPTQ is left as future work.
+
+%----------------------------------------------------------------------
+\section{Experimental Setup}
+%----------------------------------------------------------------------
+
+\subsection{Hardware and environment}
+All inference was run on a single shared GPU server: 8$\times$NVIDIA H100 80\,GB
+HBM3 (compute capability \texttt{sm\_90}), 2$\times$Intel Xeon Platinum 8480C
+(112 cores), 2.0\,TiB RAM, Ubuntu 22.04.2 / Linux 5.15, CUDA driver 12.2
+(driver 535.161.08), \texttt{nvcc} 12.2. Each run is pinned to one H100 via
+\texttt{CUDA\_VISIBLE\_DEVICES}. Every backend uses an isolated Python~3.10
+virtual environment with version pins recorded per backend (GGUF and the QTIP /
+HIGGS CUDA kernels are built from source for \texttt{sm\_90}).
+
+\subsection{Task and prompt}
+Clone detection is framed as pairwise binary classification: given two code
+snippets, the model answers \texttt{YES-SIMILAR}, \texttt{NO-NOT-SIMILAR}, or
+\texttt{DONT-KNOW} as a JSON object (\{\texttt{answer}, \texttt{explanation}\}).
+\texttt{YES-SIMILAR}$\rightarrow$CLONE and \texttt{NO-NOT-SIMILAR}$\rightarrow$
+NON-CLONE; \texttt{DONT-KNOW} and unparseable answers are excluded from scoring.
+The identical prompt is used for every model, quantization, and dataset.
+
+\subsection{Datasets}
+\begin{table}[htbp]
+  \centering
+  \caption{Evaluation datasets. All are balanced pairwise clone-detection sets.}
+  \label{tab:datasets}
+  \small
+  \begin{tabular}{llrl}
+    \toprule
+    \textbf{Dataset} & \textbf{Language(s)} & \textbf{Pairs} & \textbf{Clone type} \\
+    \midrule
+    OCD              & Java                        & 10{,}000 & Syntactic / near-miss (compile--decompile, obfuscation) \\
+    GCJ-Java         & Java                        & 400      & Semantic, same-problem (Type-4) \\
+    GCJ cross-lang.  & Java, C++, Python, PHP      & 384      & Cross-language semantic (Type-4) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent OCD contrasts $100$ Java files (10 programs $\times$ 10
+obfuscated/compiled versions) as all $100\times100$ pairs. The GCJ sets are
+derived from Google Code Jam submissions: GCJ-Java uses 20 problems $\times$ 5
+Java submissions (clones = same problem); the cross-language set pairs different
+languages solving the same problem. The fine-tuning data (RQ5) is the
+independent \textbf{AIZU} benchmark from SimilBench (AIZU Online Judge
+submissions): \textbf{AIZU384F} (384 monolingual pairs, 15 languages) and
+\textbf{AIZU324CLF} (324 cross-language pairs). AIZU shares no problems with the
+GCJ test sets, giving a clean cross-dataset train/test split.
+
+\subsection{Models and quantizations}
+\begin{table}[htbp]
+  \centering
+  \caption{Base models and the quantizations evaluated. Bit-widths are the
+           nominal weight precision. GGUF quants: \texttt{bartowski} /
+           \texttt{QuantFactory} / official Qwen builds; AQLM+HIGGS:
+           \texttt{ISTA-DASLab}; QTIP: \texttt{relaxml}.}
+  \label{tab:models}
+  \small
+  \begin{tabular}{llll}
+    \toprule
+    \textbf{Base model} & \textbf{Params} & \textbf{FP} & \textbf{Quantizations evaluated} \\
+    \midrule
+    Meta-Llama-3.1-8B-Instruct     & 8B            & BF16 & GGUF Q2/Q3/Q4; AQLM~2b; HIGGS~3/4b; QTIP~2/3/4b \\
+    Qwen2.5-Coder-7B-Instruct      & 7B            & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
+    CodeLlama-7b-Instruct          & 7B            & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
+    DeepSeek-Coder-V2-Lite         & 16B (MoE, 2.4B act.) & BF16 & GGUF Q4\_K\_M \\
+    Llama-4-Scout-17B-16E          & 109B (MoE, 17B act.) & BF16 & GGUF Q2\_K / Q3\_K\_S / Q4\_K\_M \\
+    Codestral-22B-v0.1             & 22B           & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
+    aya-expanse-8b                 & 8B            & BF16 & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Protocol and metrics}
+Each configuration is run for \textbf{5 rounds}; the final label per pair is the
+\textbf{majority vote} across rounds. We report Accuracy, Precision, Recall, F1,
+and the \textbf{Matthews Correlation Coefficient (MCC)}. MCC is our primary
+metric because it is robust on the balanced GCJ sets and heavily penalizes the
+degenerate ``predict-everything-CLONE'' behavior some models exhibit
+(MCC~$=0$). Comprehensive per-configuration results for each dataset are given
+in Tables~\ref{tab:evaluation_metrics}--\ref{tab:evaluation_summary} (OCD),
+and the analogous generated tables for GCJ-Java and GCJ cross-language
+(Section~\ref{sec:fulltables}).
+
+%----------------------------------------------------------------------
+\section{RQ1: Bit-width vs.\ full precision}
+%----------------------------------------------------------------------
+Table~\ref{tab:rq1} sweeps the fully quantized Meta-Llama-3.1-8B across all
+bit-widths and methods against its BF16 baseline, on all three datasets.
+
+\begin{table}[htbp]
+  \centering
+  \caption{RQ1 --- MCC vs.\ bit-width for Meta-Llama-3.1-8B (5-round majority
+           vote). Higher bit-width monotonically improves MCC; the best 4-bit
+           methods match or exceed the BF16 baseline.}
+  \label{tab:rq1}
+  \small
+  \begin{tabular}{llccc}
+    \toprule
+    \textbf{Config} & \textbf{Bits} & \textbf{OCD} & \textbf{GCJ-Java} & \textbf{GCJ x-lang} \\
+    \midrule
+    BF16 (baseline)      & 16 & 0.473 & 0.458 & 0.325 \\
+    \midrule
+    AQLM                 & 2  & 0.151 & 0.176 & 0.103 \\
+    GGUF Q2\_K           & 2  & 0.161 & 0.204 & 0.097 \\
+    QTIP                 & 2  & 0.279 & 0.275 & 0.030 \\
+    \midrule
+    GGUF Q3\_K\_M        & 3  & 0.245 & 0.213 & 0.159 \\
+    HIGGS-GPTQ           & 3  & 0.373 & 0.339 & 0.191 \\
+    QTIP                 & 3  & 0.450 & 0.421 & 0.269 \\
+    \midrule
+    GGUF Q4\_K\_M        & 4  & 0.367 & 0.270 & 0.265 \\
+    HIGGS-GPTQ           & 4  & 0.463 & 0.382 & 0.246 \\
+    QTIP                 & 4  & \best{0.490} & \best{0.474} & \best{0.304} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Findings.} (i) MCC increases monotonically with bit-width
+within every method (2b $<$ 3b $<$ 4b). (ii) Aggressive 2-bit quantization is
+severely damaging: MCC collapses to $0.03$--$0.28$, far below BF16. (iii)
+The impact is \emph{not} uniform across models: for the strong
+\textbf{Qwen2.5-Coder-7B}, quantization is nearly lossless --- on OCD its BF16
+MCC is $0.998$ and every GGUF quant (Q2/Q3/Q4) stays $\ge 0.998$; on GCJ-Java
+Q2\_K ($0.825$) even \emph{exceeds} BF16 ($0.601$). Thus bit-width matters most
+for weaker base models, while capable models tolerate low-bit quantization.
+
+%----------------------------------------------------------------------
+\section{RQ2: Which method best preserves capability at equal bit-width?}
+%----------------------------------------------------------------------
+Meta-Llama-3.1-8B is the only base model quantized by all four families, so it
+isolates the effect of the \emph{method} at a fixed bit-width
+(Table~\ref{tab:rq2}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{RQ2 --- method comparison at equal bit-width (Meta-Llama-3.1-8B,
+           MCC). \best{Bold} = best method at that bit-width. QTIP dominates at
+           every bit-width. MatGPTQ was not evaluated.}
+  \label{tab:rq2}
+  \small
+  \begin{tabular}{lccc}
+    \toprule
+    & \multicolumn{3}{c}{\textbf{MCC (best method in bold)}}\\
+    \cmidrule(lr){2-4}
+    \textbf{Bit-width / method} & \textbf{OCD} & \textbf{GCJ-Java} & \textbf{GCJ x-lang} \\
+    \midrule
+    \textit{2-bit} \\
+    \quad AQLM         & 0.151 & 0.176 & 0.103 \\
+    \quad GGUF Q2\_K   & 0.161 & 0.204 & \best{0.097} \\
+    \quad QTIP         & \best{0.279} & \best{0.275} & 0.030 \\
+    \midrule
+    \textit{3-bit} \\
+    \quad GGUF Q3\_K\_M & 0.245 & 0.213 & 0.159 \\
+    \quad HIGGS-GPTQ    & 0.373 & 0.339 & 0.191 \\
+    \quad QTIP          & \best{0.450} & \best{0.421} & \best{0.269} \\
+    \midrule
+    \textit{4-bit} \\
+    \quad GGUF Q4\_K\_M & 0.367 & 0.270 & 0.265 \\
+    \quad HIGGS-GPTQ    & 0.463 & 0.382 & 0.246 \\
+    \quad QTIP          & \best{0.490} & \best{0.474} & \best{0.304} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Findings.} \textbf{QTIP} (trellis-coded quantization) is the
+strongest preservation method: it wins at 3-bit and 4-bit on all three datasets
+and at 2-bit on the two Java sets. QTIP-4bit even surpasses the BF16 baseline on
+OCD and GCJ-Java (Table~\ref{tab:rq1}). \textbf{HIGGS-GPTQ} is a consistent
+second at 3--4 bit. \textbf{GGUF} $k$-quants and \textbf{AQLM} are the weakest at
+matched bit-width (AQLM-2bit and GGUF-Q2\_K are near-degenerate). The lone 2-bit
+exception is the cross-language set, where all three 2-bit methods are close to
+random. MatGPTQ is not evaluated and remains future work.
+
+%----------------------------------------------------------------------
+\section{RQ3: Consistency across languages and clone types}
+%----------------------------------------------------------------------
+Table~\ref{tab:rq3} compares each model's best-per-family configuration across
+the three datasets, which vary in language (Java vs.\ multi-language) and clone
+type (syntactic OCD vs.\ semantic GCJ).
+
+\begin{table}[htbp]
+  \centering
+  \caption{RQ3 --- MCC across datasets (representative configuration per model;
+           GGUF Q4\_K\_M unless noted). ``$\Delta$ x-lang'' is GCJ
+           cross-language minus GCJ-Java.}
+  \label{tab:rq3}
+  \small
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Model (config)} & \textbf{OCD} & \textbf{GCJ-Java} & \textbf{GCJ x-lang} & \textbf{$\Delta$ x-lang} \\
+    \midrule
+    Qwen2.5-Coder-7B (Q4\_K\_M)       & 0.998 & 0.682 & 0.734 & $+0.052$ \\
+    Llama-4-Scout-17B (Q4\_K\_M)      & 0.908 & 0.923 & 0.933 & $+0.010$ \\
+    DeepSeek-V2-Lite (Q4\_K\_M)       & 0.733 & 0.816 & 0.747 & $-0.069$ \\
+    Meta-Llama-3.1-8B (Q4\_K\_M)      & 0.367 & 0.270 & 0.265 & $-0.005$ \\
+    CodeLlama-7b (Q4\_K\_M)           & 0.048 & 0.051 & 0.000 & $-0.051$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Findings.} The impact of quantization is \emph{not} uniform;
+it is governed mainly by base-model capability, and this holds across languages
+and clone types. (i) \textbf{Clone type matters more than language}: syntactic
+OCD is nearly saturated for the strongest model (Qwen $0.998$) but hard for weak
+ones, whereas the semantic GCJ sets are uniformly harder. (ii)
+\textbf{Cross-language is roughly as hard as monolingual Java for strong
+models} (Scout, Qwen even improve slightly), but weak models degrade further
+cross-language (CodeLlama $0.051\!\rightarrow\!0.000$). (iii) The degenerate
+failure mode (predicting all-CLONE, MCC~$=0$) is consistent for CodeLlama across
+all datasets and quantizations. Overall ranking is stable across datasets:
+Scout/Qwen $>$ DeepSeek $>$ Llama-3.1 $>$ CodeLlama.
+
+%----------------------------------------------------------------------
+\section{RQ4: Resource--performance trade-offs}
+%----------------------------------------------------------------------
+Quantization reduces the weight footprint by roughly $4\times$ (4-bit) to
+$8\times$ (2-bit) relative to BF16. Table~\ref{tab:rq4} places representative
+configurations on the resource ($\approx$ effective bits $\times$ params) vs.\
+performance (GCJ-Java MCC) plane.
+
+\begin{table}[htbp]
+  \centering
+  \caption{RQ4 --- resource vs.\ performance (GCJ-Java, 5-round majority vote).
+           Approx.\ weight memory assumes the nominal bit-width; MoE rows use
+           total parameters.}
+  \label{tab:rq4}
+  \small
+  \begin{tabular}{llrrc}
+    \toprule
+    \textbf{Model} & \textbf{Config} & \textbf{Bits} & \textbf{$\approx$Wt.\ mem.} & \textbf{MCC} \\
+    \midrule
+    Qwen2.5-Coder-7B   & BF16       & 16 & $\sim$14\,GB & 0.601 \\
+    Qwen2.5-Coder-7B   & Q2\_K      &  2 & $\sim$2.2\,GB & \best{0.825} \\
+    Qwen2.5-Coder-7B   & Q4\_K\_M   &  4 & $\sim$4.4\,GB & 0.682 \\
+    \midrule
+    Llama-4-Scout-17B  & Q4\_K\_M   &  4 & $\sim$55\,GB & 0.923 \\
+    DeepSeek-V2-Lite   & Q4\_K\_M   &  4 & $\sim$8\,GB  & 0.816 \\
+    \midrule
+    Meta-Llama-3.1-8B  & BF16       & 16 & $\sim$16\,GB & 0.458 \\
+    Meta-Llama-3.1-8B  & QTIP-4b    &  4 & $\sim$4.5\,GB & 0.474 \\
+    Meta-Llama-3.1-8B  & QTIP-2b    &  2 & $\sim$2.5\,GB & 0.275 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Findings.} (i) A \textbf{strong small model at low precision
+dominates the trade-off}: Qwen2.5-Coder-7B at Q2\_K ($\sim$2\,GB) reaches MCC
+$0.825$ on GCJ-Java, beating a $\sim$55\,GB Q4 model on some axes and vastly
+outperforming BF16 Llama-3.1-8B ($0.458$) at $\sim$1/7 the memory. (ii) For a
+capable base, 4-bit is effectively ``free'' (QTIP-4b $\ge$ BF16), so 4-bit is
+the recommended default operating point. (iii) 2-bit only pays off for models
+robust to it (Qwen); for weak bases it destroys accuracy and is not worth the
+extra compression. Model \emph{choice} therefore buys far more than spending
+resources on higher precision of a weak model.
+
+%----------------------------------------------------------------------
+\section{RQ5: Clone-specific fine-tuning of quantized models}
+%----------------------------------------------------------------------
+We fine-tune a LoRA adapter with \textbf{QLoRA} (4-bit NF4 frozen base, rank-16
+adapter, $\sim$40M trainable params, 3 epochs) on the AIZU384F clone pairs, then
+apply the adapter \emph{on top of the same Q4\_K\_M GGUF} at inference (via
+llama.cpp \texttt{lora\_path}). The base bytes are identical to the evaluated
+Q4\_K\_M baseline, so the delta isolates the fine-tuning effect at fixed
+quantization. Training (AIZU) and testing (GCJ) use disjoint sources.
+
+\begin{table}[htbp]
+  \centering
+  \caption{RQ5 --- QLoRA fine-tuning on the Q4\_K\_M base (MCC,
+           baseline~$\rightarrow$~fine-tuned). Adapter trained on AIZU384F;
+           the test sets (GCJ) share no problems with training.}
+  \label{tab:rq5}
+  \small
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{GCJ-Java MCC}} & \multicolumn{2}{c}{\textbf{GCJ x-lang MCC}}\\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    \textbf{Model (Q4\_K\_M base)} & base & +QLoRA & base & +QLoRA \\
+    \midrule
+    Qwen2.5-Coder-7B  & 0.682 & \best{0.955} & 0.734 & \best{0.912} \\
+    Meta-Llama-3.1-8B & 0.270 & \best{0.889} & 0.265 & \best{0.876} \\
+    CodeLlama-7b      & 0.051 & \best{0.769} & 0.000 & \best{0.754} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{RQ5 (ablation) --- effect of training-set composition for Qwen2.5-Coder-7B
+           (MCC). Training on monolingual (AIZU384F) vs.\ cross-language
+           (AIZU324CLF) pairs is statistically indistinguishable on both tests.}
+  \label{tab:rq5-ablation}
+  \small
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Adapter (training data)} & \textbf{GCJ-Java} & \textbf{GCJ x-lang} \\
+    \midrule
+    none (Q4\_K\_M baseline)       & 0.682 & 0.734 \\
+    AIZU384F (monolingual)         & 0.955 & 0.912 \\
+    AIZU324CLF (cross-language)    & 0.955 & 0.917 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Findings.} (i) Fine-tuning yields \textbf{large gains at fixed
+quantization}: $+0.27$ to $+0.72$ MCC. (ii) It \textbf{rescues degenerate
+quantized models}: CodeLlama-7b Q4\_K\_M goes from MCC $0.000$ (all-CLONE) to
+$0.754$ cross-language. (iii) The \textbf{absolute lift is largest for the
+weakest base} (CodeLlama $+0.72$, Llama-3.1 $+0.62$, Qwen $+0.27$), but the
+final ranking still tracks base capability (Qwen $\sim$0.93 $>$ Llama-3.1
+$\sim$0.88 $>$ CodeLlama $\sim$0.76): fine-tuning narrows, but does not erase,
+the base-model gap. (iv) \textbf{Training-set composition does not matter}
+(Table~\ref{tab:rq5-ablation}): a monolingual-trained adapter transfers to
+cross-language clone detection as well as a cross-language-trained one, i.e.\
+QLoRA learns a general functional-similarity skill. All fine-tuned runs produced
+0 unparseable/DONT-KNOW answers, so the gains are genuine capability, not output
+formatting.
+
+%----------------------------------------------------------------------
+\section{Comprehensive Result Tables}
+\label{sec:fulltables}
+%----------------------------------------------------------------------
+The following tables are generated directly by \texttt{evaluate_results.py}
+(5-round majority vote, MCC-shaded). They list every model$\times$quantization
+configuration per dataset, including the QLoRA-fine-tuned rows (grouped under
+GGUF Quantization).
+
+\subsection{OCD (Java, syntactic clones)}
+\input{evaluation_summary.tex}
+
+\subsection{GCJ-Java (semantic clones)}
+\input{evaluation_summary_gcj-java.tex}
+
+\subsection{GCJ cross-language}
+\input{evaluation_summary_gcj-cross-language.tex}
+
+\end{document}

@@ -1,0 +1,2332 @@
+program_a,variant_a,program_b,variant_b,ground_truth,timestamp,response,pair_id
+2013_0_1,103399,2013_0_1,99825,CLONE,2026-07-21 20:22:46,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a Knapsack-like game where a 4x4 grid of characters is evaluated to determine a winner. They use similar logic to check for winning conditions based on rows, columns, and diagonals. The overall structure, variable names, and file I/O operations are also nearly identical, indicating functional similarity.""
+}
+```",0
+2013_0_1,99825,2013_0_1,125888,CLONE,2026-07-21 20:22:47,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a Tic-Tac-Toe game analyser. They calculate the winner based on the game state, considering rows, columns, and diagonals. The logic for determining the game state, including checking for draws and ongoing games, is similar, albeit with different syntax and structure.""
+}
+```",1
+2013_0_1,125888,2013_0_1,84842,CLONE,2026-07-21 20:22:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a function to determine the winner or state of a 4x4 Tic-Tac-Toe game. They both read a grid of characters ('.', 'X', 'O', 'T') from input, analyze the grid for winning conditions (e.g., three in a row, column, or diagonal), and print the result (win, draw, or game in progress).""
+}
+```",2
+2013_0_1,84842,2013_0_1,103399,CLONE,2026-07-21 20:22:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a game where two players (O and X) take turns placing their marks on a 4x4 grid. They check for winning conditions (a row, column, or diagonal containing four identical marks) and determine the game's outcome (win, loss, or draw) based on these conditions. The logic for checking winning conditions and determining the outcome is nearly identical in both languages.""
+}
+```",3
+2013_0_1,49244,2013_0_1,98087,CLONE,2026-07-21 20:22:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a game where two players (X and O) take turns placing their marks on a 4x4 grid. The goal is to get four of their marks in a row (horizontally, vertically, or diagonally). The code snippets share key functionalities: 1) They both read a 4x4 grid input from a file. 2) They both define constants for the possible mark types (X, O, T, empty). 3) They both implement a `winner()` function to determine if",4
+2013_0_1,98087,2013_0_1,91336,CLONE,2026-07-21 20:22:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program to determine the winner of a game played on a 4x4 grid, where 'X' and 'O' are placed in cells and 'T' represents a special cell that ends the game. The algorithms used in both snippets are nearly identical: they check for winners in rows, columns, diagonals, and remaining unfilled cells. The only differences are syntactical and stylistic, such as language (C++ vs Python) and specific file handling methods.""
+}
+```",5
+2013_0_1,91336,2013_0_1,102913,CLONE,2026-07-21 20:22:51,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program to determine the winner of a game represented on a 4x4 grid (Tic-Tac-Toe). They use similar logic to check for wins, draws, and pending games by iterating through the grid and checking for specific patterns (rows, columns, and diagonals) of 'X' or 'O' marks.""
+}
+```",6
+2013_0_1,102913,2013_0_1,49244,CLONE,2026-07-21 20:22:52,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement a game where two players (X and O) take turns placing their marks on a 4x4 grid. They both read input from a file, process it to determine the current state of the board, and output the result of the game (win, loss, or draw) for each case. The core logic, including checking rows, columns, and diagonals for a win or draw, is functionally identical.""
+}
+```",7
+2013_0_1,126886,2013_0_1,72071,CLONE,2026-07-21 20:22:53,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program to determine the winner of a Tic-Tac-Toe game. They read input files containing board states, iterate through each case, check for wins and draws, and print the result for each case.""
+}
+```",8
+2013_0_1,72071,2013_0_1,70537,CLONE,2026-07-21 20:22:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program that determines the winner of a 4x4 Tic-Tac-Toe game. They use similar logic to check for wins, draws, and unfinished games by examining rows, columns, and diagonals. The overall structure, variable names, and control flow are nearly identical.""
+}
+```",9
+2013_0_1,70537,2013_0_1,127485,CLONE,2026-07-21 20:22:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a system for determining the winner of a game (likely Tic-Tac-Toe) based on the state of a grid. They both read input, iterate over lines of the grid, check for wins, draws, and unfinished games, and output the result. Although the syntax and specific implementation details differ due to the different languages, the overall logic and functionality are the same.""
+}
+```",10
+2013_0_1,127485,2013_0_1,126886,CLONE,2026-07-21 20:22:55,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a Tic-Tac-Toe game. They read input from a file, parse the board state, determine the winner (if any), and print the result (win, loss, or draw).""
+}
+```",11
+2013_0_2,95524,2013_0_2,83774,CLONE,2026-07-21 20:22:56,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a 2D grid of numbers can be rearranged row-wise and column-wise while maintaining the relative order of elements within each row and column. They achieve this by iterating through the grid, comparing elements, and marking cells as invalid if they violate the order constraints. The overall logic, variable names, and steps taken are nearly identical.""
+}
+```",12
+2013_0_2,83774,2013_0_2,78034,CLONE,2026-07-21 20:22:57,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given 2D array (representing a grid) satisfies a specific property (all elements in a row or column are less than or equal to its maximum value). They achieve this by iterating through the grid, comparing each element to its row and column maximums, and returning 'YES' if all elements satisfy the property and 'NO' otherwise.""
+}
+```",13
+2013_0_2,78034,2013_0_2,71957,CLONE,2026-07-21 20:22:57,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a grid (board) of numbers, determine if it violates the 'max in every row and column' rule. They achieve this by calculating the maximum values in each row and column, then iterating through the board to check if any element violates the rule. The overall logic, input/output format, and purpose of both codes are identical.""
+}
+```",14
+2013_0_2,71957,2013_0_2,95524,CLONE,2026-07-21 20:22:58,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a 2D grid of integers can be rearranged so that each row and column contains a unique maximum value. They achieve this by reading input data, calculating maximums row-wise and column-wise, and then checking if any element violates the unique maximum constraint. The core logic and overall approach are identical, despite differences in syntax and language features.""
+}
+```",15
+2013_0_2,44471,2013_0_2,140779,CLONE,2026-07-21 20:22:59,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a 2D array (grid) can be filled with a specific value (the minimum value in the grid) such that every row and every column contains that value. They achieve this by iterating through the grid and checking if the maximum value in each row and column is equal to the specified minimum value. The logic and overall structure of both code snippets are nearly identical, indicating functional similarity.""
+}
+```",16
+2013_0_2,140779,2013_0_2,122219,CLONE,2026-07-21 20:22:59,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same logic to determine if a 2D grid (matrix) satisfies a specific condition. The condition is that for each cell, its value should not be less than the maximum value in its row and the maximum value in its column. The algorithms read in input data, iterate through each cell, and return 'YES' if the condition is met for all cells and 'NO' otherwise.""
+}
+```",17
+2013_0_2,122219,2013_0_2,96711,CLONE,2026-07-21 20:23:00,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given grid (board) of numbers is valid according to certain rules. They both read input from a file, process each case independently, and print 'YES' or 'NO' based on the validity of the grid.""
+}
+```",18
+2013_0_2,96711,2013_0_2,44471,CLONE,2026-07-21 20:23:01,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given 2D array represents a lawnmower pattern where each row and column has the same minimum value. They achieve this by reading input, iterating through rows and columns, and checking if the minimum value can be achieved in both row and column.""
+}
+```",19
+2013_0_2,55421,2013_0_2,91409,CLONE,2026-07-21 20:23:01,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a 2D array (representing a lawnmower's path) represents a valid pattern. They achieve this by reading input cases, processing the 2D array, and outputting 'YES' or 'NO' based on the validity of the pattern.""
+}
+```",20
+2013_0_2,91409,2013_0_2,85165,CLONE,2026-07-21 20:23:02,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a 2D array (representing a lawn) can be modified such that all heights are the same. They achieve this by reading input, processing the array, and printing an output string ('YES' or 'NO') based on the result.""
+}
+```",21
+2013_0_2,85165,2013_0_2,68303,CLONE,2026-07-21 20:23:02,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given 2D array (representing a lawn) can be transformed into a uniform height while satisfying boundary conditions. They achieve this by iteratively adjusting heights to reach a uniform state. The core logic, including reading input, processing the lawn, and outputting 'YES' or 'NO', is nearly identical.""
+}
+```",22
+2013_0_2,68303,2013_0_2,55421,CLONE,2026-07-21 20:23:03,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given lawnmower pattern can mow a given area without leaving any spots uncovered. They achieve this by reading input data, calculating maximum values in rows and columns, and checking if there are any 'impossible' areas (where the current cell's value is not the maximum in its row or column).""
+}
+```",23
+2013_0_3,108834,2013_0_3,102625,CLONE,2026-07-21 20:23:05,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the same problem: finding the number of perfect squares between two given numbers, `a` and `b`. They achieve this by pre-computing a list of perfect squares (`p` in Java, `pp` in C++) and then using binary search to find the range of perfect squares within the given interval. The main logic and overall structure of both code snippets are functionally similar, despite the differences in syntax and specific implementation details.""
+}
+```",24
+2013_0_3,102625,2013_0_3,102207,CLONE,2026-07-21 20:23:05,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet appears to generate and process a list of numbers, potentially for a math-related task, while the second snippet reads input from a file, processes lines of text, and writes output to another file.""
+}
+```",25
+2013_0_3,102207,2013_0_3,89287,CLONE,2026-07-21 20:23:06,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of perfect squares within a given range. They achieve this by iterating through numbers, checking if they are perfect squares, and incrementing a counter if they fall within the specified range. Although the syntax and implementation details differ, the overall logic and purpose are identical.""
+}
+```",26
+2013_0_3,89287,2013_0_3,108834,CLONE,2026-07-21 20:23:07,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the problem of finding the number of palindromic squares within a given range. They use similar logic to iterate through numbers, check for palindromicity, and calculate squares. The main differences are in syntax and the specific data types used, but the overall algorithm and functionality are the same.""
+}
+```",27
+2013_0_3,59317,2013_0_3,81195,CLONE,2026-07-21 20:23:08,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first code snippet calculates the number of fair and square numbers within a given range, while the second code snippet determines if a given number is a palindrome and stores palindromic square numbers within a specified range.""
+}
+```",28
+2013_0_3,81195,2013_0_3,51164,CLONE,2026-07-21 20:23:08,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets are designed to find and count perfect squares between a given lower and upper bound. The core logic involves generating a list of potential perfect squares and iterating through them to count those within the specified range.""
+}
+```",29
+2013_0_3,51164,2013_0_3,92037,CLONE,2026-07-21 20:23:09,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the number of fair squares (squares with the same reading forwards and backwards) within a given range. They achieve this by first generating a list of fair squares up to a certain limit, then iterating through this list and counting how many fall within a given range specified in the input.""
+}
+```",30
+2013_0_3,92037,2013_0_3,59317,CLONE,2026-07-21 20:23:09,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of perfect squares within a given range. They achieve this by generating a list of perfect squares up to a certain limit (10^14 in PHP, a large number in Java), then iterating through input ranges and checking if the range contains any perfect squares from the generated list. The core logic and overall approach are identical, despite the differences in syntax and implementation details.""
+}
+```",31
+2013_0_3,74156,2013_0_3,53348,CLONE,2026-07-21 20:23:10,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of perfect square palindromes within a given range. They achieve this by iterating through potential square roots within the range and checking if the square and the number itself are palindromes. The algorithms, data structures, and overall structure are nearly identical, indicating functional similarity.""
+}
+```",32
+2013_0_3,53348,2013_0_3,70289,CLONE,2026-07-21 20:23:11,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (C++ and Python), purposes (one finds palindromes and stores them, the other solves cases based on input from a file), structures, and algorithms. They perform fundamentally different tasks.""
+}
+```",33
+2013_0_3,70289,2013_0_3,132829,CLONE,2026-07-21 20:23:12,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given two numbers, count the number of perfect squares between them. They achieve this by pre-computing a list of perfect squares and then iterating through it to count the squares between the given numbers. The core logic and overall approach are identical.""
+}
+```",34
+2013_0_3,132829,2013_0_3,74156,CLONE,2026-07-21 20:23:12,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of palindromic squares between two given numbers. They achieve this by reading input from a file, iterating through potential square roots, and checking if the number and its square are palindromes. The core logic and overall approach are identical.""
+}
+```",35
+2013_1_1,42047,2013_1_1,28766,CLONE,2026-07-21 20:23:13,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest value of 'x' such that (2*r - 3)*x + 2*x*(x+1) >= t, where r and t are input parameters. They use similar binary search strategies to find this value.""
+}
+```",36
+2013_1_1,28766,2013_1_1,37029,CLONE,2026-07-21 20:23:14,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the  number of rings (n) needed to paint a circle with a given radius (r) and a given amount of paint (t). They use similar algorithms (binary search) to find the optimal value of n that satisfies the paint constraint. The core logic and end goal are identical.""
+}
+```",37
+2013_1_1,37029,2013_1_1,34507,CLONE,2026-07-21 20:23:14,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the number of rings (n) required to paint a circular area (t milliliters of paint) with a given radius (r). They use a binary search algorithm to find the optimal value of n that satisfies the paint volume constraint.""
+}
+```",38
+2013_1_1,34507,2013_1_1,42047,CLONE,2026-07-21 20:23:15,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest value x such that the sum of 2x² - x + 2rx is greater than or equal to a given target value t. They use a binary search-like approach to find this value. Despite the difference in syntax and language, the core logic and steps to achieve the solution are nearly identical.""
+}
+```",39
+2013_1_1,30835,2013_1_1,30228,CLONE,2026-07-21 20:23:16,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest integer \( k \) such that \( 2r(k-1) + t \leq k \), where \( r \) and \( t \) are given. They use similar logic to find the solution, although with different variable names and syntax.""
+}
+```",40
+2013_1_1,30228,2013_1_1,32497,CLONE,2026-07-21 20:23:16,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the optimal number of rings (or segments) that can be made with a given radius (r) and thickness (t). They use a binary search approach to find the solution, and their algorithms are conceptually identical, despite the difference in syntax and language.""
+}
+```",41
+2013_1_1,32497,2013_1_1,39026,CLONE,2026-07-21 20:23:17,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the number of rings (or circles) that can be painted within a given area (t) based on the radius (r). They use similar mathematical formulas and algorithms to achieve this, including calculating the square root and using integer arithmetic to find the optimal number of rings.""
+}
+```",42
+2013_1_1,39026,2013_1_1,30835,CLONE,2026-07-21 20:23:17,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the number of circles that can be painted on a target area given the radius of the circles and the total area available. They use similar mathematical principles (involving quadratic equations) to calculate the optimal circle radius that maximizes the painted area within the given constraints.""
+}
+```",43
+2013_1_1,32414,2013_1_1,30618,CLONE,2026-07-21 20:23:18,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: finding the maximum value of x in the quadratic equation 2x² + 2rx - t = 0, given r and t as input. They use a similar binary search approach to find the root of the quadratic equation and determine the maximum value of x.""
+}
+```",44
+2013_1_1,30618,2013_1_1,30519,CLONE,2026-07-21 20:23:18,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the number of circles (in this case, intervals) that can be inscribed within a given radius and area constraint. They use a binary search-like approach to find the optimal radius that satisfies the constraints.""
+}
+```",45
+2013_1_1,30519,2013_1_1,31779,CLONE,2026-07-21 20:23:19,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a binary search algorithm to find the largest circle count (`n`) that can be inscribed within a given radius (`r`) and area (`t`). They use a similar loop structure to iteratively narrow down the search range by half, comparing the calculated area of the circle at the current midpoint with the given area `t`. The final answer is determined by whether the calculated area exceeds or falls below `t` at the midpoint.""
+}
+```",46
+2013_1_1,31779,2013_1_1,32414,CLONE,2026-07-21 20:23:20,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the maximum value of 'r' such that the sum of 'r' and the product of 'r' and 't' is less than or equal to zero. They use a binary search algorithm to achieve this, with a function to calculate the sum and a check to verify the condition.""
+}
+```",47
+2014_2_1,115757,2014_2_1,131278,CLONE,2026-07-21 20:23:20,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the same problem: compressing and decompressing strings using Run-Length Encoding (RLE). They achieve this by reading input strings, encoding them into RLE format, and then decompressing them. The core logic, including handling RLE encoding, sorting, and calculating the minimum difference in counts for each character, is nearly identical.""
+}
+```",48
+2014_2_1,131278,2014_2_1,128920,CLONE,2026-07-21 20:23:21,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the same problem: processing a set of strings to find the minimum sum of absolute differences between the frequency of characters at a given position across all strings. They use similar steps, including reading input, processing strings, calculating differences, and outputting results. Although the syntax and specific implementation details differ, the overall algorithm and purpose are the same.""
+}
+```",49
+2014_2_1,128920,2014_2_1,118754,CLONE,2026-07-21 20:23:22,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a set of strings, determine the minimum number of moves required to make all strings identical. They use similar data structures (arrays and sets) to track and compare characters within the strings, and they output the result for each test case.""
+}
+```",50
+2014_2_1,118754,2014_2_1,115757,CLONE,2026-07-21 20:23:23,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the minimum number of moves required to transform a string into another string using a run-length encoding (RLE) approach. They achieve this by parsing input strings, encoding them into RLE format, and then comparing the resulting encodings to calculate the minimum difference in character counts between them.""
+}
+```",51
+2014_2_1,129296,2014_2_1,119165,CLONE,2026-07-21 20:23:23,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: analyzing a collection of lines (strings) and calculating a certain metric based on the character frequencies in each line. They share similar overall logic:
+
+1. Read input data (number of test cases and lines of text).
+2. Process each line to count character occurrences.
+3. Calculate a result based on the character counts, specifically focusing on the median of the counts and the total deviation from the median.
+
+Although the syntax and specific implementation details differ, the overall algorithm and purpose are",52
+2014_2_1,119165,2014_2_1,118416,CLONE,2026-07-21 20:23:24,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string array, determine the average character count per string and calculate the total distance from this average for each string. They achieve this through similar steps: reading input, processing strings, calculating averages, and computing distances. The core logic and overall structure are nearly identical.""
+}
+```",53
+2014_2_1,118416,2014_2_1,116147,CLONE,2026-07-21 20:23:25,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solver for a problem involving analyzing sequences of characters. They both read input data (in this case, from files), process it by iterating over sequences and counting character occurrences, and then output results. The core logic, including calculating distances between sequences and handling cases where a character doesn't match, is nearly identical.""
+}
+```",54
+2014_2_1,116147,2014_2_1,129296,CLONE,2026-07-21 20:23:25,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: finding the median of the lengths of repeating sequences in a set of strings. They share key steps like reading input, processing strings, calculating sequence lengths, and outputting results. Although the syntax and implementation details differ, the overall logic and purpose are identical.""
+}
+```",55
+2014_2_1,131873,2014_2_1,118489,CLONE,2026-07-21 20:23:27,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a 
+sequence of characters, determine the minimum number of operations 
+(insertions, deletions, substitutions) needed to make all substrings 
+unique. They achieve this by:
+
+1. **Reading input:** Both read input from a file, parse the number of 
+test cases, and then for each case, read the sequence of characters.
+
+2. **Processing input:** They both process the input sequences in a 
+similar manner:
+    * They identify substrings",56
+2014_2_1,118489,2014_2_1,121201,CLONE,2026-07-21 20:23:28,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet appears to be designed for a specific type of string manipulation and optimization problem, while the second snippet is focused on reading input, transforming strings, and calculating the total distance between transformed strings. Their algorithms, data structures, and overall structures are quite distinct.""
+}
+```",57
+2014_2_1,121201,2014_2_1,114208,CLONE,2026-07-21 20:23:29,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a transformation on a list of strings, aiming to simplify them by grouping identical consecutive characters. They calculate a 'distance' metric based on the frequency of each character and its position in the simplified string, with the goal of minimizing the total distance across all strings in a set of test cases.""
+}
+```",58
+2014_2_1,114208,2014_2_1,131873,CLONE,2026-07-21 20:23:30,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing a 
+sequence of strings and calculating a 'distance' metric based on their 
+character frequency. They share similar overall logic:
+
+1. Read input data (strings from stdin for PHP, lines from a file for Java).
+2. Preprocess each string to identify unique characters and their counts.
+3. Compare the character frequency distributions across all strings.
+4. Calculate a 'distance' metric based on the differences in character 
+frequency.
+
+Despite syntax and language",59
+2014_3_1,135560,2014_3_1,138308,CLONE,2026-07-21 20:23:30,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the problem of determining the minimum number of divisions required to reduce two numbers to their greatest common divisor (GCD). They achieve this by iteratively dividing the larger number by the smaller one, tracking the number of divisions, and accounting for special cases. Although the syntax and implementation details differ, the overall algorithm and goal are the same.""
+}
+```",60
+2014_3_1,138308,2014_3_1,139209,CLONE,2026-07-21 20:23:31,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm to find the minimum number of divisions required to reduce a numerator/denominator fraction to its greatest common divisor (GCD). They share the same overall logic:
+
+1. Calculate the GCD of the numerator and denominator.
+2. Determine the reduced form of the fraction by repeatedly dividing by 2.
+3. Count the number of divisions required to reach the reduced form.
+
+Although the syntax and specific implementation details differ, the core algorithm is the same.""
+}
+```",61
+2014_3_1,139209,2014_3_1,142092,CLONE,2026-07-21 20:23:32,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve different problems. The Python code calculates the minimum number of divisions required to reduce a fraction to its simplest form, while the PHP code determines the 'Elveness' of a number and finds the minimum number of steps to make it a perfect power of 2. The algorithms, input/output formats, and overall logic differ significantly.""
+}
+```",62
+2014_3_1,142092,2014_3_1,135560,CLONE,2026-07-21 20:23:32,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets appear to solve the same problem: determining the number of divisions it takes to reduce a given fraction to a specific denominator. They use similar logic to iteratively halve the numerator while keeping track of the remaining remainder until the desired precision is reached or it becomes impossible.""
+}
+```",63
+2014_3_1,138333,2014_3_1,134611,CLONE,2026-07-21 20:23:33,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same algorithm to determine the minimum number of divisions required to reduce a given fraction `p/q` to its lowest terms. They use the Euclidean algorithm to find the greatest common divisor (GCD) and then manipulate the fraction based on the GCD to simplify it.""
+}
+```",64
+2014_3_1,134611,2014_3_1,139370,CLONE,2026-07-21 20:23:34,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm to solve a problem related to finding the generation at which a given `p` and `q` become equal (or determine that it's impossible). They use similar logic, including calculating the greatest common divisor (GCD), handling even numbers, and repeatedly halving the larger number until a solution is found or it's clear that none exists.""
+}
+```",65
+2014_3_1,139370,2014_3_1,134295,CLONE,2026-07-21 20:23:34,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the Euclidean algorithm to find the greatest common divisor (GCD) of two numbers, `P` and `Q`. They then use the GCD to determine the number of divisions required to reduce `P` to 1 using `Q`. The core logic, algorithm steps, and final output format are identical.""
+}
+```",66
+2014_3_1,134295,2014_3_1,138333,CLONE,2026-07-21 20:23:35,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets calculate the number of divisions required to reduce two numbers, `P` and `Q`, to their greatest common divisor (GCD). They achieve this by iteratively dividing and checking for even divisibility until the smaller number is 1. The final result is printed for each case.""
+}
+```",67
+2014_3_1,140281,2014_3_1,132142,CLONE,2026-07-21 20:23:35,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of steps required to reduce a given number `p` to be less than or equal to another number `q` using only the operation of doubling and subtracting. They achieve this through similar logic: repeatedly doubling `p` and checking if it exceeds `q`, then subtracting `q` from `p` if necessary.""
+}
+```",68
+2014_3_1,132142,2014_3_1,143074,CLONE,2026-07-21 20:23:36,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the minimum number of divisions required to reduce one number to another (with the goal of finding if the result is a power of 2). They achieve this by calculating the greatest common divisor (GCD) of the two numbers and then performing a series of divisions based on the GCD. The main differences are in syntax and the specific implementation details, but the overall logic and purpose are identical.""
+}
+```",69
+2014_3_1,143074,2014_3_1,132975,CLONE,2026-07-21 20:23:37,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the number of decimal places needed to represent a given fraction as a power of 2. They achieve this by calculating the logarithm of the fraction and dividing by the logarithm of 2. The main differences are in syntax and the specific implementation details (e.g., use of `gmp_pow` in PHP, `while` loops in Python), but the overall logic and purpose are identical.""
+}
+```",70
+2014_3_1,132975,2014_3_1,140281,CLONE,2026-07-21 20:23:37,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given two numbers p and q, determine the minimum number of times p must be divided by q to become zero. They achieve this by iteratively doubling p and checking if it's less than or equal to q. The final result is printed for each test case.""
+}
+```",71
+2015_0_1,47939,2015_0_1,44230,CLONE,2026-07-21 20:23:38,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of times a person needs to stand up in response to a series of invitations represented by a string. They achieve this by iterating through the string, keeping track of the current count of invitations, and incrementing the total count when necessary.""
+}
+```",72
+2015_0_1,44230,2015_0_1,106809,CLONE,2026-07-21 20:23:38,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total number of invitations required to invite all shy people based on a string representing their shyness levels. They achieve this by iterating through the input string, keeping track of the last invited index and the accumulated shyness level, and summing up the differences between consecutive shyness levels.""
+}
+```",73
+2015_0_1,106809,2015_0_1,25955,CLONE,2026-07-21 20:23:39,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of people needed to reach a certain level in a sequence of shy levels. They achieve this by iterating through the input, keeping track of the current level and the number of people reached, and calculating the difference between the desired level and the current level to determine how many more people are needed.""
+}
+```",74
+2015_0_1,25955,2015_0_1,47939,CLONE,2026-07-21 20:23:40,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code snippet appears to be solving a problem related to calculating the number of people standing at different levels, possibly for a concert or event. The Java code snippet solves a problem where it needs to count the number of times a person stands up (represented by a string) based on a given input.""
+}
+```",75
+2015_0_1,43660,2015_0_1,64620,CLONE,2026-07-21 20:23:40,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the number of operations required to convert a binary string into all zeros. They achieve this by iterating through the string, counting the number of ones, and adjusting a running total based on the current one count.""
+}
+```",76
+2015_0_1,64620,2015_0_1,86599,CLONE,2026-07-21 20:23:41,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the number of friends needed in a scenario where each friend contributes a certain amount to a common fund. They achieve this by reading input data, iterating through it, and keeping track of a running total. The core logic and final output are identical.""
+}
+```",77
+2015_0_1,86599,2015_0_1,28465,CLONE,2026-07-21 20:23:41,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total number of invitations required for a group of people to stand in a line. They achieve this by reading input data, iterating through each person's standing position, and accumulating the required invitations to maintain a specific order. The core logic and overall approach are identical.""
+}
+```",78
+2015_0_1,28465,2015_0_1,43660,CLONE,2026-07-21 20:23:42,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the number of invitations required to achieve a certain standing for a given audience. They achieve this by reading input data (a file in PHP, stdin in Java), parsing it, and iterating through the audience data to compute the required invitations for each case.""
+}
+```",79
+2015_0_1,100718,2015_0_1,65110,CLONE,2026-07-21 20:23:43,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of friends required to achieve a certain level of shyness (represented by a string of digits) and printing the result for each test case. They use similar logic: iterating through the digits, keeping track of a running sum, and incrementing the friend count when necessary. The syntax and specific variable names differ, but the overall algorithm is the same.""
+}
+```",80
+2015_0_1,65110,2015_0_1,60803,CLONE,2026-07-21 20:23:43,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. Code Snippet 1 reads input, manipulates a string to calculate a value, and writes the result to a file. Code Snippet 2 reads input, converts a string to an array, performs cumulative summation and calculations on that array, and prints the result.""
+}
+```",81
+2015_0_1,60803,2015_0_1,96593,CLONE,2026-07-21 20:23:44,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code calculates the maximum value in a cumulative sum of an array, while the PHP code determines the minimum number of friends needed to make everyone in a group of visitors stand and clap.""
+}
+```",82
+2015_0_1,96593,2015_0_1,100718,CLONE,2026-07-21 20:23:44,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the problem of determining the minimum number of friends needed for a standing ovation based on a given input. They achieve this by iterating through a string representing the shyness levels and summing the values to calculate the required number of friends. Although the syntax and implementation details differ, the core logic is the same.""
+}
+```",83
+2015_0_2,91000,2015_0_2,96440,CLONE,2026-07-21 20:23:45,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of flips required to make a set of pancakes all the same size. They achieve this by sorting the input array, calculating the minimum flips for each possible divisor of the largest pancake size, and then outputting the minimum flips found.""
+}
+```",84
+2015_0_2,96440,2015_0_2,36519,CLONE,2026-07-21 20:23:45,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the problem of minimizing the total time to serve a set of pancakes by breaking them into smaller piles. They both use a priority queue (simulated by a stack in the first snippet) to keep track of the pancakes and a loop to iteratively reduce the largest pile(s) until a minimum time is achieved.""
+}
+```",85
+2015_0_2,36519,2015_0_2,103402,CLONE,2026-07-21 20:23:46,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of minutes required to flip a set of pancakes, where each pancake has a size and needs to be flipped to cook both sides. They achieve this by using a similar algorithm: first, finding the maximum pancake size, then iteratively trying different flipping limits and calculating the total time based on how many flips are needed for each pancake size.""
+}
+```",86
+2015_0_2,103402,2015_0_2,91000,CLONE,2026-07-21 20:23:47,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first PHP snippet appears to be solving a problem related to finding the minimum time to flip a set of pancakes, while the Java snippet is solving a problem about finding the minimum number of special orders (pancakes divided by a certain number) to make all pancakes equal.""
+}
+```",87
+2015_0_2,21812,2015_0_2,88257,CLONE,2026-07-21 20:23:47,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the problem of finding the minimum number of days required to consume pancakes (or similar items) based on their durations. They both take input as an array of durations, calculate the maximum duration, and then iterate through potential divisors of the maximum duration to find the minimum total days. The core logic and end goal are identical.""
+}
+```",88
+2015_0_2,88257,2015_0_2,81081,CLONE,2026-07-21 20:23:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers (pancakes), find the minimum number of 'eats' (or divisions) required to consume all pancakes. They achieve this by iterating through the array, finding the maximum value in each iteration, and calculating the number of splits and the sum of the splits (which represents the 'eats'). The final answer is the minimum number of eats found.""
+}
+```",89
+2015_0_2,81081,2015_0_2,102321,CLONE,2026-07-21 20:23:49,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of 'eats' (represented as 'splits' in Python) to consume a set of pancakes with a given maximum value. They achieve this by iteratively testing different maximum values and calculating the total 'eats' for each, keeping track of the minimum value found.""
+}
+```",90
+2015_0_2,102321,2015_0_2,21812,CLONE,2026-07-21 20:23:49,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of days required to eat all pancakes (items) in a given input array. They achieve this by iterating through the array, testing different eating days, and calculating the total days required to eat all pancakes for each case. The core logic and overall goal are identical.""
+}
+```",91
+2015_0_2,40957,2015_0_2,38840,CLONE,2026-07-21 20:23:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of operations required to increase a set of numbers to their maximum possible value. They achieve this by first finding the maximum number in the set and then iteratively increasing each number using a greedy algorithm based on division and rounding.""
+}
+```",92
+2015_0_2,38840,2015_0_2,100159,CLONE,2026-07-21 20:23:51,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of moves required to serve a set of plates to diners, where each plate can be served by multiple servers. They achieve this by finding the maximum plate value and then calculating the total moves needed to serve all plates using that maximum value as a base.""
+}
+```",93
+2015_0_2,100159,2015_0_2,55775,CLONE,2026-07-21 20:23:51,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of moves required to serve all diners with the minimum plates. They achieve this by sorting the plates and then iteratively calculating the optimal number of moves for each plate using a ceiling function. Although the syntax and implementation details differ, the overall algorithm is the same.""
+}
+```",94
+2015_0_2,55775,2015_0_2,40957,CLONE,2026-07-21 20:23:52,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem, which is to find the minimum number of pancakes (or stacks) needed to make all pancakes in a list equal in size. They achieve this by iteratively combining pancakes based on their size and calculating the minimum sum of pancakes for each combination.""
+}
+```",95
+2015_0_3,42051,2015_0_3,41900,CLONE,2026-07-21 20:23:53,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a quaternion multiplication algorithm to solve a specific problem: finding a specific element in a string after a certain number of multiplications. They share the same basic logic, including the use of a lookup table for quaternion multiplication, iteration over the input string, and conditional swaps based on the result. Although the syntax and specific implementation details differ, the overall algorithm and purpose are identical.""
+}
+```",96
+2015_0_3,41900,2015_0_3,103585,CLONE,2026-07-21 20:23:53,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given string of characters, when manipulated according to specific rules, will result in a specific product. They use similar data structures (multisets, lists) and algorithms (iterations, conditional checks) to achieve this. The core logic, including the definition of the conversion table and multiplication rules, is nearly identical.""
+}
+```",97
+2015_0_3,103585,2015_0_3,19800,CLONE,2026-07-21 20:23:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a system for multiplying strings of characters (representing binary numbers) using a specific multiplication table. They share the same core logic for processing input strings, converting characters to numerical values, performing multiplications using the table, and determining the final result based on the multiplication outcome and the input count.""
+}
+```",98
+2015_0_3,19800,2015_0_3,42051,CLONE,2026-07-21 20:23:55,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets implement different algorithms for solving the same problem. The PHP code uses a case-by-case analysis with string manipulation and conditional statements to determine if a given string represents a valid quaternion multiplication sequence. The Java code, on the other hand, uses a lookup table and recursive multiplication to achieve the same result. The fundamental approaches and logic behind the two solutions are distinct.""
+}
+```",99
+2015_0_3,47513,2015_0_3,49764,CLONE,2026-07-21 20:23:56,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string of characters 'i', 'j', 'k' and a number of repetitions 'x', determine if the string, after repeating it 'x' times, contains the subsequence 'ijjk' (in any order). They achieve this by using a lookup table to manipulate the characters in the string and check for the desired subsequence.""
+}
+```",100
+2015_0_3,49764,2015_0_3,103774,CLONE,2026-07-21 20:23:57,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets implement a solution to a problem involving the manipulation of strings and mathematical operations. They use similar data structures (arrays, maps, etc.) and algorithms to transform an input string according to a given parameter `x`. The core logic, including the use of lookup tables and power operations, is nearly identical.""
+}
+```",101
+2015_0_3,103774,2015_0_3,102323,CLONE,2026-07-21 20:23:58,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different languages (Python and PHP) and architectures. The Python code defines functions to process a string based on user input, while the PHP code reads input from files and uses a custom data structure (`Num`) to manipulate a string according to specific rules. The logic and algorithms used in each code are also not equivalent.""
+}
+```",102
+2015_0_3,102323,2015_0_3,47513,CLONE,2026-07-21 20:23:59,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, determine if it can be transformed into a specific format consisting of 'i', 'j', and 'k' by repeating parts of the string. They share the same overall logic, including reading input, processing the string, and outputting a result ('YES' or 'NO'). Although the syntax and specific implementation details differ, the core functionality is identical.""
+}
+```",103
+2015_0_3,96608,2015_0_3,23036,CLONE,2026-07-21 20:24:00,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to Dijkstra's algorithm, a graph traversal algorithm used to find the shortest paths from a source node to all other nodes in a graph. They use a similar approach to represent nodes using a string of characters ('i', 'j', 'k') and to perform multiplications on these strings, which corresponds to applying the algorithm's edge weights. The core logic, including handling negative weights and determining if a solution exists, is nearly identical.""
+}
+```",104
+2015_0_3,23036,2015_0_3,72742,CLONE,2026-07-21 20:24:01,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet implements an algorithm to calculate the result of a series of quaternion multiplications, with a focus on handling negative values and specific patterns. The second snippet defines classes and methods for reading input, writing output, and solving a problem related to legal sequences of characters based on quaternion rules. The logic, data structures, and overall structure of the two snippets are significantly different.""
+}
+```",105
+2015_0_3,72742,2015_0_3,18309,CLONE,2026-07-21 20:24:02,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Python and PHP) and fundamentally different approaches to solving the same problem. The Python code uses a class-based structure to read input, process it, and write output, while the PHP code uses functions and a more procedural style. Both codes implement a system for manipulating strings and performing operations on them based on specific rules, but the internal logic and implementation details differ significantly.""
+}
+```",106
+2015_0_3,18309,2015_0_3,96608,CLONE,2026-07-21 20:24:03,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: determining if a given string, representing a product of 'i', 'j', and 'k' with optional repetition, can be expressed as the product of two numbers, one of which is -1. They use similar data structures (arrays) and algorithms (iterating through the string, performing multiplications, and checking for specific patterns) to achieve the same goal.""
+}
+```",107
+2015_0_4,86262,2015_0_4,63026,CLONE,2026-07-21 20:24:04,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a set of dimensions (X, R, C) allows for a certain arrangement (Omino game pieces). They use similar logic to check if the dimensions meet the game's rules and output the result (win or lose) based on the conditions. The main differences are in syntax and the specific implementation details, but the overall functionality remains the same.""
+}
+```",108
+2015_0_4,63026,2015_0_4,57828,CLONE,2026-07-21 20:24:05,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given set of dimensions (X, R, C) should be assigned to 'GABRIEL' or 'RICHARD' based on specific conditions. They achieve this by using similar logic to check for divisibility, remainders, and specific edge cases. The overall structure and control flow are nearly identical.""
+}
+```",109
+2015_0_4,57828,2015_0_4,68310,CLONE,2026-07-21 20:24:05,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same logic to determine if a given set of dimensions (row and column) can be covered by an Ominous Omino of a certain size (X). They both output 'RICHARD' if the dimensions can be covered and 'GABRIEL' otherwise. The specific conditions for determining coverage are similar, although the syntax and implementation details differ.""
+}
+```",110
+2015_0_4,68310,2015_0_4,86262,CLONE,2026-07-21 20:24:06,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given set of dimensions (row, column, and omino size) allow for a Richard or Gabriel arrangement. They use similar logic to calculate the number of squares in the grid and compare it to the omino size to make their decisions. The core algorithm and outcome are identical.""
+}
+```",111
+2015_0_4,30398,2015_0_4,86932,CLONE,2026-07-21 20:24:07,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the winner ('GABRIEL' or 'RICHARD') in a game based on dimensions (r, c) and a number (x). They use similar logic to check conditions related to x, r, and c to decide the winner. The main differences are in syntax and the way they read/write files, which do not affect functionality.""
+}
+```",112
+2015_0_4,86932,2015_0_4,94256,CLONE,2026-07-21 20:24:07,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a logic to determine if a given set of dimensions (X, R, C) meets specific criteria to return either 'GABRIEL' or 'RICHARD' as a winner. The core logic, including conditions based on X, R, and C relationships, is identical despite the difference in syntax and language.""
+}
+```",113
+2015_0_4,94256,2015_0_4,19708,CLONE,2026-07-21 20:24:08,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same logic to determine if Richard or Gabriel would win a game. They take input parameters (x, r, c) representing dimensions of a grid and output the winner. The core logic involves checking conditions related to the values of x, r, and c to see if Richard would win based on specific rules. Although the syntax and structure differ due to language differences, the overall algorithm and functionality are identical.""
+}
+```",114
+2015_0_4,19708,2015_0_4,30398,CLONE,2026-07-21 20:24:09,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the winner of a game based on the dimensions of a grid and a given number. They use similar logic to check for conditions that favor Richard's win, such as the size of the grid, the product of row and column dimensions, and specific dimensions related to the given number. The overall structure and control flow are also nearly identical, with loops to process multiple cases and methods to handle input and output.""
+}
+```",115
+2015_0_4,29877,2015_0_4,60776,CLONE,2026-07-21 20:24:10,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a function that determines if Richard or Gabriel wins a game based on the dimensions (X, R, C) of a grid. They use similar logic to check for specific conditions related to X, R, and C, such as checking for divisibility rules and minimum values. The overall structure and control flow are also nearly identical, iterating over cases and printing results.""
+}
+```",116
+2015_0_4,60776,2015_0_4,74018,CLONE,2026-07-21 20:24:10,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given grid size (r, c) and a number of cases (x) meet specific conditions to return 'GABRIEL' or 'RICHARD'. The logic and conditions for determining the return value are nearly identical, differing only in syntax and minor details like variable naming.""
+}
+```",117
+2015_0_4,74018,2015_0_4,78114,CLONE,2026-07-21 20:24:11,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same logic to determine if a given set of input values (X, R, C) result in 'RICHARD' or 'GABRIEL' based on specific conditions. The main differences are in syntax and the specific way they handle input and output, but the core logic is identical.""
+}
+```",118
+2015_0_4,78114,2015_0_4,29877,CLONE,2026-07-21 20:24:11,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given set of dimensions (X, R, C) will result in a win for Richard or Gabriel based on specific rules. The core logic, including the conditional statements and the outcome determination, is identical.""
+}
+```",119
+2015_1_1,112276,2015_1_1,111086,CLONE,2026-07-21 20:24:12,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total distance between consecutive intervals in an array of integers. They achieve this by reading input data, iterating through the array, and accumulating distances between adjacent intervals. Although the syntax and specific implementation details differ, the overall logic and functionality are identical.""
+}
+```",120
+2015_1_1,111086,2015_1_1,117734,CLONE,2026-07-21 20:24:13,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total increase in a sequence of numbers and the total sum of a potentially modified version of that sequence. They achieve this by reading input, iterating through the sequence, and updating running totals. The core logic, including variable names and the overall structure, are nearly identical.""
+}
+```",121
+2015_1_1,117734,2015_1_1,122934,CLONE,2026-07-21 20:24:13,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total increase in a sequence of time intervals and the total count of intervals with a specific maximum difference. They achieve this by iterating through the input data, tracking maximum differences and cumulative sums.""
+}
+```",122
+2015_1_1,122934,2015_1_1,112276,CLONE,2026-07-21 20:24:14,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing a file containing multiple test cases, each with a number of intervals and a corresponding array of counts. They calculate and output the sum of differences in count between consecutive intervals for each case, using slightly different algorithms.""
+}
+```",123
+2015_1_1,118030,2015_1_1,122263,CLONE,2026-07-21 20:24:14,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first Java code snippet calculates the total number of mushrooms eaten at a variable rate, while the second C++ code snippet calculates the sum of minimum values between consecutive elements in an array.""
+}
+```",124
+2015_1_1,122263,2015_1_1,124602,CLONE,2026-07-21 20:24:15,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers, calculate two values: the total decrease in the array (i.e., the sum of the differences between consecutive elements when the array is sorted in non-decreasing order) and the total sum of the maximum possible minimums in each subarray (i.e., the minimum of the differences between consecutive elements, taken as far as necessary to satisfy the sum). They achieve this by reading input, iterating through the array, and performing similar calculations.""
+}
+```",125
+2015_1_1,124602,2015_1_1,111264,CLONE,2026-07-21 20:24:16,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of mushrooms to eat in order to maximize the total value, given an array of mushroom values where each consecutive value is smaller than the previous one. They achieve this by iterating through the array, calculating the difference between consecutive values, and summing up the minimum of these differences and the actual values.""
+}
+```",126
+2015_1_1,111264,2015_1_1,118030,CLONE,2026-07-21 20:24:16,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total number of mushrooms eaten when eating at a variable and constant rate, respectively. The core logic involves iterating through an array of mushroom counts and tracking the cumulative number of mushrooms eaten at each rate. Although the syntax and structure differ, the overall algorithm and purpose are identical.""
+}
+```",127
+2015_1_1,112898,2015_1_1,111866,CLONE,2026-07-21 20:24:17,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of snacks to eat in a sequence of meals with specific constraints. They achieve this by iterating through the input array, identifying the difference between consecutive elements, and summing specific subsets of these differences. The overall structure, variable names, and logic are nearly identical, indicating functional similarity.""
+}
+```",128
+2015_1_1,111866,2015_1_1,111647,CLONE,2026-07-21 20:24:18,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different languages (C++ and Python) and perform different tasks. The C++ code reads input from a file, processes an array of integers, and calculates two sums related to differences between adjacent elements. The Python code defines a set of utility functions for reading input from a file and performing basic operations on lists of different data types. The two snippets have no shared logic or similar functionality.""
+}
+```",129
+2015_1_1,111647,2015_1_1,121770,CLONE,2026-07-21 20:24:18,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve completely different purposes. The first is a collection of utility functions in Python for reading data from a file, while the second is a PHP script that solves a specific problem related to mushroom counting and refills. They have no common functionality or logic.""
+}
+```",130
+2015_1_1,121770,2015_1_1,112898,CLONE,2026-07-21 20:24:19,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of mushrooms eaten in a sequence of refills. They achieve this by iterating through the sequence, tracking the cumulative number of mushrooms eaten, and updating the minimum and maximum values as they go. Although the syntax and structure differ, the core logic and outcome are the same.""
+}
+```",131
+2016_0_1,76319,2016_0_1,65647,CLONE,2026-07-21 20:24:20,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given number is 'INSOMNIA' (a specific pattern in its decimal representation). They achieve this by iteratively dividing the number by 10 and checking the remainders, using a map or array to track the occurrence of each digit in the remainder. The final output format is also similar, printing 'Case #' followed by the case number and the result.""
+}
+```",132
+2016_0_1,65647,2016_0_1,94639,CLONE,2026-07-21 20:24:20,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm that takes a number as input and determines if it can be represented using only the digits 0-9 exactly once. They achieve this by iteratively checking divisibility by each digit's power (starting from 100) and keeping track of used digits in a map. The output is also similar: 'INSOMNIA' for numbers that cannot be represented and the actual number for those that can.""
+}
+```",133
+2016_0_1,94639,2016_0_1,48618,CLONE,2026-07-21 20:24:21,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a algorithm that generates numbers by repeatedly multiplying a given input (N) by an incrementing counter. They track the distinct digits used in each number using a dictionary/hashmap. The algorithm stops when all 10 digits (0-9) are present or a maximum number of iterations is reached (1,000,000 in the PHP code). The final result is printed for each case.""
+}
+```",134
+2016_0_1,48618,2016_0_1,76319,CLONE,2026-07-21 20:24:22,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: generating a large number by repeatedly multiplying a base value (initially provided as input) by a counter. They both read input cases, process each case, and print the result for each case. The core logic, including the multiplication, looping, and digit extraction, is nearly identical.""
+}
+```",135
+2016_0_1,117099,2016_0_1,134225,CLONE,2026-07-21 20:24:22,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding a number that, when multiplied by a given integer 'n', results in a mask where each bit is set to 1 exactly once (a 'perfect mask'). They achieve this through a loop that iterates and sets bits in a mask based on the remainder of the iteration value divided by 10. The final mask is then checked for the '1023' (1<<10)-1 value, and the corresponding result is printed.""
+}
+```",136
+2016_0_1,134225,2016_0_1,88781,CLONE,2026-07-21 20:24:23,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same algorithm to convert a positive integer `n` into a number that consists of only the digits from `n` repeated, until all 10 digits are present. They both use a loop to keep adding `n` to itself and track the unique digits encountered using a set or list. The algorithm terminates when all 10 digits are present in the number.""
+}
+```",137
+2016_0_1,88781,2016_0_1,39027,CLONE,2026-07-21 20:24:24,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a function that takes a positive integer as input and determines if it can be expressed as a sum of 10 distinct digits (0-9). They use similar logic: repeatedly adding the input to itself and checking if each digit is present in the sum. The main differences are in syntax and the specific implementation details, but the core functionality is the same.""
+}
+```",138
+2016_0_1,39027,2016_0_1,117099,CLONE,2026-07-21 20:24:24,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and programming languages. The PHP code reads input from a file, processes it, and writes output to another file. It involves string manipulation, array processing, and conditional logic. The Java code reads an integer input (T), then iterates through T cases, each involving finding a binary representation of a number related to N. It uses bitwise operations and a loop to generate a mask.""
+}
+```",139
+2016_0_1,100898,2016_0_1,143909,CLONE,2026-07-21 20:24:25,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest number divisible by a given number 'n' after a certain number of iterations (1,000,000 in this case). They achieve this by iteratively building up a binary representation of the number and checking for divisibility. The core logic and end goal are identical.""
+}
+```",140
+2016_0_1,143909,2016_0_1,71388,CLONE,2026-07-21 20:24:26,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest number that can be represented using a given number of digits (n) in binary format. The algorithms used in both snippets are similar: they iteratively construct numbers by multiplying a base (initially n) by a multiplier and adding it to the existing number, removing digits from the input string as they are used. The goal is to use all digits from 0 to n-1 exactly once, resulting in a binary number of length n.""
+}
+```",141
+2016_0_1,71388,2016_0_1,113708,CLONE,2026-07-21 20:24:26,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same algorithm: they take an integer input, attempt to form a string by multiplying the input by increasing integers, and remove digits that appear in the resulting string from a list of available digits. They then print the final string with a case identifier.""
+}
+```",142
+2016_0_1,113708,2016_0_1,100898,CLONE,2026-07-21 20:24:27,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest positive integer that, when expressed in base `base` (given as input), results in a number with all digits from 0 to 9 present at least once. They achieve this by iteratively incrementing the value in base `base` and checking if all digits (0-9) have been used. If they have, they return the current value. Otherwise, they continue the loop. The main difference is the syntax and language, but the core logic and functionality are identical",143
+2016_0_4,136626,2016_0_4,135114,CLONE,2026-07-21 20:24:28,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the number of valid paths through a tree-like structure with specific constraints. They achieve this by reading input cases, processing each case individually, and printing the results. The core logic, including the use of loops, exponentiation, and calculations based on input parameters (branches, depth, checks), is nearly identical.""
+}
+```",144
+2016_0_4,135114,2016_0_4,63570,CLONE,2026-07-21 20:24:28,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: generating a list of unique numbers based on input parameters K, C, and S. They achieve this by calculating combinations of K using the given C and S values, and then printing the resulting numbers.""
+}
+```",145
+2016_0_4,63570,2016_0_4,80717,CLONE,2026-07-21 20:24:29,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given K, C, and S, they aim to find a valid distribution of K items into C groups of size S, or declare it impossible if it's not feasible. The core logic, including calculating gaps, handling edge cases for single-element groups, and printing the results, is nearly identical.""
+}
+```",146
+2016_0_4,80717,2016_0_4,136626,CLONE,2026-07-21 20:24:29,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a number of branches, depth, and checks, find a sequence of positions that satisfy the constraints. They use similar algorithms to calculate the positions, raising the branch number to the power of the depth and iterating through possible combinations. The output format is also nearly identical, printing 'Case #' followed by the case number and the solution.""
+}
+```",147
+2016_0_4,125922,2016_0_4,90060,CLONE,2026-07-21 20:24:30,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: generating a list of numbers based on input parameters K, C, and S. They achieve this by calculating a combination of these parameters and printing the resulting numbers in the specified format. The core logic and overall functionality are identical.""
+}
+```",148
+2016_0_4,90060,2016_0_4,158305,CLONE,2026-07-21 20:24:31,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given K, C, and S, they aim to find a sequence of numbers that satisfies specific conditions. They achieve this by calculating the required number of guesses and generating a sequence of numbers based on K and C. The core logic, including the calculation of the sequence elements and the handling of edge cases, is identical.""
+}
+```",149
+2016_0_4,158305,2016_0_4,139021,CLONE,2026-07-21 20:24:31,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: generating a list of numbers based on given parameters (K, C, S). They achieve this by calculating the number of guesses required, iterating to generate possible combinations, and then formatting the output. The core logic, including handling edge cases like when S equals K or C equals 1, is nearly identical.""
+}
+```",150
+2016_0_4,139021,2016_0_4,125922,CLONE,2026-07-21 20:24:32,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: generating a list of possible art works based on a given base, exponent, and constraint (S). They use similar logic to calculate the number of Ls andGs in the art work strings, and output the results in a similar format for each test case.""
+}
+```",151
+2016_0_4,99642,2016_0_4,45917,CLONE,2026-07-21 20:24:33,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an integer k, an integer c, and an integer s, they generate an output string representing a sequence of numbers based on specific rules. The core logic, including reading input, calculating required values, and printing the output string, is nearly identical.""
+}
+```",152
+2016_0_4,45917,2016_0_4,142083,CLONE,2026-07-21 20:24:34,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: generating a list of numbers based on given parameters `k`, `c`, and `s`. They achieve this by calculating the required number of elements in the list (`need`), and then iteratively constructing the list with specific rules based on `k` and `c`.""
+}
+```",153
+2016_0_4,142083,2016_0_4,37736,CLONE,2026-07-21 20:24:34,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: generating a list of numbers based on specific input parameters (K, C, S). They achieve this by calculating positions within a sequence of numbers based on the given parameters and then outputting the resulting list for each case.""
+}
+```",154
+2016_0_4,37736,2016_0_4,99642,CLONE,2026-07-21 20:24:35,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given parameters K, C, and S, they determine a set of indices that satisfy the condition based on the provided input. The core logic involves calculating positions based on the parameters and outputting the result in a specific format. Despite differences in syntax and language, the overall algorithm and output remain the same.""
+}
+```",155
+2016_1_1,15819,2016_1_1,15421,CLONE,2026-07-21 20:24:35,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: extracting the last word from a given string. They achieve this by iterating through the string and building a new string containing the words in the desired order (either lexicographically or based on the first character encountered).""
+}
+```",156
+2016_1_1,15421,2016_1_1,3308,CLONE,2026-07-21 20:24:36,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different purposes and programming languages. The first snippet is a C++ program that processes a string input, rearranging characters based on a specific rule. The second snippet is a Python script that reads input from a file, processes it, and writes the output to another file, with timing functionality.""
+}
+```",157
+2016_1_1,3308,2016_1_1,3735,CLONE,2026-07-21 20:24:36,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same algorithm to extract the last word from a given string. They take an input file, read the number of test cases, and then process each case, extracting and printing the last word of the input string. The core logic, including iterating through the string characters and building the last word, is identical.""
+}
+```",158
+2016_1_1,3735,2016_1_1,15819,CLONE,2026-07-21 20:24:37,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same algorithm: they take a string as input, iterate through the characters, and construct a new string by merging characters in a specific order. The core logic, including variable names and the overall structure, are nearly identical.""
+}
+```",159
+2016_1_1,28201,2016_1_1,31768,CLONE,2026-07-21 20:24:37,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program that reads a string of characters from a file, sorts the characters within each string, and writes the sorted string to a file (or output). The core logic of sorting a string based on lexicographical order (with a specific comparison rule: sorting in reverse order of input) is identical in both languages.""
+}
+```",160
+2016_1_1,31768,2016_1_1,33316,CLONE,2026-07-21 20:24:38,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different purposes and programming languages. The first snippet is a C++ program that reads a string, manipulates it, and prints a result. The second snippet is a Python script that reads input from a file, processes it using a sorting algorithm, and writes the result to another file. Their algorithms and data structures are also different, indicating distinct approaches to solving the same high-level problem.""
+}
+```",161
+2016_1_1,33316,2016_1_1,18665,CLONE,2026-07-21 20:24:39,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: sorting a string of characters to form a lexicographically smallest string. They achieve this using different algorithms (Python uses a combination of list sorting and a custom comparison function, PHP uses a custom sorting algorithm), but the overall logic and desired outcome are identical.""
+}
+```",162
+2016_1_1,18665,2016_1_1,28201,CLONE,2026-07-21 20:24:39,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: sorting a string of characters to form a lexicographically largest string. They achieve this by iterating through the input string, comparing adjacent characters, and appending the larger character to a sorted string. Although the syntax and specific implementation details differ, the overall logic and purpose are the same.""
+}
+```",163
+2016_1_1,22113,2016_1_1,20829,CLONE,2026-07-21 20:24:40,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string of words separated by spaces, they aim to find a sorted concatenation of the words. The algorithms used in both snippets are nearly identical: they split the input string into words, then iterate through the words, appending them to a result string in a specific order based on their first character. The final result is printed.""
+}
+```",164
+2016_1_1,20829,2016_1_1,14703,CLONE,2026-07-21 20:24:41,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement the same algorithm: they take a string input, sort its characters in a specific order (in reverse alphabetical order in both cases), and then print the resulting string. The syntax and language differ, but the core logic is identical.""
+}
+```",165
+2016_1_1,14703,2016_1_1,4557,CLONE,2026-07-21 20:24:41,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm that takes a string as input and returns the lexicographically smallest string that is a prefix of all its suffixes. The core logic is the same: iterate through the string, maintain a list of the current best prefix, and update it based on the current character.""
+}
+```",166
+2016_1_1,4557,2016_1_1,22113,CLONE,2026-07-21 20:24:42,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The PHP code processes input files, performs a specific string manipulation operation, and outputs the result. The Java code reads a line of input, splits it into words, and concatenates them in a specific order. They achieve different tasks and do not share the same logic or algorithm.""
+}
+```",167
+2016_1_2,23627,2016_1_2,7905,CLONE,2026-07-21 20:24:42,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing an input array of integers and printing a specific subset of unique odd numbers. They use similar overall structures: reading input cases, processing each case, and printing the result. The core logic, including data structures (hashmap/array) and algorithms (iterating through input, counting occurrences, filtering odd numbers) are nearly identical.""
+}
+```",168
+2016_1_2,7905,2016_1_2,30453,CLONE,2026-07-21 20:24:43,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing a list of numbers and outputting a sorted list of unique numbers with an odd count. The core logic, including input parsing, data manipulation (using a list/array to store counts), and output formatting, is nearly identical.""
+}
+```",169
+2016_1_2,30453,2016_1_2,22155,CLONE,2026-07-21 20:24:43,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a list of lists of numbers, they identify and sort all odd numbers present in the flattened list of numbers from each sublist. They use similar steps: extract all numbers from the sublists, count their occurrences, identify odd numbers, and sort them.""
+}
+```",170
+2016_1_2,22155,2016_1_2,23627,CLONE,2026-07-21 20:24:44,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers, find and print the unique odd numbers from the array. They achieve this using similar steps: reading input, processing the array, counting occurrences of each number, identifying odd counts, and printing the result.""
+}
+```",171
+2016_1_2,26561,2016_1_2,22827,CLONE,2026-07-21 20:24:45,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a list of numbers, find and print the numbers that appear an odd number of times. They achieve this by using a `HashMap` (Java) or `map` (C++) to count the occurrences of each number and then iterating through the map to identify and print numbers with odd counts.""
+}
+```",172
+2016_1_2,22827,2016_1_2,14745,CLONE,2026-07-21 20:24:45,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a list of unique integers, find and print all integers that appear an odd number of times. They achieve this by using a hashmap to count the occurrences of each integer and then iterating through the map to identify and print integers with odd counts.""
+}
+```",173
+2016_1_2,14745,2016_1_2,21265,CLONE,2026-07-21 20:24:45,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of arrays representing soldier positions, identify and print the names of soldiers who are not paired (have an odd count).""
+}
+```",174
+2016_1_2,21265,2016_1_2,26561,CLONE,2026-07-21 20:24:46,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding and printing the list of soldiers with odd counts in each case from an input grid. They achieve this by reading input, counting soldier occurrences, identifying odd counts, and printing the resulting list of soldiers.""
+}
+```",175
+2016_1_2,21848,2016_1_2,26565,CLONE,2026-07-21 20:24:47,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers representing heights, find and print the heights of all individuals with odd occurrences (i.e., those who appear an odd number of times in the array).""
+}
+```",176
+2016_1_2,26565,2016_1_2,7956,CLONE,2026-07-21 20:24:47,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a 2D array of integers, find and print all unique integers that appear an odd number of times. They achieve this by reading input, counting occurrences of each number, identifying numbers with odd counts, sorting and printing the results for each case.""
+}
+```",177
+2016_1_2,7956,2016_1_2,19133,CLONE,2026-07-21 20:24:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting and printing the odd-counted numbers from a set of 2D arrays. They achieve this by reading input, counting the occurrences of each number, identifying odd counts, and then printing the resulting list of odd-counted numbers sorted.""
+}
+```",178
+2016_1_2,19133,2016_1_2,21848,CLONE,2026-07-21 20:24:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers representing heights, identify and print the heights of people who have an odd number of occurrences in the array. They use similar data structures (maps/hashes) to count the occurrences of each height, and then filter and sort the results to produce the final output.""
+}
+```",179
+2016_2_1,201276,2016_2_1,194349,CLONE,2026-07-21 20:24:49,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: taking a string input, replacing specific characters with digits based on their frequency in the input, and then printing the resulting string. The core logic, including character replacement and output formatting, is nearly identical.""
+}
+```",180
+2016_2_1,194349,2016_2_1,185295,CLONE,2026-07-21 20:24:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: taking a string input, counting the occurrences of each letter, and then generating a string composed of numbers (0-9) that represent the frequency of each letter, following specific rules. The core logic, including counting letters, eliminating certain letters based on their associated numbers, and outputting the resulting string, is identical.""
+}
+```",181
+2016_2_1,185295,2016_2_1,198100,CLONE,2026-07-21 20:24:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string of numbers, they count the occurrences of each digit and then construct a new string using a specific set of rules to minimize the number of distinct digits used. The overall structure, variable names, and logic of both code snippets are nearly identical, indicating functional similarity.""
+}
+```",182
+2016_2_1,198100,2016_2_1,201276,CLONE,2026-07-21 20:24:52,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the same problem, the Fractiles problem (D) from Google Code Jam 2016, by reading an input file, processing each test case, and writing the output to an output file. They use similar data structures (arrays and maps) to count and store the frequency of digits in the input strings, and they employ similar logic to replace specific characters with digits to form the final output. The overall structure, variable names, and functions (though with different implementations) indicate the same functionality.""
+}
+",183
+2016_2_1,180026,2016_2_1,186531,CLONE,2026-07-21 20:24:52,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, count and reduce the frequency of each character to form a new string representing the result. They use similar logic for reducing character counts, converting input strings to arrays/hash maps, and constructing the output string based on the reduced counts.""
+}
+```",184
+2016_2_1,186531,2016_2_1,196651,CLONE,2026-07-21 20:24:53,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve different purposes. Code Snippet 1 is a C++ program that counts and manipulates the frequency of characters in a string, converting them into a numerical representation based on their ASCII values. Code Snippet 2 is a Python script that uses two external modules (`gcj` and `a_digits`) to solve a problem, likely reading input from a file, processing it, and writing the output to another file.""
+}
+```",185
+2016_2_1,196651,2016_2_1,193717,CLONE,2026-07-21 20:24:54,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The Python code reads input from a file, processes it using a `solve_case` function, and writes the output to another file. It iterates through a list of items and performs some string manipulation. The PHP code, on the other hand, reads input from STDIN, counts character occurrences, and constructs an output string based on specific character counts. The algorithms and overall logic of the two snippets are entirely different.""
+}
+```",186
+2016_2_1,193717,2016_2_1,180026,CLONE,2026-07-21 20:24:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, count the occurrences of each character and then use those counts to generate a specific output string. They use similar logic to track character frequencies, update counts, and construct the output string based on predefined mappings.""
+}
+```",187
+2016_2_1,193929,2016_2_1,179503,CLONE,2026-07-21 20:24:55,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the occurrences of each letter in a given string and printing them in order of decreasing frequency. They achieve this by tracking letter counts in an array and then iterating through the array to print the letters in the desired order.""
+}
+```",188
+2016_2_1,179503,2016_2_1,182378,CLONE,2026-07-21 20:24:56,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting and displaying the frequency of characters in a string. They achieve this by iterating through a string, replacing specific characters with empty strings, and tracking the frequency of the remaining characters. Although the syntax and implementation details differ, the overall logic and end result are the same.""
+}
+```",189
+2016_2_1,182378,2016_2_1,200006,CLONE,2026-07-21 20:24:57,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, they process it to produce a new string based on specific rules involving letters. They use similar logic to track and replace letters ('Z', 'W', 'U', etc.) in the input string, and output the resulting string in a case-based format. The overall structure, variable names, and core algorithms are nearly identical.""
+}
+```",190
+2016_2_1,200006,2016_2_1,193929,CLONE,2026-07-21 20:24:58,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string containing only the letters A-Z, they count and output the number of occurrences of each letter in the string. They use similar logic to track letter counts and generate the output string.""
+}
+```",191
+2013_0_1,103399,2015_0_2,96440,NON-CLONE,2026-07-21 20:24:58,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first code snippet implements a variant of the Knapsack problem, where the goal is to maximize the value of items placed in a knapsack with a given capacity. The second code snippet reads a set of integers, finds the maximum value divisible by each integer, and calculates the minimum number of these divisors needed to sum to the total set of integers.""
+}
+```",192
+2013_0_1,49244,2016_2_1,186531,NON-CLONE,2026-07-21 20:24:59,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a game where the objective is to get four in a row (horizontally, vertically, or diagonally). They use a 2D array to represent the game board and track the number of each piece (X, O, or empty) using a mapping. They also have similar logic for checking for winners and handling incomplete games. Although the syntax and specific implementation details differ, the overall structure and functionality are the same.""
+}
+```",193
+2013_0_1,126886,2016_0_4,45917,NON-CLONE,2026-07-21 20:25:00,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a Tic-Tac-Toe solver. They read input cases, process each case by reading a 4x4 board, determining the winner (X or O), and printing the result (win, loss, or draw). The logic for checking for a win, loss, and draw is nearly identical in both languages.""
+}
+```",194
+2013_0_1,99825,2016_1_2,23627,NON-CLONE,2026-07-21 20:25:01,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet implements a game of Tic-Tac-Toe, while the second snippet reads integer data from a file, counts the occurrences of each number, and identifies 'lost' numbers (those with odd counts).""
+}
+```",195
+2013_0_1,98087,2014_3_1,135560,NON-CLONE,2026-07-21 20:25:02,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a function that determines the outcome of a game (presumably Tic-Tac-Toe) based on the state of the board. They both read input from a file, process it, and write the output to another file. The core logic for determining the winner or if the game is a draw is similar, involving loops and conditional checks on the board state.""
+}
+```",196
+2013_0_1,72071,2015_0_3,103774,NON-CLONE,2026-07-21 20:25:03,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program that determines the winner of a game of Tic-Tac-Toe. They use similar logic to check for winning conditions (rows, columns, and diagonals) and to determine if the game is a draw. The specific implementation details, such as data structures and helper functions, differ but the overall functionality is the same.""
+}
+```",197
+2013_0_1,125888,2014_2_1,114208,NON-CLONE,2026-07-21 20:25:03,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different syntax, languages (Python vs PHP), and purposes. The first snippet is a Python program for analyzing the state of a Tic-Tac-Toe game, while the second is a PHP script that processes and calculates distances in a set of strings.""
+}
+```",198
+2013_0_1,91336,2015_0_3,42051,NON-CLONE,2026-07-21 20:25:04,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Python and Java), syntax, and overall structure. They appear to solve different problems. The Python code seems to be determining the winner of a game (likely Tic-Tac-Toe), while the Java code is implementing a quaternion multiplication algorithm for a different purpose.""
+}
+```",199
+2013_0_1,70537,2015_0_3,49764,NON-CLONE,2026-07-21 20:25:05,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different syntax, languages (Python vs C++), and overall structures. They appear to solve the same problem (determining the winner of a game based on a board state), but the approaches are not similar. The Python code uses a functional approach with helper functions and string manipulation, while the C++ code uses a more procedural style with loops and bitwise operations.""
+}
+```",200
+2013_0_1,84842,2016_1_1,28201,NON-CLONE,2026-07-21 20:25:05,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program that reads a file containing multiple test cases, processes each line of the input, and determines the winner of a game based on the characters 'O', 'X', and '.' in the line. The core logic, including reading input, parsing characters, and determining the game outcome, is nearly identical.""
+}
+```",201
+2013_0_1,102913,2016_0_4,135114,NON-CLONE,2026-07-21 20:25:06,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code reads a text file, parses it, and determines the winner of a Tic-Tac-Toe game based on various winning conditions. The C++ code reads input parameters, generates valid permutations within constraints, and prints them. Their objectives, input/output formats, and internal logic are completely distinct.""
+}
+```",202
+2013_0_1,127485,2016_0_1,100898,NON-CLONE,2026-07-21 20:25:07,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The PHP code processes a text input to determine the winner of a game on a board, while the Java code implements a loop to find a specific number by repeatedly concatenating and checking a binary representation. They achieve entirely different tasks and do not share a common functionality.""
+}
+```",203
+2013_0_2,95524,2015_0_2,38840,NON-CLONE,2026-07-21 20:25:08,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. Code Snippet 1 reads a grid of numbers and determines if it's possible to rearrange the rows and columns to form a non-decreasing grid. Code Snippet 2 reads an array of numbers and finds the minimum number of operations needed to make the array non-decreasing. The algorithms, data structures, and logic used in each snippet are distinct.""
+}
+```",204
+2013_0_2,44471,2014_2_1,114208,NON-CLONE,2026-07-21 20:25:08,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different languages (Java vs PHP) and different problem domains. The Java code reads input from a file, processes a grid of numbers, and checks if certain patterns are possible. The PHP code processes lines of input, tokenizes them, and calculates the distance between different elements in an array. The algorithms and overall logic of the two codes are fundamentally different.""
+}
+```",205
+2013_0_2,55421,2016_2_1,196651,NON-CLONE,2026-07-21 20:25:09,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The code snippets have different languages (Java vs Python), different problem-solving approaches, and different structures. The first snippet reads input from files, processes it case-by-case, and writes the results to another file. The second snippet takes input as a string, calls a separate solve_case function, and handles output in a different way.""
+}
+```",206
+2013_0_2,83774,2016_2_1,201276,NON-CLONE,2026-07-21 20:25:10,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: checking if a 2D array (representing a grid) contains a specific pattern (a 'valid' grid according to the problem statement). They read input cases, process each case by iterating through the 2D array, and output 'YES' or 'NO' based on whether the pattern is found. Despite language differences, the core logic and overall structure are identical.""
+}
+```",207
+2013_0_2,140779,2013_1_1,30519,NON-CLONE,2026-07-21 20:25:11,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first snippet checks if a 2D grid satisfies a specific condition (likely related to maximum values in rows and columns), while the second snippet calculates the minimum number of circles needed to cover a given area (as determined by a binary search-like algorithm).""
+}
+```",208
+2013_0_2,91409,2013_0_3,102207,NON-CLONE,2026-07-21 20:25:11,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different purposes and structures. The first snippet reads input from a file, processes it, and writes output to another file, focusing on finding valid 2D arrays. The second snippet defines a list of numbers and processes them to count the number of functions of a square within a range, without file I/O or output to a file.""
+}
+```",209
+2013_0_2,78034,2014_2_1,129296,NON-CLONE,2026-07-21 20:25:12,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code checks if a lawn (represented as a 2D list) has consistent maximum values in rows and columns, while the Java code processes a string of characters to calculate a median-based score for the length and frequency of repeated characters.""
+}
+```",210
+2013_0_2,122219,2014_3_1,138308,NON-CLONE,2026-07-21 20:25:13,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different purposes and programming languages. The Python code snippet reads a file, processes board data, and checks for a specific game state (a board configuration where no cell is larger than its row or column). The C++ code snippet implements a gcd calculation and a related integer division operation, with no apparent file I/O or board game logic.""
+}
+```",211
+2013_0_2,85165,2014_3_1,134611,NON-CLONE,2026-07-21 20:25:13,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code appears to be solving a problem related to creating a 'lawn' with uniform heights, while the C++ code is solving a problem about finding the generation required to reduce two numbers to 1 through repeated division and gcd calculations.""
+}
+```",212
+2013_0_2,71957,2016_1_1,15819,NON-CLONE,2026-07-21 20:25:14,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve completely different purposes. The first snippet reads a matrix from a file, calculates the maximum value in each row and column, and checks if a cell violates the condition of having a larger value in its row and column. The second snippet reads a string, extracts the last word, and ensures that the next word (if any) is lexicographically greater than or equal to the current last word.""
+}
+```",213
+2013_0_2,96711,2013_0_3,51164,NON-CLONE,2026-07-21 20:25:14,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet reads input, checks if each number in the input is a square, and outputs 'YES' or 'NO' based on whether all numbers in a test case satisfy the square condition. The second snippet generates a list of perfect squares, reads another input with a range, and counts how many squares fall within that range.""
+}
+```",214
+2013_0_2,68303,2016_0_1,71388,NON-CLONE,2026-07-21 20:25:15,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet is a PHP program that reads input data about lawn dimensions and checks if a given set of numbers represent a valid arrangement for a lawn. The second snippet is a Python program that reads a number of test cases, generates a string based on a mathematical operation involving input numbers, and prints the result.""
+}
+```",215
+2013_0_3,108834,2016_0_1,39027,NON-CLONE,2026-07-21 20:25:16,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Java code implements a solver for a specific mathematical problem involving square roots and palindromes. The PHP code reads input, processes it through a custom function (`x`), and outputs a result. They have no shared logic or similar structure.""
+}
+```",216
+2013_0_3,59317,2016_1_2,26565,NON-CLONE,2026-07-21 20:25:17,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet is designed to calculate the number of perfect squares less than or equal to a given BigInteger. The second snippet reads a set of integers, counts the occurrences of each unique integer, and prints the integers that appear an odd number of times.""
+}
+```",217
+2013_0_3,74156,2015_0_3,49764,NON-CLONE,2026-07-21 20:25:18,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Java vs C++) and different approaches to solving the problem. The Java code uses a `Scanner` to read input, writes to `PrintStream`, and includes a complex `isPalindrome` function to check for palindromes. The C++ code uses `cin` and `cout` for input and output, has a different structure for processing input, and uses a lookup table (`table`) for string manipulation instead of a separate function.""
+}
+```",218
+2013_0_3,102625,2013_0_1,126886,NON-CLONE,2026-07-21 20:25:19,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program to determine the winner of a Tic-Tac-Toe game. They read input cases, process each board, and output the winner (X, O, or Draw) for each case. The core logic, including checking for winning conditions and drawing conclusions, is identical.""
+}
+```",219
+2013_0_3,81195,2014_2_1,131873,NON-CLONE,2026-07-21 20:25:19,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different purposes and structures. The first snippet is a C++ program that finds and stores perfect square numbers that are within a given range using a recursive function. The second snippet is a Java program that reads a file, checks if each line is a palindrome, and calculates a total count of characters across all lines, then outputs the result.""
+}
+```",220
+2013_0_3,53348,2015_0_3,72742,NON-CLONE,2026-07-21 20:25:21,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet implements a function to count the number of palindromic numbers within a given range. The second snippet defines classes and methods for reading input, writing output, and solving a problem related to quaternion operations and string repetition. The algorithms, data structures, and overall structures of the two code snippets are not similar.""
+}
+```",221
+2013_0_3,102207,2015_1_1,122934,NON-CLONE,2026-07-21 20:25:21,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve different purposes and have distinct functionalities. The first snippet reads a file, processes each line, and writes the results to another file. It calculates the number of function square values in a given range for each line. The second snippet reads input from the command line, processes a series of time intervals and counts, and outputs two cumulative sums representing two different methods for calculating the total count change.""
+}
+```",222
+2013_0_3,51164,2014_2_1,129296,NON-CLONE,2026-07-21 20:25:22,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Python and Java), different purposes (one finds fair squares and the other processes a string with repeated characters), and different algorithms. They achieve different outcomes, making them functionally dissimilar.""
+}
+```",223
+2013_0_3,70289,2015_0_4,63026,NON-CLONE,2026-07-21 20:25:23,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The Python code is a script that generates a dataset of palindromic squares and can either learn the dataset or solve a series of cases using the dataset. The C++ code is a program that reads input from a file, processes it, and writes output to another file, focusing on specific calculations related to rectangular areas.""
+}
+```",224
+2013_0_3,89287,2016_1_1,15421,NON-CLONE,2026-07-21 20:25:23,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet is designed to find and count perfect squares within a given range, while the second snippet is a string manipulation algorithm that constructs a specific type of string based on input.""
+}
+```",225
+2013_0_3,92037,2014_3_1,134611,NON-CLONE,2026-07-21 20:25:24,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code calculates the number of perfect squares within a given range, while the C++ code implements an algorithm to find the generation of a binary fraction representing the ratio of two numbers.""
+}
+```",226
+2013_0_3,132829,2016_1_1,14703,NON-CLONE,2026-07-21 20:25:24,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the number of squares between two given numbers. They achieve this by reading input from a file, processing the input, and printing the result for each case. Although the syntax and implementation details differ, the overall logic and purpose of the code are identical.""
+}
+```",227
+2013_1_1,42047,2013_0_1,99825,NON-CLONE,2026-07-21 20:25:25,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Java vs C++) and different problem domains. The Java code snippet appears to solve a problem related to finding a specific number in a file and performing calculations based on that number. The C++ code snippet, on the other hand, implements a game with a grid of cells, where two players (X and O) take turns placing their marks, and the winner is determined by the placement of the marks on the grid. The logic, algorithms, and data structures used in each code snippet are",228
+2013_1_1,30835,2015_0_3,103774,NON-CLONE,2026-07-21 20:25:26,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Java and Python), purposes (one solves a mathematical problem, the other checks a string), and implement completely different algorithms.""
+}
+```",229
+2013_1_1,32414,2016_2_1,179503,NON-CLONE,2026-07-21 20:25:26,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Java and C++), different problem statements, and different approaches to solving the problem. The Java code snippet appears to be solving a quadratic equation, while the C++ code snippet is analyzing a string to count character frequencies.""
+}
+```",230
+2013_1_1,28766,2015_0_1,47939,NON-CLONE,2026-07-21 20:25:27,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet implements a binary search algorithm to find the maximum value 'x' such that (2*r - 3)*x + 2*x*(x+1) <= t. The second snippet counts the number of times a character appears in a string up to a given index.""
+}
+```",231
+2013_1_1,30228,2016_2_1,185295,NON-CLONE,2026-07-21 20:25:28,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and approaches. The first snippet is a C++ program that solves a specific mathematical problem (finding the largest number that can be represented given a radius and a value). The second snippet is a Python script that processes a text file, counts characters, and constructs a string based on a set of rules. They share no common logic or algorithm.""
+}
+```",232
+2013_1_1,30618,2014_2_1,115757,NON-CLONE,2026-07-21 20:25:28,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet implements a binary search algorithm to find the root of a quadratic equation. The second snippet processes strings using Run-Length Encoding (RLE) to calculate a cost based on the frequency of characters.""
+}
+```",233
+2013_1_1,37029,2015_0_4,86932,NON-CLONE,2026-07-21 20:25:29,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet calculates the number of rings required to paint a circle given its radius and volume of paint. The second snippet determines if a grid (defined by its dimensions) is in a specific configuration (called 'Richard' configuration) based on certain mathematical conditions.""
+}
+```",234
+2013_1_1,32497,2016_2_1,194349,NON-CLONE,2026-07-21 20:25:29,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and functionalities. The first snippet calculates the number of rings in a circular object based on its radius and thickness, while the second snippet processes a string of characters to generate a numeric result based on their frequency.""
+}
+```",235
+2013_1_1,30519,2015_0_1,65110,NON-CLONE,2026-07-21 20:25:30,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code implements a binary search algorithm to find the last number that can be represented as a sum of integers up to a given radius 'r' that does not exceed a target 't'. The C++ code processes a string of digits, converting it into a number that represents the sum of its digits, and counts the number of iterations needed to reach a target value.""
+}
+```",236
+2013_1_1,34507,2014_3_1,138308,NON-CLONE,2026-07-21 20:25:30,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (PHP vs C++), different purposes (one reads files and processes them, the other finds the GCD of two numbers), and different algorithms (one uses a recursive process function, the other uses a loop and GCD calculations).""
+}
+```",237
+2013_1_1,39026,2016_0_1,143909,NON-CLONE,2026-07-21 20:25:31,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest number that can be expressed as a sum of powers of 10 (up to a certain limit) while respecting a given amount of 'paint' (represented by a threshold). They use similar algorithms to achieve this: iterating through the input, incrementing a mask (or 'r' in PHP) to track the used powers of 10, and stopping when the mask (or calculated sum) exceeds the threshold.""
+}
+```",238
+2013_1_1,31779,2014_3_1,132142,NON-CLONE,2026-07-21 20:25:32,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the smallest power of 2 that is greater than or equal to the division of two numbers, `one` and `two`. They achieve this using similar algorithms: reading input, calculating the GCD, simplifying the numbers, and then applying a binary search-like technique to find the smallest power of 2 that satisfies the condition.""
+}
+```",239
+2014_2_1,115757,2013_0_1,99825,NON-CLONE,2026-07-21 20:25:33,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Java code snippet appears to be solving a problem related to reading input, processing it (representing it as Run-Length Encoded (RLE) strings), and then calculating a result based on the frequency of certain characters. The C++ code snippet appears to be implementing a game where two players (X and O) take turns placing their marks on a 4x4 grid, and the winner is determined based on specific conditions related to the placement of marks and the grid's final",240
+2014_2_1,129296,2015_1_1,122263,NON-CLONE,2026-07-21 20:25:33,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total number of characters in a set of lines, with a specific focus on the frequency of each character. They achieve this by tokenizing the lines, counting character occurrences, and then processing those counts to compute the final result.""
+}
+```",241
+2014_2_1,131873,2016_1_2,19133,NON-CLONE,2026-07-21 20:25:34,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different structures and languages (Java vs. PHP). The Java code reads input from files, processes it, and writes output to files, while the PHP code reads input from a single file, processes it line-by-line, and writes output to another file. They achieve similar results through different algorithms and data structures.""
+}
+```",242
+2014_2_1,131278,2013_0_1,91336,NON-CLONE,2026-07-21 20:25:35,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first snippet appears to process and manipulate strings, while the second snippet implements a game logic for a 4x4 grid (likely Tic-Tac-Toe). Their algorithms, data structures, and overall structure are significantly different, indicating they are not functionally similar.""
+}
+```",243
+2014_2_1,119165,2013_1_1,30835,NON-CLONE,2026-07-21 20:25:35,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet appears to be analyzing a string array, grouping characters, and calculating an average count per group. The second snippet is solving a bullseye problem, finding the optimal number of darts to hit a target based on the radius and total points.""
+}
+```",244
+2014_2_1,118489,2016_0_1,100898,NON-CLONE,2026-07-21 20:25:37,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. Code Snippet 1 appears to be solving a problem related to string manipulation, input parsing, and calculating a specific metric based on input data. Code Snippet 2 is a simple program that reads a number of 't' tests cases, and for each case, it generates a sequence of numbers and checks if a specific condition is met (all digits are equal). The logic, input/output formats, and overall algorithms are quite distinct.""
+}
+```",245
+2014_2_1,128920,2015_0_4,68310,NON-CLONE,2026-07-21 20:25:38,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code appears to be solving a puzzle involving arranging letters (possibly 'omino' pieces) into a matrix and calculating the minimum movement required to achieve a specific configuration. The PHP code, on the other hand, reads input from a file, parses it into an array, and then determines if the input can be classified as 'RICHARD' or 'GABRIEL' based on specific conditions related to the dimensions of the matrix and the size of the 'omino'.""
+}",246
+2014_2_1,118416,2015_0_2,102321,NON-CLONE,2026-07-21 20:25:38,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the total distance between elements in an array when those elements are grouped into blocks based on their value. They achieve this by reading input data, calculating the median of each block, and then summing the distances between the median and each element in the block.""
+}
+```",247
+2014_2_1,121201,2013_0_2,91409,NON-CLONE,2026-07-21 20:25:39,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The Python code focuses on transforming strings by counting consecutive identical characters and calculating the average repetition length. The C++ code reads input from a file, checks if a given 2D array of numbers meets certain criteria (all values within a range), and outputs 'YES' or 'NO' based on that check.""
+}
+```",248
+2014_2_1,118754,2015_0_2,81081,NON-CLONE,2026-07-21 20:25:40,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem, which is to determine the minimum number of moves required to sort a list of pancakes (integers) in descending order. They achieve this by tracking the maximum value in the list and then iteratively 'eating' pancakes from the list, splitting them into smaller piles based on the current max value. The main differences are in syntax, the specific implementation details of some helper functions, and the way the input is read (PHP uses direct file access, Python uses a more structured approach with a `read_",249
+2014_2_1,116147,2013_0_3,74156,NON-CLONE,2026-07-21 20:25:41,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and approaches. The PHP code processes a text file to find the number of fair squares (palindrome squares) for each case, while the Java code reads input from a file, calculates the fair squares within a given range, and writes the results to another file. They use different data structures, algorithms, and I/O operations.""
+}
+```",250
+2014_2_1,114208,2013_0_3,102625,NON-CLONE,2026-07-21 20:25:42,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different structures and programming languages. The PHP code reads input from stdin, processes it, and calculates a distance metric for each case. The C++ code uses a different algorithm (involving lower_bound and square roots) to count the number of elements within a given range. Despite both codes achieving similar results (counting elements within a range), their approaches and internal logic are not functionally similar.""
+}
+```",251
+2014_3_1,135560,2016_1_2,21265,NON-CLONE,2026-07-21 20:25:42,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The Java code reads input, performs a specific mathematical operation (multiplicative iteration) on a pair of numbers, and writes the result to a file. The PHP code reads input, parses it into cases and soldiers, keeps track of soldier counts, and identifies and outputs soldiers who cannot be paired (imbalanced counts).""
+}
+```",252
+2014_3_1,138333,2013_0_2,68303,NON-CLONE,2026-07-21 20:25:43,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Java code snippet appears to be calculating the minimum number of operations to reduce a fraction to its simplest form, while the PHP code snippet is determining if a lawn mowing pattern is possible based on maximum heights at different locations.""
+}
+```",253
+2014_3_1,140281,2013_1_1,30519,NON-CLONE,2026-07-21 20:25:43,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm to determine the minimum number of circles (or divisions) required to fit a radius r within a given area t. They use a similar binary search-like approach to find the optimal division that minimizes the number of circles.""
+}
+```",254
+2014_3_1,138308,2013_1_1,30519,NON-CLONE,2026-07-21 20:25:44,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets calculate the minimum number of circles (or divisions) required to fit a radius (r) and area (t). The core algorithm involves repeatedly halving the remaining area and incrementing the circle count until the area is small enough to fit within the circle's area. The syntax and specific implementation details differ, but the overall logic and purpose are identical.""
+}
+```",255
+2014_3_1,134611,2016_1_2,14745,NON-CLONE,2026-07-21 20:25:45,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve different problems. The first snippet implements an algorithm to find the greatest common divisor (GCD) of two numbers and determine if it's possible to reach a specific ratio. The second snippet reads a list of integers, counts their occurrences, and identifies which ones appear an odd number of times.""
+}
+```",256
+2014_3_1,132142,2014_2_1,118754,NON-CLONE,2026-07-21 20:25:45,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of moves required to transform one number into another by dividing them by their greatest common divisor (GCD). They achieve this by calculating the GCD, simplifying the numbers, and then determining the minimum number of moves needed to reach a specific condition (e.g., one of the numbers becoming a power of 2).""
+}
+```",257
+2014_3_1,139209,2015_0_3,49764,NON-CLONE,2026-07-21 20:25:46,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve the same problem (finding the minimum result when dividing two numbers), but they do so with fundamentally different approaches. The Python code uses a recursive approach with gcd calculation, while the C++ code uses a more complex string manipulation and modular exponentiation technique. The algorithms and overall structure are not similar.""
+}
+```",258
+2014_3_1,139370,2016_1_1,15819,NON-CLONE,2026-07-21 20:25:47,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve completely different purposes. The first snippet is a Python function that solves a mathematical problem related to finding the number of steps to reduce a number to 1 using division by 2. The second snippet is a Java class that reads input lines from a file, processes each line to extract the first word, and writes the result to another file. The algorithms, data structures, and overall logic of the two snippets are vastly different.""
+}
+```",259
+2014_3_1,143074,2015_0_2,91000,NON-CLONE,2026-07-21 20:25:48,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet implements a function to determine if a number is a power of 2 and counts the number of divisions needed to reduce a fraction to its simplest form. The second snippet sorts an array of integers representing pancakes and calculates the minimum number of flips required to make each pancake special.""
+}
+```",260
+2014_3_1,142092,2015_0_1,106809,NON-CLONE,2026-07-21 20:25:48,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. Code Snippet 1 calculates the number of half-elves in a given sequence, while Code Snippet 2 calculates the minimum additional elves needed to reach a certain position in a sequence.""
+}
+```",261
+2014_3_1,134295,2015_0_4,94256,NON-CLONE,2026-07-21 20:25:49,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet calculates the greatest common divisor (GCD) of two numbers, while the second snippet determines if a given number can be evenly divided into the dimensions of a rectangle (row and column) without remaining remainder.""
+}
+```",262
+2014_3_1,132975,2016_0_4,135114,NON-CLONE,2026-07-21 20:25:49,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and approaches. The PHP code reads input from stdin, processes lines of input, and calculates the result for each case. The C++ code reads input through scanf, generates a specific output based on parameters, and does not involve any calculation similar to the PHP code.""
+}
+```",263
+2015_0_1,47939,2016_0_1,71388,NON-CLONE,2026-07-21 20:25:50,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The first snippet is a Java program that reads input, performs a specific mathematical operation on a string, and outputs a result. The second snippet is a Python script that reads input, manipulates a string based on certain rules, and prints a string. They do not share the same logic or overall functionality.""
+}
+```",264
+2015_0_1,43660,2016_1_1,33316,NON-CLONE,2026-07-21 20:25:50,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The first snippet is a Java program that reads input, processes it, and prints an integer result for each test case. The second snippet is a Python script that reads input, processes it using a custom sorting algorithm, and writes a string result to a file for each test case.""
+}
+```",265
+2015_0_1,100718,2016_2_1,198100,NON-CLONE,2026-07-21 20:25:51,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Java vs PHP) and fundamentally different structures and approaches. The Java code reads input from the command line, processes each test case individually, and writes the result to a file. The PHP code reads input from a file, processes all test cases within the script, and writes the results to a specified output file. The algorithms used for processing the input and generating the output are also not the same.""
+}
+```",266
+2015_0_1,44230,2016_1_1,18665,NON-CLONE,2026-07-21 20:25:52,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The C++ code processes input strings to count the number of invitations required to invite all shy people, while the PHP code finds the lexicographically smallest string that can be formed by rearranging the characters in the input string.""
+}
+```",267
+2015_0_1,64620,2013_1_1,37029,NON-CLONE,2026-07-21 20:25:52,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the minimum number of rings required to cover a given area of a circle with paint. They achieve this by using mathematical formulas and iterative algorithms. Although the syntax and structure differ due to language differences (C++ vs Python), the core logic and functionality are identical.""
+}
+```",268
+2015_0_1,65110,2015_0_3,42051,NON-CLONE,2026-07-21 20:25:53,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: they take a string and an integer as input, and output a result based on manipulating the string according to specific rules. The core logic, including parsing the input, performing quaternion multiplications, and determining the final result, is nearly identical.""
+}
+```",269
+2015_0_1,106809,2015_0_2,96440,NON-CLONE,2026-07-21 20:25:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of items to include in a set to ensure all items can be grouped into contiguous ranges. They achieve this by iterating through an array of values, calculating the maximum value and then iterating through possible divisors to find the optimal range size.""
+}
+```",270
+2015_0_1,86599,2013_0_2,96711,NON-CLONE,2026-07-21 20:25:54,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code reads input lines, calculates the number of friends for each scenario based on stand and data, and outputs the result. The PHP code reads input, checks if a lawn is valid (no grass taller than another grass in the same row or column), and outputs 'YES' or 'NO' accordingly.""
+}
+```",271
+2015_0_1,60803,2015_1_1,111866,NON-CLONE,2026-07-21 20:25:55,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers, they calculate and print the sum of two subarrays. One subarray consists of consecutive positive differences between elements, and the other consists of the maximum possible differences (up to the length of the array) for negative differences. The core logic, including the use of cumulative sums and iteration over the array, is identical.""
+}
+```",272
+2015_0_1,25955,2013_0_1,72071,NON-CLONE,2026-07-21 20:25:56,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining the winner of a game where two players (X and O) take turns placing their marks on a 4x4 grid. They achieve this by reading input, processing the grid, and printing the outcome (winner or draw) for each test case.""
+}
+```",273
+2015_0_1,28465,2015_0_2,88257,NON-CLONE,2026-07-21 20:25:56,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the total number of invitations required to seat a group of people with specific seating arrangements. They achieve this by reading input data, processing it, and outputting the result for each case.""
+}
+```",274
+2015_0_1,96593,2015_0_2,40957,NON-CLONE,2026-07-21 20:25:57,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code processes a text file with visitor data and determines the minimum number of friends needed so that everyone is standing. The Java code reads an array of integers representing visitor counts and finds the maximum possible number of visitors that can be accommodated with the given resources (represented by the array).""
+}
+```",275
+2015_0_2,91000,2013_0_1,98087,NON-CLONE,2026-07-21 20:25:58,"```json
+{
+  ""answer"": ""NO-NOT-SIMILAR"",
+  ""explanation"": ""The two code snippets have different languages (Java vs C++) and perform fundamentally different tasks. The Java code solves a problem related to sorting and manipulating arrays of integers, while the C++ code determines the winner of a game board (X or O) based on specific conditions. Despite sharing some general algorithmic concepts, the overall logic, syntax, and implementation details are significantly different.""
+}
+```",276
+2015_0_2,21812,2013_0_3,102625,NON-CLONE,2026-07-21 20:25:59,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of pancake flip times (days it takes to cook a pancake), determine the minimum number of days it takes to eat all pancakes. The algorithms used in both snippets are nearly identical: they both find the maximum flip time in the array, then iterate through the array, calculating the total flip time for each possible eating pattern based on divisibility of flip times into the eating days. The final minimum days is returned.""
+}
+```",277
+2015_0_2,40957,2013_0_2,71957,NON-CLONE,2026-07-21 20:25:59,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of operations required to transform a matrix into all zeros. They achieve this by first finding the maximum value in each row and column, then checking if these maximums can be reduced to zero while maintaining the constraints of the problem. The logic, algorithm, and overall structure of both snippets are nearly identical.""
+}
+```",278
+2015_0_2,96440,2015_0_1,86599,NON-CLONE,2026-07-21 20:26:00,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of friends needed for a group activity based on individual stand times. They achieve this by iterating through input data, calculating the difference between stand times, and accumulating the number of friends needed. The overall structure, variable names, and logic are nearly identical.""
+}
+```",279
+2015_0_2,88257,2013_0_2,68303,NON-CLONE,2026-07-21 20:26:00,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The C++ code snippet finds the maximum sum of divisions for each number up to a given limit, while the PHP code snippet determines if a lawn's elements can be covered by a set of maximum values.""
+}
+```",280
+2015_0_2,38840,2013_0_1,127485,NON-CLONE,2026-07-21 20:26:01,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The C++ code reads a set of numbers and finds the minimum possible sum of a specific combination, while the PHP code reads a grid of 'X' and 'O' characters and determines the winner of a game of Tic-Tac-Toe (or a draw if there are still empty spaces).""
+}
+```",281
+2015_0_2,36519,2015_1_1,111086,NON-CLONE,2026-07-21 20:26:02,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem:  calculating the total time to serve a set of pancakes, where each pancake has a size, and the goal is to minimize the total serving time. They both read input from a file, process it, and print the results. The core logic, including reading input, splitting piles, and calculating the minimum time, is nearly identical.""
+}
+```",282
+2015_0_2,81081,2013_0_3,108834,NON-CLONE,2026-07-21 20:26:03,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of splits of a set of pancakes (represented as an array of integers) into two groups, where the sum of each group is as close as possible to each other. They achieve this by using a memoization decorator to cache previously calculated results and a loop to iteratively find the optimal splits. The core logic and overall approach are identical.""
+}
+```",283
+2015_0_2,100159,2016_2_1,179503,NON-CLONE,2026-07-21 20:26:04,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the problem of distributing a set of plates among diners, minimizing the total moves required. They achieve this by: 1) Converting input strings into numerical arrays, 2) Sorting the arrays, 3) Calculating the minimum number of moves for each diner based on the sorted array, and 4) Returning the minimum total moves. Although the syntax and specific implementation details differ, the overall logic and goal are the same.""
+}
+```",284
+2015_0_2,103402,2015_0_1,106809,NON-CLONE,2026-07-21 20:26:04,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum additional time required to ensure all elements in a sequence are distinct. The first snippet uses PHP and iterates through lines of input, calculating the minimum minutes required for each case. The second snippet uses Python and does the same, using `raw_input` and `split` to process the input and `print` to output the result. The core logic and end goal are identical.""
+}
+```",285
+2015_0_2,102321,2015_0_3,72742,NON-CLONE,2026-07-21 20:26:05,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different structures and languages (PHP vs Python). Even though they both appear to solve a problem related to processing input and generating output, the algorithms and internal logic are not similar.""
+}
+```",286
+2015_0_2,55775,2016_1_2,14745,NON-CLONE,2026-07-21 20:26:06,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the maximum number of pancakes that can be flipped using the fewest flips. The core logic involves iterating through all possible flip sizes and accumulating the flips required for each size. Although the syntax and implementation details differ, the overall algorithm and goal are identical.""
+}
+```",287
+2015_0_3,42051,2015_0_1,44230,NON-CLONE,2026-07-21 20:26:06,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet appears to implement a quaternion multiplication algorithm and solve a specific problem related to string manipulation and rotations. The second snippet reads input, processes it to count the number of invitations in a string, and prints the result.""
+}
+```",288
+2015_0_3,47513,2013_1_1,34507,NON-CLONE,2026-07-21 20:26:07,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string and a number, determine if the string, when repeated a certain number of times, can be transformed into a specific target string. They use similar logic to manipulate the string characters and check if the resulting string satisfies the conditions.""
+}
+```",289
+2015_0_3,96608,2016_1_2,14745,NON-CLONE,2026-07-21 20:26:08,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first code snippet implements Dijkstra's algorithm for finding shortest paths in a graph, while the second snippet counts the number of odd occurrences of each element in a list of lists.""
+}
+```",290
+2015_0_3,41900,2015_0_1,96593,NON-CLONE,2026-07-21 20:26:09,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet appears to be solving a puzzle involving a sequence of characters and mathematical operations, while the second snippet is determining the minimum number of friends needed to get everyone in a party to clap at the same time. They share no common logic or algorithm structure.""
+}
+```",291
+2015_0_3,49764,2016_1_2,14745,NON-CLONE,2026-07-21 20:26:09,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet appears to be implementing a specific algorithm related to string manipulation and pattern matching, while the second snippet is a general solution for counting and outputting unique elements with odd counts from a list of lists.""
+}
+```",292
+2015_0_3,23036,2016_0_4,142083,NON-CLONE,2026-07-21 20:26:10,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The first snippet implements a specific mathematical operation (exponentiation and matrix multiplication) and solves a problem related to finding a specific pattern in a string. The second snippet reads input from a file, performs a different mathematical operation (generating a sequence based on a given parameter), and writes the result to another file. Despite both involving mathematical operations, the specific algorithms, data structures, and problem domains are not similar.""
+}
+```",293
+2015_0_3,103585,2014_3_1,138308,NON-CLONE,2026-07-21 20:26:11,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code snippet appears to be solving a problem related to the product of a series of codes, with specific rules for negative numbers and potential repetitions. The C++ code snippet is implementing an algorithm to find the greatest common divisor (GCD) of two numbers and then determine the power to which one of the numbers needs to be raised to equal the other.""
+}
+```",294
+2015_0_3,103774,2013_0_3,89287,NON-CLONE,2026-07-21 20:26:12,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet appears to be solving a specific mathematical problem involving quadratic functions and their interactions with a given input. The second snippet is a PHP script that generates and counts palindromic squares within a given range. They perform unrelated tasks and share no common logic or functionality.""
+}
+```",295
+2015_0_3,72742,2013_0_3,89287,NON-CLONE,2026-07-21 20:26:12,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet implements a system for checking if a given string and repetition count meet specific criteria related to quaternions. The second snippet generates prime numbers within a given range and calculates their count.""
+}
+```",296
+2015_0_3,19800,2016_1_1,22113,NON-CLONE,2026-07-21 20:26:13,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve completely different purposes. The first snippet is a PHP implementation for a specific mathematical operation on strings, while the second snippet is a Java program that processes input lines to construct a sorted concatenation of words.""
+}
+```",297
+2015_0_3,102323,2016_0_1,76319,NON-CLONE,2026-07-21 20:26:14,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different structures, languages, and purposes. The PHP code reads input from a file, processes it based on specific rules, and outputs results for each test case. The Java code reads input from a file, processes it in a different way (using arrays and calculations), and also outputs results for each test case. Despite both codes achieving similar-looking output, their internal logic and implementation differ significantly.""
+}
+```",298
+2015_0_3,18309,2016_1_1,15819,NON-CLONE,2026-07-21 20:26:15,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code snippet appears to be solving a specific word manipulation problem where you need to repeatedly multiply the current word with other words based on their positions and values, aiming to reach a specific result (-1). The Java code snippet, on the other hand, is reading a list of inputs, processing each string to find the first word (the 'last word' in the filename suggests this), and then writing the result to a file. The logic and structure of these two codes are completely",299
+2015_0_4,86262,2016_0_4,80717,NON-CLONE,2026-07-21 20:26:15,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given set of dimensions (X, R, C) allows for a certain arrangement (represented by 'LOSE' or 'WIN'). The core logic involves calculating the total number of squares that can be formed and checking if it's divisible by X, along with other constraints based on the dimensions. Although the syntax and implementation details differ (Java vs. PHP), the overall algorithm and problem-solving approach are identical.""
+}
+```",300
+2015_0_4,30398,2016_1_2,26565,NON-CLONE,2026-07-21 20:26:16,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The first snippet determines the winner of a game based on dimensions and specific rules, while the second snippet processes a set of numbers and identifies unique occurrences, printing them in sorted order for each case.""
+}
+```",301
+2015_0_4,29877,2013_0_2,122219,NON-CLONE,2026-07-21 20:26:17,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm to determine if a player, Richard or Gabriel, can win a game based on the dimensions of a board and the ranks of its cells. The core logic, including checking cell values against their row and column maxima, is identical despite the different languages and syntax.""
+}
+```",302
+2015_0_4,63026,2013_0_3,92037,NON-CLONE,2026-07-21 20:26:17,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The C++ code reads input from a file, processes it, and writes results to another file, focusing on finding specific cases that meet certain conditions. The PHP code generates a list of 'fair and square' numbers within a given range, and processes input lines to count how many of these numbers fall within a specified interval.""
+}
+```",303
+2015_0_4,86932,2013_0_2,71957,NON-CLONE,2026-07-21 20:26:18,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given grid (represented differently in each code) meets specific conditions. The core logic involves calculating the maximum values in each row and column and checking if these maximum values violate any of the conditions. The syntax and implementation details differ, but the overall algorithm and purpose are identical.""
+}
+```",304
+2015_0_4,60776,2016_0_4,158305,NON-CLONE,2026-07-21 20:26:19,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet determines if a given set of dimensions (r, c) meets specific criteria based on 'x' to return either 'GABRIEL' or 'RICHARD'. The second snippet calculates a set of guesses for a larger number 'K' based on 'C' and 'S', aiming to find a solution to a different type of problem.""
+}
+```",305
+2015_0_4,57828,2015_1_1,111866,NON-CLONE,2026-07-21 20:26:19,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code determines if a given set of coordinates (X, R, C) adheres to specific rules and returns a string ('RICHARD' or 'GABRIEL') based on those rules. The C++ code calculates the sum of differences between consecutive elements in an array and then computes two separate sums based on the array's values, with different logic for handling negative differences. The objectives and algorithms of the two codes are not the same.""
+}
+```",306
+2015_0_4,94256,2013_1_1,42047,NON-CLONE,2026-07-21 20:26:20,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve different problems. The Python code determines if a given target size can be achieved with a grid of dimensions r and c, while the Java code finds a specific number (marked) that satisfies a different mathematical condition related to the target size and grid dimensions. The algorithms, data structures, and overall logic differ significantly.""
+}
+```",307
+2015_0_4,74018,2015_0_2,91000,NON-CLONE,2026-07-21 20:26:21,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet is a Python function that determines if a given set of three integers (X, R, C) results in 'RICHARD' or 'GABRIEL' based on specific conditions. The second snippet is a Java class that solves a problem related to finding the minimum number of flips needed to make a sequence of pancakes sorted.""
+}
+```",308
+2015_0_4,68310,2014_3_1,134611,NON-CLONE,2026-07-21 20:26:21,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet appears to be solving a puzzle involving 'Richard' and 'Gabriel' omino pieces, while the second snippet is solving a mathematical problem related to finding the generation in which two numbers become equal after repeated division by each other.""
+}
+```",309
+2015_0_4,19708,2014_3_1,138308,NON-CLONE,2026-07-21 20:26:22,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code determines the winner in a game based on specific conditions involving the dimensions of a grid and its contents. The C++ code finds the minimum number of divisions needed to make two numbers mutually divisible.""
+}
+```",310
+2015_0_4,78114,2016_1_1,3308,NON-CLONE,2026-07-21 20:26:23,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve completely different purposes. The first snippet is a PHP script that determines the winner of a game based on given coordinates and a rule related to divisibility and the second snippet is a Python script that processes a text file, rearranges words based on a specific logic, and writes the result to another file. They have no common functionality or logic.""
+}
+```",311
+2015_1_1,112276,2013_1_1,31779,NON-CLONE,2026-07-21 20:26:23,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of intervals required to cover a set of time ranges. They achieve this by using a binary search-like approach to find the optimal interval size. Although the syntax and specific implementation details differ, the overall algorithm and purpose are identical.""
+}
+```",312
+2015_1_1,118030,2016_1_1,15421,NON-CLONE,2026-07-21 20:26:24,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet implements algorithms to calculate the total mushrooms eaten in two different scenarios, while the second snippet processes a string to construct a new string based on a specific rule. They share no common logic or similar structure.""
+}
+```",313
+2015_1_1,112898,2014_3_1,134611,NON-CLONE,2026-07-21 20:26:24,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first snippet calculates the minimum and maximum number of meals for a given array of values, while the second snippet determines if it's possible to reach a given number of generations in a binary GCD-based process.""
+}
+```",314
+2015_1_1,111086,2015_0_2,55775,NON-CLONE,2026-07-21 20:26:25,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the minimum number of pancakes (or items) to be flipped to make all items in a stack in the same order. They achieve this by iterating through the stack, testing different flip sizes, and accumulating the cost of flips. Although the syntax and specific implementation details differ, the overall algorithm and purpose are identical.""
+}
+```",315
+2015_1_1,122263,2016_1_2,26561,NON-CLONE,2026-07-21 20:26:26,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an array of integers, they count the occurrences of each number and then output two values: the sum of the differences between consecutive non-zero counts (ans) and the sum of the minimum of a number's count and the maximum difference seen so far (ans2). The overall structure, variable names, and algorithms used in both snippets are nearly identical, indicating functional similarity.""
+}
+```",316
+2015_1_1,111866,2015_0_2,91000,NON-CLONE,2026-07-21 20:26:26,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet calculates the sum of differences between adjacent elements in an array, while the second snippet finds the minimum number of flips needed to make all pancakes the same size.""
+}
+```",317
+2015_1_1,117734,2013_0_3,59317,NON-CLONE,2026-07-21 20:26:27,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the sum of two types of values (represented as `M` and `MAX`) based on a specific logic. They use similar logic to iterate through the input array, calculate differences, and accumulate sums. The core algorithm and output format are identical.""
+}
+```",318
+2015_1_1,124602,2016_1_1,20829,NON-CLONE,2026-07-21 20:26:27,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing an array of numbers and calculating two values based on the differences between consecutive elements. The core logic, including reading input, iterating over the array, and performing calculations, is identical despite the difference in languages.""
+}
+```",319
+2015_1_1,111647,2013_0_3,92037,NON-CLONE,2026-07-21 20:26:28,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve completely different purposes. The first is a collection of Python functions for reading data from a file and performing simple mathematical operations. The second is a PHP script that reads input, calculates the number of squares within a given range, and outputs the results for each case.""
+}
+```",320
+2015_1_1,122934,2013_0_2,83774,NON-CLONE,2026-07-21 20:26:29,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The PHP code processes a file containing case-based data, calculating specific metrics based on time intervals and population counts. The C++ code reads a 2D array of integers, checks for row and column ordering, and outputs 'YES' or 'NO' accordingly. The algorithms, input formats, and output types are entirely different.""
+}
+```",321
+2015_1_1,111264,2013_0_1,99825,NON-CLONE,2026-07-21 20:26:29,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The PHP code reads input from stdin, processes it, and outputs the result in a specific format. In contrast, the C++ code reads input from a file, processes it according to a game logic involving 'X', 'O', and 'T' on a 4x4 grid, and determines the winner or if the game is a draw. The algorithms, data structures, and overall logic are completely different.""
+}
+```",322
+2015_1_1,121770,2013_0_3,53348,NON-CLONE,2026-07-21 20:26:30,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of palindromic numbers within a given range. They use similar algorithms to iterate through a list of numbers, check for palindromicity, and count the palindromes that fall within the specified range. The core logic and overall structure of the two snippets are nearly identical.""
+}
+```",323
+2016_0_1,76319,2015_0_1,25955,NON-CLONE,2026-07-21 20:26:31,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and structures. The Java code processes a text file, reads input, performs calculations, and writes output. The PHP code reads input from a file, processes it by analyzing shy levels and people counts, and generates output in a different format. The logic and algorithms used in each code are also distinct.""
+}
+```",324
+2016_0_1,117099,2014_2_1,118754,NON-CLONE,2026-07-21 20:26:32,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a series of strings, determine the minimum number of moves required to make all strings unique. They achieve this through similar logic: parsing input, generating masks, and comparing string sets. The core algorithm and overall approach are nearly identical.""
+}
+```",325
+2016_0_1,100898,2016_0_4,142083,NON-CLONE,2026-07-21 20:26:32,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first snippet appears to be solving a problem related to counting sheep and checking for a specific condition using a loop and boolean array. The second snippet is a Python script that reads input from a file, performs some mathematical operations based on the input, and writes the results to another file. The algorithms, data structures, and overall logic of the two snippets are completely different.""
+}
+```",326
+2016_0_1,65647,2016_1_2,21265,NON-CLONE,2026-07-21 20:26:33,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The C++ code snippet processes a single number, breaking it down into its digits and counting the number of unique digits, then printing a result based on whether all digits are unique. The PHP code snippet reads a file containing multiple cases, each with an array of soldiers, and identifies and prints the soldiers who have odd counts, indicating they are missing from a balanced squad.""
+}
+```",327
+2016_0_1,134225,2016_1_2,22155,NON-CLONE,2026-07-21 20:26:34,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different structures and languages (C++ and PHP). The C++ code focuses on bitwise operations and generating a specific output based on a mathematical process, while the PHP code reads input, manipulates an array, and outputs the result of a counting process. Their overall tasks and logic differ significantly.""
+}
+```",328
+2016_0_1,143909,2015_0_1,47939,NON-CLONE,2026-07-21 20:26:34,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The C++ code snippet generates a binary mask by iteratively setting bits based on an input number, while the Java code snippet processes a string of digits to determine the number of times a person needs to stand up based on specific patterns.""
+}
+```",329
+2016_0_1,94639,2016_0_4,135114,NON-CLONE,2026-07-21 20:26:35,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code implements a counting sheep algorithm, where each digit in a number is marked as visited and the smallest number with all digits visited is returned. The C++ code, on the other hand, takes input parameters K, C, and S and generates a sequence of numbers that satisfy certain conditions related to these parameters.""
+}
+```",330
+2016_0_1,88781,2013_0_2,71957,NON-CLONE,2026-07-21 20:26:36,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code finds the smallest positive integer that, when converted to a string and its digits analyzed, results in a unique set of digits. The PHP code checks if a given matrix represents a valid arrangement where every row and column has a maximum value, with no overlapping maximum values in the same cell.""
+}
+```",331
+2016_0_1,71388,2014_2_1,118754,NON-CLONE,2026-07-21 20:26:36,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, determine the minimum number of moves required to transform it into a string consisting of only distinct digits. They achieve this by breaking down the input string into substrings, analyzing their character frequency, and calculating the difference in frequency counts between the substrings.""
+}
+```",332
+2016_0_1,48618,2015_1_1,124602,NON-CLONE,2026-07-21 20:26:37,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: finding the sum of a specific type of decomposition of a number (in this case, the sum of differences between consecutive elements in a sorted array). They achieve this by reading input cases, processing each case, and printing the result. Although the syntax and implementation details differ, the overall logic and goal are identical.""
+}
+```",333
+2016_0_1,39027,2013_0_1,103399,NON-CLONE,2026-07-21 20:26:38,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different languages (PHP vs Java), structures, and functionalities. The PHP code reads and writes to files, processes a dataset, and implements a simple text-based game logic. The Java code implements a Knapsack problem solver, using a 2D array to store and optimize solutions.""
+}
+```",334
+2016_0_1,113708,2016_0_4,136626,NON-CLONE,2026-07-21 20:26:38,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and approaches. The PHP code generates a 'bleatrix' value based on a given base, while the Java code solves a specific problem related to branches, depth, and checks. They do not achieve the same result or perform the same task.""
+}
+```",335
+2016_0_4,136626,2015_0_2,81081,NON-CLONE,2026-07-21 20:26:39,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating the minimum number of moves required to eat all pancakes in a stack, given a maximum value for each move. They achieve this by iterating through the input array, calculating the number of moves needed to consume each stack at each possible maximum value, and keeping track of the minimum moves found.""
+}
+```",336
+2016_0_4,125922,2016_1_1,4557,NON-CLONE,2026-07-21 20:26:40,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve different purposes. The Java code reads input from a file, processes it based on specific rules, and prints output in a specific format. The PHP code performs file I/O operations, processes lines of input, and generates output with a different structure. The core logic and output formats are significantly different.""
+}
+```",337
+2016_0_4,99642,2015_0_3,49764,NON-CLONE,2026-07-21 20:26:41,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given an input 
+number of tests and a power, they generate an output string representing a 
+sequence of 'i', 'j', and 'k' characters that satisfies specific conditions.
+
+The core logic is nearly identical:
+
+1. Read input parameters.
+2. Iterate through a string of characters, converting them to corresponding 
+power-based values.
+3. Combine these values into an output string based on the power and 
+specific rules.
+
+While the",338
+2016_0_4,135114,2016_1_1,15819,NON-CLONE,2026-07-21 20:26:41,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve different purposes. The first snippet is solving a specific problem related to generating numbers within a range, while the second snippet reads input lines from a file, processes each line to extract the last word, and writes the result to another file.""
+}
+```",339
+2016_0_4,90060,2016_1_2,21265,NON-CLONE,2026-07-21 20:26:42,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The C++ code snippet calculates the possible arrangements of soldiers in groups of a given size (k, c, s) while the PHP code snippet counts and outputs the soldiers with odd counts within a given case.""
+}
+```",340
+2016_0_4,45917,2014_2_1,128920,NON-CLONE,2026-07-21 20:26:42,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet deals with generating a sequence of numbers based on given parameters and printing it. The second snippet deals with minimizing the sum of absolute differences between the frequency of characters in a string for each possible rotation.""
+}
+```",341
+2016_0_4,63570,2014_3_1,138308,NON-CLONE,2026-07-21 20:26:43,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code snippet appears to be solving a problem related to distributing items (represented by 'K') among groups (represented by 'C' and 'S') with a constraint on the total sum. The C++ code snippet is finding the smallest exponent to which a number (P) must be raised to equal another number (Q), essentially performing a greatest common divisor (GCD) calculation.""
+}
+```",342
+2016_0_4,158305,2015_0_3,41900,NON-CLONE,2026-07-21 20:26:44,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The Python code solves a specific problem related to generating a sequence of numbers based on a given set of parameters (K, C, S). The C++ code appears to be a more general algorithm, possibly related to string manipulation or set operations, with a focus on finding specific patterns within a string (represented by 's'). The logic, data structures, and output formats of the two codes are quite distinct.""
+}
+```",343
+2016_0_4,142083,2015_0_1,43660,NON-CLONE,2026-07-21 20:26:45,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (Python and Java), different purposes (one reads from a file, writes to another, and solves a specific mathematical problem; the other appears to be a simple main method with no file I/O), and different internal logic. They are not functionally similar.""
+}
+```",344
+2016_0_4,80717,2013_0_2,91409,NON-CLONE,2026-07-21 20:26:45,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. Code Snippet 1 reads a set of cases, each with a key, color, and size. It then generates a list of valid positions for a marker based on the key and color, while ensuring the marker doesn't overlap with itself or the edges. Code Snippet 2 reads a grid of values, checks if each value is within a valid range, and then determines if a 'YES' or 'NO' answer is appropriate based on the presence of two maximum values in",345
+2016_0_4,139021,2013_0_2,78034,NON-CLONE,2026-07-21 20:26:46,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different goals and approaches. The PHP code implements an algorithm to generate possible art works based on a given set of rules and constraints, while the Python code checks if a given 2D array (representing a lawn) satisfies certain conditions (maximizing rows and columns) to determine if it's a valid 'YES' or 'NO' case.""
+}
+```",346
+2016_0_4,37736,2015_0_3,72742,NON-CLONE,2026-07-21 20:26:47,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code reads input, performs a specific mathematical calculation on it, and outputs the result for each case. The Python code defines classes for reading and writing input/output, implements a problem abstract base class, and uses quaternion operations to determine if a given string is legal based on certain rules. The logic, data structures, and overall architecture of the two codes are significantly different.""
+}
+```",347
+2016_1_1,15819,2013_0_2,85165,NON-CLONE,2026-07-21 20:26:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing a grid of numbers and determining if it forms a valid 'lawn' (all rows and columns have the same minimum height). They use similar logic: reading input, iterating over rows and columns, and updating heights based on the minimum value found. The overall structure, algorithms, and output format are nearly identical.""
+}
+```",348
+2016_1_1,28201,2013_0_2,78034,NON-CLONE,2026-07-21 20:26:48,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: determining if a given board (represented as a 2D array) satisfies a specific property (all elements must be less than or equal to the maximum element in the same row and column). They achieve this by reading input test cases, processing each board, and outputting the result for each case.""
+}
+```",349
+2016_1_1,22113,2016_1_2,7956,NON-CLONE,2026-07-21 20:26:49,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing a list of lists of numbers to find and print the unique numbers that appear an odd number of times. They achieve this by counting the occurrences of each number and then selecting and sorting the numbers that appear an odd number of times.""
+}
+```",350
+2016_1_1,15421,2016_2_1,193929,NON-CLONE,2026-07-21 20:26:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: sorting a string of characters to form a new string based on specific rules. They use similar data structures (arrays/maps to count character frequencies) and algorithms (iterating through the input string and selecting characters based on their frequency and position).""
+}
+```",351
+2016_1_1,31768,2014_2_1,118416,NON-CLONE,2026-07-21 20:26:50,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string of characters, they aim to find a single character that, when repeated, approximates the average length of the input string's characters. They achieve this by iterating through the input, tracking character frequencies, and calculating a median length. The final output is the sum of distances between the median length and the frequency of each character.""
+}
+```",352
+2016_1_1,20829,2013_0_2,85165,NON-CLONE,2026-07-21 20:26:51,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: processing a grid of numbers to find a specific pattern. They both read input from a file, process the grid, and output the result to another file. The core logic, including looping through the grid, updating values based on a comparison, and checking for a specific pattern, is nearly identical.""
+}
+```",353
+2016_1_1,3308,2016_2_1,186531,NON-CLONE,2026-07-21 20:26:52,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, they analyze its character frequency to construct a new string based on specific rules. The core logic, including looping through the input string, counting character frequencies, and constructing the output string based on those frequencies, is identical despite the difference in syntax and structure.""
+}
+```",354
+2016_1_1,33316,2013_0_3,74156,NON-CLONE,2026-07-21 20:26:52,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet is a Python program that sorts a list of characters based on their frequency, while the second snippet is a Java program that counts fair squares (palindromic squares) within a given range.""
+}
+```",355
+2016_1_1,14703,2014_3_1,140281,NON-CLONE,2026-07-21 20:26:53,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The Python code snippet implements a function that takes a string and returns the lexicographically smallest string that is greater than or equal to the input string. The Java code snippet implements an algorithm to find the minimum number of multiplications of a number p by itself to reach a target number q.""
+}
+```",356
+2016_1_1,3735,2013_0_2,85165,NON-CLONE,2026-07-21 20:26:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm that processes a grid of numbers (represented as strings in PHP and lists in Python). The goal is to find a configuration where all cells have the same height, and the algorithm outputs 'YES' if a valid configuration is found. The core logic, including reading input, iterating over the grid, updating cell values based on a minimum/maximum height comparison, and outputting 'YES' or 'NO', is identical in both languages.""
+}
+```",357
+2016_1_1,18665,2013_0_2,85165,NON-CLONE,2026-07-21 20:26:54,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement an algorithm that reads a grid of numbers, aims to transform it into a uniform height, and outputs whether the transformation was successful. They use similar logic for updating the grid based on the minimum and maximum heights, and the overall structure of the code (input reading, processing, and outputting) is nearly identical.""
+}
+```",358
+2016_1_1,4557,2015_0_1,106809,NON-CLONE,2026-07-21 20:26:55,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: processing an input file, performing some operation on each line, and writing the result to an output file. They use similar logic for reading input, processing lines, and formatting output. Although the syntax and specific implementation details differ, the overall functionality is the same.""
+}
+```",359
+2016_1_2,23627,2016_0_1,88781,NON-CLONE,2026-07-21 20:26:55,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different objectives. The first snippet reads data from a file, processes it using a hashmap, and outputs a sorted list of unique integers. The second snippet takes an integer input, converts it to a list of digits, and iteratively adds the number to itself until all digits are unique. They perform entirely different tasks.""
+}
+```",360
+2016_1_2,26561,2013_1_1,37029,NON-CLONE,2026-07-21 20:26:56,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet is a Java program that reads input, processes it, and prints a list of missing values. The second snippet is a Python script that calculates the number of rings needed to paint a circle based on given radius and volume of paint. They perform entirely distinct tasks.""
+}
+```",361
+2016_1_2,21848,2015_0_2,96440,NON-CLONE,2026-07-21 20:26:57,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first snippet reads input data, identifies missing heights in a specific pattern, and outputs the sorted list of those heights. The second snippet reads an array of integers, finds the maximum value, and then iteratively calculates the minimum number of divisions needed to evenly distribute the values into groups of that maximum size.""
+}
+```",362
+2016_1_2,7905,2013_0_2,44471,NON-CLONE,2026-07-21 20:26:57,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different functionalities. The first snippet reads an array of integers, inverts the parity of each element, and prints the modified array. The second snippet reads a 2D array representing a lawnmower pattern, checks if it's possible to mow the lawn with a lowest possible height, and outputs 'YES' or 'NO' accordingly.""
+}
+```",363
+2016_1_2,22827,2013_0_3,74156,NON-CLONE,2026-07-21 20:26:58,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a system to count and print palindromic squares within a given range. They share the same overall logic: read input, iterate through a range, check for palindromic properties, and output results. Although the syntax and specific implementation details differ, the core functionality is identical.""
+}
+```",364
+2016_1_2,26565,2016_0_1,113708,NON-CLONE,2026-07-21 20:26:59,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. Code Snippet 1 reads a set of numbers, counts their occurrences, identifies numbers that appear an odd number of times, and prints them. Code Snippet 2 generates a 'sleep' value by recursively constructing numbers from a base value and checking if they are present in a list of missing digits. The logic, algorithms, and output formats are distinct.""
+}
+```",365
+2016_1_2,30453,2016_2_1,193717,NON-CLONE,2026-07-21 20:26:59,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets serve different purposes. The first is a Python function that sorts odd numbers from a list of lists, while the second is a PHP function that processes a string by decrementing counts of characters in a hashmap and then printing out a specific number of times each character appears in the string.""
+}
+```",366
+2016_1_2,14745,2015_0_3,18309,NON-CLONE,2026-07-21 20:27:00,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: given a set of strings, determine if a specific target string (represented by the sequence 'i', 'j', 'k') can be formed by multiplying together the numbers in each string. They use similar data structures (dictionaries/hash maps) to track the frequency of numbers and employ loops to iterate through the input strings and perform multiplications. The overall logic and algorithm are nearly identical.""
+}
+```",367
+2016_1_2,7956,2015_0_2,96440,NON-CLONE,2026-07-21 20:27:01,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve different problems. The Python code processes a set of 2D arrays, counting the occurrences of each number and printing out the odd counts. The C++ code reads an array of integers, finds the maximum value, and then iteratively calculates the minimum number of divisions needed to reduce all numbers to that maximum value.""
+}
+```",368
+2016_1_2,22155,2014_3_1,139370,NON-CLONE,2026-07-21 20:27:01,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have fundamentally different purposes and approaches. The PHP code reads input from STDIN, processes an array of numbers, and outputs a list of odd numbers after certain transformations. The Python code implements a mathematical algorithm to determine the minimum number of divisions required to reduce two numbers to 1, with a specific focus on cases where one number is twice the other.""
+}
+```",369
+2016_1_2,21265,2015_0_3,72742,NON-CLONE,2026-07-21 20:27:02,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a solution to the same problem: determining if a given string of characters, repeated a certain number of times, is a legal quaternion representation. They share the same overall logic: read input, process it, and output a \""YES\"" or \""NO\"" based on the legality check.""
+}
+```",370
+2016_1_2,19133,2015_0_1,86599,NON-CLONE,2026-07-21 20:27:03,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: calculating and printing the number of friends each person should have in a social scenario based on given data. They both read input from a file, process each case, and output the result for each case.""
+}
+```",371
+2016_2_1,201276,2015_0_2,81081,NON-CLONE,2026-07-21 20:27:03,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string of numbers, determine the minimum number of operations required to transform it into a string consisting of only zeros. They achieve this by tracking the frequency of each digit and replacing it with zeros iteratively based on specific rules. The core logic, including variable names and function purposes, are nearly identical.""
+}
+```",372
+2016_2_1,180026,2016_0_1,143909,NON-CLONE,2026-07-21 20:27:04,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The first code snippet counts the frequency of characters in a string and converts them into a specific set of numbers based on predefined mappings. The second code snippet generates a binary mask representing a number within a given range using a loop and a bitwise operation.""
+}
+```",373
+2016_2_1,193929,2013_1_1,34507,NON-CLONE,2026-07-21 20:27:05,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: counting the number of occurrences of each letter in a given string and printing the result. They use similar logic to track letter counts and output the results in the same format.""
+}
+```",374
+2016_2_1,194349,2015_0_3,103774,NON-CLONE,2026-07-21 20:27:06,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have different languages (C++ and Python), structures, and functionalities. The first snippet reads input, performs string manipulation and mathematical operations on character counts, and prints a result. The second snippet defines functions for pre-processing, reading input, performing mathematical operations on a different set of data (a 2D array), and determining if a given input string satisfies a specific condition. The algorithms and overall logic of the two snippets are fundamentally different.""
+}
+```",375
+2016_2_1,186531,2016_1_1,15819,NON-CLONE,2026-07-21 20:27:06,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different functionalities. The first snippet is designed to count and manipulate the frequency of each letter (A-Z) in a given string, while the second snippet is designed to extract the last word from a given string, regardless of its position or content.""
+}
+```",376
+2016_2_1,179503,2015_0_3,18309,NON-CLONE,2026-07-21 20:27:07,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different syntax, structures, and purposes. The first snippet is a C++ program that reads a string, performs a specific transformation on its characters, and prints the result. The second snippet is a PHP script that defines two functions, `t()` and `mult()`, and uses them to solve a mathematical problem related to string manipulation and number theory. The algorithms and logic used in each snippet are entirely distinct.""
+}
+```",377
+2016_2_1,185295,2013_0_3,108834,NON-CLONE,2026-07-21 20:27:08,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: given a string, 
+count and concatenate unique characters in a specific order based on their 
+frequency. They achieve this by:
+
+1. **Reading input:**  Opening and reading from an input file.
+2. **Processing the string:**  Iterating through the input string, counting 
+character frequencies, and storing them in a dictionary.
+3. **Generating the output:**  Using the frequency dictionary to construct 
+the desired output string based on the rules specified in",378
+2016_2_1,196651,2013_0_1,126886,NON-CLONE,2026-07-21 20:27:09,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets implement a program that reads a series of Tic-Tac-Toe board states from input, determines the winner or if the game is a draw, and prints the result. They share the same overall logic, algorithms, and data structures (e.g., checking for winning conditions, handling empty cells) despite differences in syntax and implementation details.""
+}
+```",379
+2016_2_1,182378,2016_1_1,15819,NON-CLONE,2026-07-21 20:27:10,"```json
+{
+ ""answer"": ""YES-SIMILAR"",
+ ""explanation"": ""Both code snippets solve the same problem: processing a string of characters and outputting the 'last word' based on specific rules. The core logic, including the character manipulation and output format, is identical.""
+}
+```",380
+2016_2_1,198100,2013_0_3,51164,NON-CLONE,2026-07-21 20:27:11,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets have completely different purposes and structures. The first snippet implements a solution to the 'Fractiles' problem from Google Code Jam 2016, reading input, processing it, and writing output for each test case. The second snippet finds perfect squares within a given range and writes the count of such squares for each test case in a different input/output format.""
+}
+```",381
+2016_2_1,193717,2013_0_3,108834,NON-CLONE,2026-07-21 20:27:12,"```json
+{
+  ""answer"": ""YES-SIMILAR"",
+  ""explanation"": ""Both code snippets solve the same problem: given a range of numbers, find the number of palindromic numbers within that range. They use similar logic to iterate through the range, identify palindromic numbers, and accumulate a result. The main differences are in the syntax and the specific implementation details, but the overall algorithm and purpose remain the same.""
+}
+```",382
+2016_2_1,200006,2015_0_1,47939,NON-CLONE,2026-07-21 20:27:12,"```json
+{
+ ""answer"": ""NO-NOT-SIMILAR"",
+ ""explanation"": ""The two code snippets solve fundamentally different problems. The PHP code processes a string of characters, counts occurrences of specific letters, and constructs a result string based on those counts. The Java code reads an input string, extracts indices of specific characters, and counts the total number of steps required to process those characters in order.""
+}
+```",383

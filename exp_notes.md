@@ -901,7 +901,7 @@ datasets (9 runs) are chained sequentially on one GPU by `chain_aya_gguf_all.sh`
 from existing round CSVs):
 
 ```bash
-CUDA_VISIBLE_DEVICES=5 setsid bash chain_aya_gguf_all.sh \
+CUDA_VISIBLE_DEVICES=5 setsid bash scripts/chain_aya_gguf_all.sh \
   > logs/chain_aya_gguf_all.log 2>&1 < /dev/null &
 ```
 
@@ -1241,7 +1241,7 @@ CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH gguf/bin/python run_quantization.py ggu
 
 env -u PYTHONPATH gguf/bin/python evaluate_results.py \
   results_gcj_java/Qwen2.5-Coder-7B-Instruct/results_qwen_q4km_aizu_lora_round*.csv \
-  --mode majority-vote --output results_gcj_java/evaluation_summary_gcj_java.csv
+  --mode majority-vote --output summaries/evaluation_summary_gcj_java.csv
 ```
 
 Compare the resulting Acc/MCC against the plain Q4_K_M row (0.8175 / 0.6821) to

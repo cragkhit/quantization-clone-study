@@ -572,8 +572,59 @@ def load_qtip(hf_model: str | None = None):
     return _make_transformers_infer(model, tokenizer, max_new_tokens=256, warmup=True)
 
 
+def load_qwen36(hf_model: str | None = None):
+    """Qwen3.6-27B — a Qwen3.5-family multimodal (VLM) model, run TEXT-ONLY.
+
+    Served via **transformers**, not vLLM: every vLLM new enough to support the
+    `qwen3_5` architecture (>= 0.19) ships CUDA-13 kernels, and this box's driver
+    (535 / CUDA 12.2) cannot run them — a vLLM smoke test dies in the flash-attn
+    kernel with "CUDA driver version is insufficient". transformers uses torch's
+    cu128 kernels, which do work here. Needs `qwen36_venv`
+    (transformers >= 5.14, torch 2.8+cu128 with matching torchvision/torchaudio).
+    The 27B **dense** model fits one H100 in BF16 (~52 GB); pin a GPU with
+    CUDA_VISIBLE_DEVICES.
+
+    Text-only path: the model is loaded with `AutoModelForImageTextToText` but fed
+    text-only prompts via the plain tokenizer chat template — no processor/vision
+    inputs. Qwen3.6 is a hybrid *thinking* model whose template appends `<think>`
+    by default; we pass `enable_thinking=False` so it emits the JSON verdict
+    directly (empty think block) instead of a long reasoning trace that would
+    blow past max_new_tokens and fail JSON parsing.
+    """
+    from transformers import AutoModelForImageTextToText, AutoTokenizer
+    import torch
+
+    model_id = hf_model or "Qwen/Qwen3.6-27B"
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForImageTextToText.from_pretrained(
+        model_id, dtype=torch.bfloat16, device_map="auto",
+    )
+    model.eval()
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        messages = [{"role": "user", "content": prompt}]
+        text = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True,
+            enable_thinking=False,
+        )
+        inputs = tokenizer(text, return_tensors="pt").to(model.device)
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs, max_new_tokens=256,
+                do_sample=True, temperature=0.7, top_p=0.8, top_k=20,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+        return tokenizer.decode(
+            outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True
+        )
+
+    return infer
+
+
 LOADERS = {
     "original":   load_original,
+    "qwen36":     load_qwen36,
     "gguf":       load_gguf,
     "qwen":       load_qwen,
     "gguf_lora":  load_gguf_lora,

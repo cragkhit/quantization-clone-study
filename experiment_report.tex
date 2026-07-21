@@ -130,9 +130,10 @@ GCJ test sets, giving a clean cross-dataset train/test split.
 \begin{table}[htbp]
   \centering
   \caption{Base models and the quantizations evaluated. Bit-widths are the
-           nominal weight precision. GGUF quants: \texttt{bartowski} /
-           \texttt{QuantFactory} / official Qwen builds; AQLM+HIGGS:
-           \texttt{ISTA-DASLab}; QTIP: \texttt{relaxml}.}
+           nominal weight precision. ``FP'' marks whether a full-precision
+           (BF16) baseline was run. GGUF quants: \texttt{bartowski} /
+           \texttt{QuantFactory} / \texttt{cortexso} / official Qwen builds;
+           AQLM+HIGGS: \texttt{ISTA-DASLab}; QTIP: \texttt{relaxml}.}
   \label{tab:models}
   \small
   \begin{tabular}{llll}
@@ -145,6 +146,7 @@ GCJ test sets, giving a clean cross-dataset train/test split.
     DeepSeek-Coder-V2-Lite         & 16B (MoE, 2.4B act.) & BF16 & GGUF Q4\_K\_M \\
     Llama-4-Scout-17B-16E          & 109B (MoE, 17B act.) & BF16 & GGUF Q2\_K / Q3\_K\_S / Q4\_K\_M \\
     Codestral-22B-v0.1             & 22B           & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
+    cogito-v1-preview-llama-8B     & 8B            & ---  & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
     aya-expanse-8b                 & 8B            & BF16 & --- \\
     \bottomrule
   \end{tabular}

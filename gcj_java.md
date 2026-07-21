@@ -75,8 +75,21 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 - [x] **Original (BF16)** — `original` · `CohereLabs/aya-expanse-8b` · venv `aqlm_venv310` — *Acc 0.8333, F1 0.8398, MCC 0.6696* (4 excluded)
 
+## cogito-v1-preview-llama-8B
+
+- [x] **GGUF Q2_K** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q2_k.gguf` · venv `gguf` — *Acc 0.5525, F1 0.6865, MCC 0.2025*
+- [x] **GGUF Q3_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q3_k_m.gguf` · venv `gguf` — *Acc 0.6310, F1 0.7310, MCC 0.3701* (7 excluded)
+- [x] **GGUF Q4_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q4_k_m.gguf` · venv `gguf` — *Acc 0.8797, F1 0.8884, MCC 0.7680* (1 excluded)
+
+## Codestral-22B-v0.1
+
+- [x] **Original (BF16)** — `original` · `mistralai/Codestral-22B-v0.1` · venv `codestral_venv` — *Acc 0.9375, F1 0.9351, MCC 0.8775*
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q2_K.gguf` · venv `gguf` — *Acc 0.9350, F1 0.9350, MCC 0.8700*
+- [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q3_K_M.gguf` · venv `gguf` — *Acc 0.9350, F1 0.9347, MCC 0.8700*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9400, F1 0.9388, MCC 0.8807*
+
 ---
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
 
-**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.6821→0.9550), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9550 — identical on Java).
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.6821→0.9550), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9550 — identical on Java); Codestral-22B-v0.1 BF16 + GGUF Q2_K/Q3_K_M/Q4_K_M (added 2026-07-19, MCC 0.8775 BF16, ~0.87–0.88 across quants — near-lossless, Q4_K_M 0.8807 edges out BF16); cogito-v1-preview-llama-8B GGUF Q2_K/Q3_K_M/Q4_K_M (no BF16 run; steep bit-width sensitivity, MCC 0.2025/0.3701/0.7680).

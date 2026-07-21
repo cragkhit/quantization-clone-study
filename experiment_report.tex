@@ -171,36 +171,43 @@ bit-widths and methods against its BF16 baseline, on all three datasets.
 
 \begin{table}[htbp]
   \centering
-  \caption{RQ1 --- MCC vs.\ bit-width for Meta-Llama-3.1-8B (5-round majority
-           vote). Higher bit-width monotonically improves MCC; the best 4-bit
-           methods match or exceed the BF16 baseline.}
+  \caption{RQ1 --- MCC vs.\ bit-width for Meta-Llama-3.1-8B (all four methods)
+           and cogito-v1-preview-llama-8B (GGUF), 5-round majority vote. Higher
+           bit-width monotonically improves MCC; the best 4-bit methods match or
+           exceed the BF16 baseline. Cogito has no BF16 baseline run.}
   \label{tab:rq1}
   \small
-  \begin{tabular}{llccc}
+  \begin{tabular}{lllccc}
     \toprule
-    \textbf{Config} & \textbf{Bits} & \textbf{OCD} & \textbf{GCJ-Java} & \textbf{GCJ x-lang} \\
+    \textbf{Model} & \textbf{Config} & \textbf{Bits} & \textbf{OCD} & \textbf{GCJ-Java} & \textbf{GCJ x-lang} \\
     \midrule
-    BF16 (baseline)      & 16 & 0.473 & 0.458 & 0.325 \\
+    Llama-3.1-8B & BF16 (baseline)      & 16 & 0.473 & 0.458 & 0.325 \\
     \midrule
-    AQLM                 & 2  & 0.151 & 0.176 & 0.103 \\
-    GGUF Q2\_K           & 2  & 0.161 & 0.204 & 0.097 \\
-    QTIP                 & 2  & 0.279 & 0.275 & 0.030 \\
+    Llama-3.1-8B & AQLM                 & 2  & 0.151 & 0.176 & 0.103 \\
+    Llama-3.1-8B & GGUF Q2\_K           & 2  & 0.161 & 0.204 & 0.097 \\
+    Llama-3.1-8B & QTIP                 & 2  & 0.279 & 0.275 & 0.030 \\
     \midrule
-    GGUF Q3\_K\_M        & 3  & 0.245 & 0.213 & 0.159 \\
-    HIGGS-GPTQ           & 3  & 0.373 & 0.339 & 0.191 \\
-    QTIP                 & 3  & 0.450 & 0.421 & 0.269 \\
+    Llama-3.1-8B & GGUF Q3\_K\_M        & 3  & 0.245 & 0.213 & 0.159 \\
+    Llama-3.1-8B & HIGGS-GPTQ           & 3  & 0.373 & 0.339 & 0.191 \\
+    Llama-3.1-8B & QTIP                 & 3  & 0.450 & 0.421 & 0.269 \\
     \midrule
-    GGUF Q4\_K\_M        & 4  & 0.367 & 0.270 & 0.265 \\
-    HIGGS-GPTQ           & 4  & 0.463 & 0.382 & 0.246 \\
-    QTIP                 & 4  & \best{0.490} & \best{0.474} & \best{0.304} \\
+    Llama-3.1-8B & GGUF Q4\_K\_M        & 4  & 0.367 & 0.270 & 0.265 \\
+    Llama-3.1-8B & HIGGS-GPTQ           & 4  & 0.463 & 0.382 & 0.246 \\
+    Llama-3.1-8B & QTIP                 & 4  & \best{0.490} & \best{0.474} & \best{0.304} \\
+    \midrule
+    cogito-8B    & GGUF Q2\_K           & 2  & 0.471 & 0.203 & 0.179 \\
+    cogito-8B    & GGUF Q3\_K\_M        & 3  & 0.541 & 0.370 & 0.291 \\
+    cogito-8B    & GGUF Q4\_K\_M        & 4  & 0.776 & 0.768 & 0.701 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \noindent\textbf{Findings.} (i) MCC increases monotonically with bit-width
-within every method (2b $<$ 3b $<$ 4b). (ii) Aggressive 2-bit quantization is
-severely damaging: MCC collapses to $0.03$--$0.28$, far below BF16. (iii)
-The impact is \emph{not} uniform across models: for the strong
+within every method and model (2b $<$ 3b $<$ 4b); cogito shows the steepest such
+climb (GCJ-Java $0.20\!\rightarrow\!0.37\!\rightarrow\!0.77$), underscoring that
+low-bit GGUF can cripple a model that is strong at 4-bit. (ii) Aggressive 2-bit
+quantization is severely damaging: MCC collapses to $0.03$--$0.28$, far below
+BF16. (iii) The impact is \emph{not} uniform across models: for the strong
 \textbf{Qwen2.5-Coder-7B}, quantization is nearly lossless --- on OCD its BF16
 MCC is $0.998$ and every GGUF quant (Q2/Q3/Q4) stays $\ge 0.998$; on GCJ-Java
 Q2\_K ($0.825$) even \emph{exceeds} BF16 ($0.601$). Thus bit-width matters most
@@ -274,6 +281,7 @@ type (syntactic OCD vs.\ semantic GCJ).
     Qwen2.5-Coder-7B (Q4\_K\_M)       & 0.998 & 0.682 & 0.734 & $+0.052$ \\
     Llama-4-Scout-17B (Q4\_K\_M)      & 0.908 & 0.923 & 0.933 & $+0.010$ \\
     DeepSeek-V2-Lite (Q4\_K\_M)       & 0.733 & 0.816 & 0.747 & $-0.069$ \\
+    cogito-8B (Q4\_K\_M)              & 0.776 & 0.768 & 0.701 & $-0.067$ \\
     Meta-Llama-3.1-8B (Q4\_K\_M)      & 0.367 & 0.270 & 0.265 & $-0.005$ \\
     CodeLlama-7b (Q4\_K\_M)           & 0.048 & 0.051 & 0.000 & $-0.051$ \\
     \bottomrule

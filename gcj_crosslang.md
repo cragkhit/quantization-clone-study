@@ -65,8 +65,14 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 
 - [x] **Original (BF16)** — `original` · `CohereLabs/aya-expanse-8b` · venv `aqlm_venv310` — *Acc 0.7995, F1 0.8031, MCC 0.5994* (0 excluded)
 
+## cogito-v1-preview-llama-8B
+
+- [x] **GGUF Q2_K** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q2_k.gguf` · venv `gguf` — *Acc 0.5681, F1 0.6771, MCC 0.1787* (2 excluded)
+- [x] **GGUF Q3_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q3_k_m.gguf` · venv `gguf` — *Acc 0.5937, F1 0.7105, MCC 0.2911* (5 excluded)
+- [x] **GGUF Q4_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q4_k_m.gguf` · venv `gguf` — *Acc 0.8407, F1 0.8578, MCC 0.7009* (1 excluded)
+
 ---
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
 
-**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.7339→0.9118), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9169 — ~tie).
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.7339→0.9118), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9169 — ~tie); cogito-v1-preview-llama-8B GGUF Q2_K/Q3_K_M/Q4_K_M (no BF16 run; steep bit-width sensitivity, MCC 0.1787/0.2911/0.7009).

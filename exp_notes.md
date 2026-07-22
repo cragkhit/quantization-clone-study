@@ -916,13 +916,24 @@ gguf/bin/python run_quantization.py gguf \
   --rounds 5
 ```
 
-Results (5-round majority vote) — filled in as runs complete:
+Results (5-round majority vote MCC; BF16 baseline from the table above):
 
-| Variant | GCJ-Java MCC | GCJ-XLang MCC | OCD MCC |
+| Variant | GCJ-Java | GCJ-XLang | OCD |
 | --- | --- | --- | --- |
-| GGUF Q2\_K | _pending_ | _pending_ | _pending_ |
-| GGUF Q3\_K\_M | _pending_ | _pending_ | _pending_ |
-| GGUF Q4\_K\_M | _pending_ | _pending_ | _pending_ |
+| Original (BF16) | 0.6696 | 0.5994 | 0.7424 |
+| GGUF Q4\_K\_M | **0.6744** | 0.5514 | 0.5711 |
+| GGUF Q3\_K\_M | 0.6460 | 0.5526 | **0.7359** |
+| GGUF Q2\_K | 0.3910 | 0.3970 | 0.2146 |
+
+Q4\_K\_M is ~lossless vs BF16 on the GCJ sets (Java edges it out, 0.6744 vs 0.6696);
+Q3\_K\_M is close; **Q2\_K collapses** (steep 2-bit sensitivity, worst on OCD, 0.7424→0.2146,
+where it degenerates toward predicting CLONE — recall 1.0, precision 0.14).
+
+**Non-monotonic on OCD:** Q3\_K\_M (0.7359) > Q4\_K\_M (0.5711). OCD's n×n product is
+heavily class-imbalanced (~10 % clone pairs), and Q4\_K\_M over-predicts CLONE
+(precision 0.39, recall 1.00) while Q3\_K\_M stays more selective (precision 0.59),
+so on this imbalanced set the lower-bit quant scores higher on MCC. The GCJ sets are
+balanced (50/50) and there Q4\_K\_M ≥ Q3\_K\_M as expected.
 
 ## Codestral-22B-v0.1 Setup
 

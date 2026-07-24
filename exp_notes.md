@@ -330,6 +330,78 @@ python run_quantization.py gguf \
   1 2>&1 | tee logs/run_gguf_q4km.log
 ```
 
+### Producing our own GGUF quants (models without a community GGUF)
+
+When no community GGUF exists for a model, we quantize it ourselves with the
+**llama.cpp** tooling (this is how bartowski's files are made). Cloned to
+`./llama.cpp/`. The pipeline is: **HF weights → F16 GGUF → quantized GGUF**.
+
+**Always quantize from the BF16/FP16 base, not an FP8/quantized checkpoint.** FP8
+(and other pre-quantized) weights are already lossy; converting FP8 → GGUF → Q2/Q3
+compounds two rounds of quantization error (and the converter expects unquantized
+BF16/FP16 tensors anyway). E.g. for Qwen3-Coder-30B-A3B, quantize
+`Qwen/Qwen3-Coder-30B-A3B-Instruct` (BF16), **not** the `-FP8` variant we serve via
+vLLM.
+
+**1. Build the llama.cpp binaries for sm_90.** The `gguf` venv's `llama-cpp-python`
+does not ship the standalone `llama-quantize` / `llama-imatrix` executables, so build
+them from the `./llama.cpp/` checkout. No system `cmake`; install it (and `ninja`)
+into the `gguf` venv. Same sm_90 + gcc-11 rules as the `llama-cpp-python` rebuild
+(nvcc 12.2 rejects gcc-13, so `-DCMAKE_CUDA_HOST_COMPILER=g++-11`):
+
+```bash
+gguf/bin/pip install cmake ninja
+export PATH="$PWD/gguf/bin:$PATH"
+cd llama.cpp
+CC=gcc-11 CXX=g++-11 cmake -B build -G Ninja -DGGML_CUDA=ON \
+  -DCMAKE_CUDA_ARCHITECTURES=90 -DCMAKE_CUDA_HOST_COMPILER=g++-11 -DLLAMA_CURL=OFF
+cmake --build build -j 16 --target llama-quantize llama-imatrix llama-cli
+```
+
+Binaries land in `llama.cpp/build/bin/`. (`llama-quantize` is CPU-only; the CUDA
+build is only needed to make `llama-imatrix` fast — see the imatrix note below.)
+Recent llama.cpp moved the per-arch converter classes into `convert_hf_to_gguf.py`'s
+`conversion/` submodule; Qwen3-Coder MoE is `Qwen3MoeForCausalLM`
+(`conversion/qwen.py`), so it is supported.
+
+**2. Download the BF16 base** (use `HF_HUB_DISABLE_XET=1`; the xet backend stalls on
+large shards — same lesson as the Codestral GGUF download):
+
+```bash
+HF_HUB_DISABLE_XET=1 gguf/bin/python -c "
+from huggingface_hub import snapshot_download
+snapshot_download('Qwen/Qwen3-Coder-30B-A3B-Instruct',
+    local_dir='models/Qwen3-Coder-30B-A3B-Instruct',
+    allow_patterns=['*.safetensors','*.json','*.txt','tokenizer*','*.py'])"
+```
+
+**3. Convert HF → F16 GGUF** (repackages weights; no quantization yet):
+
+```bash
+gguf/bin/python llama.cpp/convert_hf_to_gguf.py models/Qwen3-Coder-30B-A3B-Instruct \
+  --outfile models/Qwen3-Coder-30B-A3B-Instruct-F16.gguf --outtype f16
+```
+
+**4. Quantize F16 → target bit-widths.** One call per type; the type list is in
+`llama-quantize --help`:
+
+```bash
+Q=llama.cpp/build/bin/llama-quantize
+BASE=models/Qwen3-Coder-30B-A3B-Instruct
+$Q "$BASE-F16.gguf" "$BASE-Q3_K_M.gguf" Q3_K_M
+$Q "$BASE-F16.gguf" "$BASE-Q2_K.gguf"   Q2_K
+```
+
+These self-made files then feed the `gguf` backend exactly like a community GGUF —
+point `--output` at a `results_*/Qwen3-Coder-30B-A3B-Instruct/` path and pass the
+local `.gguf` path as the `hf_model` arg (a plain path, no `repo::file` needed).
+
+**imatrix (optional, skipped here).** For the best low-bit (Q2_K/Q3_K) quality —
+especially on a sparse MoE — first compute an importance matrix
+(`llama-imatrix -m …-F16.gguf -f calibration.txt -o model.imatrix -ngl 99`) and pass
+`--imatrix model.imatrix` to `llama-quantize`. This Qwen3-Coder run was done **without**
+imatrix (plain uniform-importance quantization) by choice.
+
 ---
 
 ## HIGGS-GPTQ Setup

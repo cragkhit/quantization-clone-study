@@ -375,21 +375,30 @@ snapshot_download('Qwen/Qwen3-Coder-30B-A3B-Instruct',
     allow_patterns=['*.safetensors','*.json','*.txt','tokenizer*','*.py'])"
 ```
 
-**3. Convert HF → F16 GGUF** (repackages weights; no quantization yet):
+**3. Convert HF → F16 GGUF** (repackages weights; no quantization yet). The
+converter needs **torch + safetensors**, which the `gguf` venv (inference-only
+`llama-cpp-python`, no torch) does not have — use **`aqlm_venv310`** with the
+checkout's `gguf-py` on `PYTHONPATH`:
 
 ```bash
-gguf/bin/python llama.cpp/convert_hf_to_gguf.py models/Qwen3-Coder-30B-A3B-Instruct \
+PYTHONPATH=llama.cpp/gguf-py aqlm_venv310/bin/python \
+  llama.cpp/convert_hf_to_gguf.py models/Qwen3-Coder-30B-A3B-Instruct \
   --outfile models/Qwen3-Coder-30B-A3B-Instruct-F16.gguf --outtype f16
 ```
 
-**4. Quantize F16 → target bit-widths.** One call per type; the type list is in
-`llama-quantize --help`:
+Produces a **61 GB** F16 GGUF (30B params, 579 tensors). The conversion is
+CPU/IO-bound (~5 min to write the file).
+
+**4. Quantize F16 → target bit-widths.** One `llama-quantize` call per type (the
+type list is in `llama-quantize --help`). Each pass is CPU-bound, ~3 min for this
+30B MoE; run detached (a 2-min foreground tool timeout will SIGTERM it mid-write):
 
 ```bash
 Q=llama.cpp/build/bin/llama-quantize
 BASE=models/Qwen3-Coder-30B-A3B-Instruct
-$Q "$BASE-F16.gguf" "$BASE-Q3_K_M.gguf" Q3_K_M
-$Q "$BASE-F16.gguf" "$BASE-Q2_K.gguf"   Q2_K
+$Q "$BASE-F16.gguf" "$BASE-Q4_K_M.gguf" Q4_K_M   # ~18 GB
+$Q "$BASE-F16.gguf" "$BASE-Q3_K_M.gguf" Q3_K_M   # 14.7 GB
+$Q "$BASE-F16.gguf" "$BASE-Q2_K.gguf"   Q2_K     # 11.3 GB
 ```
 
 These self-made files then feed the `gguf` backend exactly like a community GGUF —

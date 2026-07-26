@@ -405,6 +405,25 @@ These self-made files then feed the `gguf` backend exactly like a community GGUF
 point `--output` at a `results_*/Qwen3-Coder-30B-A3B-Instruct/` path and pass the
 local `.gguf` path as the `hf_model` arg (a plain path, no `repo::file` needed).
 
+**`load_gguf` local-path support.** `load_gguf` now accepts a **local `.gguf` file
+path** in addition to `repo_id` / `repo_id::filename.gguf`: if `hf_model` ends in
+`.gguf` and the file exists, it loads via `Llama(model_path=…)` instead of
+`Llama.from_pretrained(...)` (which only pulls from the Hub). Everything else
+(`n_gpu_layers=-1`, `n_ctx=16384`, chat-completion infer) is unchanged.
+
+### Study integration (BF16-sourced GGUF sweep)
+
+All three self-made quants × all three datasets (9 runs) are chained on one GPU by
+`scripts/chain_qwen3_bf16gguf_all.sh` (six quick GCJ runs first, then the three long
+OCD runs; auto-resumes). Results land under a `Qwen3-Coder-30B-A3B-Instruct/` dir
+(distinct from the community-FP8 `Qwen3-Coder-30B-A3B-Instruct-FP8/` already in the
+study), with `results_gguf_…` stems so the evaluator groups them as GGUF quants:
+
+```bash
+CUDA_VISIBLE_DEVICES=6 setsid bash scripts/chain_qwen3_bf16gguf_all.sh \
+  > logs/chain_qwen3_bf16gguf_all.log 2>&1 < /dev/null &
+```
+
 **imatrix (optional, skipped here).** For the best low-bit (Q2_K/Q3_K) quality —
 especially on a sparse MoE — first compute an importance matrix
 (`llama-imatrix -m …-F16.gguf -f calibration.txt -o model.imatrix -ngl 99`) and pass

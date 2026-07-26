@@ -1180,7 +1180,20 @@ GPU=4 setsid bash scripts/chain_qwen36_all.sh > logs/chain_qwen36_all.log 2>&1 <
 
 ### Results (5-round majority vote)
 
-_Runs in progress (launched 2026-07-22); table to be filled in when complete._
+All three datasets completed 2026-07-27 (launched 2026-07-22; OCD alone took
+~4.5 days at ~8 s/pair). 0 excluded on every dataset — the `enable_thinking=False`
+JSON verdict parsed cleanly on all 12,304 pairs × 5 rounds.
+
+| Dataset | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| GCJ-Java (400) | 0.9450 | 1.0000 | 0.8900 | 0.9418 | 0.8954 | 0 |
+| GCJ cross-language (384) | 0.9271 | 0.9881 | 0.8646 | 0.9222 | 0.8609 | 0 |
+| OCD (10,000) | 0.9926 | 1.0000 | 0.9260 | 0.9616 | 0.9584 | 0 |
+
+Notably high precision throughout (1.0 on both GCJ-Java and OCD) — the model is
+conservative about calling CLONE, trading some recall for near-zero false
+positives. The OCD MCC (0.9584) is the highest of any model in the OCD study,
+ahead of Qwen3-Coder-30B-A3B-FP8 (0.9307).
 
 ## Datasets
 

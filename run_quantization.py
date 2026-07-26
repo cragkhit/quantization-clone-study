@@ -204,26 +204,36 @@ def load_deepseek(hf_model: str | None = None):
 
 def load_gguf(hf_model: str | None = None):
     """GGUF Q4_K_M. pip install llama-cpp-python
-    hf_model format: 'repo_id' or 'repo_id::filename.gguf'
+    hf_model format: 'repo_id', 'repo_id::filename.gguf', or a local path to a
+    '.gguf' file (e.g. a self-quantized model under models/).
     """
     from llama_cpp import Llama
 
     default_repo = "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
     default_file = "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
 
-    if hf_model and "::" in hf_model:
-        repo_id, filename = hf_model.split("::", 1)
+    if hf_model and hf_model.endswith(".gguf") and Path(hf_model).is_file():
+        # Local GGUF file (self-quantized via llama.cpp); load it directly.
+        llm = Llama(
+            model_path=hf_model,
+            n_gpu_layers=-1,
+            n_ctx=16384,
+            verbose=False,
+        )
     else:
-        repo_id = hf_model or default_repo
-        filename = default_file
+        if hf_model and "::" in hf_model:
+            repo_id, filename = hf_model.split("::", 1)
+        else:
+            repo_id = hf_model or default_repo
+            filename = default_file
 
-    llm = Llama.from_pretrained(
-        repo_id=repo_id,
-        filename=filename,
-        n_gpu_layers=-1,
-        n_ctx=16384,
-        verbose=False,
-    )
+        llm = Llama.from_pretrained(
+            repo_id=repo_id,
+            filename=filename,
+            n_gpu_layers=-1,
+            n_ctx=16384,
+            verbose=False,
+        )
 
     def infer(content_a: str, content_b: str, lang: str) -> str:
         prompt = build_prompt(content_a, content_b, lang)

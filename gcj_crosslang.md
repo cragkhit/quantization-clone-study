@@ -64,6 +64,9 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 ## aya-expanse-8b
 
 - [x] **Original (BF16)** — `original` · `CohereLabs/aya-expanse-8b` · venv `aqlm_venv310` — *Acc 0.7995, F1 0.8031, MCC 0.5994* (0 excluded)
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q2_K.gguf` · venv `gguf` — *Acc 0.6927, F1 0.7256, MCC 0.3970* (0 excluded)
+- [x] **GGUF Q3_K_M** — `gguf` · `bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q3_K_M.gguf` · venv `gguf` — *Acc 0.7760, F1 0.7713, MCC 0.5526* (0 excluded)
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q4_K_M.gguf` · venv `gguf` — *Acc 0.7708, F1 0.7905, MCC 0.5514* (0 excluded)
 
 ## cogito-v1-preview-llama-8B
 
@@ -78,8 +81,12 @@ deepseek→GPU3, qwen→GPU5, scout_gguf→GPU6).
 - [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q3_K_M.gguf` · venv `gguf` — *Acc 0.8672, F1 0.8806, MCC 0.7535*
 - [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q4_K_M.gguf` · venv `gguf` — *Acc 0.8984, F1 0.9056, MCC 0.8061*
 
+## Qwen3.6-27B
+
+- [x] **Text-only (BF16)** — `qwen36` · `Qwen/Qwen3.6-27B` · venv `qwen36_venv` — *Acc 0.9271, F1 0.9222, MCC 0.8609* (multimodal model run text-only; `enable_thinking=False` — see exp_notes.md)
+
 ---
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
 
-**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.7339→0.9118), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9169 — ~tie); cogito-v1-preview-llama-8B GGUF Q2_K/Q3_K_M/Q4_K_M (no BF16 run; steep bit-width sensitivity, MCC 0.1787/0.2911/0.7009); Codestral-22B-v0.1 BF16 + GGUF Q2_K/Q3_K_M/Q4_K_M (added 2026-07-22, MCC 0.8251 BF16, near-lossless quants 0.76–0.81).
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.7339→0.9118), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9169 — ~tie); cogito-v1-preview-llama-8B GGUF Q2_K/Q3_K_M/Q4_K_M (no BF16 run; steep bit-width sensitivity, MCC 0.1787/0.2911/0.7009); Codestral-22B-v0.1 BF16 + GGUF Q2_K/Q3_K_M/Q4_K_M (added 2026-07-22, MCC 0.8251 BF16, near-lossless quants 0.76–0.81); Qwen3.6-27B text-only (added 2026-07-27, MCC 0.8609 — multimodal model driven through the text-only chat path via the new `qwen36` backend; vLLM builds new enough for its `qwen3_5` architecture need CUDA 13, incompatible with this box's driver, so it runs on transformers).

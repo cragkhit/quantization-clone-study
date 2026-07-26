@@ -13,6 +13,7 @@
     \multicolumn{8}{l}{\textit{Original (FP16)}} \\
     \midrule
     CodeLlama-7b-Instruct-hf & 10000 & 5731 & 4269 & 1000 & 4729 & 0 & 2 \\
+    Codestral-22B-v0.1 & 10000 & 10000 & 0 & 998 & 56 & 2 & 8944 \\
     deepseek\_coder\_v2\_lite & 10000 & 10000 & 0 & 1000 & 307 & 0 & 8693 \\
     Llama-4-Scout-17B-16E-Instruct & 10000 & 10000 & 0 & 1000 & 205 & 0 & 8795 \\
     Meta-Llama-3.1-8B-Instruct & 10000 & 9622 & 378 & 1000 & 2282 & 0 & 6340 \\
@@ -24,6 +25,9 @@
     CodeLlama-7b-Instruct-hf-GGUF\_CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 9000 & 0 & 0 \\
     CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 10000 & 7565 & 2435 & 1000 & 6563 & 0 & 2 \\
     CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 10000 & 9582 & 418 & 1000 & 8393 & 0 & 189 \\
+    Codestral-22B-v0.1-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 59 & 0 & 8941 \\
+    Codestral-22B-v0.1-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 52 & 0 & 8948 \\
+    Codestral-22B-v0.1-Q4\_K\_M.gguf & 10000 & 9991 & 9 & 999 & 68 & 1 & 8923 \\
     deepseek\_coder\_v2\_lite\_q4km & 10000 & 10000 & 0 & 1000 & 712 & 0 & 8288 \\
     llama4\_scout\_Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 283 & 0 & 8717 \\
     llama4\_scout\_Q3\_K\_S.gguf & 10000 & 10000 & 0 & 1000 & 141 & 0 & 8859 \\
@@ -34,6 +38,10 @@
     qwen2.5\_coder\_7B\_q2k & 10000 & 9182 & 818 & 999 & 0 & 1 & 8182 \\
     qwen2.5\_coder\_7B\_q3km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 \\
     qwen2.5\_coder\_7B\_q4km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 969 & 0 & 31 & 9000 \\
+    aya-expanse-8b-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 6069 & 0 & 2931 \\
+    aya-expanse-8b-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 700 & 1 & 8300 \\
+    aya-expanse-8b-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 1541 & 0 & 7459 \\
     cogito-v1-preview-llama-8b-q2\_k.gguf & 10000 & 9957 & 43 & 991 & 2287 & 9 & 6670 \\
     cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 10000 & 9851 & 149 & 1000 & 1742 & 0 & 7109 \\
     cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 10000 & 9993 & 7 & 1000 & 559 & 0 & 8434 \\
@@ -57,6 +65,7 @@
     \midrule
     results\_qwen3\_coder\_30B\_a3b\_fp8 & 10000 & 10000 & 0 & 878 & 0 & 122 & 9000 \\
     results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 10000 & 9994 & 6 & 919 & 0 & 81 & 8994 \\
+    results\_qwen36\_Qwen\_\_Qwen3.6-27B & 10000 & 10000 & 0 & 926 & 0 & 74 & 9000 \\
     \bottomrule
   \end{tabular}
   }
@@ -75,6 +84,7 @@
     \multicolumn{6}{l}{\textit{Original (FP16)}} \\
     \midrule
     CodeLlama-7b-Instruct-hf & 0.175 & 0.175 & 1.000 & 0.297 & 0.009 \\
+    Codestral-22B-v0.1 & 0.994 & 0.947 & 0.998 & 0.972 & 0.969 \\
     deepseek\_coder\_v2\_lite & 0.969 & 0.765 & 1.000 & 0.867 & 0.860 \\
     Llama-4-Scout-17B-16E-Instruct & 0.980 & 0.830 & 1.000 & 0.907 & 0.900 \\
     Meta-Llama-3.1-8B-Instruct & 0.763 & 0.305 & 1.000 & 0.467 & 0.473 \\
@@ -86,6 +96,9 @@
     CodeLlama-7b-Instruct-hf-GGUF\_CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 0.100 & 0.100 & 1.000 & 0.182 & 0.000 \\
     CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 0.133 & 0.132 & 1.000 & 0.234 & 0.006 \\
     CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 0.124 & 0.106 & 1.000 & 0.192 & 0.048 \\
+    Codestral-22B-v0.1-Q2\_K.gguf & 0.994 & 0.944 & 1.000 & 0.971 & 0.969 \\
+    Codestral-22B-v0.1-Q3\_K\_M.gguf & 0.995 & 0.951 & 1.000 & 0.975 & 0.972 \\
+    Codestral-22B-v0.1-Q4\_K\_M.gguf & 0.993 & 0.936 & 0.999 & 0.967 & 0.963 \\
     deepseek\_coder\_v2\_lite\_q4km & 0.929 & 0.584 & 1.000 & 0.738 & 0.733 \\
     llama4\_scout\_Q2\_K.gguf & 0.972 & 0.779 & 1.000 & 0.876 & 0.869 \\
     llama4\_scout\_Q3\_K\_S.gguf & 0.986 & 0.876 & 1.000 & 0.934 & 0.929 \\
@@ -96,6 +109,10 @@
     qwen2.5\_coder\_7B\_q2k & 1.000 & 1.000 & 0.999 & 1.000 & \cellcolor{green!50}0.999 \\
     qwen2.5\_coder\_7B\_q3km & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!30}0.998 \\
     qwen2.5\_coder\_7B\_q4km & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!20}0.998 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q2\_K.gguf & 0.997 & 1.000 & 0.969 & 0.984 & \cellcolor{green!10}0.983 \\
+    aya-expanse-8b-Q2\_K.gguf & 0.393 & 0.141 & 1.000 & 0.248 & 0.215 \\
+    aya-expanse-8b-Q3\_K\_M.gguf & 0.930 & 0.588 & 0.999 & 0.740 & 0.736 \\
+    aya-expanse-8b-Q4\_K\_M.gguf & 0.846 & 0.394 & 1.000 & 0.565 & 0.571 \\
     cogito-v1-preview-llama-8b-q2\_k.gguf & 0.769 & 0.302 & 0.991 & 0.463 & 0.470 \\
     cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 0.823 & 0.365 & 1.000 & 0.534 & 0.541 \\
     cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 0.944 & 0.641 & 1.000 & 0.782 & 0.776 \\
@@ -118,7 +135,8 @@
     \multicolumn{6}{l}{\textit{Other}} \\
     \midrule
     results\_qwen3\_coder\_30B\_a3b\_fp8 & 0.988 & 1.000 & 0.878 & 0.935 & 0.931 \\
-    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 0.992 & 1.000 & 0.919 & 0.958 & \cellcolor{green!10}0.954 \\
+    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 0.992 & 1.000 & 0.919 & 0.958 & 0.954 \\
+    results\_qwen36\_Qwen\_\_Qwen3.6-27B & 0.993 & 1.000 & 0.926 & 0.962 & 0.958 \\
     \bottomrule
   \end{tabular}
   }
@@ -137,6 +155,7 @@
     \multicolumn{13}{l}{\textit{Original (FP16)}} \\
     \midrule
     CodeLlama-7b-Instruct-hf & 10000 & 5731 & 4269 & 1000 & 4729 & 0 & 2 & 0.175 & 0.175 & 1.000 & 0.297 & 0.009 \\
+    Codestral-22B-v0.1 & 10000 & 10000 & 0 & 998 & 56 & 2 & 8944 & 0.994 & 0.947 & 0.998 & 0.972 & 0.969 \\
     deepseek\_coder\_v2\_lite & 10000 & 10000 & 0 & 1000 & 307 & 0 & 8693 & 0.969 & 0.765 & 1.000 & 0.867 & 0.860 \\
     Llama-4-Scout-17B-16E-Instruct & 10000 & 10000 & 0 & 1000 & 205 & 0 & 8795 & 0.980 & 0.830 & 1.000 & 0.907 & 0.900 \\
     Meta-Llama-3.1-8B-Instruct & 10000 & 9622 & 378 & 1000 & 2282 & 0 & 6340 & 0.763 & 0.305 & 1.000 & 0.467 & 0.473 \\
@@ -148,6 +167,9 @@
     CodeLlama-7b-Instruct-hf-GGUF\_CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 9000 & 0 & 0 & 0.100 & 0.100 & 1.000 & 0.182 & 0.000 \\
     CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 10000 & 7565 & 2435 & 1000 & 6563 & 0 & 2 & 0.133 & 0.132 & 1.000 & 0.234 & 0.006 \\
     CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 10000 & 9582 & 418 & 1000 & 8393 & 0 & 189 & 0.124 & 0.106 & 1.000 & 0.192 & 0.048 \\
+    Codestral-22B-v0.1-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 59 & 0 & 8941 & 0.994 & 0.944 & 1.000 & 0.971 & 0.969 \\
+    Codestral-22B-v0.1-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 52 & 0 & 8948 & 0.995 & 0.951 & 1.000 & 0.975 & 0.972 \\
+    Codestral-22B-v0.1-Q4\_K\_M.gguf & 10000 & 9991 & 9 & 999 & 68 & 1 & 8923 & 0.993 & 0.936 & 0.999 & 0.967 & 0.963 \\
     deepseek\_coder\_v2\_lite\_q4km & 10000 & 10000 & 0 & 1000 & 712 & 0 & 8288 & 0.929 & 0.584 & 1.000 & 0.738 & 0.733 \\
     llama4\_scout\_Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 283 & 0 & 8717 & 0.972 & 0.779 & 1.000 & 0.876 & 0.869 \\
     llama4\_scout\_Q3\_K\_S.gguf & 10000 & 10000 & 0 & 1000 & 141 & 0 & 8859 & 0.986 & 0.876 & 1.000 & 0.934 & 0.929 \\
@@ -158,6 +180,10 @@
     qwen2.5\_coder\_7B\_q2k & 10000 & 9182 & 818 & 999 & 0 & 1 & 8182 & 1.000 & 1.000 & 0.999 & 1.000 & \cellcolor{green!50}0.999 \\
     qwen2.5\_coder\_7B\_q3km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!30}0.998 \\
     qwen2.5\_coder\_7B\_q4km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!20}0.998 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 969 & 0 & 31 & 9000 & 0.997 & 1.000 & 0.969 & 0.984 & \cellcolor{green!10}0.983 \\
+    aya-expanse-8b-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 6069 & 0 & 2931 & 0.393 & 0.141 & 1.000 & 0.248 & 0.215 \\
+    aya-expanse-8b-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 700 & 1 & 8300 & 0.930 & 0.588 & 0.999 & 0.740 & 0.736 \\
+    aya-expanse-8b-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 1541 & 0 & 7459 & 0.846 & 0.394 & 1.000 & 0.565 & 0.571 \\
     cogito-v1-preview-llama-8b-q2\_k.gguf & 10000 & 9957 & 43 & 991 & 2287 & 9 & 6670 & 0.769 & 0.302 & 0.991 & 0.463 & 0.470 \\
     cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 10000 & 9851 & 149 & 1000 & 1742 & 0 & 7109 & 0.823 & 0.365 & 1.000 & 0.534 & 0.541 \\
     cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 10000 & 9993 & 7 & 1000 & 559 & 0 & 8434 & 0.944 & 0.641 & 1.000 & 0.782 & 0.776 \\
@@ -180,7 +206,8 @@
     \multicolumn{13}{l}{\textit{Other}} \\
     \midrule
     results\_qwen3\_coder\_30B\_a3b\_fp8 & 10000 & 10000 & 0 & 878 & 0 & 122 & 9000 & 0.988 & 1.000 & 0.878 & 0.935 & 0.931 \\
-    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 10000 & 9994 & 6 & 919 & 0 & 81 & 8994 & 0.992 & 1.000 & 0.919 & 0.958 & \cellcolor{green!10}0.954 \\
+    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 10000 & 9994 & 6 & 919 & 0 & 81 & 8994 & 0.992 & 1.000 & 0.919 & 0.958 & 0.954 \\
+    results\_qwen36\_Qwen\_\_Qwen3.6-27B & 10000 & 10000 & 0 & 926 & 0 & 74 & 9000 & 0.993 & 1.000 & 0.926 & 0.962 & 0.958 \\
     \bottomrule
   \end{tabular}
   }

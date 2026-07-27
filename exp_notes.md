@@ -1114,6 +1114,41 @@ slightly edges out full precision.
 | GGUF Q3\_K\_M | 0.9350 | 0.9394 | 0.9300 | 0.9347 | 0.8700 | 0 |
 | GGUF Q4\_K\_M | 0.9400 | 0.9583 | 0.9200 | 0.9388 | 0.8807 | 0 |
 
+### Results (GCJ cross-language, 5-round majority vote)
+
+Codestral was initially only run on GCJ-Java; the cross-language sweep
+(`gcj_crosslang_clones/pairs.csv`) was filled in later with the same commands
+(swap `--pairs-file` and `--output`). Same pattern as GCJ-Java — quantization
+stays close to BF16, with Q2\_K/Q3\_K\_M costing a bit more MCC than on Java.
+
+| Variant | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| Original (BF16) | 0.9115 | — | — | 0.9146 | 0.8251 | 0 |
+| GGUF Q2\_K | 0.8724 | — | — | 0.8847 | 0.7624 | 0 |
+| GGUF Q3\_K\_M | 0.8672 | — | — | 0.8806 | 0.7535 | 0 |
+| GGUF Q4\_K\_M | 0.8984 | — | — | 0.9056 | 0.8061 | 0 |
+
+### Results (OCD, 5-round majority vote)
+
+The OCD sweep (`--tests-dir ocd/tests`, no `--pairs-file`) was the last dataset
+filled in, run on idle GPUs with the same `original`/`gguf` commands (see
+[Experimental Environment](#experimental-environment) for the GPU-contention
+note that pushed the GGUF chain's Q4\_K\_M leg onto a dedicated idle GPU
+mid-run). OCD is syntactic/near-miss rather than semantic, and Codestral is
+near-saturated on it — MCC stays in a tight 0.96–0.97 band across all four
+configs, the smallest quantization-induced spread of any dataset for this
+model.
+
+| Variant | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| Original (BF16) | 0.9942 | 0.9469 | 0.9980 | 0.9718 | 0.9689 | 0 |
+| GGUF Q2\_K | 0.9941 | 0.9443 | 1.0000 | 0.9713 | 0.9686 | 0 |
+| GGUF Q3\_K\_M | 0.9948 | 0.9506 | 1.0000 | 0.9747 | 0.9722 | 0 |
+| GGUF Q4\_K\_M | 0.9927 | 0.9328 | 0.9990 | 0.9648 | 0.9614 | 0 |
+
+Codestral's coverage is now complete across all three datasets (OCD, GCJ-Java,
+GCJ cross-language) for all four variants (BF16, Q2\_K, Q3\_K\_M, Q4\_K\_M).
+
 ## Qwen3.6-27B Setup (multimodal model, run text-only)
 
 ### Model run

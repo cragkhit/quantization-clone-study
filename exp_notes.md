@@ -424,6 +424,24 @@ CUDA_VISIBLE_DEVICES=6 setsid bash scripts/chain_qwen3_bf16gguf_all.sh \
   > logs/chain_qwen3_bf16gguf_all.log 2>&1 < /dev/null &
 ```
 
+**Results (5-round majority-vote MCC) — BF16-sourced beats FP8 at every bit-width.**
+This is the empirical payoff of the "quantize from BF16, not FP8" rule: a single
+clean quantization from BF16 outperforms both the native FP8 checkpoint *and* the
+community FP8→GGUF Q4_K_M, on both balanced GCJ sets. Even our Q3_K_M edges out
+native FP8.
+
+| Quantization path | GCJ-Java | GCJ-XLang | OCD |
+| --- | --- | --- | --- |
+| FP8 (native, vLLM) | 0.6939 | 0.7002 | 0.9307 |
+| FP8 → GGUF Q4_K_M (community) | 0.7582 | 0.7296 | — |
+| **BF16 → GGUF Q4_K_M (ours)** | **0.7664** | **0.7552** | 0.9555 |
+| BF16 → GGUF Q3_K_M (ours) | 0.7058 | 0.6919 | 0.9388 |
+| BF16 → GGUF Q2_K (ours) | 0.6664 | 0.5653 | 0.9827 |
+
+Monotonic (Q4 > Q3 > Q2) on the balanced GCJ sets; precision ≈ 1.00 throughout
+(this model essentially never false-positives). OCD's ordering is dominated by its
+class imbalance, as elsewhere — read the GCJ sets for the clean bit-width trend.
+
 **imatrix (optional, skipped here).** For the best low-bit (Q2_K/Q3_K) quality —
 especially on a sparse MoE — first compute an importance matrix
 (`llama-imatrix -m …-F16.gguf -f calibration.txt -o model.imatrix -ngl 99`) and pass

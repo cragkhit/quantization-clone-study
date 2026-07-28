@@ -6,19 +6,32 @@ For each CSV it:
   - Maps YES-SIMILAR → CLONE, NO-NOT-SIMILAR → NON-CLONE
   - Handles DONT-KNOW / parse errors via --unknown-as (default: exclude)
   - Prints a confusion matrix plus precision, recall, F1, and MCC
-  - Writes a summary CSV with all metrics (default: evaluation_summary.csv)
+  - Writes a summary CSV with all metrics (default: evaluation_summary.csv) —
+    but only for a full-dataset run; see the safety note below.
 
 Usage:
     python evaluate_results.py                                      # all results/**/*.csv, individual mode
     python evaluate_results.py --mode majority-vote                # majority vote across _roundN files
     python evaluate_results.py --dataset gcj-java                  # evaluate the GCJ Java set
     python evaluate_results.py --dataset gcj-cross-language        # evaluate the GCJ cross-language set
-    python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/*.csv  # specific folder
+    python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/*.csv  # specific folder (no CSV write, see below)
     python evaluate_results.py results/Meta-Llama-3.1-8B-Instruct/results_aqlm_round1.csv  # single file
     python evaluate_results.py --unknown-as non-clone              # treat unknowns as NON-CLONE
     python evaluate_results.py --unknown-as clone                  # treat unknowns as CLONE
     python evaluate_results.py --unknown-as exclude                # skip unknowns (default)
     python evaluate_results.py --output summary.csv                # custom output CSV name
+
+Safety note (ad hoc / partial runs): whenever an explicit file list is given,
+--output (and --latex, if you want LaTeX) MUST also be given explicitly, or
+nothing is written to disk — results still print to the console. --dataset
+does NOT opt a partial file list into that dataset's canonical path, even if
+passed; only a true full-dataset run (no files given, so all of the dataset's
+results are auto-discovered) may write to the shared
+evaluation_summary*.csv/.tex. This prevents a one-off progress-check like
+`evaluate_results.py results/SomeModel/*.csv` from silently overwriting the
+canonical multi-model summary with just that one model's rows — a corruption
+that has happened for real more than once, including via a `--dataset` flag
+that looked like it should have been "safe."
 """
 
 import argparse
@@ -646,12 +659,14 @@ def main() -> None:
     parser.add_argument(
         "--dataset",
         choices=list(DATASETS),
-        default="ocd",
+        default=None,
         metavar="NAME",
         help=(
             "Dataset to evaluate when no files are given: "
             f"{', '.join(DATASETS)} (default: ocd). "
-            "Selects the results directory and the default --output name."
+            "Selects the results directory and the default --output name. "
+            "Ignored for output-path purposes if an explicit file list is "
+            "given too — pass --output explicitly in that case."
         ),
     )
     parser.add_argument(
@@ -694,16 +709,35 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    paths = args.files or dataset_result_paths(args.dataset)
+    # --dataset defaults to None (not "ocd") purely so the "Dataset: ..." print
+    # below can tell whether the user named one; it otherwise falls back to
+    # "ocd" immediately.
+    dataset = args.dataset or "ocd"
+
+    # SAFETY INVARIANT: a dataset's canonical default_output/default_latex path
+    # may only be used for a full-dataset run, i.e. when NO explicit files were
+    # given and paths come from auto-discovery via dataset_result_paths(). The
+    # instant the caller passes an explicit file list, `paths` below is EXACTLY
+    # that list — it does not matter whether --dataset was also passed, the
+    # evaluated set is still a subset of the dataset's real result files. So
+    # explicit files always require an explicit --output (and --latex) or
+    # nothing gets written, full stop. (An earlier version of this check let
+    # `--dataset` alone "opt in" a partial file list to the canonical path —
+    # that silently overwrote 45 rows down to 4, i.e. the exact bug this
+    # guards against. Do not resurrect that shortcut.)
+    is_full_dataset_run = not args.files
+
+    paths = args.files or dataset_result_paths(dataset)
     if not paths:
         print("No result CSV files found.", file=sys.stderr)
         sys.exit(1)
 
-    output_path = args.output or DATASETS[args.dataset]["default_output"]
+    output_path = args.output or (DATASETS[dataset]["default_output"]
+                                  if is_full_dataset_run else None)
 
     if not args.files:
-        print(f"Dataset: {args.dataset} "
-              f"(results dir: {DATASETS[args.dataset]['results_dir']}/)")
+        print(f"Dataset: {dataset} "
+              f"(results dir: {DATASETS[dataset]['results_dir']}/)")
     print(f"Unknown/ambiguous responses: treated as '{args.unknown_as}'")
     print(f"Mode: {args.mode}")
 
@@ -726,11 +760,26 @@ def main() -> None:
                 summary_rows.append(result)
 
     print_summary_table(summary_rows)
-    write_summary_csv(summary_rows, output_path)
+
+    if output_path is not None:
+        write_summary_csv(summary_rows, output_path)
+    else:
+        print("No --output given for this explicit file list — skipping the "
+              "CSV write so a partial result set can't overwrite the dataset's "
+              "canonical summary. Pass --output <file> to save one.")
+
     if args.latex is not None:
-        latex_path = (DATASETS[args.dataset]["default_latex"]
-                      if args.latex is _LATEX_DEFAULT else args.latex)
-        write_latex_table(summary_rows, latex_path)
+        if args.latex is not _LATEX_DEFAULT:
+            latex_path = args.latex
+        elif not is_full_dataset_run:
+            latex_path = None
+            print("No explicit --latex path for this explicit file list — "
+                  "skipping the LaTeX write for the same reason as the CSV "
+                  "above. Pass --latex <file> to save one.")
+        else:
+            latex_path = DATASETS[dataset]["default_latex"]
+        if latex_path is not None:
+            write_latex_table(summary_rows, latex_path)
 
 
 if __name__ == "__main__":

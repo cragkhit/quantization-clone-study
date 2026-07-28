@@ -7,9 +7,9 @@
 %  The three comprehensive result tables are pulled in verbatim from the
 %  files produced by evaluate_results.py (regenerate with, e.g.,
 %    python evaluate_results.py --dataset gcj-java --mode majority-vote --latex):
-%    * evaluation_summary.tex                     (OCD)
-%    * evaluation_summary_gcj-java.tex            (GCJ-Java)
-%    * evaluation_summary_gcj-cross-language.tex  (GCJ cross-language)
+%    * evaluation_summary.tex                (OCD)
+%    * evaluation_summary_gcj_java.tex       (GCJ-Java)
+%    * evaluation_summary_gcj_crosslang.tex  (GCJ cross-language)
 %  All numbers in the hand-written RQ tables below are drawn from the same runs.
 % =====================================================================
 \documentclass[11pt]{article}
@@ -418,9 +418,9 @@ GGUF Quantization).
 \input{evaluation_summary.tex}
 
 \subsection{GCJ-Java (semantic clones)}
-\input{evaluation_summary_gcj-java.tex}
+\input{evaluation_summary_gcj_java.tex}
 
 \subsection{GCJ cross-language}
-\input{evaluation_summary_gcj-cross-language.tex}
+\input{evaluation_summary_gcj_crosslang.tex}
 
 \end{document}

@@ -422,6 +422,7 @@ quantization. Training (AIZU) and testing (GCJ) use disjoint sources.
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
     \textbf{Model (Q4\_K\_M base)} & base & +QLoRA & base & +QLoRA \\
     \midrule
+    Qwen3-Coder-30B-A3B & 0.758 & \best{0.960} & 0.730 & \best{0.953} \\
     Qwen2.5-Coder-7B  & 0.682 & \best{0.955} & 0.734 & \best{0.912} \\
     Meta-Llama-3.1-8B & 0.270 & \best{0.889} & 0.265 & \best{0.876} \\
     CodeLlama-7b      & 0.051 & \best{0.769} & 0.000 & \best{0.754} \\
@@ -448,13 +449,19 @@ quantization. Training (AIZU) and testing (GCJ) use disjoint sources.
 \end{table}
 
 \noindent\textbf{Findings.} (i) Fine-tuning yields \textbf{large gains at fixed
-quantization}: $+0.27$ to $+0.72$ MCC. (ii) It \textbf{rescues degenerate
+quantization}: $+0.20$ to $+0.72$ MCC. (ii) It \textbf{rescues degenerate
 quantized models}: CodeLlama-7b Q4\_K\_M goes from MCC $0.000$ (all-CLONE) to
 $0.754$ cross-language. (iii) The \textbf{absolute lift is largest for the
-weakest base} (CodeLlama $+0.72$, Llama-3.1 $+0.62$, Qwen $+0.27$), but the
-final ranking still tracks base capability (Qwen $\sim$0.93 $>$ Llama-3.1
-$\sim$0.88 $>$ CodeLlama $\sim$0.76): fine-tuning narrows, but does not erase,
-the base-model gap. (iv) \textbf{Training-set composition does not matter}
+weakest base} (CodeLlama $+0.72$, Llama-3.1 $+0.62$, Qwen2.5-Coder-7B $+0.27$,
+Qwen3-Coder-30B-A3B $+0.20$), but the final ranking still tracks base
+capability (Qwen3-Coder-30B-A3B $\sim$0.96 $>$ Qwen2.5-Coder-7B $\sim$0.93
+$>$ Llama-3.1 $\sim$0.88 $>$ CodeLlama $\sim$0.76): fine-tuning narrows, but
+does not erase, the base-model gap. Qwen3-Coder-30B-A3B gets the smallest
+lift of the four because it already had the strongest Q4\_K\_M base
+($0.758$/$0.730$, itself a re-quantization of an FP8 checkpoint, see RQ1), but
+still ends up with the highest \texttt{+QLoRA} MCC of the four models in
+Table~\ref{tab:rq5} on both GCJ sets. (iv) \textbf{Training-set composition
+does not matter}
 (Table~\ref{tab:rq5-ablation}): a monolingual-trained adapter transfers to
 cross-language clone detection as well as a cross-language-trained one, i.e.\
 QLoRA learns a general functional-similarity skill. All fine-tuned runs produced

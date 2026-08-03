@@ -148,6 +148,8 @@ GCJ test sets, giving a clean cross-dataset train/test split.
     Codestral-22B-v0.1             & 22B           & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
     cogito-v1-preview-llama-8B     & 8B            & ---  & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
     aya-expanse-8b                 & 8B            & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
+    Qwen3-Coder-30B-A3B-Instruct   & 30B (MoE, 3B act.) & --- & FP8 (native); GGUF Q4\_K\_M (self-quantized from FP8) \\
+    Qwen3.6-27B                    & 27B (dense, hybrid attn.) & BF16 & --- (multimodal model, run text-only; no quant sweep) \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -172,10 +174,14 @@ bit-widths and methods against its BF16 baseline, on all three datasets.
 \begin{table}[htbp]
   \centering
   \caption{RQ1 --- MCC vs.\ bit-width for Meta-Llama-3.1-8B (all four methods),
-           cogito-v1-preview-llama-8B, and aya-expanse-8B (GGUF), 5-round
+           cogito-v1-preview-llama-8B, aya-expanse-8B (GGUF), and
+           Qwen3-Coder-30B-A3B (FP8 vs.\ GGUF Q4\_K\_M), 5-round
            majority vote. Higher bit-width mostly improves MCC, but
            aya-expanse-8B is a counter-example: its OCD Q3\_K\_M ($0.736$)
-           beats Q4\_K\_M ($0.571$). Cogito has no BF16 baseline run.}
+           beats Q4\_K\_M ($0.571$). Qwen3-Coder-30B-A3B shows a starker
+           reversal: its GGUF Q4\_K\_M re-quantization beats its native FP8
+           baseline on \emph{all three} datasets. Cogito has no BF16 baseline
+           run.}
   \label{tab:rq1}
   \small
   \begin{tabular}{lllccc}
@@ -205,6 +211,9 @@ bit-widths and methods against its BF16 baseline, on all three datasets.
     aya-8B       & GGUF Q2\_K           & 2  & 0.215 & 0.391 & 0.397 \\
     aya-8B       & GGUF Q3\_K\_M        & 3  & 0.736 & 0.646 & 0.553 \\
     aya-8B       & GGUF Q4\_K\_M        & 4  & 0.571 & 0.674 & 0.551 \\
+    \midrule
+    Qwen3-Coder-30B-A3B & FP8 (native, baseline) & 8 & 0.931 & 0.694 & 0.700 \\
+    Qwen3-Coder-30B-A3B & GGUF Q4\_K\_M          & 4 & \best{0.954} & \best{0.758} & \best{0.730} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -225,7 +234,15 @@ for weaker base models, while capable models tolerate low-bit quantization.
 a $0.165$ MCC drop going from 3-bit to 4-bit, the opposite of the expected
 direction. Q2\_K is still the worst point in every case, so bit-width is a
 reasonable coarse predictor of quality but not a monotonic guarantee for every
-model.
+model. (v) \textbf{Qwen3-Coder-30B-A3B-FP8 shows an even cleaner reversal}:
+re-quantizing its native FP8 checkpoint down to GGUF Q4\_K\_M \emph{improves}
+MCC on \emph{all three} datasets (OCD $0.931\!\rightarrow\!0.954$, GCJ-Java
+$0.694\!\rightarrow\!0.758$, GCJ x-lang $0.700\!\rightarrow\!0.730$), unlike
+aya's single-dataset exception. FP8 and GGUF int4 are different quantization
+schemes served through different kernels, so this likely reflects llama.cpp's
+Q4\_K\_M path being better matched to this MoE architecture than the FP8
+serving path, rather than bit-width alone driving the effect; we do not have
+enough FP8-vs-GGUF comparisons in this study to isolate the mechanism.
 
 %----------------------------------------------------------------------
 \section{RQ2: Which method best preserves capability at equal bit-width?}
@@ -294,8 +311,10 @@ type (syntactic OCD vs.\ semantic GCJ).
     \midrule
     Qwen2.5-Coder-7B (Q4\_K\_M)       & 0.998 & 0.682 & 0.734 & $+0.052$ \\
     Llama-4-Scout-17B (Q4\_K\_M)      & 0.908 & 0.923 & 0.933 & $+0.010$ \\
+    Qwen3.6-27B (text-only)           & 0.958 & 0.895 & 0.861 & $-0.034$ \\
     DeepSeek-V2-Lite (Q4\_K\_M)       & 0.733 & 0.816 & 0.747 & $-0.069$ \\
     cogito-8B (Q4\_K\_M)              & 0.776 & 0.768 & 0.701 & $-0.067$ \\
+    Qwen3-Coder-30B-A3B (Q4\_K\_M)    & 0.954 & 0.758 & 0.730 & $-0.028$ \\
     aya-expanse-8B (Q4\_K\_M)         & 0.571 & 0.674 & 0.551 & $-0.123$ \\
     Meta-Llama-3.1-8B (Q4\_K\_M)      & 0.367 & 0.270 & 0.265 & $-0.005$ \\
     CodeLlama-7b (Q4\_K\_M)           & 0.048 & 0.051 & 0.000 & $-0.051$ \\
@@ -313,11 +332,19 @@ models} (Scout, Qwen even improve slightly), but weak models degrade further
 cross-language (CodeLlama $0.051\!\rightarrow\!0.000$). (iii) The degenerate
 failure mode (predicting all-CLONE, MCC~$=0$) is consistent for CodeLlama across
 all datasets and quantizations. Overall ranking is fairly stable across
-datasets: on the semantic GCJ sets, Scout $>$ DeepSeek $>$ cogito $>$ Qwen
-$\gtrsim$ aya $\gg$ Llama-3.1 $>$ CodeLlama --- though Qwen's near-perfect OCD
-score ($0.998$) makes it the strongest model overall once the syntactic
-dataset is included, illustrating again that clone type can reorder models
-that are close on the semantic sets.
+datasets: on the semantic GCJ sets, Scout $>$ Qwen3.6-27B $>$ DeepSeek $>$
+cogito $>$ Qwen3-Coder-30B-A3B $>$ Qwen2.5-Coder-7B $\gtrsim$ aya $\gg$
+Llama-3.1 $>$ CodeLlama --- though Qwen2.5-Coder-7B's near-perfect OCD score
+($0.998$) makes it the strongest model overall once the syntactic dataset is
+included, illustrating again that clone type can reorder models that are
+close on the semantic sets. (iv) \textbf{Qwen3.6-27B is the most consistent
+top performer}: it trails only Scout on every dataset (by $0.03$--$0.07$ MCC)
+despite being a $27$B dense model run at BF16 with no quantization sweep,
+and its $\Delta$ x-lang ($-0.034$) is the second-smallest in the table after
+Scout's. (v) Qwen3-Coder-30B-A3B (MoE, $3$B active) sits mid-table on the
+semantic GCJ sets but is near the top on OCD ($0.954$), the same
+syntactic-vs-semantic split seen for Qwen2.5-Coder-7B --- both Qwen-family
+coder models are comparatively stronger on syntactic than semantic clones.
 
 %----------------------------------------------------------------------
 \section{RQ4: Resource--performance trade-offs}

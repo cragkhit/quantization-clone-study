@@ -246,6 +246,61 @@ def load_gguf(hf_model: str | None = None):
     return infer
 
 
+def load_qwen36_gguf(hf_model: str | None = None):
+    """Qwen3.6-27B (qwen35 arch) GGUF, self-quantized under models/ (no
+    community GGUF exists yet for this brand-new architecture; see
+    "Producing our own GGUF quants" in exp_notes.md).
+
+    hf_model format: a local path to a '.gguf' file (default
+    'models/Qwen3.6-27B-Q4_K_M.gguf'), or 'repo_id::filename.gguf' if a
+    community GGUF ever appears.
+
+    Bypasses create_chat_completion() and builds the ChatML prompt by hand,
+    because llama-cpp-python's chat-completion API has no way to pass the
+    'enable_thinking' Jinja variable through to the model's own chat
+    template. Left at its default, the template opens an unclosed <think>
+    block and the model reasons at length before ever emitting the JSON
+    verdict -- 1024 generated tokens wasn't even enough to finish thinking on
+    a single pair. Manually emitting the closed '<think>\n\n</think>\n\n'
+    block the template would produce for enable_thinking=False (mirroring
+    load_qwen36's transformers-side enable_thinking=False) skips straight to
+    the JSON answer: ~4-5s/pair instead of never finishing.
+    """
+    from llama_cpp import Llama
+
+    hf_model = hf_model or "models/Qwen3.6-27B-Q4_K_M.gguf"
+
+    if hf_model.endswith(".gguf") and Path(hf_model).is_file():
+        llm = Llama(model_path=hf_model, n_gpu_layers=-1, n_ctx=16384, verbose=False)
+    elif "::" in hf_model:
+        repo_id, filename = hf_model.split("::", 1)
+        llm = Llama.from_pretrained(
+            repo_id=repo_id, filename=filename,
+            n_gpu_layers=-1, n_ctx=16384, verbose=False,
+        )
+    else:
+        raise ValueError(
+            f"qwen36_gguf: '{hf_model}' is not a local .gguf file and has no "
+            "'repo_id::filename.gguf' separator. Pass a local path under "
+            "models/, or repo::file once a community GGUF exists."
+        )
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        full_prompt = (
+            f"<|im_start|>user\n{prompt}<|im_end|>\n"
+            f"<|im_start|>assistant\n<think>\n\n</think>\n\n"
+        )
+        output = llm.create_completion(
+            full_prompt,
+            max_tokens=384,
+            stop=["<|im_end|>"],
+        )
+        return output["choices"][0]["text"]
+
+    return infer
+
+
 def load_qwen(hf_model: str | None = None):
     """Qwen2.5-Coder GGUF. pip install llama-cpp-python
     hf_model format: 'repo_id::filename.gguf' or omit for default Q4_K_M.
@@ -635,6 +690,7 @@ def load_qwen36(hf_model: str | None = None):
 LOADERS = {
     "original":   load_original,
     "qwen36":     load_qwen36,
+    "qwen36_gguf": load_qwen36_gguf,
     "gguf":       load_gguf,
     "qwen":       load_qwen,
     "gguf_lora":  load_gguf_lora,

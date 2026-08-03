@@ -412,20 +412,21 @@ quantization. Training (AIZU) and testing (GCJ) use disjoint sources.
 \begin{table}[htbp]
   \centering
   \caption{RQ5 --- QLoRA fine-tuning on the Q4\_K\_M base (MCC,
-           baseline~$\rightarrow$~fine-tuned). Adapter trained on AIZU384F;
-           the test sets (GCJ) share no problems with training.}
+           baseline~$\rightarrow$~fine-tuned, and the $\Delta$ improvement).
+           Adapter trained on AIZU384F; the test sets (GCJ) share no problems
+           with training.}
   \label{tab:rq5}
   \small
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lcccccc}
     \toprule
-    & \multicolumn{2}{c}{\textbf{GCJ-Java MCC}} & \multicolumn{2}{c}{\textbf{GCJ x-lang MCC}}\\
-    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-    \textbf{Model (Q4\_K\_M base)} & base & +QLoRA & base & +QLoRA \\
+    & \multicolumn{3}{c}{\textbf{GCJ-Java MCC}} & \multicolumn{3}{c}{\textbf{GCJ x-lang MCC}}\\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+    \textbf{Model (Q4\_K\_M base)} & base & +QLoRA & $\Delta$ & base & +QLoRA & $\Delta$ \\
     \midrule
-    Qwen3-Coder-30B-A3B & 0.758 & \best{0.960} & 0.730 & \best{0.953} \\
-    Qwen2.5-Coder-7B  & 0.682 & \best{0.955} & 0.734 & \best{0.912} \\
-    Meta-Llama-3.1-8B & 0.270 & \best{0.889} & 0.265 & \best{0.876} \\
-    CodeLlama-7b      & 0.051 & \best{0.769} & 0.000 & \best{0.754} \\
+    Qwen3-Coder-30B-A3B & 0.758 & \best{0.960} & $+0.202$ & 0.730 & \best{0.953} & $+0.223$ \\
+    Qwen2.5-Coder-7B  & 0.682 & \best{0.955} & $+0.273$ & 0.734 & \best{0.912} & $+0.178$ \\
+    Meta-Llama-3.1-8B & 0.270 & \best{0.889} & $+0.619$ & 0.265 & \best{0.876} & $+0.611$ \\
+    CodeLlama-7b      & 0.051 & \best{0.769} & $+0.718$ & 0.000 & \best{0.754} & $+0.754$ \\
     \bottomrule
   \end{tabular}
 \end{table}

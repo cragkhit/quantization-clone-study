@@ -1643,3 +1643,68 @@ so fine-tuning helps damaged/weak quantized models most — but (3) **base-model
 capability remains the ceiling**: the final ranking still tracks it
 (Qwen ~0.93 > Llama-3.1 ~0.88 > CodeLlama ~0.76). The adapter dramatically
 narrows the gap that quantization + a weak base open up, without erasing it.
+
+### Qwen3-Coder-30B-A3B — LoRA on the BF16 base (MoE; 2026-08-03)
+
+First **standard LoRA** (not QLoRA) in this study, and first on a **MoE**. Trained
+on the BF16 base with `train_lora.py --no-4bit` — same recipe otherwise (r=16,
+α=32, dropout 0.05, targets `q/k/v/o/gate/up/down`, lr 2e-4, 3 epochs, seed 42,
+completion-only loss). The base (~60 GB BF16) is sharded model-parallel across 4
+GPUs via `device_map="auto"`; point `--base-model` at the local snapshot from the
+GGUF-production download to avoid re-downloading:
+
+```bash
+CUDA_VISIBLE_DEVICES=4,5,6,7 env -u PYTHONPATH finetune_venv/bin/python train_lora.py \
+  --no-4bit --base-model models/Qwen3-Coder-30B-A3B-Instruct \
+  --train-file finetune_data/aizu_train.jsonl --val-file finetune_data/aizu_val.jsonl \
+  --output-dir finetune_models/qwen3-coder-30b-a3b-aizu-lora
+```
+
+- **Adapter is large: 843 M trainable params (2.69%)** — LoRA targets every one of
+  the 128 experts' `gate/up/down` across all layers, so the MoE FFN dominates the
+  count (vs ~40–80 M for the dense 7–8 B adapters). ~5 h (123 steps, naive
+  model-parallel = one GPU active at a time; train_loss 0.114).
+
+**MoE LoRA → GGUF works (the open question from the DeepSeek note is resolved).**
+`convert_lora_to_gguf.py` (reuses the `conversion/` model classes, so
+`Qwen3MoeForCausalLM` is supported) **stacks the per-expert LoRA into the merged
+expert-tensor layout**: the output GGUF has 672 tensors — 384 attention
+(`attn_{q,k,v,output}.weight.lora_{a,b}`) **plus 288 expert**
+(`ffn_{gate,up,down}_exps.weight.lora_{a,b}`, i.e. all experts stacked per layer).
+Nothing dropped. Adapter GGUF: `finetune_models/qwen3-coder-30b-a3b-aizu-lora-F16.gguf`
+(1.7 GB).
+
+```bash
+PYTHONPATH=llama.cpp/gguf-py env -u PYTHONPATH aqlm_venv310/bin/python \
+  llama.cpp/convert_lora_to_gguf.py finetune_models/qwen3-coder-30b-a3b-aizu-lora \
+  --base models/Qwen3-Coder-30B-A3B-Instruct --outtype f16 \
+  --outfile finetune_models/qwen3-coder-30b-a3b-aizu-lora-F16.gguf
+```
+
+**`load_gguf_lora` now accepts a local base GGUF.** Added a 2-part form
+`localbase.gguf::adapter.gguf` (if the base ends in `.gguf` and the file exists,
+it loads via `Llama(model_path=…, lora_path=…)` instead of `from_pretrained`). This
+lets the adapter run on our self-made F16/Q4_K_M GGUFs (not on the Hub). Evaluated
+here on the **full-precision F16 base** = the fine-tune **ceiling** (arm C2 in
+`exp_design.md`):
+
+```bash
+CUDA_VISIBLE_DEVICES=6 env -u PYTHONPATH gguf/bin/python run_quantization.py gguf_lora \
+  "models/Qwen3-Coder-30B-A3B-Instruct-F16.gguf::finetune_models/qwen3-coder-30b-a3b-aizu-lora-F16.gguf" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Qwen3-Coder-30B-A3B-Instruct/results_gguf_lora_Qwen3-Coder-30B-A3B-Instruct-F16_aizu" \
+  --rounds 5
+```
+
+**Results (5-round majority vote, MCC):** the LoRA lifts the model to the study's
+top tier — a fine-tuned 30B matching Llama-4-Scout / the Qwen2.5-Coder+LoRA 7B.
+
+| | GCJ-Java | GCJ-XLang |
+| --- | --- | --- |
+| FP8 base (≈ full-precision, no FT) | 0.6939 | 0.7002 |
+| BF16→GGUF Q4_K_M (no FT) | 0.7664 | 0.7552 |
+| **F16 + AIZU LoRA (fine-tuned)** | **0.9600** | **0.9531** |
+
++0.266 / +0.253 MCC over the full-precision base; precision & recall both ≈0.97–0.98
+(balanced 3 FP / 5 FN on Java). Monolingual AIZU384F training again transfers to
+cross-language, consistent with the 7B adapters.

@@ -1248,6 +1248,77 @@ conservative about calling CLONE, trading some recall for near-zero false
 positives. The OCD MCC (0.9584) is the highest of any model in the OCD study,
 ahead of Qwen3-Coder-30B-A3B-FP8 (0.9307).
 
+### Self-quantized GGUF (`qwen36_gguf` backend)
+
+No community GGUF exists yet for the brand-new `qwen35` architecture, so it is
+quantized ourselves following [Producing our own GGUF
+quants](#producing-our-own-gguf-quants-models-without-a-community-gguf):
+`llama.cpp` (as of 2026-07-16) already registers `Qwen3_5ForConditionalGeneration`
+in `conversion/qwen.py` (`Qwen3_5TextModel`, GGUF arch `QWEN35`) with a matching
+C++ runtime (`src/models/qwen35.cpp`), and the already-installed
+`llama-cpp-python==0.3.26` has `qwen35` compiled into its `libllama.so` — no
+rebuild needed for inference, only for producing the quants (`llama-quantize`,
+already built at `llama.cpp/build/bin/`).
+
+```bash
+SNAP=~/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/<hash>
+env -u PYTHONPATH PYTHONPATH=llama.cpp/gguf-py aqlm_venv310/bin/python \
+  llama.cpp/convert_hf_to_gguf.py "$SNAP" \
+  --outfile models/Qwen3.6-27B-F16.gguf --outtype f16   # 54.6 GB, 866 tensors
+
+Q=llama.cpp/build/bin/llama-quantize
+BASE=models/Qwen3.6-27B
+$Q "$BASE-F16.gguf" "$BASE-Q4_K_M.gguf" Q4_K_M   # 16.8 GB, 4.92 BPW
+$Q "$BASE-F16.gguf" "$BASE-Q3_K_M.gguf" Q3_K_M   # 13.5 GB, 3.95 BPW
+$Q "$BASE-F16.gguf" "$BASE-Q2_K.gguf"   Q2_K     # 10.9 GB, 3.18 BPW
+```
+
+**Thinking must be suppressed by hand.** `llama-cpp-python`'s
+`create_chat_completion()` has no way to pass the `enable_thinking` Jinja
+variable through to the model's own chat template. Left at its default, the
+template opens an unclosed `<think>` block and the model reasons at length
+before ever emitting the JSON verdict — a smoke test hit 1024 generated
+tokens (`finish_reason=length`) without finishing a single pair's reasoning,
+let alone answering it. The fix (the new `qwen36_gguf` backend in
+`run_quantization.py`) builds the ChatML prompt by hand with a pre-closed
+`<think>\n\n</think>\n\n` block — the template's own output for
+`enable_thinking=False`, mirroring `load_qwen36`'s transformers-side flag —
+and calls raw `create_completion()` instead of the chat wrapper. This took
+inference from "never finishes" to **~4–5 s/pair**, `finish_reason=stop`,
+clean JSON every time.
+
+```bash
+CUDA_VISIBLE_DEVICES=<gpu> env -u PYTHONPATH gguf/bin/python run_quantization.py qwen36_gguf \
+  models/Qwen3.6-27B-Q4_K_M.gguf \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output results_gcj_java/Qwen3.6-27B/results_gguf_Qwen3.6-27B-Q4_K_M \
+  --rounds 5
+```
+
+All 6 GCJ runs (Q2_K/Q3_K_M/Q4_K_M × Java/cross-language) were chained on one
+GPU by `scripts/chain_qwen36_gguf_gcj.sh` and completed 2026-08-04 in ~16 h
+(~5 s/pair, matching the smoke test). OCD (50,000 inferences × 3 quant levels)
+is deferred — at this rate it is a multi-day-per-quant-level undertaking, same
+order as the BF16 OCD run.
+
+| Config | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| GCJ-Java Q2_K | 0.9300 | 1.0000 | 0.8600 | 0.9247 | 0.8686 | 0 |
+| GCJ-Java Q3_K_M | 0.9625 | 1.0000 | 0.9250 | 0.9610 | 0.9276 | 0 |
+| GCJ-Java Q4_K_M | 0.9375 | 1.0000 | 0.8750 | 0.9333 | 0.8819 | 0 |
+| GCJ cross-language Q2_K | 0.9452 | 1.0000 | 0.8901 | 0.9418 | 0.8957 | 1 |
+| GCJ cross-language Q3_K_M | 0.9792 | 0.9894 | 0.9688 | 0.9789 | 0.9585 | 0 |
+| GCJ cross-language Q4_K_M | 0.9269 | 0.9940 | 0.8594 | 0.9218 | 0.8618 | 1 |
+
+**Non-monotonic with bit-width, and Q3_K_M is the best config overall** — it
+beats not just Q2_K/Q4_K_M but the BF16 baseline itself (Java 0.9276 vs.
+0.8954; cross-language 0.9585 vs. 0.8609). Precision stays pinned near 1.0
+across every config (0.99–1.00), so all of the MCC movement comes from
+**recall** — quantization here shifts how many true clones the model misses,
+not how trigger-happy it is. This is the second model in the study (after
+aya-expanse-8b) where a mid bit-width outperforms both its neighbors, so
+bit-width is a coarse predictor of quality but not a monotonic guarantee.
+
 ## Datasets
 
 ### GCJ2-4lang (cross-language clones)

@@ -1779,3 +1779,57 @@ top tier — a fine-tuned 30B matching Llama-4-Scout / the Qwen2.5-Coder+LoRA 7B
 +0.266 / +0.253 MCC over the full-precision base; precision & recall both ≈0.97–0.98
 (balanced 3 FP / 5 FN on Java). Monolingual AIZU384F training again transfers to
 cross-language, consistent with the 7B adapters.
+
+### Qwen3.6-27B — LoRA on a multimodal (VLM) base, evaluated via transformers (2026-08-04)
+
+First **VLM** in the study. `Qwen3.6-27B` is `Qwen3_5ForConditionalGeneration` — a
+dense 27B multimodal model with a vision tower, a *thinking* template, and an
+auxiliary multi-token-prediction head (`mtp`). It runs **text-only via
+transformers** (`qwen36` backend; vLLM/GGUF unavailable — see that section). The
+standard `train_lora.py` does **not** apply; a sibling `train_lora_vlm.py` handles
+three model-specific changes:
+
+1. Loads with `AutoModelForImageTextToText` (not `AutoModelForCausalLM`), BF16, no 4-bit.
+2. `target_modules` is a **regex scoped to the text tower only**
+   (`model\.language_model\.layers\.\d+\.…`) so LoRA does **not** touch the vision
+   encoder or the `mtp.layers.*` head — both share the same q/k/v/o/gate/up/down
+   suffixes and would otherwise be caught by a plain suffix list. Verified: **79.7 M
+   trainable (0.29%)**, a clean 64-layer text-only adapter (0 = regex missed;
+   bloated = vision/mtp caught — neither happened).
+3. Tokenization sets `enable_thinking=False` to match the eval path (the AIZU
+   targets are plain JSON verdicts, no reasoning trace).
+
+Training needs `peft`+`datasets` added to `qwen36_venv` (transformers 5.14.1;
+`finetune_venv`'s 4.57 cannot load `qwen3_5`). Same recipe otherwise (r=16/α=32,
+lr 2e-4, 3 epochs, seed 42, completion-only loss); ~2 h on 2 GPUs, train_loss 0.057.
+
+```bash
+CUDA_VISIBLE_DEVICES=6,7 env -u PYTHONPATH qwen36_venv/bin/python train_lora_vlm.py \
+  --base-model Qwen/Qwen3.6-27B --output-dir finetune_models/qwen3.6-27b-aizu-lora
+```
+
+**Eval via transformers + PeftModel (`qwen36_lora` backend), not GGUF.** The model
+already runs on transformers here, and GGUF for this new VLM arch is untested, so
+the `gguf_lora` route does not apply. `load_qwen36_lora` mirrors `load_qwen36` but
+wraps the base with `PeftModel.from_pretrained`. hf_model = `adapter_dir` (default
+base) or `base_id::adapter_dir`. This applies the adapter on the **BF16 base** =
+fine-tune ceiling (arm C2):
+
+```bash
+CUDA_VISIBLE_DEVICES=7 env -u PYTHONPATH qwen36_venv/bin/python run_quantization.py qwen36_lora \
+  "finetune_models/qwen3.6-27b-aizu-lora" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Qwen3.6-27B/results_qwen36_lora_Qwen3.6-27B_aizu" --rounds 5
+```
+
+**Results (5-round majority vote, MCC):**
+
+| | GCJ-Java | GCJ-XLang |
+| --- | --- | --- |
+| BF16 base (no FT) | 0.8954 | 0.8609 |
+| **BF16 + AIZU LoRA (fine-tuned)** | **0.9504** | **0.9532** |
+
++0.055 / +0.092 over the base. Smaller lift than the weaker models (the base was
+already strong), consistent with the earlier finding — absolute lift is largest for
+weaker bases, but base capability sets the ceiling. Monolingual AIZU384F again
+transfers to cross-language.

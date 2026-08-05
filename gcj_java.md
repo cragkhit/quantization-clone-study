@@ -95,6 +95,18 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 - [x] **Text-only (BF16)** — `qwen36` · `Qwen/Qwen3.6-27B` · venv `qwen36_venv` — *Acc 0.9450, F1 0.9418, MCC 0.8954* (multimodal model run text-only; `enable_thinking=False` — see exp_notes.md)
 
+Self-quantized from the BF16 base via llama.cpp (`models/Qwen3.6-27B-QX.gguf`;
+no community GGUF exists yet for this brand-new `qwen35` architecture — see
+exp_notes.md). Uses the new `qwen36_gguf` backend, which suppresses the
+model's default "thinking" mode (see exp_notes.md) — without that fix the
+model never finishes reasoning before the token budget runs out. **Non-monotonic
+with bit-width: Q3_K_M is best, even beating BF16** (0.9276 vs. 0.8954);
+precision stays ~1.0 across every config, so quantization only moves recall.
+
+- [x] **GGUF Q2_K** — `qwen36_gguf` · `models/Qwen3.6-27B-Q2_K.gguf` · venv `gguf` — *Acc 0.9300, F1 0.9247, MCC 0.8686* (0 excluded)
+- [x] **GGUF Q3_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q3_K_M.gguf` · venv `gguf` — *Acc 0.9625, F1 0.9610, MCC 0.9276* (0 excluded — best config, beats BF16)
+- [x] **GGUF Q4_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9375, F1 0.9333, MCC 0.8819* (0 excluded)
+
 ---
 
 **Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)

@@ -80,6 +80,7 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 
 ## cogito-v1-preview-llama-8B
 
+- [x] **Original (BF16)** — `original` · `deepcogito/cogito-v1-preview-llama-8B` · venv `aqlm_venv310` — *Acc 0.9225, F1 0.9191, MCC 0.8481*
 - [x] **GGUF Q2_K** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q2_k.gguf` · venv `gguf` — *Acc 0.5525, F1 0.6865, MCC 0.2025*
 - [x] **GGUF Q3_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q3_k_m.gguf` · venv `gguf` — *Acc 0.6310, F1 0.7310, MCC 0.3701* (7 excluded)
 - [x] **GGUF Q4_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q4_k_m.gguf` · venv `gguf` — *Acc 0.8797, F1 0.8884, MCC 0.7680* (1 excluded)
@@ -106,6 +107,20 @@ precision stays ~1.0 across every config, so quantization only moves recall.
 - [x] **GGUF Q2_K** — `qwen36_gguf` · `models/Qwen3.6-27B-Q2_K.gguf` · venv `gguf` — *Acc 0.9300, F1 0.9247, MCC 0.8686* (0 excluded)
 - [x] **GGUF Q3_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q3_K_M.gguf` · venv `gguf` — *Acc 0.9625, F1 0.9610, MCC 0.9276* (0 excluded — best config, beats BF16)
 - [x] **GGUF Q4_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9375, F1 0.9333, MCC 0.8819* (0 excluded)
+- [x] **BF16 + AIZU LoRA (fine-tuned)** — `qwen36_lora` · `Qwen/Qwen3.6-27B` base + PEFT adapter `finetune_models/qwen3.6-27b-aizu-lora` · venv `qwen36_venv` — *Acc 0.9750, F1 0.9746, MCC 0.9504* (0 excluded — standard LoRA on the BF16 text tower via `train_lora_vlm.py`, applied through transformers+PeftModel = fine-tune ceiling; +0.055 over base; see exp_notes.md)
+
+## Qwen3-Coder-30B-A3B-Instruct
+
+Self-quantized **from the BF16 base** (`Qwen/Qwen3-Coder-30B-A3B-Instruct`) via
+llama.cpp (`models/…-QX.gguf`; see exp_notes.md). Distinct from the community
+FP8-derived runs. **Beats FP8 at every bit-width:** native FP8 MCC 0.6939, community
+FP8→GGUF Q4_K_M 0.7582 — our BF16→GGUF Q4_K_M is 0.7664 and even Q3_K_M (0.7058)
+edges out native FP8.
+
+- [x] **GGUF Q2_K (BF16-sourced)** — `gguf` · `models/Qwen3-Coder-30B-A3B-Instruct-Q2_K.gguf` · venv `gguf` — *Acc 0.8075, F1 0.7616, MCC 0.6664* (0 excluded)
+- [x] **GGUF Q3_K_M (BF16-sourced)** — `gguf` · `models/Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf` · venv `gguf` — *Acc 0.8325, F1 0.7988, MCC 0.7058* (0 excluded)
+- [x] **GGUF Q4_K_M (BF16-sourced)** — `gguf` · `models/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.8700, F1 0.8506, MCC 0.7664* (0 excluded — best; beats native FP8 0.6939)
+- [x] **F16 + AIZU LoRA (fine-tuned)** — `gguf_lora` · F16 base + `finetune_models/qwen3-coder-30b-a3b-aizu-lora-F16.gguf` · venv `gguf` — *Acc 0.9800, F1 0.9799, MCC 0.9600* (0 excluded — standard LoRA on the BF16 base, applied on the full-precision F16 GGUF = fine-tune ceiling; +0.266 over FP8 base; MoE expert LoRA tensors survive GGUF conversion — see exp_notes.md)
 
 ---
 

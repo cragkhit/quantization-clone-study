@@ -1319,6 +1319,66 @@ not how trigger-happy it is. This is the second model in the study (after
 aya-expanse-8b) where a mid bit-width outperforms both its neighbors, so
 bit-width is a coarse predictor of quality but not a monotonic guarantee.
 
+## cogito-v1-preview-llama-8B Setup
+
+### Models run
+- **[`deepcogito/cogito-v1-preview-llama-8B`](https://huggingface.co/deepcogito/cogito-v1-preview-llama-8B)** — BF16, full precision (`original` backend)
+- **[`cortexso/cogito-v1`](https://huggingface.co/cortexso/cogito-v1)** — Q2\_K, Q3\_K\_M, Q4\_K\_M (`gguf` backend)
+
+### Two separate repos — the GGUF one has no full-precision weights
+
+The GGUF quants (run first, chronologically) come from `cortexso/cogito-v1`,
+which is a **GGUF-only** community distribution — it ships no `.safetensors`,
+so no BF16 baseline could be run from that repo. The original full-precision
+release lives at a **different** repo, `deepcogito/cogito-v1-preview-llama-8B`
+(standard `LlamaForCausalLM`, ungated, BF16) — a Llama-3.1-8B fine-tune. No new
+backend code was needed for either: `original` and `gguf` are the same generic
+loaders used for every other model in the study.
+
+- BF16: `AutoModelForCausalLM`, `torch_dtype=torch.bfloat16`, `device_map="auto"`,
+  standard Llama-3.1 `[INST]`-style chat template, `max_new_tokens=128`
+  (loader default). Uses **`aqlm_venv310`** (Python 3.10, transformers 4.57.6) —
+  same venv as aya-expanse-8b, no version pins needed.
+- GGUF: standard `gguf` venv/backend; cogito runs in non-thinking mode by
+  default so the usual `max_tokens=128` GGUF path applies (see
+  `scripts/chain_cogito_all.sh`).
+
+### Running the BF16 experiment (all three datasets)
+
+Chained sequentially on one GPU by `scripts/chain_cogito_original_all.sh`
+(quick GCJ sets first, OCD last; each call auto-resumes from existing round
+CSVs):
+
+```bash
+GPU=0 setsid bash scripts/chain_cogito_original_all.sh \
+  > logs/chain_cogito_original_all.log 2>&1 < /dev/null &
+```
+
+### Results (5-round majority vote)
+
+Quantization is **not** lossless for this model — BF16 clears every GGUF
+quant by a wide margin on all three datasets (Q4\_K\_M alone still leaves
+$0.08$–$0.14$ MCC on the table vs.\ BF16), unlike aya-expanse-8b/Codestral
+where 4-bit was near-free. See RQ1/RQ4 in `summaries/experiment_report.tex`.
+
+| Variant | Acc | Precision | Recall | F1 | MCC | Excl |
+| --- | --- | --- | --- | --- | --- | --- |
+| **GCJ-Java (400)** | | | | | | |
+| Original (BF16) | 0.9225 | 0.9617 | 0.8800 | 0.9191 | 0.8481 | 0 |
+| GGUF Q2\_K | 0.5525 | 0.5283 | 0.9800 | 0.6865 | 0.2025 | 0 |
+| GGUF Q3\_K\_M | 0.6310 | 0.5794 | 0.9899 | 0.7310 | 0.3701 | 7 |
+| GGUF Q4\_K\_M | 0.8797 | 0.8304 | 0.9550 | 0.8884 | 0.7680 | 1 |
+| **GCJ cross-language (384)** | | | | | | |
+| Original (BF16) | 0.9213 | 0.8971 | 0.9531 | 0.9242 | 0.8441 | 3 |
+| GGUF Q2\_K | 0.5681 | 0.5423 | 0.9010 | 0.6771 | 0.1787 | 2 |
+| GGUF Q3\_K\_M | 0.5937 | 0.5559 | 0.9844 | 0.7105 | 0.2911 | 5 |
+| GGUF Q4\_K\_M | 0.8407 | 0.7764 | 0.9583 | 0.8578 | 0.7009 | 1 |
+| **OCD (10,000)** | | | | | | |
+| Original (BF16) | 0.9732 | 0.7886 | 1.0000 | 0.8818 | 0.8747 | 16 |
+| GGUF Q2\_K | 0.7694 | 0.3023 | 0.9910 | 0.4633 | 0.4705 | 43 |
+| GGUF Q3\_K\_M | 0.8232 | 0.3647 | 1.0000 | 0.5345 | 0.5412 | 149 |
+| GGUF Q4\_K\_M | 0.9441 | 0.6414 | 1.0000 | 0.7816 | 0.7756 | 7 |
+
 ## Datasets
 
 ### GCJ2-4lang (cross-language clones)

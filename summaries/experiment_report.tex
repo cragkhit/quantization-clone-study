@@ -146,7 +146,7 @@ GCJ test sets, giving a clean cross-dataset train/test split.
     DeepSeek-Coder-V2-Lite         & 16B (MoE, 2.4B act.) & BF16 & GGUF Q4\_K\_M \\
     Llama-4-Scout-17B-16E          & 109B (MoE, 17B act.) & BF16 & GGUF Q2\_K / Q3\_K\_S / Q4\_K\_M \\
     Codestral-22B-v0.1             & 22B           & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
-    cogito-v1-preview-llama-8B     & 8B            & ---  & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
+    cogito-v1-preview-llama-8B     & 8B            & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
     aya-expanse-8b                 & 8B            & BF16 & GGUF Q2\_K / Q3\_K\_M / Q4\_K\_M \\
     Qwen3-Coder-30B-A3B-Instruct   & 30B (MoE, 3B act.) & --- & FP8 (native); GGUF Q4\_K\_M (self-quantized from FP8) \\
     Qwen3.6-27B                    & 27B (dense, hybrid attn.) & BF16 & --- (multimodal model, run text-only; no quant sweep) \\
@@ -180,8 +180,9 @@ bit-widths and methods against its BF16 baseline, on all three datasets.
            aya-expanse-8B is a counter-example: its OCD Q3\_K\_M ($0.736$)
            beats Q4\_K\_M ($0.571$). Qwen3-Coder-30B-A3B shows a starker
            reversal: its GGUF Q4\_K\_M re-quantization beats its native FP8
-           baseline on \emph{all three} datasets. Cogito has no BF16 baseline
-           run.}
+           baseline on \emph{all three} datasets. Cogito's BF16 baseline is
+           from \texttt{deepcogito/cogito-v1-preview-llama-8B} (the GGUF
+           quants come from a separate, GGUF-only community repo).}
   \label{tab:rq1}
   \small
   \begin{tabular}{lllccc}
@@ -202,6 +203,8 @@ bit-widths and methods against its BF16 baseline, on all three datasets.
     Llama-3.1-8B & HIGGS-GPTQ           & 4  & 0.463 & 0.382 & 0.246 \\
     Llama-3.1-8B & QTIP                 & 4  & \best{0.490} & \best{0.474} & \best{0.304} \\
     \midrule
+    cogito-8B    & BF16 (baseline)      & 16 & \best{0.875} & \best{0.848} & \best{0.844} \\
+    \midrule
     cogito-8B    & GGUF Q2\_K           & 2  & 0.471 & 0.203 & 0.179 \\
     cogito-8B    & GGUF Q3\_K\_M        & 3  & 0.541 & 0.370 & 0.291 \\
     cogito-8B    & GGUF Q4\_K\_M        & 4  & 0.776 & 0.768 & 0.701 \\
@@ -220,9 +223,11 @@ bit-widths and methods against its BF16 baseline, on all three datasets.
 
 \noindent\textbf{Findings.} (i) MCC increases monotonically with
 bit-width within every method for Meta-Llama-3.1-8B and cogito (2b $<$ 3b $<$
-4b); cogito shows the steepest such climb (GCJ-Java
-$0.20\!\rightarrow\!0.37\!\rightarrow\!0.77$), underscoring that low-bit GGUF
-can cripple a model that is strong at 4-bit. (ii) Aggressive 2-bit quantization
+4b $<$ 16b); cogito shows the steepest such climb (GCJ-Java
+$0.20\!\rightarrow\!0.37\!\rightarrow\!0.77\!\rightarrow\!0.85$), underscoring
+that low-bit GGUF can cripple a model that is strong at higher precision ---
+even its Q4\_K\_M still leaves $0.08$--$0.14$ MCC on the table versus BF16 on
+all three datasets, unlike the ``4-bit is free'' models below. (ii) Aggressive 2-bit quantization
 is severely damaging: MCC collapses to $0.03$--$0.40$, far below BF16. (iii)
 The impact is \emph{not} uniform across models: for the strong
 \textbf{Qwen2.5-Coder-7B}, quantization is nearly lossless --- on OCD its BF16
@@ -376,6 +381,7 @@ performance (GCJ-Java MCC) plane.
     Meta-Llama-3.1-8B  & QTIP-4b    &  4 & $\sim$4.5\,GB & 0.474 \\
     Meta-Llama-3.1-8B  & QTIP-2b    &  2 & $\sim$2.5\,GB & 0.275 \\
     \midrule
+    cogito-8B          & BF16          & 16 & $\sim$16\,GB & \best{0.848} \\
     cogito-8B          & GGUF Q4\_K\_M &  4 & $\sim$4.5\,GB & 0.768 \\
     cogito-8B          & GGUF Q2\_K    &  2 & $\sim$2.5\,GB & 0.203 \\
     \midrule
@@ -392,7 +398,11 @@ outperforming BF16 Llama-3.1-8B ($0.458$) at $\sim$1/7 the memory. (ii) For a
 capable base, 4-bit is effectively ``free'' (QTIP-4b $\ge$ BF16), so 4-bit is
 the recommended default operating point; \textbf{aya-expanse-8B} reproduces
 this at $\sim$1/4 the memory (Q4\_K\_M $0.674$ edges out its own BF16
-$0.670$). (iii) 2-bit only pays off for models robust to it (Qwen); for weak
+$0.670$). \textbf{cogito-8B is the counter-example}: its GGUF Q4\_K\_M
+($0.768$) still trails its own BF16 ($0.848$) by $0.08$ MCC at the same
+$\sim$1/4 memory, so ``4-bit is free'' does not generalize --- it depends on
+how well the specific GGUF quantization suits the model, not just the
+bit-width. (iii) 2-bit only pays off for models robust to it (Qwen); for weak
 bases it destroys accuracy and is not worth the extra compression ---
 \textbf{cogito-8B} is the clearest negative case here, losing $0.565$ MCC
 ($0.768\!\rightarrow\!0.203$) for the same $\sim$2$\times$ memory saving that

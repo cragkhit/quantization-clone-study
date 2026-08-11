@@ -448,6 +448,36 @@ especially on a sparse MoE — first compute an importance matrix
 `--imatrix model.imatrix` to `llama-quantize`. This Qwen3-Coder run was done **without**
 imatrix (plain uniform-importance quantization) by choice.
 
+### Reproducing a community GGUF: Qwen2.5-Coder-7B self-quantized (2026-08-08)
+
+Same pipeline applied to `Qwen/Qwen2.5-Coder-7B-Instruct` (dense 7B,
+`Qwen2ForCausalLM`) → `models/Qwen2.5-Coder-7B-Instruct-{Q4_K_M,Q3_K_M,Q2_K}.gguf`,
+evaluated on all three datasets with a **`-self`** output suffix to separate them
+from the existing COMMUNITY-GGUF rows (`results_qwen2.5_coder_7B_q*`, from
+`Qwen/Qwen2.5-Coder-7B-Instruct-GGUF`). Chain: `scripts/chain_qwen25_selfgguf_all.sh`.
+
+- **Non-obvious dep:** unlike Qwen3-Coder, the Qwen2 converter takes the
+  **sentencepiece** vocab path (`qwen.py` → `_set_vocab_sentencepiece`), so
+  `convert_hf_to_gguf.py` fails with `ModuleNotFoundError: sentencepiece` until it's
+  installed into `aqlm_venv310` (`uv pip install --python aqlm_venv310/bin/python sentencepiece`).
+
+**Finding — the community Q2_K used an imatrix; ours (plain) did not.** Q3_K_M and
+Q4_K_M reproduce the community numbers closely, but **Q2_K collapses only in the
+self (plain) build**, and only on the *balanced* GCJ sets:
+
+| Variant | GCJ-Java (self / comm) | GCJ-XLang (self / comm) | OCD (self / comm) |
+| --- | --- | --- | --- |
+| Q4_K_M | 0.6391 / 0.6821 | 0.6753 / 0.7339 | 0.9989 / 0.9978 |
+| Q3_K_M | 0.6313 / 0.6236 | 0.7128 / 0.7044 | 0.9978 / 0.9978 |
+| **Q2_K** | **0.4445 / 0.8250** | **0.3958 / 0.8044** | 0.9821 / 0.9994 |
+
+The Q2_K gap (~+0.38 MCC for the community build) appears **only at 2-bit** and
+**only on the balanced sets** — the textbook imatrix signature (biggest help at the
+lowest bit-width; OCD's ~10% class imbalance floats MCC near 1.0 and hides it). So
+the anomalous "Q2_K = best Qwen" community row is an imatrix artifact, not a genuine
+2-bit advantage. Confirming it directly (calibrated imatrix Q2_K re-quant) is the
+clean follow-up ablation.
+
 ---
 
 ## HIGGS-GPTQ Setup

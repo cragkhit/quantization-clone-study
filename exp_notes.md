@@ -1328,8 +1328,9 @@ CUDA_VISIBLE_DEVICES=<gpu> env -u PYTHONPATH gguf/bin/python run_quantization.py
 All 6 GCJ runs (Q2_K/Q3_K_M/Q4_K_M × Java/cross-language) were chained on one
 GPU by `scripts/chain_qwen36_gguf_gcj.sh` and completed 2026-08-04 in ~16 h
 (~5 s/pair, matching the smoke test). OCD (50,000 inferences × 3 quant levels)
-is deferred — at this rate it is a multi-day-per-quant-level undertaking, same
-order as the BF16 OCD run.
+was run afterward, one quant level per GPU (idle GPUs 5/6/7) so all three ran
+concurrently instead of chained on one GPU; each took ~2.9–3.3 days
+(2026-08-08 to 2026-08-10/11), matching the ~5 s/pair rate.
 
 | Config | Acc | Precision | Recall | F1 | MCC | Excl |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1339,15 +1340,25 @@ order as the BF16 OCD run.
 | GCJ cross-language Q2_K | 0.9452 | 1.0000 | 0.8901 | 0.9418 | 0.8957 | 1 |
 | GCJ cross-language Q3_K_M | 0.9792 | 0.9894 | 0.9688 | 0.9789 | 0.9585 | 0 |
 | GCJ cross-language Q4_K_M | 0.9269 | 0.9940 | 0.8594 | 0.9218 | 0.8618 | 1 |
+| OCD Q2_K | 0.9982 | 1.0000 | 0.9820 | 0.9909 | 0.9900 | 2 |
+| OCD Q3_K_M | 0.9973 | 0.9939 | 0.9790 | 0.9864 | 0.9849 | 0 |
+| OCD Q4_K_M | 0.9927 | 0.9989 | 0.9280 | 0.9622 | 0.9589 | 0 |
 
-**Non-monotonic with bit-width, and Q3_K_M is the best config overall** — it
-beats not just Q2_K/Q4_K_M but the BF16 baseline itself (Java 0.9276 vs.
-0.8954; cross-language 0.9585 vs. 0.8609). Precision stays pinned near 1.0
-across every config (0.99–1.00), so all of the MCC movement comes from
-**recall** — quantization here shifts how many true clones the model misses,
-not how trigger-happy it is. This is the second model in the study (after
-aya-expanse-8b) where a mid bit-width outperforms both its neighbors, so
-bit-width is a coarse predictor of quality but not a monotonic guarantee.
+**Non-monotonic with bit-width, and — more strikingly — the best bit-width is
+not even the same dataset to dataset.** On the two semantic GCJ sets Q3_K_M
+wins outright, beating both its neighbors and the BF16 baseline (Java 0.9276
+vs. 0.8954; cross-language 0.9585 vs. 0.8609). On the syntactic OCD set the
+ranking flips to **Q2_K best (0.9900) > Q3_K_M (0.9849) > Q4_K_M (0.9589)**,
+with Q4_K_M landing barely above the BF16 OCD baseline (0.9584) rather than
+clearly ahead of it. Precision stays pinned near 1.0 across every config on
+every dataset (0.99–1.00), so all of the MCC movement — on both GCJ and OCD —
+comes from **recall**: quantization here shifts how many true clones the
+model misses, not how trigger-happy it is. This is the second model in the
+study (after aya-expanse-8b) where a mid bit-width outperforms both its
+neighbors, and the first where the *optimal* bit-width itself depends on
+clone type (syntactic vs. semantic) — so for this model "pick the highest
+bit-width you can afford" is not just non-monotonic but dataset-dependent
+advice.
 
 ## cogito-v1-preview-llama-8B Setup
 

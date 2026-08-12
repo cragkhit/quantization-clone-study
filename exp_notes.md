@@ -1934,3 +1934,44 @@ CUDA_VISIBLE_DEVICES=7 env -u PYTHONPATH qwen36_venv/bin/python run_quantization
 already strong), consistent with the earlier finding — absolute lift is largest for
 weaker bases, but base capability sets the ceiling. Monolingual AIZU384F again
 transfers to cross-language.
+
+#### Also on the Q4\_K\_M GGUF base — GGUF-LoRA works for the Qwen3.5-family VLM
+
+To get a *Q4\_K\_M* (not just full-precision) fine-tuned number for the RQ5 table,
+the PEFT adapter was converted to a GGUF LoRA and applied on the self-quantized
+Q4\_K\_M base — and it works, contrary to the earlier assumption that this VLM arch
+had no GGUF-LoRA path:
+
+- `convert_lora_to_gguf.py` maps the text-tower adapter cleanly onto the text-GGUF
+  layer names (`blk.N.attn_*` + `blk.N.ffn_*`, 153 MB); the vision tower and `mtp`
+  head simply aren't in the text GGUF, so the text-only scoping carries over for free.
+- **Thinking fix is required.** The plain `gguf_lora` backend uses
+  `create_chat_completion`, which can't pass `enable_thinking=False`, so the model
+  reasons past `max_tokens` and **14–26% of responses fail to parse**. A dedicated
+  **`qwen36_gguf_lora`** backend (mirroring the parallel-added `qwen36_gguf`) builds
+  the ChatML prompt by hand with a closed `<think>\n\n</think>\n\n` block and calls
+  `create_completion` (`max_tokens=384`, `stop=["<|im_end|>"]`) → **0 excluded**.
+
+```bash
+# adapter -> GGUF LoRA (base = the HF snapshot dir)
+PYTHONPATH=llama.cpp/gguf-py env -u PYTHONPATH aqlm_venv310/bin/python \
+  llama.cpp/convert_lora_to_gguf.py finetune_models/qwen3.6-27b-aizu-lora \
+  --base <Qwen3.6-27B snapshot dir> --outtype f16 \
+  --outfile finetune_models/qwen3.6-27b-aizu-lora-F16.gguf
+
+# eval on the self-quantized Q4_K_M base (thinking-disabled backend)
+CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH gguf/bin/python run_quantization.py qwen36_gguf_lora \
+  "models/Qwen3.6-27B-Q4_K_M.gguf::finetune_models/qwen3.6-27b-aizu-lora-F16.gguf" \
+  --pairs-file gcj_java_clones/pairs.csv \
+  --output "results_gcj_java/Qwen3.6-27B/results_qwen36_gguf_lora_Qwen3.6-27B-Q4_K_M_aizu" --rounds 5
+```
+
+**Q4\_K\_M base → +adapter (5-round majority vote, MCC, 0 excluded):**
+
+| | GCJ-Java | GCJ-XLang |
+| --- | --- | --- |
+| Q4\_K\_M base (no FT) | 0.8819 | 0.8618 |
+| **Q4\_K\_M + AIZU LoRA** | **0.9556** | **0.9688** |
+
++0.074 / +0.107 over the Q4\_K\_M base — the consistent, dagger-free RQ5 row (vs the
+0.9504/0.9532 *full-precision* ceiling above).

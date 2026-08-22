@@ -1975,3 +1975,192 @@ CUDA_VISIBLE_DEVICES=0 env -u PYTHONPATH gguf/bin/python run_quantization.py qwe
 
 +0.074 / +0.107 over the Q4\_K\_M base — the consistent, dagger-free RQ5 row (vs the
 0.9504/0.9532 *full-precision* ceiling above).
+
+## Llama-4-Scout-17B-16E QLoRA Fine-Tuning — IN PROGRESS / BLOCKED (as of 2026-08-12)
+
+**Status: no adapter trained yet.** Blocked on a single-GPU VRAM ceiling while
+loading the model; environment is fully working and one fix (multi-GPU load)
+is queued but untried. Picking this back up should start at "Next step" below.
+
+### Why this needs a different toolchain than the other QLoRA runs
+
+Standard `transformers` + `bitsandbytes` + `peft` (used for every other
+fine-tuned model in this study, via `finetune_venv`) **cannot QLoRA-train
+Llama-4-Scout**: its MoE expert layers (`Llama4TextExperts`) are implemented as
+fused batched `nn.Parameter` tensors (`gate_up_proj`, `down_proj`, shape
+`[num_experts, ...]`, computed via `torch.bmm`) — not individual `nn.Linear`
+submodules. Both bitsandbytes' 4-bit quantization and PEFT's
+`LoraConfig(target_modules=...)` only know how to wrap `nn.Linear` layers by
+module name, so they silently skip the expert weights (the bulk of the 109B
+params), and a naive `load_in_4bit=True` load balloons to 300GB+ VRAM instead
+of the expected ~55GB. Confirmed independently via web search: "QLoRA
+fine-tuning for Llama 4 Scout in 4-bit precision is currently only supported
+by Unsloth" ([Unsloth blog](https://unsloth.ai/blog/llama4);
+[IPFLY guide](https://www.ipfly.net/blog/fine-tuning-llama-4-single-gpu-2026-beginners-complete-guide/)).
+Unsloth's own numbers: Scout QLoRA fits ~71GB VRAM on one H100, rank-32 LoRA
+on all linear-equivalent layers (Q/K/V/O + MoE gate/up/down).
+
+`llama.cpp`'s own training tool (`examples/training/finetune.cpp`) is **not**
+an alternative: its README states it's "very much WIP," requires **F32**
+models (not quantized, not even F16), and has been tested only on tiny dense
+models (Stories-260K, Llama-3.2-1B) — no MoE support.
+
+### `unsloth_venv` setup (Python 3.10) — working, after real friction
+
+```bash
+uv venv unsloth_venv --python 3.10
+
+# 1. torch first. NOTE: the final working version is 2.11.0+cu128 (see below for
+#    why) - do not stop at 2.5.1+cu121 despite that being what Unsloth's own
+#    docs page recommends for "CUDA 12.1 + Ampere/Hopper" (that recipe is stale
+#    relative to the current unsloth_zoo release's actual torchao requirement).
+uv pip install --python unsloth_venv/bin/python torch==2.11.0 \
+  --index-url https://download.pytorch.org/whl/cu128
+
+# 2. unsloth + flash-attn (built from source - needs setuptools/wheel present
+#    AND --no-build-isolation, since flash-attn's setup.py imports torch/
+#    setuptools at build time but doesn't declare them as build deps; uv's
+#    isolated per-package build env hides the already-installed venv packages
+#    unless told not to).
+uv pip install --python unsloth_venv/bin/python setuptools wheel ninja packaging psutil
+CC=gcc-11 CXX=g++-11 MAX_JOBS=8 uv pip install --python unsloth_venv/bin/python \
+  --no-build-isolation \
+  "unsloth[flashattention] @ git+https://github.com/unslothai/unsloth.git"
+
+# 3. unsloth_zoo doesn't always get pulled in as a dependency by step 2 (uv
+#    resolved it as already-satisfied / skipped it in testing) - install
+#    explicitly, which also pulls torchao.
+uv pip install --python unsloth_venv/bin/python unsloth_zoo
+
+# 4. transformers/peft version pins: unsloth's own resolver picked
+#    transformers==5.5.0, which needs torch.int1 (introduced well after 2.11)
+#    and crashes torchao's quant_primitives.py at import time; peft==0.20.0
+#    then imports a transformers API surface only present in 5.x
+#    (BloomPreTrainedModel import fails on 4.57.6). Pin both down to the
+#    versions already proven elsewhere in this study:
+uv pip install --python unsloth_venv/bin/python "transformers==4.57.6" "peft==0.19.1"
+
+# 5. torchvision was left stale at 0.20.0 (from an earlier/different torch
+#    pin attempt) and doesn't match torch 2.11 - Unsloth's own startup check
+#    (unsloth/import_fixes.py::torchvision_compatibility_check) raises on this.
+uv pip install --python unsloth_venv/bin/python "torchvision>=0.26.0" \
+  --index-url https://download.pytorch.org/whl/cu128
+```
+
+Final working versions: `torch==2.11.0+cu128`, `torchvision==0.26.0+cu128`,
+`transformers==4.57.6`, `peft==0.19.1`, `bitsandbytes==0.50.0`,
+`torchao==0.18.0`, `unsloth==2026.8.12`, `unsloth-zoo==2026.8.9`. Verified:
+`from unsloth import FastLanguageModel` imports cleanly and correctly detects
+the H100 ("Fast Llama4 patching. Transformers: 4.57.6 ... NVIDIA H100 80GB
+HBM3"). No lock file frozen yet (see "Next step").
+
+**Why torch 2.11.0 specifically:** Unsloth's own top-level constraint is
+`torch<2.12.0,>=2.4.0`, but an earlier warning
+(`Skipping import of cpp extensions due to incompatible torch version. Please
+upgrade to torch >= 2.11.0`) pins the *real* floor at exactly 2.11.x — the
+only version in that narrow window with a published `cu128` wheel (no cu121
+or cu124 build exists for 2.11.0 on the PyTorch index).
+
+**flash-attn is currently non-functional** (built successfully once against an
+earlier torch 2.5.0+cu124 pin, then invalidated — ABI mismatch — when torch
+was bumped to 2.11.0+cu128 to fix the torchao issue). Unsloth falls back to
+xformers automatically ("Your Flash Attention 2 installation seems to be
+broken. Using Xformers instead. No performance changes will be seen.") — this
+is **not a blocker**, just not maximally fast. Rebuild flash-attn against the
+current torch if training speed becomes an issue:
+`CC=gcc-11 CXX=g++-11 MAX_JOBS=8 uv pip install --python unsloth_venv/bin/python --no-build-isolation --force-reinstall --no-deps "flash-attn==2.8.3.post1"`.
+
+### Bug #1 (found and worked around): pre-quantized checkpoints are broken
+
+All three of Unsloth's pre-quantized Llama-4-Scout checkpoints —
+[`unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit`](https://huggingface.co/unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit),
+`-unsloth-dynamic-bnb-4bit`, and `-unsloth-bnb-8bit` — crash on load with
+`AttributeError: SequentialLlama4TextExperts has no attribute 'down_proj'`.
+This is a confirmed, currently-unresolved upstream bug
+([unslothai/unsloth discussion #3619](https://github.com/unslothai/unsloth/discussions/3619),
+no fix as of 2026-08-12).
+
+**Root cause** (found by reading `transformers/quantizers/base.py` directly):
+`_convert_model_for_quantization` walks a freshly-instantiated (empty/meta)
+model and replaces any `Llama4TextExperts` module with
+`SequentialLlama4TextExperts` — a `ModuleList` of `num_local_experts`
+individual `Llama4TextMLP` submodules, each with real `nn.Linear` layers (this
+*is* the transformers-native fix for the bitsandbytes/MoE incompatibility
+above). This conversion runs unconditionally on **any** BNB-4bit + Llama4 load.
+The pre-quantized checkpoints were created **April 2025**, right when
+Llama-4-Scout launched — before this conversion mechanism existed — so their
+saved safetensors still use the *old* flat/fused tensor names
+(`...experts.down_proj`). Loading that old naming into the *new*
+per-expert-indexed `ModuleList` structure fails immediately.
+
+**Workaround: use the plain BF16 checkpoint,
+[`unsloth/Llama-4-Scout-17B-16E-Instruct`](https://huggingface.co/unsloth/Llama-4-Scout-17B-16E-Instruct)
+(217 GB, ungated), with `load_in_4bit=True` for on-the-fly quantization**
+instead of a pre-quantized repo. A BF16 checkpoint's tensor names match the
+*original* `Llama4TextExperts` layout — exactly what
+`_convert_model_for_quantization` is designed to reshape — so the fused→
+per-expert conversion and the quantization happen together, fresh, through the
+currently-tested code path. **Confirmed**: this gets past the
+`SequentialLlama4TextExperts` error entirely (reached actual weight loading).
+
+Note: `HF_HUB_ENABLE_HF_TRANSFER` should be **disabled**
+(`HF_HUB_ENABLE_HF_TRANSFER=0`) for this download — the accelerated `hf_transfer`
+backend (which Unsloth enables by default, "Fast downloading is enabled") hit a
+**fatal, non-resumable** `ChunkedEncodingError` partway through the 217 GB
+download; the standard downloader hit the same transient network read-timeouts
+but retried/resumed gracefully every time (`Trying to resume download...`).
+The full checkpoint is now cached locally under `~/.cache/huggingface/hub/` —
+a retry does **not** need to re-download.
+
+### Bug #2 (current blocker): single-GPU OOM during weight loading
+
+Loading the BF16 checkpoint with `load_in_4bit=True` on **one** H100 (79.11 GB)
+OOMs partway through `_load_state_dict_into_meta_model`:
+
+```
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.50 GiB.
+GPU 0 has a total capacity of 79.11 GiB of which 1.50 GiB is free.
+Including non-PyTorch memory, this process has 77.60 GiB memory in use.
+```
+
+**Tried and confirmed ineffective:** `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`
+(the fix the error message itself suggests) — identical OOM, byte-for-byte, on
+retry. "Reserved but unallocated" is only 214 MB (tiny), confirming this is a
+genuine capacity ceiling during the fused→per-expert quantization conversion,
+**not** allocator fragmentation. This happens *before* any LoRA/training code
+runs — it's purely the cost of loading+quantizing on one GPU. Unsloth's own
+blog claim of "~71 GB fits on one H100" is apparently optimistic for the
+*loading* peak specifically (transient BF16+4bit tensors coexisting during
+per-shard conversion), even if the eventual steady-state trained footprint
+would fit.
+
+### Next step (not yet tried)
+
+Spread the load across **2 idle GPUs** (this box has 8×H100; 6 were idle at
+last check) via `device_map="auto"` spanning two devices — e.g.
+`CUDA_VISIBLE_DEVICES=2,3` — giving ~160 GB of headroom during the
+load/quantize step. `FastLanguageModel.from_pretrained` should respect
+`device_map` the same way plain `transformers.AutoModelForCausalLM` does
+(untested for Unsloth specifically — verify device_map is actually threaded
+through, since Unsloth's loader wraps `auto_model.from_pretrained` with its
+own kwargs handling). Smoke-test script (load → attach rank-32 LoRA on
+Q/K/V/O + MoE gate/up/down → one forward+backward pass → report peak VRAM) is
+committed at `scripts/smoke_llama4_unsloth.py` — currently single-GPU only
+(the state that OOM'd above); add `device_map="auto"` and run with
+`CUDA_VISIBLE_DEVICES` spanning 2 GPUs to try the fix:
+
+```bash
+CUDA_VISIBLE_DEVICES=2,3 HF_HUB_DISABLE_XET=1 HF_HUB_ENABLE_HF_TRANSFER=0 \
+  unsloth_venv/bin/python scripts/smoke_llama4_unsloth.py
+```
+
+If 2-GPU loading works, the remaining steps mirror every other QLoRA run in
+this study: train on AIZU384F (`train_lora.py`'s pattern, or Unsloth's own
+`SFTTrainer`-based loop), convert the adapter to GGUF via
+`llama.cpp/convert_lora_to_gguf.py` (`Llama4Model(LlamaModel)` is registered in
+`conversion/llama.py` for both `Llama4ForCausalLM` and the vision variant, so
+this step is already confirmed supported), then evaluate with the existing
+`gguf_lora` backend on top of the same
+`bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF` Q4\_K\_M base
+already used for this study's Llama-4-Scout eval (GCJ-Java + GCJ
+cross-language — RQ5 doesn't cover OCD for any model).

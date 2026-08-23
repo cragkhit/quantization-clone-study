@@ -2134,25 +2134,44 @@ blog claim of "~71 GB fits on one H100" is apparently optimistic for the
 per-shard conversion), even if the eventual steady-state trained footprint
 would fit.
 
+### Attempt #2 (tried 2026-08-23, failed): `device_map="auto"` does not multi-GPU-shard in Unsloth
+
+Added `device_map="auto"` to `FastLanguageModel.from_pretrained` in
+`scripts/smoke_llama4_unsloth.py` and ran with `CUDA_VISIBLE_DEVICES=<n>,<m>`
+spanning 2 idle H100s. Unsloth's own startup banner confirmed both GPUs were
+visible (`Num GPUs = 2`), but it still crashed with the **exact same OOM as
+the single-GPU attempt**, byte-for-byte (`77.62 GiB` in use, `1.48 GiB` free,
+tried to allocate `2.50 GiB`), and `Max memory: 79.109 GB` in the banner — a
+**single** GPU's capacity, not the combined ~160 GB. So passing `device_map`
+through `FastLanguageModel.from_pretrained` does **not** get threaded down to
+transformers' multi-GPU sharding logic; Unsloth's loader appears to force
+single-device placement regardless of how many GPUs are visible (consistent
+with Unsloth being built around single-GPU workflows). **Do not repeat this
+attempt as-is** — the `device_map="auto"` kwarg is silently ineffective here.
+
 ### Next step (not yet tried)
 
-Spread the load across **2 idle GPUs** (this box has 8×H100; 6 were idle at
-last check) via `device_map="auto"` spanning two devices — e.g.
-`CUDA_VISIBLE_DEVICES=2,3` — giving ~160 GB of headroom during the
-load/quantize step. `FastLanguageModel.from_pretrained` should respect
-`device_map` the same way plain `transformers.AutoModelForCausalLM` does
-(untested for Unsloth specifically — verify device_map is actually threaded
-through, since Unsloth's loader wraps `auto_model.from_pretrained` with its
-own kwargs handling). Smoke-test script (load → attach rank-32 LoRA on
-Q/K/V/O + MoE gate/up/down → one forward+backward pass → report peak VRAM) is
-committed at `scripts/smoke_llama4_unsloth.py` — currently single-GPU only
-(the state that OOM'd above); add `device_map="auto"` and run with
-`CUDA_VISIBLE_DEVICES` spanning 2 GPUs to try the fix:
+Bypass Unsloth's `FastLanguageModel.from_pretrained` wrapper for the loading
+step specifically, since plain `transformers.AutoModelForCausalLM.from_pretrained`
+has well-established, broadly-tested multi-GPU `device_map` sharding
+(independent of whatever Unsloth's loader is doing to ignore it):
 
-```bash
-CUDA_VISIBLE_DEVICES=2,3 HF_HUB_DISABLE_XET=1 HF_HUB_ENABLE_HF_TRANSFER=0 \
-  unsloth_venv/bin/python scripts/smoke_llama4_unsloth.py
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+model = AutoModelForCausalLM.from_pretrained(
+    "unsloth/Llama-4-Scout-17B-16E-Instruct",
+    device_map="auto",  # or an explicit max_memory={0: "70GiB", 1: "70GiB"} dict
+    quantization_config=BitsAndBytesConfig(load_in_4bit=True, ...),
+)
+# then hand the already-loaded, already-sharded model to Unsloth for the LoRA
+# attach step only, e.g. FastLanguageModel.get_peft_model(model, ...) — untested
+# whether Unsloth's get_peft_model accepts an externally-loaded model cleanly.
 ```
+
+If that also fails to shard (or `get_peft_model` rejects an externally-loaded
+model), the fallback is to skip Unsloth's speed optimizations entirely and
+train with raw `transformers` + `peft` + `bitsandbytes` — accepting slower
+training in exchange for standard, well-tested multi-GPU device_map support.
 
 If 2-GPU loading works, the remaining steps mirror every other QLoRA run in
 this study: train on AIZU384F (`train_lora.py`'s pattern, or Unsloth's own

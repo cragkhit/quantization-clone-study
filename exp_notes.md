@@ -2149,29 +2149,73 @@ single-device placement regardless of how many GPUs are visible (consistent
 with Unsloth being built around single-GPU workflows). **Do not repeat this
 attempt as-is** — the `device_map="auto"` kwarg is silently ineffective here.
 
-### Next step (not yet tried)
+### Attempt #3 (tried 2026-08-23, failed): `unsloth_zoo`'s purpose-built device-map planner
 
-Bypass Unsloth's `FastLanguageModel.from_pretrained` wrapper for the loading
-step specifically, since plain `transformers.AutoModelForCausalLM.from_pretrained`
-has well-established, broadly-tested multi-GPU `device_map` sharding
-(independent of whatever Unsloth's loader is doing to ignore it):
+`unsloth_zoo.device_map_planner.plan_device_map_for_pretrained` exists
+specifically to work around a known accelerate limitation with quantized
+multi-GPU models (per its own module docstring: plain `max_memory` caps don't
+work either because "accelerate's allocator never backtracks to an earlier
+device"). It builds the model on the meta device first and hands back an
+explicit **per-module** device_map dict — script:
+`scripts/smoke_llama4_unsloth.py` (already updated to use this planner).
 
-```python
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-model = AutoModelForCausalLM.from_pretrained(
-    "unsloth/Llama-4-Scout-17B-16E-Instruct",
-    device_map="auto",  # or an explicit max_memory={0: "70GiB", 1: "70GiB"} dict
-    quantization_config=BitsAndBytesConfig(load_in_4bit=True, ...),
-)
-# then hand the already-loaded, already-sharded model to Unsloth for the LoRA
-# attach step only, e.g. FastLanguageModel.get_peft_model(model, ...) — untested
-# whether Unsloth's get_peft_model accepts an externally-loaded model cleanly.
-```
+The planner's own calculation was sound: **total weights 52.035 GiB**, split
+evenly — `cuda:0: weights 26.019 GiB`, `cuda:1: weights 26.017 GiB` — each
+with a 63 GiB budget (70 GiB cap minus bnb's own reserved load-time buffer)
+and ~37 GiB of headroom. This is exactly the balanced split we want.
 
-If that also fails to shard (or `get_peft_model` rejects an externally-loaded
-model), the fallback is to skip Unsloth's speed optimizations entirely and
-train with raw `transformers` + `peft` + `bitsandbytes` — accepting slower
-training in exchange for standard, well-tested multi-GPU device_map support.
+**But actual loading still OOM'd** — this time on `cuda:1` (not `cuda:0`,
+confirming the planner *is* influencing something), at the same signature:
+`76.99 GiB` in use, `2.11 GiB` free, tried to allocate `2.50 GiB`. The
+computed plan is not what actually gets applied during real weight loading —
+most likely because `_convert_model_for_quantization` (see Bug #1 above)
+creates each `SequentialLlama4TextExperts` replacement fresh via
+`init_empty_weights()` *during* loading, and this re-creation does not
+correctly inherit/preserve the planner's per-module device assignment for the
+newly-materialized per-expert submodules, so the (large) MoE expert tensors
+end up funneled onto a single device regardless of the plan.
+
+### Attempt #4 (tried 2026-08-23, failed): bypass Unsloth's loader entirely
+
+To isolate whether the bug is in Unsloth's wrapping/patches or in the
+underlying transformers/accelerate machinery itself, loaded via **plain**
+`transformers.AutoModelForCausalLM.from_pretrained` with **no Unsloth code
+involved in loading at all** (`device_map="auto"`, explicit
+`max_memory={0: "70GiB", 1: "70GiB"}`, standard `BitsAndBytesConfig`) — script:
+`scripts/smoke_llama4_plain_transformers.py`. Unsloth would only be brought in
+afterward, for the LoRA-attach step (`FastLanguageModel.get_peft_model` has no
+hard requirement that the model was Unsloth-loaded — confirmed by reading its
+source in `unsloth/models/vision.py`).
+
+**Identical failure signature**: `76.98 GiB` in use, `2.12 GiB` free, tried to
+allocate `2.50 GiB`, crashed inside `from_pretrained` before returning (no
+`hf_device_map` was ever printed). This **rules out Unsloth as the cause
+entirely** — the bug is in transformers' own `_load_state_dict_into_meta_model`
+/ `_convert_model_for_quantization` interaction with multi-GPU `device_map`
+for Llama4's MoE-restructured modules, independent of any Unsloth code.
+
+### Conclusion after 4 attempts
+
+Every device_map mechanism tried (implicit single-device, `"auto"`, explicit
+`max_memory`, the purpose-built `unsloth_zoo` planner, and bypassing Unsloth
+entirely) produces the **same symptom**: one GPU accumulates weights up to
+~77 GiB and OOMs by ~2.5 GiB, regardless of how many GPUs are visible or what
+the computed plan says. This looks like a genuine, currently-unworked-around
+bug in how transformers quantizes+places Llama4's fused-MoE-to-per-expert
+conversion under a multi-GPU device_map — not something fixable by adjusting
+the `device_map`/`max_memory` kwargs further. Untried, more invasive options:
+
+- **Patch `_convert_model_for_quantization`** (`transformers/quantizers/base.py`)
+  to explicitly propagate each expert submodule's intended device from the
+  original device_map when constructing `SequentialLlama4TextExperts`, instead
+  of relying on `init_empty_weights()` + implicit placement.
+- **DeepSpeed ZeRO-3 / FSDP** instead of `accelerate`'s device_map sharding —
+  a structurally different (and much larger engineering lift) multi-GPU
+  approach not yet explored at all.
+- **Reduce peak footprint enough to fit one GPU**: e.g. 8-bit instead of
+  4-bit is *more* memory, not less, so not viable; a shorter `max_seq_length`
+  doesn't help since the OOM happens during weight loading, before any
+  activations exist. No untried lever identified here yet.
 
 If 2-GPU loading works, the remaining steps mirror every other QLoRA run in
 this study: train on AIZU384F (`train_lora.py`'s pattern, or Unsloth's own

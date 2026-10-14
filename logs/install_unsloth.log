@@ -1,0 +1,68 @@
+Using Python 3.10.6 environment at: unsloth_venv
+   Updating https://github.com/unslothai/unsloth.git (HEAD)
+    Updated https://github.com/unslothai/unsloth.git (8601821e372694778ddce67b8fc3a05c828d6b61)
+Resolved 106 packages in 1m 15s
+   Building flash-attn==2.8.3.post1
+   Building unsloth @ git+https://github.com/unslothai/unsloth.git@8601821e372694778ddce67b8fc3a05c828d6b61
+Downloading xformers (15.9MiB)
+Downloading diffusers (5.4MiB)
+Downloading scikit-learn (9.2MiB)
+Downloading torchao (3.2MiB)
+Downloading hf-transfer (3.4MiB)
+Downloading pyarrow (47.7MiB)
+Downloading hf-xet (4.3MiB)
+Downloading transformers (9.8MiB)
+Downloading aiohttp (1.6MiB)
+Downloading bitsandbytes (39.0MiB)
+Downloading unsloth-zoo (1.3MiB)
+Downloading torchvision (6.9MiB)
+Downloading torch (864.5MiB)
+ Downloaded unsloth-zoo
+ Downloaded aiohttp
+ Downloaded xformers
+  × Failed to build `flash-attn==2.8.3.post1`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit
+      status: 1)
+
+      [stderr]
+      /home/chaiyong.rag/.cache/uv/builds-v0/.tmpkKrQyB/lib/python3.10/site-packages/setuptools/_vendor/wheel/bdist_wheel.py:4:
+      FutureWarning: The 'wheel' package is no longer the canonical location
+      of the 'bdist_wheel' command, and will be removed in a future release.
+      Please update to setuptools v70.1 or later which contains an integrated
+      version of this command.
+        warn(
+      Traceback (most recent call last):
+        File "<string>", line 14, in <module>
+        File
+      "/home/chaiyong.rag/.cache/uv/builds-v0/.tmpkKrQyB/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 333, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+        File
+      "/home/chaiyong.rag/.cache/uv/builds-v0/.tmpkKrQyB/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 301, in _get_build_requires
+          self.run_setup()
+        File
+      "/home/chaiyong.rag/.cache/uv/builds-v0/.tmpkKrQyB/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 520, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File
+      "/home/chaiyong.rag/.cache/uv/builds-v0/.tmpkKrQyB/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 317, in run_setup
+          exec(code, locals())  # noqa: S102 # exec is intentional here
+        File "<string>", line 22, in <module>
+      ModuleNotFoundError: No module named 'torch'
+
+      hint: This error likely indicates that `flash-attn@2.8.3.post1`
+      depends on `torch`, but doesn't declare it as a build dependency.
+      If `flash-attn` is a first-party package, consider adding `torch`
+      to its `build-system.requires`. Otherwise, either add it to your
+      `pyproject.toml` under:
+
+      [tool.uv.extra-build-dependencies]
+      flash-attn = ["torch"]
+
+      or `uv pip install torch` into the environment and re-run with
+      `--no-build-isolation`.
+  help: `flash-attn` (v2.8.3.post1) was included because
+        `unsloth[cu121-ampere-torch250]` (v2026.8.12) depends on `flash-attn`

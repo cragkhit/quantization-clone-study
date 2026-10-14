@@ -61,6 +61,9 @@ Check a box once **all 5 rounds** for that run are complete. Environment setup
 - [x] **GGUF Q2_K** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf` · venv `gguf` — *Acc 0.9050, F1 0.8950, MCC 0.8250*
 - [x] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf` — *Acc 0.7800, F1 0.7179, MCC 0.6236*
 - [x] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf` — *Acc 0.8175, F1 0.7768, MCC 0.6821*
+- [x] **GGUF Q2_K (self-quantized)** — `gguf` · `models/Qwen2.5-Coder-7B-Instruct-Q2_K.gguf` · venv `gguf` — *Acc 0.6650, F1 0.4962, MCC 0.4445* (self-quantized from BF16, no imatrix; **vs community 0.8250 — the community Q2_K almost certainly used an imatrix; see exp_notes.md**)
+- [x] **GGUF Q3_K_M (self-quantized)** — `gguf` · `models/Qwen2.5-Coder-7B-Instruct-Q3_K_M.gguf` · venv `gguf` — *Acc 0.7850, F1 0.7261, MCC 0.6313* (≈ community 0.6236)
+- [x] **GGUF Q4_K_M (self-quantized)** — `gguf` · `models/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.7900, F1 0.7342, MCC 0.6391* (≈ community 0.6821)
 - [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9774, MCC 0.9550* (adapter trained on SimilBench AIZU384F; see exp_notes.md)
 - [x] **GGUF Q4_K_M + AIZU-CL QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `finetune_models/qwen2.5-coder-7b-aizuCL-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9776, MCC 0.9550* (adapter trained on cross-language AIZU324CLF; identical to the monolingual adapter here — see exp_notes.md)
 
@@ -108,6 +111,7 @@ precision stays ~1.0 across every config, so quantization only moves recall.
 - [x] **GGUF Q3_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q3_K_M.gguf` · venv `gguf` — *Acc 0.9625, F1 0.9610, MCC 0.9276* (0 excluded — best config, beats BF16)
 - [x] **GGUF Q4_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9375, F1 0.9333, MCC 0.8819* (0 excluded)
 - [x] **BF16 + AIZU LoRA (fine-tuned)** — `qwen36_lora` · `Qwen/Qwen3.6-27B` base + PEFT adapter `finetune_models/qwen3.6-27b-aizu-lora` · venv `qwen36_venv` — *Acc 0.9750, F1 0.9746, MCC 0.9504* (0 excluded — standard LoRA on the BF16 text tower via `train_lora_vlm.py`, applied through transformers+PeftModel = fine-tune ceiling; +0.055 over base; see exp_notes.md)
+- [x] **Q4_K_M + AIZU LoRA (fine-tuned)** — `qwen36_gguf_lora` · `models/Qwen3.6-27B-Q4_K_M.gguf` base + GGUF adapter `finetune_models/qwen3.6-27b-aizu-lora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9771, MCC 0.9556* (0 excluded — **GGUF-LoRA works for this VLM arch**; adapter converted via `convert_lora_to_gguf.py`, applied on the self-quantized Q4_K_M via the `qwen36_gguf_lora` backend which disables thinking like `qwen36_gguf`; +0.074 over Q4_K_M base 0.8819; see exp_notes.md)
 
 ## Qwen3-Coder-30B-A3B-Instruct
 

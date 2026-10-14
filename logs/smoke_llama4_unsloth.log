@@ -1,0 +1,54 @@
+[fla.utils._device|WARNING]Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+Unsloth: Your Flash Attention 2 installation seems to be broken. Using Xformers instead. No performance changes will be seen.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+[smoke] 15:40:37 loading unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit ...
+==((====))==  Unsloth 2026.8.12: Fast Llama4 patching. Transformers: 4.57.6.
+   \\   /|    NVIDIA H100 80GB HBM3. Num GPUs = 1. Max memory: 79.109 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.11.0+cu128. CUDA: 9.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Error while downloading from https://huggingface.co/unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit/resolve/301fe7429503fb29bf77175ca61d4203a796e2ac/model-00007-of-00013.safetensors: HTTPSConnectionPool(host='us.aws.cdn.hf.co', port=443): Read timed out.
+Trying to resume download...
+Error while downloading from https://huggingface.co/unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit/resolve/301fe7429503fb29bf77175ca61d4203a796e2ac/model-00012-of-00013.safetensors: HTTPSConnectionPool(host='us.aws.cdn.hf.co', port=443): Read timed out.
+Trying to resume download...
+Loading checkpoint shards:   0%|          | 0/13 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/13 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/tmp/claude-749000007/-home-chaiyong-rag-quantization-clone-study/c6e42ce0-69d4-4409-816e-80a299f6a711/scratchpad/smoke_llama4_unsloth.py", line 10, in <module>
+    model, tokenizer = FastLanguageModel.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth/models/loader_utils.py", line 1278, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth/models/loader.py", line 907, in from_pretrained
+    delegated, tokenizer = FastModel.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth/models/loader_utils.py", line 1278, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth/models/loader.py", line 1962, in from_pretrained
+    model, tokenizer = FastBaseModel.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth_zoo/temporary_patches/moe_grouped_modulelist.py", line 382, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth/models/loader_utils.py", line 1278, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/unsloth/models/vision.py", line 1366, in from_pretrained
+    model = auto_model.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 604, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 277, in _wrapper
+    return func(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 5048, in from_pretrained
+    ) = cls._load_pretrained_model(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 5468, in _load_pretrained_model
+    _error_msgs, disk_offload_index = load_shard_file(args)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 843, in load_shard_file
+    disk_offload_index = _load_state_dict_into_meta_model(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 774, in _load_state_dict_into_meta_model
+    hf_quantizer.create_quantized_param(model, param, param_name, param_device)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/quantizers/quantizer_bnb_4bit.py", line 190, in create_quantized_param
+    module, tensor_name = get_module_from_name(model, param_name)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/quantizers/quantizers_utils.py", line 20, in get_module_from_name
+    module = module.get_submodule(module_name)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 729, in get_submodule
+    raise AttributeError(
+AttributeError: SequentialLlama4TextExperts has no attribute `down_proj`

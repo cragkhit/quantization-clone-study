@@ -1,0 +1,2 @@
+/tmp/claude-749000007/smoke_q2k.sh: line 5: 4100817 Segmentation fault      (core dumped) CUDA_VISIBLE_DEVICES=1 llama.cpp/build/bin/llama-cli -m models/Qwen3-Coder-30B-A3B-Instruct-Q2_K.gguf -p "Write a Python function that returns the sum of a list of integers." -n 60 -ngl 99 --no-warmup --no-display-prompt -no-cnv > logs/smoke_q2k.out 2> /dev/null
+SMOKE_DONE rc=139

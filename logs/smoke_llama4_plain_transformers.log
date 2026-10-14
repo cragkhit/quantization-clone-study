@@ -1,0 +1,25 @@
+[smoke] 2 visible GPUs, max_memory={0: '70GiB', 1: '70GiB'}
+[smoke] 14:45:22 loading unsloth/Llama-4-Scout-17B-16E-Instruct via plain transformers ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Failed to load /home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torchao/_C_mxfp8.cpython-310-x86_64-linux-gnu.so: Could not load this library: /home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torchao/_C_mxfp8.cpython-310-x86_64-linux-gnu.so
+Failed to load /home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torchao/_C_cutlass_90a.abi3.so: Could not load this library: /home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torchao/_C_cutlass_90a.abi3.so
+Fetching 50 files:   0%|          | 0/50 [00:00<?, ?it/s]Fetching 50 files: 100%|██████████| 50/50 [00:00<00:00, 2316.60it/s]
+Loading checkpoint shards:   0%|          | 0/50 [00:00<?, ?it/s]Loading checkpoint shards:   2%|▏         | 1/50 [00:02<01:41,  2.07s/it]Loading checkpoint shards:   4%|▍         | 2/50 [00:04<01:52,  2.34s/it]Loading checkpoint shards:   6%|▌         | 3/50 [00:06<01:48,  2.30s/it]Loading checkpoint shards:   8%|▊         | 4/50 [00:09<01:45,  2.30s/it]Loading checkpoint shards:  10%|█         | 5/50 [00:11<01:45,  2.35s/it]Loading checkpoint shards:  12%|█▏        | 6/50 [00:13<01:41,  2.30s/it]Loading checkpoint shards:  14%|█▍        | 7/50 [00:15<01:37,  2.26s/it]Loading checkpoint shards:  16%|█▌        | 8/50 [00:18<01:34,  2.24s/it]Loading checkpoint shards:  18%|█▊        | 9/50 [00:21<01:45,  2.57s/it]Loading checkpoint shards:  20%|██        | 10/50 [00:23<01:38,  2.46s/it]Loading checkpoint shards:  22%|██▏       | 11/50 [00:26<01:36,  2.47s/it]Loading checkpoint shards:  24%|██▍       | 12/50 [00:28<01:31,  2.40s/it]Loading checkpoint shards:  26%|██▌       | 13/50 [00:30<01:28,  2.39s/it]Loading checkpoint shards:  28%|██▊       | 14/50 [00:32<01:23,  2.31s/it]Loading checkpoint shards:  30%|███       | 15/50 [00:35<01:20,  2.29s/it]Loading checkpoint shards:  32%|███▏      | 16/50 [00:37<01:18,  2.32s/it]Loading checkpoint shards:  34%|███▍      | 17/50 [00:41<01:29,  2.70s/it]Loading checkpoint shards:  36%|███▌      | 18/50 [00:43<01:21,  2.54s/it]Loading checkpoint shards:  38%|███▊      | 19/50 [00:46<01:27,  2.83s/it]Loading checkpoint shards:  40%|████      | 20/50 [00:50<01:29,  2.99s/it]Loading checkpoint shards:  40%|████      | 20/50 [00:51<01:16,  2.56s/it]
+Traceback (most recent call last):
+  File "/home/chaiyong.rag/quantization-clone-study/scripts/smoke_llama4_plain_transformers.py", line 39, in <module>
+    model = AutoModelForCausalLM.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 604, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 277, in _wrapper
+    return func(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 5048, in from_pretrained
+    ) = cls._load_pretrained_model(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 5468, in _load_pretrained_model
+    _error_msgs, disk_offload_index = load_shard_file(args)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 843, in load_shard_file
+    disk_offload_index = _load_state_dict_into_meta_model(
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/chaiyong.rag/quantization-clone-study/unsloth_venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 770, in _load_state_dict_into_meta_model
+    _load_parameter_into_model(model, param_name, param.to(param_device))
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.50 GiB. GPU 0 has a total capacity of 79.11 GiB of which 2.12 GiB is free. Including non-PyTorch memory, this process has 76.98 GiB memory in use. Of the allocated memory 76.18 GiB is allocated by PyTorch, and 218.17 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

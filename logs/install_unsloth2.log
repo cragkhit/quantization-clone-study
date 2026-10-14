@@ -1,0 +1,28 @@
+Using Python 3.10.6 environment at: unsloth_venv
+Resolved 106 packages in 629ms
+Uninstalled 11 packages in 194ms
+Installed 84 packages in 1.05s
+   Building flash-attn==2.8.3.post1
+  × Failed to build `flash-attn==2.8.3.post1`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit
+      status: 1)
+
+      [stderr]
+      Traceback (most recent call last):
+        File "<string>", line 8, in <module>
+      ModuleNotFoundError: No module named 'setuptools'
+
+      hint: This error likely indicates that `flash-attn@2.8.3.post1` depends
+      on `setuptools`, but doesn't declare it as a build dependency. If
+      `flash-attn` is a first-party package, consider adding `setuptools`
+      to its `build-system.requires`. Otherwise, either add it to your
+      `pyproject.toml` under:
+
+      [tool.uv.extra-build-dependencies]
+      flash-attn = ["setuptools"]
+
+      or `uv pip install setuptools` into the environment and re-run with
+      `--no-build-isolation`.
+  help: `flash-attn` (v2.8.3.post1) was included because
+        `unsloth[cu121-ampere-torch250]` (v2026.8.12) depends on `flash-attn`

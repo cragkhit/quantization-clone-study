@@ -1,0 +1,242 @@
+% Requires \usepackage[table]{xcolor} for the \cellcolor MCC highlights.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Clone Detection Evaluation Summary --- Count Statistics}
+  \label{tab:evaluation_counts}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lrrrrrrr}
+    \toprule
+    \textbf{Model} & \textbf{Total} & \textbf{Eval} & \textbf{Excl} & \textbf{TP} & \textbf{FP} & \textbf{FN} & \textbf{TN} \\
+    \midrule
+    \multicolumn{8}{l}{\textit{Original (FP16)}} \\
+    \midrule
+    CodeLlama-7b-Instruct-hf & 10000 & 10000 & 0 & 1000 & 4729 & 0 & 4271 \\
+    Codestral-22B-v0.1 & 10000 & 10000 & 0 & 998 & 56 & 2 & 8944 \\
+    deepseek\_coder\_v2\_lite & 10000 & 10000 & 0 & 1000 & 307 & 0 & 8693 \\
+    Llama-4-Scout-17B-16E-Instruct & 10000 & 10000 & 0 & 1000 & 205 & 0 & 8795 \\
+    Meta-Llama-3.1-8B-Instruct & 10000 & 10000 & 0 & 1000 & 2282 & 0 & 6718 \\
+    qwen2.5\_coder\_7B\_original & 10000 & 10000 & 0 & 997 & 0 & 3 & 9000 \\
+    aya-expanse-8b & 10000 & 10000 & 0 & 998 & 673 & 2 & 8327 \\
+    cogito-v1-preview-llama-8B & 10000 & 10000 & 0 & 1000 & 268 & 0 & 8732 \\
+    \midrule
+    \multicolumn{8}{l}{\textit{GGUF Quantization}} \\
+    \midrule
+    CodeLlama-7b-Instruct-hf-GGUF\_CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 9000 & 0 & 0 \\
+    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 6563 & 0 & 2437 \\
+    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 8393 & 0 & 607 \\
+    Codestral-22B-v0.1-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 59 & 0 & 8941 \\
+    Codestral-22B-v0.1-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 52 & 0 & 8948 \\
+    Codestral-22B-v0.1-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 72 & 1 & 8928 \\
+    deepseek\_coder\_v2\_lite\_q4km & 10000 & 10000 & 0 & 1000 & 712 & 0 & 8288 \\
+    llama4\_scout\_Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 283 & 0 & 8717 \\
+    llama4\_scout\_Q3\_K\_S.gguf & 10000 & 10000 & 0 & 1000 & 141 & 0 & 8859 \\
+    llama4\_scout\_Q4\_K\_M.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 \\
+    Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 7105 & 0 & 1895 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 5263 & 0 & 3737 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 3495 & 0 & 5505 \\
+    Qwen2.5-Coder-7B-Instruct-Q2\_K-self.gguf & 10000 & 10000 & 0 & 968 & 0 & 32 & 9000 \\
+    Qwen2.5-Coder-7B-Instruct-Q3\_K\_M-self.gguf & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 \\
+    Qwen2.5-Coder-7B-Instruct-Q4\_K\_M-self.gguf & 10000 & 10000 & 0 & 998 & 0 & 2 & 9000 \\
+    qwen2.5\_coder\_7B\_q2k & 10000 & 10000 & 0 & 999 & 0 & 1 & 9000 \\
+    qwen2.5\_coder\_7B\_q3km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 \\
+    qwen2.5\_coder\_7B\_q4km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 969 & 0 & 31 & 9000 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 892 & 0 & 108 & 9000 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 921 & 0 & 79 & 9000 \\
+    Qwen3.6-27B-Q2\_K.gguf & 10000 & 10000 & 0 & 980 & 0 & 20 & 9000 \\
+    Qwen3.6-27B-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 979 & 6 & 21 & 8994 \\
+    Qwen3.6-27B-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 928 & 1 & 72 & 8999 \\
+    aya-expanse-8b-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 6069 & 0 & 2931 \\
+    aya-expanse-8b-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 700 & 1 & 8300 \\
+    aya-expanse-8b-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 1541 & 0 & 7459 \\
+    cogito-v1-preview-llama-8b-q2\_k.gguf & 10000 & 10000 & 0 & 991 & 2287 & 9 & 6713 \\
+    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 10000 & 10000 & 0 & 1000 & 1742 & 0 & 7258 \\
+    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 10000 & 10000 & 0 & 1000 & 559 & 0 & 8441 \\
+    \midrule
+    \multicolumn{8}{l}{\textit{AQLM Quantization}} \\
+    \midrule
+    Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf & 10000 & 10000 & 0 & 1000 & 7295 & 0 & 1705 \\
+    \midrule
+    \multicolumn{8}{l}{\textit{HIGGS Quantization}} \\
+    \midrule
+    llama3.1\_8B\_3bit & 10000 & 10000 & 0 & 1000 & 3337 & 0 & 5663 \\
+    llama3.1\_8B\_4bit & 10000 & 10000 & 0 & 1000 & 2387 & 0 & 6613 \\
+    \midrule
+    \multicolumn{8}{l}{\textit{QTIP Quantization}} \\
+    \midrule
+    Llama-3.1-8b-Instruct-QTIP-2Bit & 10000 & 10000 & 0 & 1000 & 4378 & 0 & 4622 \\
+    Llama-3.1-8b-Instruct-QTIP-3Bit & 10000 & 10000 & 0 & 1000 & 2501 & 0 & 6499 \\
+    Llama-3.1-8b-Instruct-QTIP-4Bit & 10000 & 10000 & 0 & 1000 & 2136 & 0 & 6864 \\
+    \midrule
+    \multicolumn{8}{l}{\textit{Other}} \\
+    \midrule
+    results\_qwen3\_coder\_30B\_a3b\_fp8 & 10000 & 10000 & 0 & 878 & 0 & 122 & 9000 \\
+    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 10000 & 10000 & 0 & 919 & 0 & 81 & 9000 \\
+    results\_qwen36\_Qwen\_\_Qwen3.6-27B & 10000 & 10000 & 0 & 926 & 0 & 74 & 9000 \\
+    \bottomrule
+  \end{tabular}
+  }
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Clone Detection Evaluation Summary --- Performance Metrics}
+  \label{tab:evaluation_metrics}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lrrrrr}
+    \toprule
+    \textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{MCC} \\
+    \midrule
+    \multicolumn{6}{l}{\textit{Original (FP16)}} \\
+    \midrule
+    CodeLlama-7b-Instruct-hf & 0.527 & 0.175 & 1.000 & 0.297 & 0.288 \\
+    Codestral-22B-v0.1 & 0.994 & 0.947 & 0.998 & 0.972 & 0.969 \\
+    deepseek\_coder\_v2\_lite & 0.969 & 0.765 & 1.000 & 0.867 & 0.860 \\
+    Llama-4-Scout-17B-16E-Instruct & 0.980 & 0.830 & 1.000 & 0.907 & 0.900 \\
+    Meta-Llama-3.1-8B-Instruct & 0.772 & 0.305 & 1.000 & 0.467 & 0.477 \\
+    qwen2.5\_coder\_7B\_original & 1.000 & 1.000 & 0.997 & 0.999 & \cellcolor{green!30}0.998 \\
+    aya-expanse-8b & 0.932 & 0.597 & 0.998 & 0.747 & 0.742 \\
+    cogito-v1-preview-llama-8B & 0.973 & 0.789 & 1.000 & 0.882 & 0.875 \\
+    \midrule
+    \multicolumn{6}{l}{\textit{GGUF Quantization}} \\
+    \midrule
+    CodeLlama-7b-Instruct-hf-GGUF\_CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 0.100 & 0.100 & 1.000 & 0.182 & 0.000 \\
+    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 0.344 & 0.132 & 1.000 & 0.234 & 0.189 \\
+    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 0.161 & 0.106 & 1.000 & 0.192 & 0.085 \\
+    Codestral-22B-v0.1-Q2\_K.gguf & 0.994 & 0.944 & 1.000 & 0.971 & 0.969 \\
+    Codestral-22B-v0.1-Q3\_K\_M.gguf & 0.995 & 0.951 & 1.000 & 0.975 & 0.972 \\
+    Codestral-22B-v0.1-Q4\_K\_M.gguf & 0.993 & 0.933 & 0.999 & 0.965 & 0.961 \\
+    deepseek\_coder\_v2\_lite\_q4km & 0.929 & 0.584 & 1.000 & 0.738 & 0.733 \\
+    llama4\_scout\_Q2\_K.gguf & 0.972 & 0.779 & 1.000 & 0.876 & 0.869 \\
+    llama4\_scout\_Q3\_K\_S.gguf & 0.986 & 0.876 & 1.000 & 0.934 & 0.929 \\
+    llama4\_scout\_Q4\_K\_M.gguf & 0.981 & 0.843 & 0.998 & 0.914 & 0.907 \\
+    Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 0.289 & 0.123 & 1.000 & 0.220 & 0.161 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 0.474 & 0.160 & 1.000 & 0.275 & 0.258 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 0.650 & 0.223 & 1.000 & 0.364 & 0.369 \\
+    Qwen2.5-Coder-7B-Instruct-Q2\_K-self.gguf & 0.997 & 1.000 & 0.968 & 0.984 & 0.982 \\
+    Qwen2.5-Coder-7B-Instruct-Q3\_K\_M-self.gguf & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!20}0.998 \\
+    Qwen2.5-Coder-7B-Instruct-Q4\_K\_M-self.gguf & 1.000 & 1.000 & 0.998 & 0.999 & \cellcolor{green!40}0.999 \\
+    qwen2.5\_coder\_7B\_q2k & 1.000 & 1.000 & 0.999 & 1.000 & \cellcolor{green!50}0.999 \\
+    qwen2.5\_coder\_7B\_q3km & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!10}0.998 \\
+    qwen2.5\_coder\_7B\_q4km & 1.000 & 1.000 & 0.996 & 0.998 & 0.998 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q2\_K.gguf & 0.997 & 1.000 & 0.969 & 0.984 & 0.983 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q3\_K\_M.gguf & 0.989 & 1.000 & 0.892 & 0.943 & 0.939 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q4\_K\_M.gguf & 0.992 & 1.000 & 0.921 & 0.959 & 0.956 \\
+    Qwen3.6-27B-Q2\_K.gguf & 0.998 & 1.000 & 0.980 & 0.990 & 0.989 \\
+    Qwen3.6-27B-Q3\_K\_M.gguf & 0.997 & 0.994 & 0.979 & 0.986 & 0.985 \\
+    Qwen3.6-27B-Q4\_K\_M.gguf & 0.993 & 0.999 & 0.928 & 0.962 & 0.959 \\
+    aya-expanse-8b-Q2\_K.gguf & 0.393 & 0.141 & 1.000 & 0.248 & 0.215 \\
+    aya-expanse-8b-Q3\_K\_M.gguf & 0.930 & 0.588 & 0.999 & 0.740 & 0.736 \\
+    aya-expanse-8b-Q4\_K\_M.gguf & 0.846 & 0.394 & 1.000 & 0.565 & 0.571 \\
+    cogito-v1-preview-llama-8b-q2\_k.gguf & 0.770 & 0.302 & 0.991 & 0.463 & 0.471 \\
+    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 0.826 & 0.365 & 1.000 & 0.534 & 0.542 \\
+    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 0.944 & 0.641 & 1.000 & 0.782 & 0.776 \\
+    \midrule
+    \multicolumn{6}{l}{\textit{AQLM Quantization}} \\
+    \midrule
+    Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf & 0.271 & 0.121 & 1.000 & 0.215 & 0.151 \\
+    \midrule
+    \multicolumn{6}{l}{\textit{HIGGS Quantization}} \\
+    \midrule
+    llama3.1\_8B\_3bit & 0.666 & 0.231 & 1.000 & 0.375 & 0.381 \\
+    llama3.1\_8B\_4bit & 0.761 & 0.295 & 1.000 & 0.456 & 0.466 \\
+    \midrule
+    \multicolumn{6}{l}{\textit{QTIP Quantization}} \\
+    \midrule
+    Llama-3.1-8b-Instruct-QTIP-2Bit & 0.562 & 0.186 & 1.000 & 0.314 & 0.309 \\
+    Llama-3.1-8b-Instruct-QTIP-3Bit & 0.750 & 0.286 & 1.000 & 0.444 & 0.454 \\
+    Llama-3.1-8b-Instruct-QTIP-4Bit & 0.786 & 0.319 & 1.000 & 0.484 & 0.493 \\
+    \midrule
+    \multicolumn{6}{l}{\textit{Other}} \\
+    \midrule
+    results\_qwen3\_coder\_30B\_a3b\_fp8 & 0.988 & 1.000 & 0.878 & 0.935 & 0.931 \\
+    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 0.992 & 1.000 & 0.919 & 0.958 & 0.954 \\
+    results\_qwen36\_Qwen\_\_Qwen3.6-27B & 0.993 & 1.000 & 0.926 & 0.962 & 0.958 \\
+    \bottomrule
+  \end{tabular}
+  }
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Clone Detection Evaluation Summary --- Full Results}
+  \label{tab:evaluation_summary}
+  \footnotesize
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lrrrrrrrrrrrr}
+    \toprule
+    \textbf{Model} & \textbf{Total} & \textbf{Eval} & \textbf{Excl} & \textbf{TP} & \textbf{FP} & \textbf{FN} & \textbf{TN} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{MCC} \\
+    \midrule
+    \multicolumn{13}{l}{\textit{Original (FP16)}} \\
+    \midrule
+    CodeLlama-7b-Instruct-hf & 10000 & 10000 & 0 & 1000 & 4729 & 0 & 4271 & 0.527 & 0.175 & 1.000 & 0.297 & 0.288 \\
+    Codestral-22B-v0.1 & 10000 & 10000 & 0 & 998 & 56 & 2 & 8944 & 0.994 & 0.947 & 0.998 & 0.972 & 0.969 \\
+    deepseek\_coder\_v2\_lite & 10000 & 10000 & 0 & 1000 & 307 & 0 & 8693 & 0.969 & 0.765 & 1.000 & 0.867 & 0.860 \\
+    Llama-4-Scout-17B-16E-Instruct & 10000 & 10000 & 0 & 1000 & 205 & 0 & 8795 & 0.980 & 0.830 & 1.000 & 0.907 & 0.900 \\
+    Meta-Llama-3.1-8B-Instruct & 10000 & 10000 & 0 & 1000 & 2282 & 0 & 6718 & 0.772 & 0.305 & 1.000 & 0.467 & 0.477 \\
+    qwen2.5\_coder\_7B\_original & 10000 & 10000 & 0 & 997 & 0 & 3 & 9000 & 1.000 & 1.000 & 0.997 & 0.999 & \cellcolor{green!30}0.998 \\
+    aya-expanse-8b & 10000 & 10000 & 0 & 998 & 673 & 2 & 8327 & 0.932 & 0.597 & 0.998 & 0.747 & 0.742 \\
+    cogito-v1-preview-llama-8B & 10000 & 10000 & 0 & 1000 & 268 & 0 & 8732 & 0.973 & 0.789 & 1.000 & 0.882 & 0.875 \\
+    \midrule
+    \multicolumn{13}{l}{\textit{GGUF Quantization}} \\
+    \midrule
+    CodeLlama-7b-Instruct-hf-GGUF\_CodeLlama-7b-Instruct-hf.Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 9000 & 0 & 0 & 0.100 & 0.100 & 1.000 & 0.182 & 0.000 \\
+    CodeLlama-7b-Instruct-hf.Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 6563 & 0 & 2437 & 0.344 & 0.132 & 1.000 & 0.234 & 0.189 \\
+    CodeLlama-7b-Instruct-hf.Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 8393 & 0 & 607 & 0.161 & 0.106 & 1.000 & 0.192 & 0.085 \\
+    Codestral-22B-v0.1-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 59 & 0 & 8941 & 0.994 & 0.944 & 1.000 & 0.971 & 0.969 \\
+    Codestral-22B-v0.1-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 52 & 0 & 8948 & 0.995 & 0.951 & 1.000 & 0.975 & 0.972 \\
+    Codestral-22B-v0.1-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 72 & 1 & 8928 & 0.993 & 0.933 & 0.999 & 0.965 & 0.961 \\
+    deepseek\_coder\_v2\_lite\_q4km & 10000 & 10000 & 0 & 1000 & 712 & 0 & 8288 & 0.929 & 0.584 & 1.000 & 0.738 & 0.733 \\
+    llama4\_scout\_Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 283 & 0 & 8717 & 0.972 & 0.779 & 1.000 & 0.876 & 0.869 \\
+    llama4\_scout\_Q3\_K\_S.gguf & 10000 & 10000 & 0 & 1000 & 141 & 0 & 8859 & 0.986 & 0.876 & 1.000 & 0.934 & 0.929 \\
+    llama4\_scout\_Q4\_K\_M.gguf & 10000 & 10000 & 0 & 998 & 186 & 2 & 8814 & 0.981 & 0.843 & 0.998 & 0.914 & 0.907 \\
+    Meta-Llama-3.1-8B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 7105 & 0 & 1895 & 0.289 & 0.123 & 1.000 & 0.220 & 0.161 \\
+    Meta-Llama-3.1-8B-Instruct-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 5263 & 0 & 3737 & 0.474 & 0.160 & 1.000 & 0.275 & 0.258 \\
+    Meta-Llama-3.1-8B-Instruct-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 3495 & 0 & 5505 & 0.650 & 0.223 & 1.000 & 0.364 & 0.369 \\
+    Qwen2.5-Coder-7B-Instruct-Q2\_K-self.gguf & 10000 & 10000 & 0 & 968 & 0 & 32 & 9000 & 0.997 & 1.000 & 0.968 & 0.984 & 0.982 \\
+    Qwen2.5-Coder-7B-Instruct-Q3\_K\_M-self.gguf & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!20}0.998 \\
+    Qwen2.5-Coder-7B-Instruct-Q4\_K\_M-self.gguf & 10000 & 10000 & 0 & 998 & 0 & 2 & 9000 & 1.000 & 1.000 & 0.998 & 0.999 & \cellcolor{green!40}0.999 \\
+    qwen2.5\_coder\_7B\_q2k & 10000 & 10000 & 0 & 999 & 0 & 1 & 9000 & 1.000 & 1.000 & 0.999 & 1.000 & \cellcolor{green!50}0.999 \\
+    qwen2.5\_coder\_7B\_q3km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 & 1.000 & 1.000 & 0.996 & 0.998 & \cellcolor{green!10}0.998 \\
+    qwen2.5\_coder\_7B\_q4km & 10000 & 10000 & 0 & 996 & 0 & 4 & 9000 & 1.000 & 1.000 & 0.996 & 0.998 & 0.998 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q2\_K.gguf & 10000 & 10000 & 0 & 969 & 0 & 31 & 9000 & 0.997 & 1.000 & 0.969 & 0.984 & 0.983 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 892 & 0 & 108 & 9000 & 0.989 & 1.000 & 0.892 & 0.943 & 0.939 \\
+    Qwen3-Coder-30B-A3B-Instruct-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 921 & 0 & 79 & 9000 & 0.992 & 1.000 & 0.921 & 0.959 & 0.956 \\
+    Qwen3.6-27B-Q2\_K.gguf & 10000 & 10000 & 0 & 980 & 0 & 20 & 9000 & 0.998 & 1.000 & 0.980 & 0.990 & 0.989 \\
+    Qwen3.6-27B-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 979 & 6 & 21 & 8994 & 0.997 & 0.994 & 0.979 & 0.986 & 0.985 \\
+    Qwen3.6-27B-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 928 & 1 & 72 & 8999 & 0.993 & 0.999 & 0.928 & 0.962 & 0.959 \\
+    aya-expanse-8b-Q2\_K.gguf & 10000 & 10000 & 0 & 1000 & 6069 & 0 & 2931 & 0.393 & 0.141 & 1.000 & 0.248 & 0.215 \\
+    aya-expanse-8b-Q3\_K\_M.gguf & 10000 & 10000 & 0 & 999 & 700 & 1 & 8300 & 0.930 & 0.588 & 0.999 & 0.740 & 0.736 \\
+    aya-expanse-8b-Q4\_K\_M.gguf & 10000 & 10000 & 0 & 1000 & 1541 & 0 & 7459 & 0.846 & 0.394 & 1.000 & 0.565 & 0.571 \\
+    cogito-v1-preview-llama-8b-q2\_k.gguf & 10000 & 10000 & 0 & 991 & 2287 & 9 & 6713 & 0.770 & 0.302 & 0.991 & 0.463 & 0.471 \\
+    cogito-v1-preview-llama-8b-q3\_k\_m.gguf & 10000 & 10000 & 0 & 1000 & 1742 & 0 & 7258 & 0.826 & 0.365 & 1.000 & 0.534 & 0.542 \\
+    cogito-v1-preview-llama-8b-q4\_k\_m.gguf & 10000 & 10000 & 0 & 1000 & 559 & 0 & 8441 & 0.944 & 0.641 & 1.000 & 0.782 & 0.776 \\
+    \midrule
+    \multicolumn{13}{l}{\textit{AQLM Quantization}} \\
+    \midrule
+    Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf & 10000 & 10000 & 0 & 1000 & 7295 & 0 & 1705 & 0.271 & 0.121 & 1.000 & 0.215 & 0.151 \\
+    \midrule
+    \multicolumn{13}{l}{\textit{HIGGS Quantization}} \\
+    \midrule
+    llama3.1\_8B\_3bit & 10000 & 10000 & 0 & 1000 & 3337 & 0 & 5663 & 0.666 & 0.231 & 1.000 & 0.375 & 0.381 \\
+    llama3.1\_8B\_4bit & 10000 & 10000 & 0 & 1000 & 2387 & 0 & 6613 & 0.761 & 0.295 & 1.000 & 0.456 & 0.466 \\
+    \midrule
+    \multicolumn{13}{l}{\textit{QTIP Quantization}} \\
+    \midrule
+    Llama-3.1-8b-Instruct-QTIP-2Bit & 10000 & 10000 & 0 & 1000 & 4378 & 0 & 4622 & 0.562 & 0.186 & 1.000 & 0.314 & 0.309 \\
+    Llama-3.1-8b-Instruct-QTIP-3Bit & 10000 & 10000 & 0 & 1000 & 2501 & 0 & 6499 & 0.750 & 0.286 & 1.000 & 0.444 & 0.454 \\
+    Llama-3.1-8b-Instruct-QTIP-4Bit & 10000 & 10000 & 0 & 1000 & 2136 & 0 & 6864 & 0.786 & 0.319 & 1.000 & 0.484 & 0.493 \\
+    \midrule
+    \multicolumn{13}{l}{\textit{Other}} \\
+    \midrule
+    results\_qwen3\_coder\_30B\_a3b\_fp8 & 10000 & 10000 & 0 & 878 & 0 & 122 & 9000 & 0.988 & 1.000 & 0.878 & 0.935 & 0.931 \\
+    results\_qwen3\_coder\_30B\_a3b\_fp8\_q4km\_gguf & 10000 & 10000 & 0 & 919 & 0 & 81 & 9000 & 0.992 & 1.000 & 0.919 & 0.958 & 0.954 \\
+    results\_qwen36\_Qwen\_\_Qwen3.6-27B & 10000 & 10000 & 0 & 926 & 0 & 74 & 9000 & 0.993 & 1.000 & 0.926 & 0.962 & 0.958 \\
+    \bottomrule
+  \end{tabular}
+  }
+\end{table}
+

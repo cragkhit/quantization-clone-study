@@ -352,27 +352,42 @@ def load_gguf_lora(hf_model: str | None = None):
     default_file = "qwen2.5-coder-7b-instruct-q4_k_m.gguf"
 
     parts = (hf_model or "").split("::")
-    if len(parts) == 3:
+    local_base = None
+    if len(parts) == 2 and parts[0].endswith(".gguf") and Path(parts[0]).is_file():
+        # Local base GGUF (e.g. a self-quantized model) + adapter.
+        local_base, lora_path = parts
+    elif len(parts) == 3:
         repo_id, filename, lora_path = parts
     elif len(parts) == 1 and parts[0]:
         repo_id, filename, lora_path = default_repo, default_file, parts[0]
     else:
         raise ValueError(
-            "gguf_lora needs 'repo::base_file.gguf::adapter.gguf' "
-            "(or just 'adapter.gguf' to use the default Qwen Q4_K_M base).")
+            "gguf_lora needs 'repo::base_file.gguf::adapter.gguf', "
+            "'localbase.gguf::adapter.gguf', or just 'adapter.gguf' "
+            "(default Qwen Q4_K_M base).")
 
     if not Path(lora_path).exists():
         raise FileNotFoundError(f"LoRA adapter not found: {lora_path}")
 
-    print(f"GGUF base: {repo_id}::{filename}\nLoRA adapter: {lora_path}", flush=True)
-    llm = Llama.from_pretrained(
-        repo_id=repo_id,
-        filename=filename,
-        lora_path=lora_path,
-        n_gpu_layers=-1,
-        n_ctx=16384,
-        verbose=False,
-    )
+    if local_base:
+        print(f"GGUF base (local): {local_base}\nLoRA adapter: {lora_path}", flush=True)
+        llm = Llama(
+            model_path=local_base,
+            lora_path=lora_path,
+            n_gpu_layers=-1,
+            n_ctx=16384,
+            verbose=False,
+        )
+    else:
+        print(f"GGUF base: {repo_id}::{filename}\nLoRA adapter: {lora_path}", flush=True)
+        llm = Llama.from_pretrained(
+            repo_id=repo_id,
+            filename=filename,
+            lora_path=lora_path,
+            n_gpu_layers=-1,
+            n_ctx=16384,
+            verbose=False,
+        )
 
     def infer(content_a: str, content_b: str, lang: str) -> str:
         prompt = build_prompt(content_a, content_b, lang)
@@ -687,10 +702,112 @@ def load_qwen36(hf_model: str | None = None):
     return infer
 
 
+def load_qwen36_lora(hf_model: str | None = None):
+    """Qwen3.6-27B (VLM, text-only) + a PEFT LoRA adapter, via transformers.
+
+    The transformers analogue of `gguf_lora` for the `qwen36` backend: loads the
+    BF16 base with AutoModelForImageTextToText and applies a locally-trained PEFT
+    adapter with PeftModel, so the base is identical to the benchmarked `qwen36`
+    row and the delta isolates the fine-tuning lift. Used because this VLM runs on
+    transformers (not GGUF) on this box — see load_qwen36 / exp_notes.md.
+
+    hf_model format: 'adapter_dir' (default base Qwen/Qwen3.6-27B) or
+    'base_id::adapter_dir'.
+    """
+    from transformers import AutoModelForImageTextToText, AutoTokenizer
+    from peft import PeftModel
+    import torch
+
+    default_base = "Qwen/Qwen3.6-27B"
+    parts = (hf_model or "").split("::")
+    if len(parts) == 2:
+        base_id, adapter_dir = parts
+    elif len(parts) == 1 and parts[0]:
+        base_id, adapter_dir = default_base, parts[0]
+    else:
+        raise ValueError("qwen36_lora needs 'adapter_dir' or 'base_id::adapter_dir'.")
+    if not Path(adapter_dir).exists():
+        raise FileNotFoundError(f"LoRA adapter not found: {adapter_dir}")
+
+    print(f"qwen36 base: {base_id}\nPEFT adapter: {adapter_dir}", flush=True)
+    tokenizer = AutoTokenizer.from_pretrained(base_id)
+    model = AutoModelForImageTextToText.from_pretrained(
+        base_id, dtype=torch.bfloat16, device_map="auto",
+    )
+    model = PeftModel.from_pretrained(model, adapter_dir)
+    model.eval()
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        messages = [{"role": "user", "content": prompt}]
+        text = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True,
+            enable_thinking=False,
+        )
+        inputs = tokenizer(text, return_tensors="pt").to(model.device)
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs, max_new_tokens=256,
+                do_sample=True, temperature=0.7, top_p=0.8, top_k=20,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+        return tokenizer.decode(
+            outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True
+        )
+
+    return infer
+
+
+def load_qwen36_gguf_lora(hf_model: str | None = None):
+    """Qwen3.6-27B self-quantized GGUF base + a GGUF LoRA adapter (llama.cpp
+    `lora_path`). The GGUF-LoRA counterpart of `qwen36_lora`: applies the
+    adapter on the same self-quantized base benchmarked by `qwen36_gguf`, so
+    the metric delta isolates the fine-tuning lift at that quantization.
+
+    hf_model format: 'base.gguf::adapter.gguf' (local paths).
+
+    Like `load_qwen36_gguf`, this builds the ChatML prompt by hand with the
+    closed '<think>\\n\\n</think>\\n\\n' block (enable_thinking=False) and calls
+    create_completion — create_chat_completion cannot pass enable_thinking, so
+    the template opens an unclosed <think> and the model reasons past
+    max_tokens instead of emitting the JSON verdict (~14-26% unparseable).
+    """
+    from llama_cpp import Llama
+
+    parts = (hf_model or "").split("::")
+    if len(parts) == 2 and parts[0].endswith(".gguf") and Path(parts[0]).is_file():
+        base_path, lora_path = parts
+    else:
+        raise ValueError(
+            "qwen36_gguf_lora needs 'base.gguf::adapter.gguf' (local paths).")
+    if not Path(lora_path).exists():
+        raise FileNotFoundError(f"LoRA adapter not found: {lora_path}")
+
+    print(f"qwen36 GGUF base (local): {base_path}\nGGUF LoRA adapter: {lora_path}",
+          flush=True)
+    llm = Llama(model_path=base_path, lora_path=lora_path,
+                n_gpu_layers=-1, n_ctx=16384, verbose=False)
+
+    def infer(content_a: str, content_b: str, lang: str) -> str:
+        prompt = build_prompt(content_a, content_b, lang)
+        full_prompt = (
+            f"<|im_start|>user\n{prompt}<|im_end|>\n"
+            f"<|im_start|>assistant\n<think>\n\n</think>\n\n"
+        )
+        output = llm.create_completion(
+            full_prompt, max_tokens=384, stop=["<|im_end|>"],
+        )
+        return output["choices"][0]["text"]
+
+    return infer
+
+
 LOADERS = {
     "original":   load_original,
     "qwen36":     load_qwen36,
+    "qwen36_lora": load_qwen36_lora,
     "qwen36_gguf": load_qwen36_gguf,
+    "qwen36_gguf_lora": load_qwen36_gguf_lora,
     "gguf":       load_gguf,
     "qwen":       load_qwen,
     "gguf_lora":  load_gguf_lora,

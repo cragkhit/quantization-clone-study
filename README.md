@@ -1,141 +1,142 @@
-# Quantization & Fine-Tuning for LLM Code Clone Detection
+# Replication Package: Quantized LLMs for Code Clone Detection
 
-A study of how **weight quantization** — and, more recently, **clone-specific
-fine-tuning** — affect the ability of instruction-tuned LLMs to perform
-**code clone detection**: deciding whether two code snippets are functionally
-similar.
+This repository is the replication package for our empirical study of how weight quantization and clone-specific fine-tuning affect the ability of open LLMs to detect code clones.
+It contains the benchmarks we built, the inference and fine-tuning code, the raw per-round outputs of every run, and the scripts that turn those outputs into every table and figure in the paper.
 
-The task is framed as pairwise binary classification. For each pair the model is
-given a fixed prompt (`prompt.md`) and must answer `YES-SIMILAR`,
-`NO-NOT-SIMILAR`, or `DONT-KNOW` as a small JSON object. Runs are repeated for
-5 rounds and reduced by majority vote; the headline metric is **MCC** (Matthews
-Correlation Coefficient), which is robust on the balanced sets and penalizes the
-degenerate "predict-everything-CLONE" failure mode.
+The repository follows the structure of the paper.
+Each research question has its own folder with the scripts that produce its tables and figures.
 
 ## Research questions
 
-- **RQ1** — How does quantization **bit-width** affect performance vs. the
-  full-precision baseline?
-- **RQ2** — Which quantization **method** (GGUF, AQLM, HIGGS-GPTQ, QTIP) best
-  preserves capability at equal bit-width?
-- **RQ3** — Is the impact consistent across **languages and clone types**?
-- **RQ4** — What are the **resource–performance trade-offs**?
-- **RQ5** — How does **fine-tuning on clone-specific data** affect a quantized
-  model?
+| RQ | Question | Folder |
+| --- | --- | --- |
+| RQ1 | How does quantization affect LLM performance on code clone detection compared with full-precision baselines? (bit-width, quantization technique, single-language and cross-language clones) | [`rq1_effect_of_quantization/`](rq1_effect_of_quantization/) |
+| RQ2 | What are the resource-performance trade-offs of quantized LLMs for code clone detection? | [`rq2_resource_tradeoffs/`](rq2_resource_tradeoffs/) |
+| RQ3 | How does fine-tuning on clone-specific data affect the performance of quantized LLMs for code clone detection? | [`rq3_fine_tuning/`](rq3_fine_tuning/) |
 
-## Pipeline
+## Layout
 
 ```
-prepare_gcj_*.py / ocd/        →  datasets (code files + labeled pairs)
-        │
-run_quantization.py <backend>  →  per-round result CSVs (one row per pair)
-        │
-evaluate_results.py            →  confusion matrix + P/R/F1/MCC, CSV + LaTeX tables
+prompt.md                       the clone detection prompt used in every run
+benchmarks/                     Section 4.4: benchmarks
+  prepare_gcj_clones.py           builds GCJ-Java from GCJ2-4lang
+  prepare_gcj_crosslang.py        builds GCJ cross-language from GCJ2-4lang
+  gcj_java/                       400 labelled pairs over 100 Java files
+  gcj_crosslang/                  384 labelled pairs over 192 Java, C++, Python, and PHP files
+inference/                      Sections 4.2, 4.3, and 4.6: running the models
+  run_quantization.py             inference runner for every model and quantization backend
+  scripts/                        the shell scripts that ran each batch of experiments
+  requirements/                   pinned environments, one per backend
+  provenance/                     model revisions, source commits, patches, and hardware
+results/                        raw outputs shared by all RQs
+  ocd/  gcj_java/  gcj_crosslang/ per-round result CSVs, one folder per model
+  logs/                           console logs of the runs
+  configurations.csv              maps each run to its model, technique, and bit-width
+  load_results.py                 loads the metrics of the configurations in the paper
+rq1_effect_of_quantization/     Section 5.1, Tables 3 to 5, Figures 1 and 2
+  evaluate_results.py             computes the metrics and writes the summary tables
+  tables/                         evaluation summaries (CSV and LaTeX) per benchmark
+  figures/                        plot_technique.py, plot_cross_language.py, and their output
+rq2_resource_tradeoffs/         Section 5.2, Figures 3 and 4
+  plot_pareto.py                  weight memory, Pareto fronts, and the two figures
+  figures/
+rq3_fine_tuning/                Section 5.3, Table 6
+  prepare_aizu_finetune.py        builds the AIZU384F training set
+  prepare_aizu_cl_finetune.py     builds the AIZU324CLF cross-language training set
+  train_lora.py                   QLoRA training for the 7B and 8B models
+  train_lora_vlm.py               LoRA training for Qwen3.6-27B
+  generate_finetune_table.py      baseline and fine-tuned MCC on both GCJ benchmarks
+  tables/
+docs/                           experiment notes, model list, and run trackers
+archive/                        superseded summary tables, kept for reference
 ```
 
-1. **`run_quantization.py`** — the inference runner. Loads a model via one of
-   several *backends* (see below), runs every pair, and writes
-   `..._round{N}.csv`. Resumes automatically (completed rounds/pairs are
-   skipped). Two input modes:
-   - OCD: the n×n Cartesian product of the `ocd/tests/` Java files.
-   - `--pairs-file <csv>`: an explicit labeled pair list (the GCJ sets).
-2. **`evaluate_results.py`** — parses the `response` JSON, maps
-   `YES-SIMILAR→CLONE` / `NO-NOT-SIMILAR→NON-CLONE`, applies majority vote across
-   rounds, and emits a summary CSV plus booktabs **LaTeX** tables. Select a
-   dataset with `--dataset {ocd,gcj-java,gcj-cross-language}`.
-3. **`prompt.md`** — the single prompt template used identically at every stage.
+## From the paper to the files
 
-## Datasets
+| Paper | Files | How to regenerate |
+| --- | --- | --- |
+| Section 4.4, Benchmarks | `benchmarks/` | `python benchmarks/prepare_gcj_clones.py`, `python benchmarks/prepare_gcj_crosslang.py` |
+| Section 4.5, Metrics | `rq1_effect_of_quantization/evaluate_results.py` | see below |
+| Table 3 (OCD) | `rq1_effect_of_quantization/tables/evaluation_summary_ocd.*` | `evaluate_results.py --dataset ocd` |
+| Table 4 (GCJ-Java) | `rq1_effect_of_quantization/tables/evaluation_summary_gcj_java.*` | `evaluate_results.py --dataset gcj-java` |
+| Table 5 (GCJ cross-language) | `rq1_effect_of_quantization/tables/evaluation_summary_gcj_crosslang.*` | `evaluate_results.py --dataset gcj-cross-language` |
+| Figure 1, quantization techniques | `rq1_effect_of_quantization/figures/rq1_technique_bar.pdf` | `plot_technique.py` |
+| Figure 2, cross-language clones | `rq1_effect_of_quantization/figures/rq1_xlang_bar.pdf` | `plot_cross_language.py` |
+| Figures 3 and 4, Pareto fronts | `rq2_resource_tradeoffs/figures/rq2_pareto*.pdf` | `plot_pareto.py` |
+| Table 6, fine-tuning | `rq3_fine_tuning/tables/finetune_results.*` | `generate_finetune_table.py` |
+| Table A.7, checkpoints | `docs/models.md`, `inference/provenance/hf_revisions.txt` | |
 
-| Dataset | Dir | Pairs | Language(s) | Clone type |
-| --- | --- | --- | --- | --- |
-| OCD | `ocd/tests/` | 10,000 (100 files, n×n) | Java | Syntactic / near-miss (compile–decompile, obfuscation) |
-| GCJ-Java | `gcj_java_clones/` | 400 (200/200) | Java | Semantic, same-problem (Type-4) |
-| GCJ cross-language | `gcj_crosslang_clones/` | 384 (192/192) | Java, C++, Python, PHP | Cross-language semantic |
+## Reproducing the tables and figures
 
-The GCJ sets are derived from Google Code Jam submissions (`gcj4.pkl`) by
-`prepare_gcj_clones.py` and `prepare_gcj_crosslang.py`. Per-run status and
-metrics are tracked in **`gcj_java.md`** and **`gcj_crosslang.md`**.
+The raw outputs are included, so the tables and figures can be regenerated without a GPU.
+Run all commands from the repository root.
+`evaluate_results.py` and `generate_finetune_table.py` need Python 3.10 or later, and the figure scripts need `matplotlib`.
 
-## Models & quantization backends
+```bash
+# Tables 3 to 5: majority vote over five rounds, unparseable answers counted as non-clones
+for d in ocd gcj-java gcj-cross-language; do
+  python rq1_effect_of_quantization/evaluate_results.py --dataset $d \
+    --mode majority-vote --unknown-as non-clone --latex
+done
 
-`run_quantization.py` dispatches to one of these backends (each in its own
-virtual environment — see `exp_notes.md`):
+# Figures 1 and 2 (RQ1) and Figures 3 and 4 (RQ2)
+python rq1_effect_of_quantization/figures/plot_technique.py
+python rq1_effect_of_quantization/figures/plot_cross_language.py
+python rq2_resource_tradeoffs/plot_pareto.py
+
+# Table 6 (RQ3)
+python rq3_fine_tuning/generate_finetune_table.py
+```
+
+The paper counts an answer that cannot be parsed, or a `DONT-KNOW` answer, as a non-clone prediction, so every pair is evaluated.
+`evaluate_results.py` defaults to excluding such answers, so pass `--unknown-as non-clone` to reproduce the paper.
+`generate_finetune_table.py` uses the paper's setting by default.
+
+## Configurations
+
+`results/configurations.csv` lists every run on each benchmark with its model, technique, bit-width, and whether the paper reports it (`in_paper`).
+The paper reports 40 configurations per benchmark: nine full-precision (BF16) models, 25 GGUF models, and six configurations of Llama-3.1-8B-Instruct with AQLM, HIGGS-GPTQ, and QTIP.
+
+The results folders also contain runs that the paper does not report.
+These are the community GGUF releases of Qwen2.5-Coder-7B-Instruct (`technique` is `GGUF (community)`), which the paper replaces with GGUF models that we quantized ourselves from the BF16 checkpoint, the Qwen3-Coder-30B-A3B runs, and the fine-tuning runs, which belong to RQ3.
+The fine-tuning table also lists Qwen2.5-Coder-7B with adapters on its community Q4_K_M model, which the paper does not report.
+
+## Rerunning the experiments
+
+Rerunning inference needs GPUs and one Python environment per quantization backend.
+`inference/run_quantization.py` loads a model through one of the backends below, runs every pair for the given number of rounds, and writes one CSV per round.
+It resumes automatically from completed rounds and pairs.
 
 | Backend | Format | Notes |
 | --- | --- | --- |
-| `original`, `deepseek`, `codellama` | BF16 (full precision) | HuggingFace `transformers` |
-| `gguf`, `qwen` | GGUF k-quants (Q2_K / Q3_K_M / Q4_K_M …) | llama.cpp |
-| `aqlm`, `higgs`, `qtip` | 2/3/4-bit research quantization | AQLM · HIGGS-GPTQ · QTIP |
-| `qwen3fp8` | FP8 (MoE) | Qwen3-Coder-30B-A3B via vLLM |
-| `qwen36` | Qwen3.6-27B (VLM, text-only) | via transformers |
-| `gguf_lora` | GGUF base **+ LoRA adapter** | applies a fine-tuned adapter at inference (RQ5) |
-
-Models evaluated include Meta-Llama-3.1-8B (the one base quantized by **all**
-methods), Qwen2.5-Coder-7B, CodeLlama-7b, DeepSeek-Coder-V2-Lite, Llama-4-Scout-17B,
-Codestral-22B, aya-expanse-8b, and cogito-v1-preview-llama-8B. See the trackers
-for the full grid and MCCs.
-
-## Fine-tuning (RQ5)
-
-A **QLoRA** adapter is trained on an *independent* clone benchmark
-([SimilBench](https://github.com/UCL-CREST/SimilBench) **AIZU**, disjoint from
-the GCJ test sets) and applied on top of the **same** Q4_K_M GGUF at inference,
-so the metric delta isolates the fine-tuning lift at fixed quantization.
-
-```
-prepare_aizu_finetune.py      →  finetune_data/aizu_{train,val}.jsonl   (monolingual AIZU384F)
-prepare_aizu_cl_finetune.py   →  finetune_data/aizu_cl_{train,val}.jsonl (cross-language AIZU324CLF)
-        │
-train_lora.py                 →  finetune_models/<name>-qlora/  (LoRA adapter, ~40 MB)
-        │
-llama.cpp/convert_lora_to_gguf.py  →  <name>-qlora-F16.gguf
-        │
-run_quantization.py gguf_lora "<repo>::<base>.gguf::<adapter>.gguf"  →  result CSVs
-        │
-generate_finetune_table.py    →  focused RQ5 LaTeX/CSV (base → +FT MCC lift)
-```
-
-Fine-tuning gives large gains at fixed quantization — e.g. on GCJ-Java, MCC
-**0.68 → 0.96** (Qwen2.5-Coder-7B) and **0.05 → 0.77** (CodeLlama-7b, rescuing a
-degenerate baseline). See `exp_notes.md` for the full results and method notes.
-
-## Repository layout
-
-```
-run_quantization.py        inference runner (backends + input modes)
-evaluate_results.py        metrics + LaTeX/CSV summary generator
-prompt.md                  the clone-detection prompt template
-prepare_gcj_*.py           build the GCJ pair datasets from gcj4.pkl
-prepare_aizu*_finetune.py  build QLoRA training data from AIZU
-train_lora.py              QLoRA fine-tuning (4-bit NF4 base, LoRA adapter)
-generate_finetune_table.py focused RQ5 results table
-gcj_java.md, gcj_crosslang.md  per-run trackers (status + MCC)
-exp_notes.md               per-backend setup, venvs, workarounds, results
-summaries/                 generated summary CSVs + LaTeX tables, plus
-                           experiment_report.tex (self-contained setup + RQ1–RQ5 write-up)
-results*/                  per-round result CSVs (OCD / GCJ-Java / GCJ x-lang)
-gcj*_clones/               derived GCJ datasets (source files + pairs.csv)
-finetune_data/, finetune_models/   AIZU training data + trained adapters
-<backend>_venv/, gguf/     per-backend Python environments
-```
-
-## Reproducing
-
-Each backend needs its own environment; `exp_notes.md` documents the exact venv,
-pip pins, source builds (GGUF / QTIP / HIGGS kernels are compiled for the target
-GPU), and per-backend commands. A typical run + evaluation:
+| `original`, `deepseek`, `codellama` | BF16 (full precision) | Hugging Face `transformers` |
+| `gguf`, `qwen` | GGUF k-quants (Q2_K, Q3_K_M, Q4_K_M) | llama.cpp |
+| `aqlm`, `higgs`, `qtip` | 2-bit, 3-bit, and 4-bit research quantization | AQLM, HIGGS-GPTQ, QTIP |
+| `qwen36` | Qwen3.6-27B (text only) | `transformers` |
+| `gguf_lora` | GGUF model with a LoRA adapter | applies a fine-tuned adapter at inference (RQ3) |
 
 ```bash
-# One model×quant on GCJ-Java (5 rounds)
-<venv>/bin/python run_quantization.py <backend> "<hf_model>" \
-  --pairs-file gcj_java_clones/pairs.csv \
-  --output "results_gcj_java/<Model>/results_<name>" --rounds 5
-
-# Score every run for a dataset and emit the LaTeX tables
-python evaluate_results.py --dataset gcj-java --mode majority-vote --latex
+# One configuration on GCJ-Java, five rounds
+<venv>/bin/python inference/run_quantization.py <backend> "<hf_model>" \
+  --pairs-file benchmarks/gcj_java/pairs.csv \
+  --output "results/gcj_java/<Model>/results_<name>" --rounds 5
 ```
 
-> **Note:** `run_quantization.py` uses `str | None` syntax and needs Python 3.10+.
-> Runs were executed across two GPU servers (`zeta`, A100/`sm_80`, earlier; `tau`,
-> H100/`sm_90`, more recent) — see `exp_notes.md`.
+`docs/exp_notes.md` documents each backend's environment, version pins, source builds, and exact commands.
+`inference/requirements/` holds the pinned environments, and `inference/provenance/` records the model revisions, source commits, local patches, and hardware.
+The scripts in `inference/scripts/` are the batches we ran on our GPU servers, so they refer to our server paths and virtual environments.
+
+## Data not included
+
+Some inputs are not redistributed and are ignored by Git.
+
+- `benchmarks/ocd/tests/`: the OCD benchmark (Ragkhitwetsagul et al.).
+- `benchmarks/gcj4.pkl`: the [GCJ2-4lang](https://huggingface.co/datasets/lihy11/GCJ2-4lang) dataset, from which `prepare_gcj_*.py` build the GCJ benchmarks. The built benchmarks are included.
+- `rq3_fine_tuning/data/`: the AIZU datasets from [SimilBench](https://github.com/UCL-CREST/SimilBench), which `prepare_aizu*_finetune.py` turn into training data.
+- `rq3_fine_tuning/models/`: the trained LoRA adapters.
+- The model checkpoints, which are downloaded from Hugging Face (see Table A.7 in the paper and `docs/models.md`).
+
+## Licence
+
+This package is released under the [MIT License](LICENSE).
+The benchmark programs come from Google Code Jam, the AIZU Online Judge, and OCD, and remain subject to their original terms.

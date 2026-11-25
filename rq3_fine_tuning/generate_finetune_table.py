@@ -40,6 +40,14 @@ DATASETS = [
 # and each adapter `basename` are the run basenames (without the _roundN suffix).
 MODELS = [
     {
+        "model": "Qwen3.6-27B",
+        "subdir": "Qwen3.6-27B",
+        "baseline": "results_gguf_Qwen3.6-27B-Q4_K_M",
+        "adapters": [
+            ("AIZU384F (mono)", "results_qwen36_gguf_lora_Qwen3.6-27B-Q4_K_M_aizu"),
+        ],
+    },
+    {
         "model": "Qwen2.5-Coder-7B",
         "subdir": "Qwen2.5-Coder-7B-Instruct",
         "baseline": "results_qwen2.5_coder_7B_q4km",
@@ -67,7 +75,7 @@ MODELS = [
 ]
 
 
-def metrics_for(results_dir: str, subdir: str, basename: str) -> dict | None:
+def metrics_for(results_dir: str, subdir: str, basename: str, unknown_as: str) -> dict | None:
     """Majority-vote metrics for one run basename, or None if no files/rows.
 
     Reuses evaluate_results.evaluate_majority_vote; its console report is
@@ -77,7 +85,7 @@ def metrics_for(results_dir: str, subdir: str, basename: str) -> dict | None:
     if not paths:
         return None
     with redirect_stdout(io.StringIO()):
-        results = er.evaluate_majority_vote(paths, unknown_as="exclude")
+        results = er.evaluate_majority_vote(paths, unknown_as=unknown_as)
     results = [r for r in results if r]
     return results[0] if results else None
 
@@ -92,6 +100,9 @@ def main():
     ap.add_argument("--metric", default="mcc", choices=["mcc", "f1", "accuracy"],
                     help="Metric shown in the LaTeX table (default: mcc). The CSV "
                          "always contains accuracy/precision/recall/f1/mcc.")
+    ap.add_argument("--unknown-as", default="non-clone", choices=["non-clone", "clone", "exclude"],
+                    help="How to treat unparseable or DONT-KNOW answers (default: non-clone, "
+                         "as in the paper).")
     ap.add_argument("--tex", default="rq3_fine_tuning/tables/finetune_results.tex")
     ap.add_argument("--csv", default="rq3_fine_tuning/tables/finetune_results.csv")
     args = ap.parse_args()
@@ -102,13 +113,13 @@ def main():
     for m in MODELS:
         base_by_ds = {}
         for dskey, rdir, _ in DATASETS:
-            base_by_ds[dskey] = metrics_for(rdir, m["subdir"], m["baseline"])
+            base_by_ds[dskey] = metrics_for(rdir, m["subdir"], m["baseline"], args.unknown_as)
 
         for adapter_label, adapter_base in m["adapters"]:
             per_ds = {}
             for dskey, rdir, _ in DATASETS:
                 base = base_by_ds[dskey]
-                ft = metrics_for(rdir, m["subdir"], adapter_base)
+                ft = metrics_for(rdir, m["subdir"], adapter_base, args.unknown_as)
                 per_ds[dskey] = (base, ft)
                 for kind, res in (("baseline_q4km", base), ("finetuned", ft)):
                     if res:

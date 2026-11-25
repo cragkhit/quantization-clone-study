@@ -1,6 +1,6 @@
-# Replication Package: Quantized LLMs for Code Clone Detection
+# Fewer Bits, Same Clones? Evaluating LLM Quantization for Code Clone Detection
 
-This repository is the replication package for our empirical study of how weight quantization and clone-specific fine-tuning affect the ability of open LLMs to detect code clones.
+This repository is the replication package for the paper *Fewer Bits, Same Clones? Evaluating LLM Quantization for Code Clone Detection*, an empirical study of how weight quantization and clone-specific fine-tuning affect the ability of open LLMs to detect code clones.
 It contains the benchmarks we built, the inference and fine-tuning code, the raw per-round outputs of every run, and the scripts that turn those outputs into every table and figure in the paper.
 
 The repository follows the structure of the paper.

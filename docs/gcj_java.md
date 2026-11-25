@@ -1,0 +1,133 @@
+# GCJ Java Clone Experiments — Run Tracker
+
+Mirrors the full model set from the OCD study, now on the **GCJ Java** clone set.
+
+- **Dataset:** `benchmarks/gcj_java/pairs.csv` (400 pairs, 200 clone / 200 non-clone — 20 problems × 5 Java submissions)
+- **Rounds:** 5 per run
+
+- **Results:** `results/gcj_java/<Model>/...`
+- **Eval (all models):** `python rq1_effect_of_quantization/evaluate_results.py --dataset gcj-java --mode majority-vote`
+  (auto-selects `results/gcj_java/` and writes `rq1_effect_of_quantization/tables/evaluation_summary_gcj_java.csv`)
+- **Eval (one model):** `python rq1_effect_of_quantization/evaluate_results.py results/gcj_java/<Model>/*.csv --mode majority-vote --output rq1_effect_of_quantization/tables/evaluation_summary_gcj_java.csv`
+
+Check a box once **all 5 rounds** for that run are complete. Environment setup
+(venvs, kernels, per-backend quirks) is documented in `exp_notes.md`.
+
+### Run command template
+
+```bash
+<venv>/bin/python inference/run_quantization.py <backend> "<hf_model>" \
+  --pairs-file benchmarks/gcj_java/pairs.csv \
+  --output "results/gcj_java/<Model>/results_<name>" \
+  --rounds 5
+```
+
+> **Note:** `inference/run_quantization.py` uses `str | None` syntax, so it needs a
+> **Python 3.10+** venv. Use `aqlm_venv310` (not the 3.9 `aqlm_venv`) for the
+> plain `original`/`aqlm` Llama-3.1-8B and Qwen runs.
+
+---
+
+## Meta-Llama-3.1-8B-Instruct
+
+- [x] **Original (BF16)** — `original` · `meta-llama/Meta-Llama-3.1-8B-Instruct` · venv `aqlm_venv310` — *Acc 0.6794, F1 0.7586, MCC 0.4582*
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q2_K.gguf` · venv `gguf` — *Acc 0.5400, F1 0.6849, MCC 0.2041*
+- [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q3_K_M.gguf` · venv `gguf` — *Acc 0.5466, F1 0.6897, MCC 0.2131*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF::Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.5758, F1 0.7032, MCC 0.2701*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `rq3_fine_tuning/models/llama3.1-8b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9425, F1 0.9396, MCC 0.8890* (adapter trained on AIZU384F; +0.619 MCC — see exp_notes.md)
+- [x] **AQLM PV 2-bit** — `aqlm` · `ISTA-DASLab/Meta-Llama-3.1-8B-Instruct-AQLM-PV-2Bit-1x16-hf` · venv `aqlm_venv310` — *Acc 0.5300, F1 0.6803, MCC 0.1759*
+- [x] **HIGGS-GPTQ 3-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-3bit` · venv `higgs_venv` — *Acc 0.6224, F1 0.7259, MCC 0.3390*
+- [x] **HIGGS-GPTQ 4-bit** — `higgs` · `ISTA-DASLab/Llama-3.1-8B-Instruct-HIGGS-GPTQ-4bit` · venv `higgs_venv` — *Acc 0.6429, F1 0.7378, MCC 0.3822*
+- [x] **QTIP 2-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-2Bit` · venv `qtip_venv` — *Acc 0.5952, F1 0.7193, MCC 0.2749*
+- [x] **QTIP 3-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-3Bit` · venv `qtip_venv` — *Acc 0.6616, F1 0.7486, MCC 0.4214*
+- [x] **QTIP 4-bit** — `qtip` · `relaxml/Llama-3.1-8b-Instruct-QTIP-4Bit` · venv `qtip_venv` — *Acc 0.6921, F1 0.7650, MCC 0.4743*
+
+## CodeLlama-7b-Instruct-hf
+
+- [x] **Original (BF16)** — `codellama` · `codellama/CodeLlama-7b-Instruct-hf` · venv `codellama_venv` — *Acc 0.5331, F1 0.6955, MCC 0.0000*
+- [x] **GGUF Q2_K** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q2_K.gguf` · venv `gguf` — *Acc 0.5000, F1 0.6667, MCC 0.0000*
+- [x] **GGUF Q3_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q3_K_M.gguf` · venv `gguf` — *Acc 0.5077, F1 0.6734, MCC 0.0000*
+- [x] **GGUF Q4_K_M** — `gguf` · `QuantFactory/CodeLlama-7b-Instruct-hf-GGUF::CodeLlama-7b-Instruct-hf.Q4_K_M.gguf` · venv `gguf` — *Acc 0.5076, F1 0.6723, MCC 0.0508*
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `rq3_fine_tuning/models/codellama-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.8800, F1 0.8703, MCC 0.7687* (adapter trained on AIZU384F; rescues the degenerate baseline, +0.718 MCC — see exp_notes.md)
+
+## DeepSeek-Coder-V2-Lite-Instruct
+
+- [x] **Original (BF16)** — `deepseek` · `deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct` · venv `deepseek_venv` — *Acc 0.8925, F1 0.8938, MCC 0.7852*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF::DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9075, F1 0.9059, MCC 0.8155*
+
+## Qwen2.5-Coder-7B-Instruct
+
+- [x] **Original (BF16)** — `original` · `Qwen/Qwen2.5-Coder-7B-Instruct` · venv `aqlm_venv310` — *Acc 0.7650, F1 0.6928, MCC 0.6005*
+- [x] **GGUF Q2_K** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q2_k.gguf` · venv `gguf` — *Acc 0.9050, F1 0.8950, MCC 0.8250*
+- [x] **GGUF Q3_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q3_k_m.gguf` · venv `gguf` — *Acc 0.7800, F1 0.7179, MCC 0.6236*
+- [x] **GGUF Q4_K_M** — `qwen` · `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF::qwen2.5-coder-7b-instruct-q4_k_m.gguf` · venv `gguf` — *Acc 0.8175, F1 0.7768, MCC 0.6821*
+- [x] **GGUF Q2_K (self-quantized)** — `gguf` · `models/Qwen2.5-Coder-7B-Instruct-Q2_K.gguf` · venv `gguf` — *Acc 0.6650, F1 0.4962, MCC 0.4445* (self-quantized from BF16, no imatrix; **vs community 0.8250 — the community Q2_K almost certainly used an imatrix; see exp_notes.md**)
+- [x] **GGUF Q3_K_M (self-quantized)** — `gguf` · `models/Qwen2.5-Coder-7B-Instruct-Q3_K_M.gguf` · venv `gguf` — *Acc 0.7850, F1 0.7261, MCC 0.6313* (≈ community 0.6236)
+- [x] **GGUF Q4_K_M (self-quantized)** — `gguf` · `models/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.7900, F1 0.7342, MCC 0.6391* (≈ community 0.6821)
+- [x] **GGUF Q4_K_M + AIZU QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `rq3_fine_tuning/models/qwen2.5-coder-7b-aizu-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9774, MCC 0.9550* (adapter trained on SimilBench AIZU384F; see exp_notes.md)
+- [x] **GGUF Q4_K_M + AIZU-CL QLoRA (fine-tuned)** — `gguf_lora` · Q4_K_M base + `rq3_fine_tuning/models/qwen2.5-coder-7b-aizuCL-qlora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9776, MCC 0.9550* (adapter trained on cross-language AIZU324CLF; identical to the monolingual adapter here — see exp_notes.md)
+
+## Llama-4-Scout-17B-16E-Instruct
+
+- [x] **Original (BF16)** — `original` · `meta-llama/Llama-4-Scout-17B-16E-Instruct` · venv `llama4_venv` — *Acc 0.9600, F1 0.9585, MCC 0.9223*
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q2_K.gguf` · venv `gguf` — *Acc 0.9500, F1 0.9476, MCC 0.9037*
+- [x] **GGUF Q3_K_S** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q3_K_S.gguf` · venv `gguf` — *Acc 0.9525, F1 0.9501, MCC 0.9091*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/meta-llama_Llama-4-Scout-17B-16E-Instruct-old-GGUF::...Q4_K_M-00001-of-00002.gguf` (split) · venv `gguf` — *Acc 0.9600, F1 0.9583, MCC 0.9230*
+
+## aya-expanse-8b
+
+- [x] **Original (BF16)** — `original` · `CohereLabs/aya-expanse-8b` · venv `aqlm_venv310` — *Acc 0.8333, F1 0.8398, MCC 0.6696* (4 excluded)
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q2_K.gguf` · venv `gguf` — *Acc 0.6499, F1 0.7342, MCC 0.3910* (3 excluded)
+- [x] **GGUF Q3_K_M** — `gguf` · `bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q3_K_M.gguf` · venv `gguf` — *Acc 0.8212, F1 0.8297, MCC 0.6460* (3 excluded)
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/aya-expanse-8b-GGUF::aya-expanse-8b-Q4_K_M.gguf` · venv `gguf` — *Acc 0.8266, F1 0.8449, MCC 0.6744* (2 excluded — ~lossless vs BF16, edges it out)
+
+## cogito-v1-preview-llama-8B
+
+- [x] **Original (BF16)** — `original` · `deepcogito/cogito-v1-preview-llama-8B` · venv `aqlm_venv310` — *Acc 0.9225, F1 0.9191, MCC 0.8481*
+- [x] **GGUF Q2_K** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q2_k.gguf` · venv `gguf` — *Acc 0.5525, F1 0.6865, MCC 0.2025*
+- [x] **GGUF Q3_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q3_k_m.gguf` · venv `gguf` — *Acc 0.6310, F1 0.7310, MCC 0.3701* (7 excluded)
+- [x] **GGUF Q4_K_M** — `gguf` · `cortexso/cogito-v1::cogito-v1-preview-llama-8b-q4_k_m.gguf` · venv `gguf` — *Acc 0.8797, F1 0.8884, MCC 0.7680* (1 excluded)
+
+## Codestral-22B-v0.1
+
+- [x] **Original (BF16)** — `original` · `mistralai/Codestral-22B-v0.1` · venv `codestral_venv` — *Acc 0.9375, F1 0.9351, MCC 0.8775*
+- [x] **GGUF Q2_K** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q2_K.gguf` · venv `gguf` — *Acc 0.9350, F1 0.9350, MCC 0.8700*
+- [x] **GGUF Q3_K_M** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q3_K_M.gguf` · venv `gguf` — *Acc 0.9350, F1 0.9347, MCC 0.8700*
+- [x] **GGUF Q4_K_M** — `gguf` · `bartowski/Codestral-22B-v0.1-GGUF::Codestral-22B-v0.1-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9400, F1 0.9388, MCC 0.8807*
+
+## Qwen3.6-27B
+
+- [x] **Text-only (BF16)** — `qwen36` · `Qwen/Qwen3.6-27B` · venv `qwen36_venv` — *Acc 0.9450, F1 0.9418, MCC 0.8954* (multimodal model run text-only; `enable_thinking=False` — see exp_notes.md)
+
+Self-quantized from the BF16 base via llama.cpp (`models/Qwen3.6-27B-QX.gguf`;
+no community GGUF exists yet for this brand-new `qwen35` architecture — see
+exp_notes.md). Uses the new `qwen36_gguf` backend, which suppresses the
+model's default "thinking" mode (see exp_notes.md) — without that fix the
+model never finishes reasoning before the token budget runs out. **Non-monotonic
+with bit-width: Q3_K_M is best, even beating BF16** (0.9276 vs. 0.8954);
+precision stays ~1.0 across every config, so quantization only moves recall.
+
+- [x] **GGUF Q2_K** — `qwen36_gguf` · `models/Qwen3.6-27B-Q2_K.gguf` · venv `gguf` — *Acc 0.9300, F1 0.9247, MCC 0.8686* (0 excluded)
+- [x] **GGUF Q3_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q3_K_M.gguf` · venv `gguf` — *Acc 0.9625, F1 0.9610, MCC 0.9276* (0 excluded — best config, beats BF16)
+- [x] **GGUF Q4_K_M** — `qwen36_gguf` · `models/Qwen3.6-27B-Q4_K_M.gguf` · venv `gguf` — *Acc 0.9375, F1 0.9333, MCC 0.8819* (0 excluded)
+- [x] **BF16 + AIZU LoRA (fine-tuned)** — `qwen36_lora` · `Qwen/Qwen3.6-27B` base + PEFT adapter `rq3_fine_tuning/models/qwen3.6-27b-aizu-lora` · venv `qwen36_venv` — *Acc 0.9750, F1 0.9746, MCC 0.9504* (0 excluded — standard LoRA on the BF16 text tower via `rq3_fine_tuning/train_lora_vlm.py`, applied through transformers+PeftModel = fine-tune ceiling; +0.055 over base; see exp_notes.md)
+- [x] **Q4_K_M + AIZU LoRA (fine-tuned)** — `qwen36_gguf_lora` · `models/Qwen3.6-27B-Q4_K_M.gguf` base + GGUF adapter `rq3_fine_tuning/models/qwen3.6-27b-aizu-lora-F16.gguf` · venv `gguf` — *Acc 0.9775, F1 0.9771, MCC 0.9556* (0 excluded — **GGUF-LoRA works for this VLM arch**; adapter converted via `convert_lora_to_gguf.py`, applied on the self-quantized Q4_K_M via the `qwen36_gguf_lora` backend which disables thinking like `qwen36_gguf`; +0.074 over Q4_K_M base 0.8819; see exp_notes.md)
+
+## Qwen3-Coder-30B-A3B-Instruct
+
+Self-quantized **from the BF16 base** (`Qwen/Qwen3-Coder-30B-A3B-Instruct`) via
+llama.cpp (`models/…-QX.gguf`; see exp_notes.md). Distinct from the community
+FP8-derived runs. **Beats FP8 at every bit-width:** native FP8 MCC 0.6939, community
+FP8→GGUF Q4_K_M 0.7582 — our BF16→GGUF Q4_K_M is 0.7664 and even Q3_K_M (0.7058)
+edges out native FP8.
+
+- [x] **GGUF Q2_K (BF16-sourced)** — `gguf` · `models/Qwen3-Coder-30B-A3B-Instruct-Q2_K.gguf` · venv `gguf` — *Acc 0.8075, F1 0.7616, MCC 0.6664* (0 excluded)
+- [x] **GGUF Q3_K_M (BF16-sourced)** — `gguf` · `models/Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf` · venv `gguf` — *Acc 0.8325, F1 0.7988, MCC 0.7058* (0 excluded)
+- [x] **GGUF Q4_K_M (BF16-sourced)** — `gguf` · `models/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf` · venv `gguf` — *Acc 0.8700, F1 0.8506, MCC 0.7664* (0 excluded — best; beats native FP8 0.6939)
+- [x] **F16 + AIZU LoRA (fine-tuned)** — `gguf_lora` · F16 base + `rq3_fine_tuning/models/qwen3-coder-30b-a3b-aizu-lora-F16.gguf` · venv `gguf` — *Acc 0.9800, F1 0.9799, MCC 0.9600* (0 excluded — standard LoRA on the BF16 base, applied on the full-precision F16 GGUF = fine-tune ceiling; +0.266 over FP8 base; MoE expert LoRA tensors survive GGUF conversion — see exp_notes.md)
+
+---
+
+**Progress: 24 / 24 runs complete.** ✅ (Meta-Llama-3.1-8B ×10 + CodeLlama-7b ×4 + DeepSeek-Coder-V2-Lite ×2 + Qwen2.5-Coder-7B ×4 + Llama-4-Scout ×4)
+
+**Additional models** (beyond the original OCD-mirrored set): aya-expanse-8b BF16 (added 2026-07-16); Qwen2.5-Coder-7B Q4_K_M + AIZU QLoRA fine-tuned adapter (added 2026-07-18, MCC 0.6821→0.9550), and its cross-language-trained variant AIZU-CL (added 2026-07-19, MCC 0.9550 — identical on Java); Codestral-22B-v0.1 BF16 + GGUF Q2_K/Q3_K_M/Q4_K_M (added 2026-07-19, MCC 0.8775 BF16, ~0.87–0.88 across quants — near-lossless, Q4_K_M 0.8807 edges out BF16); cogito-v1-preview-llama-8B GGUF Q2_K/Q3_K_M/Q4_K_M (no BF16 run; steep bit-width sensitivity, MCC 0.2025/0.3701/0.7680); Qwen3.6-27B text-only (added 2026-07-27, MCC 0.8954 — a multimodal model driven through the text-only chat path via a new `qwen36` backend, since vLLM builds new enough for its `qwen3_5` architecture require CUDA 13, incompatible with this box's driver).

@@ -1,0 +1,10 @@
+benchmark,term,n_models,pairs,wald_chi2,df,chi2_per_df,p
+ocd,bit-width shared by all models (bits | model),8,10000,11023.399555445818,3,3674.466518481939,0.0
+ocd,model-specific effect of bit-width (model x bits),8,10000,9456.258000145637,21,450.2980000069351,0.0
+ocd,model baseline (model | bits),8,10000,21492.67763436253,7,3070.3825191946476,0.0
+gcj_java,bit-width shared by all models (bits | model),8,400,189.30375327472734,3,63.10125109157578,8.629948583544184e-41
+gcj_java,model-specific effect of bit-width (model x bits),8,400,223.84263547259548,21,10.659173117742641,6.94483413547811e-36
+gcj_java,model baseline (model | bits),8,400,377.9115815759874,7,53.987368796569626,1.2960461871881479e-77
+gcj_crosslang,bit-width shared by all models (bits | model),8,384,174.86258214856164,3,58.28752738285388,1.134550723205573e-37
+gcj_crosslang,model-specific effect of bit-width (model x bits),8,384,215.23588354770663,21,10.24932778798603,3.551458594143122e-34
+gcj_crosslang,model baseline (model | bits),8,384,332.428003820137,7,47.48971483144815,7.092685931268161e-68

@@ -35,6 +35,7 @@ results/                        raw outputs shared by all RQs
   load_results.py                 loads the metrics of the configurations in the paper
 rq1_effect_of_quantization/     Section 5.1, Tables 3 to 5, Figures 1 and 2
   evaluate_results.py             computes the metrics and writes the summary tables
+  statistical_tests.py            significance tests for the RQ1 findings
   tables/                         evaluation summaries (CSV and LaTeX) per benchmark
   figures/                        plot_technique.py, plot_cross_language.py, and their output
 rq2_resource_tradeoffs/         Section 5.2, Figures 3 and 4
@@ -60,6 +61,7 @@ archive/                        superseded summary tables, kept for reference
 | Table 3 (OCD) | `rq1_effect_of_quantization/tables/evaluation_summary_ocd.*` | `evaluate_results.py --dataset ocd` |
 | Table 4 (GCJ-Java) | `rq1_effect_of_quantization/tables/evaluation_summary_gcj_java.*` | `evaluate_results.py --dataset gcj-java` |
 | Table 5 (GCJ cross-language) | `rq1_effect_of_quantization/tables/evaluation_summary_gcj_crosslang.*` | `evaluate_results.py --dataset gcj-cross-language` |
+| Statistical tests for RQ1 | `rq1_effect_of_quantization/tables/stats_*.csv` | `statistical_tests.py` |
 | Figure 1, quantization techniques | `rq1_effect_of_quantization/figures/rq1_technique_bar.pdf` | `plot_technique.py` |
 | Figure 2, cross-language clones | `rq1_effect_of_quantization/figures/rq1_xlang_bar.pdf` | `plot_cross_language.py` |
 | Figures 3 and 4, Pareto fronts | `rq2_resource_tradeoffs/figures/rq2_pareto*.pdf` | `plot_pareto.py` |
@@ -86,7 +88,16 @@ python rq2_resource_tradeoffs/plot_pareto.py
 
 # Table 6 (RQ3)
 python rq3_fine_tuning/generate_finetune_table.py
+
+# Statistical tests for RQ1 (needs numpy, scipy, pandas, and statsmodels)
+python rq1_effect_of_quantization/statistical_tests.py
 ```
+
+`statistical_tests.py` rebuilds the per-pair majority-vote predictions with the paper's setting and checks that they reproduce the MCC in Tables 3 to 5 before running any test.
+It compares every quantized configuration with its BF16 model (exact McNemar test with Holm correction and a paired bootstrap confidence interval for the change in MCC).
+It also tests whether robustness to quantization depends more on the model than on the bit-width (two-way ANOVA on the change in MCC and a logistic GEE on per-pair correctness).
+Finally, it tests whether quantization costs more on cross-language clones than on Java clones (sign, Wilcoxon signed-rank, and mixed-model tests, and a difference-in-differences bootstrap per configuration).
+With 10,000 bootstrap samples, the default, the run takes about a minute.
 
 The paper counts an answer that cannot be parsed, or a `DONT-KNOW` answer, as a non-clone prediction, so every pair is evaluated.
 `evaluate_results.py` defaults to excluding such answers, so pass `--unknown-as non-clone` to reproduce the paper.

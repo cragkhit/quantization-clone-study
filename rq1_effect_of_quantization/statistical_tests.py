@@ -1,4 +1,4 @@
-"""Statistical tests for the RQ1 findings.
+"""Statistical tests for the RQ1 and RQ3 findings.
 
 The script rebuilds the per-pair majority-vote predictions of every
 configuration reported in the paper (results/configurations.csv), using the
@@ -6,7 +6,7 @@ same answer parser and voting rule as evaluate_results.py with
 --unknown-as non-clone, and checks that the recomputed MCC matches the
 published summary tables before running any test.
 
-Three analyses are run.
+Four analyses are run.
 
 1. Quantized configuration against its own BF16 model (every benchmark).
    Exact McNemar test on per-pair correctness, Holm-corrected within each
@@ -35,6 +35,12 @@ Three analyses are run.
    model as the group, and a difference-in-differences bootstrap confidence
    interval for each configuration.
    The tests are repeated on the 4-bit configurations.
+
+4. RQ3, LoRA fine-tuning on the Q4_K_M model (both GCJ benchmarks).
+   Exact McNemar test of each Q4_K_M model against the same model with its
+   LoRA adapter, Holm-corrected over the six comparisons, and the change in
+   MCC with a 95% paired bootstrap confidence interval.
+   The recomputed MCC is checked against rq3_fine_tuning/tables/finetune_results.csv.
 
 Usage (from the repository root, Python 3.10 or later with numpy, scipy,
 pandas, and statsmodels):
@@ -72,6 +78,22 @@ from load_results import load as load_published  # noqa: E402
 
 CONFIGURATIONS = ROOT / "results" / "configurations.csv"
 TABLES = HERE / "tables"
+FINETUNE_TABLE = ROOT / "rq3_fine_tuning" / "tables" / "finetune_results.csv"
+
+# RQ3: the Q4_K_M baseline run, the run with the AIZU384F LoRA adapter applied
+# to it, and the model's name in finetune_results.csv, for each fine-tuned model
+# (as in rq3_fine_tuning/generate_finetune_table.py).
+LORA_RUNS = {
+    "CodeLlama-7b-Instruct": (
+        "results_gguf_QuantFactory__CodeLlama-7b-Instruct-hf-GGUF_CodeLlama-7b-Instruct-hf.Q4_K_M.gguf",
+        "results_codellama_7b_q4km_aizu_lora", "CodeLlama-7b"),
+    "Llama-3.1-8B-Instruct": (
+        "results_gguf_bartowski__Meta-Llama-3.1-8B-Instruct-GGUF_Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+        "results_llama3.1_8b_q4km_aizu_lora", "Meta-Llama-3.1-8B"),
+    "Qwen3.6-27B": (
+        "results_gguf_Qwen3.6-27B-Q4_K_M",
+        "results_qwen36_gguf_lora_Qwen3.6-27B-Q4_K_M_aizu", "Qwen3.6-27B"),
+}
 BENCHMARKS = ("ocd", "gcj_java", "gcj_crosslang")
 BENCHMARK_LABEL = {"ocd": "OCD", "gcj_java": "GCJ-Java", "gcj_crosslang": "GCJ cross-language"}
 QUANTIZED_BITS = (2, 3, 4)
@@ -381,6 +403,43 @@ def cross_language(data: dict, n_boot: int, seed: int) -> tuple[pd.DataFrame, pd
 
 
 # ---------------------------------------------------------------------------
+# Analysis 4: LoRA fine-tuning on the Q4_K_M model (RQ3)
+# ---------------------------------------------------------------------------
+
+def lora_vs_q4(n_boot: int, seed: int) -> pd.DataFrame:
+    with open(FINETUNE_TABLE, newline="") as f:
+        published = {(r["model"], r["dataset"], r["kind"]): float(r["mcc"])
+                     for r in csv.DictReader(f) if r["adapter"] == "AIZU384F (mono)"}
+    rows = []
+    for i, (benchmark, dataset) in enumerate((("gcj_java", "java"), ("gcj_crosslang", "xlang"))):
+        for j, (model, (base_run, lora_run, table_name)) in enumerate(LORA_RUNS.items()):
+            base = majority_vote(benchmark, base_run)
+            lora = majority_vote(benchmark, lora_run)
+            keys = sorted(base, key=str)
+            if set(lora) != set(keys) or any(lora[k][0] != base[k][0] for k in keys):
+                raise ValueError(f"{benchmark}/{lora_run} has a different pair set or ground truth")
+            y_true = np.array([base[k][0] for k in keys])
+            pred_q4 = np.array([base[k][1] for k in keys])
+            pred_lora = np.array([lora[k][1] for k in keys])
+            for kind, pred in (("baseline_q4km", pred_q4), ("finetuned", pred_lora)):
+                if abs(mcc(y_true, pred) - published[(table_name, dataset, kind)]) > 0.0006:
+                    raise ValueError(f"{benchmark} {model} {kind}: MCC does not match {FINETUNE_TABLE.name}")
+            b, c, p = mcnemar_exact(pred_q4 == y_true, pred_lora == y_true)
+            boot = paired_delta_bootstrap(y_true, pred_q4, pred_lora, n_boot, seed + 10 * i + j)
+            lo, hi = percentile_ci(boot)
+            rows.append({"benchmark": benchmark, "model": model,
+                         "mcc_q4km": mcc(y_true, pred_q4), "mcc_lora": mcc(y_true, pred_lora),
+                         "delta_mcc": mcc(y_true, pred_lora) - mcc(y_true, pred_q4),
+                         "ci_low": lo, "ci_high": hi,
+                         "only_q4km_correct": b, "only_lora_correct": c,
+                         "odds_ratio": (c / b) if b else np.inf, "p_mcnemar": p})
+    df = pd.DataFrame(rows)
+    df["p_holm"] = multipletests(df["p_mcnemar"], method="holm")[1]
+    df["significant_holm"] = df["p_holm"] < 0.05
+    return df
+
+
+# ---------------------------------------------------------------------------
 # Reporting
 # ---------------------------------------------------------------------------
 
@@ -431,6 +490,11 @@ def main() -> None:
     show("3a. d = dMCC(cross-language) - dMCC(Java) per configuration, with 95% "
          "difference-in-differences bootstrap CI", per_config)
     show("3b. Tests of whether quantization costs more on cross-language clones (d < 0)", summary)
+
+    lora = lora_vs_q4(args.bootstrap, args.seed)
+    lora.to_csv(TABLES / "stats_rq3_lora.csv", index=False)
+    show("4. RQ3: Q4_K_M vs. Q4_K_M with its LoRA adapter (exact McNemar, Holm over the six "
+         "comparisons; dMCC with 95% paired bootstrap CI)", lora)
 
     print(f"\nCSV files written to {TABLES.relative_to(ROOT)}/stats_*.csv")
 
